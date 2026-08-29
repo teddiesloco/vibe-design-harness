@@ -22,5 +22,21 @@
   "social_carousel": {
     "ad_creative_slide1": "High-converting Facebook ad graphic for AI automation tool. Clean top title zone, dark emerald gradient frame, 3D icon in center, 1:1 aspect ratio.",
     "carousel_step_by_step": "Educational Instagram carousel slide 2 of 5. Clear headline box, bullet point safe margins, sleek modern tech aesthetic."
+  },
+  "logo_branding": {
+    "minimalist_tech_logo": "Clean minimalist vector logo for an AI startup named 'VibeDesign'. Geometric icon featuring interlocking neural lines, dark slate background, emerald green vector mark.",
+    "3d_luxury_emblem": "Sleek 3D metallic gold emblem logo on dark matte carbon fiber background, professional branding mockup."
+  },
+  "cover_thumbnail": {
+    "youtube_tech_thumbnail": "High CTR YouTube thumbnail background for AI Agent tutorial. Expressive face cutout zone on right, glowing emerald code matrix on left, high contrast rim light.",
+    "fanpage_header_banner": "Professional Facebook Fanpage cover banner for digital agency. Modern grid layout, client hero showcase, emerald and gold accent pills."
+  },
+  "face_swap_ugc": {
+    "product_review_photo": "Authentic customer UGC photo holding a sleek skincare bottle in bathroom mirror light, natural skin texture, face preservation anchor for swap.",
+    "headshot_swap_template": "Corporate executive portrait template with soft studio rim lighting, ready for seamless identity head swap."
+  },
+  "sales_creative": {
+    "direct_response_hero": "High-converting direct response landing page hero image showcasing an AI software dashboard on a sleek laptop, surrounded by floating key feature badges.",
+    "ecommerce_product_bundle": "Pro product photography hero stack for e-commerce bundle, dramatic studio lighting, floating feature highlight callouts."
   }
 }
