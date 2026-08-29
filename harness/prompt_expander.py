@@ -2,6 +2,14 @@ import sys
 import json
 
 VISUAL_DOMAINS = {
+    "codex_ui_clean": {
+        "prefix": "OpenAI Codex CLI clean UI component spec, production-ready Tailwind CSS v4, accessible WCAG AA contrast, deep dark background slate-950, crisp zinc borders, strict typographic scale, micro-interactions.",
+        "negative": "purple gradient slop, unstyled button, generic gray backdrop, broken alignment"
+    },
+    "gemini_imagen_pro": {
+        "prefix": "Gemini 3.7 Imagen ultra-high fidelity render, photorealistic lighting physics, sharp focal depth, master studio art direction, 8k crisp details, color graded perfection.",
+        "negative": "DALL-E cartoonish artifacts, blurry textures, oversaturated plastic look, deformed geometry"
+    },
     "photorealism": {
         "prefix": "Ultra-realistic photographic shot, raw 35mm lens camera capture, natural lighting physics, subsurface micro-textures, photorealistic depth of field, neutral color balance, highly detailed cinematic framing.",
         "negative": "3d render, cartoon, illustration, painting, plastic skin, fake lighting, blurry, over-saturated, anime, CGI"
