@@ -35,6 +35,6 @@ Commands:
   npx vibe-design-harness design-system <brand>        Scaffold brand-grade DESIGN.md tokens
 
 Visual Domains:
-  photorealism, anime, 3d_animation, infographic, typography_poster, carousel_ad, logo_branding, cover_thumbnail, face_swap_ugc, sales_creative, claude_design_app, claude_design_deck, claude_design_hyperframe, pod_tshirt, sticker_vector, shopify_storefront, dropship_product
+  photorealism, anime, 3d_animation, infographic, typography_poster, carousel_ad, logo_branding, cover_thumbnail, face_swap_ugc, sales_creative, claude_design_app, claude_design_deck, claude_design_hyperframe, pod_tshirt, sticker_vector, shopify_storefront, dropship_product, mrbeast_ab_thumbnail_variant_a, mrbeast_ab_thumbnail_variant_b, mrbeast_ab_thumbnail_variant_c
 `);
 }
