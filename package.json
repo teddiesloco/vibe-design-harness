@@ -1,0 +1,27 @@
+{
+  "name": "vibe-design-harness",
+  "version": "1.0.0",
+  "description": "Universal AI Agent UI/UX Linter & Multi-Domain Image Harness for Gemini, Codex, Claude & Hermes.",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "vibe-design-harness": "./bin/cli.js"
+  },
+  "scripts": {
+    "test": "node tests/test.js",
+    "lint": "node bin/cli.js lint",
+    "expand": "node bin/cli.js expand"
+  },
+  "keywords": [
+    "ai-agent",
+    "design-harness",
+    "ui-linter",
+    "image-prompt-engine",
+    "codex",
+    "gemini",
+    "claude",
+    "hermes-agent"
+  ],
+  "author": "teddiesloco",
+  "license": "MIT"
+}

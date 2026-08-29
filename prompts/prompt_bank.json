@@ -1,0 +1,26 @@
+{
+  "photorealism": {
+    "ugc_nomad": "Candid over-the-shoulder shot of a digital nomad at a beach cafe in Phu Quoc, 35mm f/2.0 lens, condensation on iced coffee glass, realistic sea breeze.",
+    "night_developer": "Developer desk setup at night, oak table, JetBrains Mono code on screen, glass water tumbler with condensation, 50mm f/1.4 lens."
+  },
+  "anime_manga": {
+    "ghibli_summer": "Cozy seaside train station in summer afternoon, Makoto Shinkai style sky with fluffy cumulus clouds, vibrant hand-painted anime cel-shading, lush greenery.",
+    "cyberpunk_anime": "Neon-lit Tokyo alley in rain, retro 90s anime aesthetic, cell shading, sharp ink line art, glowing Japanese signage reflections on wet asphalt."
+  },
+  "3d_animation": {
+    "pixar_character": "Cute 3D animated robot assistant holding a small green plant, Pixar studio render style, soft subsurface scattering, warm rim lighting, 8k resolution.",
+    "isometric_room": "Charming isometric 3D miniature cozy bedroom render, Blender Octane lighting, pastel color palette, soft shadows."
+  },
+  "infographic_diagram": {
+    "ai_agent_architecture": "Clean modern tech infographic illustrating a 3-agent LLM workflow. Swiss vector graphic style, dark zinc background #08090a, emerald green accent arrows, crisp legible typography hierarchy.",
+    "data_flow_chart": "Minimalist corporate data flow diagram, isometric card layout, semantic color coding, ultra-clean vector design."
+  },
+  "typography_poster": {
+    "swiss_design_event": "Bold Swiss graphic design poster for AI Founder Summit. Oversized typography, grid-aligned layout, high contrast white and emerald on dark slate.",
+    "minimalist_quote": "Elegant minimalist typographic poster, serif font with tight kerning, subtle grain texture paper background."
+  },
+  "social_carousel": {
+    "ad_creative_slide1": "High-converting Facebook ad graphic for AI automation tool. Clean top title zone, dark emerald gradient frame, 3D icon in center, 1:1 aspect ratio.",
+    "carousel_step_by_step": "Educational Instagram carousel slide 2 of 5. Clear headline box, bullet point safe margins, sleek modern tech aesthetic."
+  }
+}
