@@ -1,56 +1,40 @@
 #!/usr/bin/env node
-import { execSync } from 'child_process';
-import fileURLToPath from 'url';
-import path from 'path';
-import fs from 'fs';
 
-const args = process.argv.slice(2);
-const command = args[0];
+const { lintUI, expandPrompt, generateDesignMD } = require('../index');
 
-if (!command || command === '--help' || command === '-h') {
-  console.log(`
-VibeDesign Harness CLI (v1.0.0)
-Usage:
-  npx vibe-design-harness lint <file.html>          # Audit UI for AI-slop
-  npx vibe-design-harness expand "<prompt>" [domain] # Expand image prompt (photorealism|anime|3d_animation|infographic|typography_poster|carousel_ad)
-  npx vibe-design-harness info                      # Print Agent Harness Spec
-  `);
-  process.exit(0);
-}
-
-const rootDir = path.resolve(path.dirname(import.meta.url.replace('file://', '')), '..');
+const command = process.argv[2];
 
 if (command === 'lint') {
-  const filePath = args[1];
-  if (!filePath) {
-    console.error('Error: Missing HTML file path.');
-    process.exit(1);
-  }
-  try {
-    const output = execSync(`python3 ${path.join(rootDir, 'harness/ui_linter.py')} ${filePath}`, { encoding: 'utf-8' });
-    console.log(output);
-  } catch (err) {
-    console.error(err.stdout || err.message);
-    process.exit(1);
-  }
+    const targetFile = process.argv[3];
+    if (!targetFile) {
+        console.log('Error: Please specify a file path. Example: npx vibe-design-harness lint component.html');
+        process.exit(1);
+    }
+    const report = lintUI(targetFile);
+    console.log(JSON.stringify(report, null, 2));
 } else if (command === 'expand') {
-  const prompt = args[1];
-  const domain = args[2] || 'auto';
-  if (!prompt) {
-    console.error('Error: Missing prompt text.');
-    process.exit(1);
-  }
-  try {
-    const output = execSync(`python3 ${path.join(rootDir, 'harness/prompt_expander.py')} "${prompt}" --domain ${domain}`, { encoding: 'utf-8' });
-    console.log(output);
-  } catch (err) {
-    console.error(err.stdout || err.message);
-    process.exit(1);
-  }
-} else if (command === 'info') {
-  const skillPath = path.join(rootDir, 'SKILL.md');
-  console.log(fs.readFileSync(skillPath, 'utf-8'));
+    const prompt = process.argv[3];
+    const domain = process.argv[4] || 'photorealism';
+    if (!prompt) {
+        console.log('Error: Please specify a prompt. Example: npx vibe-design-harness expand "Cyberpunk city" anime');
+        process.exit(1);
+    }
+    const result = expandPrompt(prompt, domain);
+    console.log(JSON.stringify(result, null, 2));
+} else if (command === 'design-system') {
+    const brand = process.argv[3] || 'Linear';
+    const doc = generateDesignMD(brand);
+    console.log(doc);
 } else {
-  console.error(`Unknown command: ${command}`);
-  process.exit(1);
+    console.log(`
+VibeDesign-Harness CLI — Claude Design & 10-Domain Visual Engine
+
+Commands:
+  npx vibe-design-harness lint <file.html>            Lint UI HTML for AI-slop anti-patterns
+  npx vibe-design-harness expand "<prompt>" <domain>   Expand visual prompt by domain
+  npx vibe-design-harness design-system <brand>        Scaffold brand-grade DESIGN.md tokens
+
+Visual Domains:
+  photorealism, anime, 3d_animation, infographic, typography_poster, carousel_ad, logo_branding, cover_thumbnail, face_swap_ugc, sales_creative, claude_design_app, claude_design_deck, claude_design_hyperframe
+`);
 }
