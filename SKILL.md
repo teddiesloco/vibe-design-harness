@@ -1,6 +1,6 @@
 ---
 name: vibe-design-harness
-description: Universal AI Agent UI/UX Linter & Pro Graphics Engine (Photorealism, Anime, 3D, Infographics, Posters, Logos, Covers, UGC Face Swap, Sales Creatives) for Gemini 3.7, Codex CLI, Claude & Hermes.
+description: Universal AI Agent UI/UX Linter & Pro Graphics Engine (Photorealism, Anime, 3D, Infographics, Posters, Logos, Covers, UGC Face Swap, Sales Creatives) for Gemini, Codex CLI, Claude & Hermes.
 category: creative
 ---
 

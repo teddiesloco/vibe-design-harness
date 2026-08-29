@@ -3,9 +3,9 @@
 [![npm version](https://img.shields.io/npm/v/vibe-design-harness.svg?color=emerald)](https://www.npmjs.com/package/vibe-design-harness)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![MCP Server Compatible](https://img.shields.io/badge/MCP%20Server-v1.6.0-purple.svg)](https://modelcontextprotocol.io)
-[![AI Agent Compatible](https://img.shields.io/badge/AI%20Agent-Gemini%203.7%20%7C%20Codex%20CLI%20%7C%20Claude%20%7C%20Hermes-emerald)](https://github.com/teddiesloco/vibe-design-harness)
+[![AI Agent Compatible](https://img.shields.io/badge/AI%20Agent-Gemini%20%7C%20Codex%20CLI%20%7C%20Claude%20%7C%20Hermes-emerald)](https://github.com/teddiesloco/vibe-design-harness)
 
-> **Zero-Token UI/UX Linter for OpenAI Codex & Gemini + Studio Image Harness Engine exclusively for Gemini 3.7 (Imagen 3). Now with MCP Server integration!**
+> **Zero-Token UI/UX Linter for OpenAI Codex & Gemini + Studio Image Harness Engine for Gemini (Imagen 3+). Now with MCP Server integration!**
 
 ---
 
@@ -13,8 +13,8 @@
 
 | Feature | Target AI Runtimes | Purpose & Impact |
 | :--- | :--- | :--- |
-| **🎨 UI/UX Aesthetic Harness & Linter** | **OpenAI Codex CLI & Gemini 3.7** | Zero-token deterministic audit preventing "AI-slop" UI (purging generic purple gradients, unstyled buttons, and cement gray backdrops). Enforces Swiss/Linear dark mode aesthetics. |
-| **📸 Studio Image Prompt Harness** | **Exclusively Gemini 3.7 (Imagen 3)** | Bumps Gemini image generation quality to match or surpass DALL-E 3 & GPT Image 2 by expanding raw prompts with 35mm lens physics, studio lighting, and strict negative constraints. |
+| **🎨 UI/UX Aesthetic Harness & Linter** | **OpenAI Codex CLI & Gemini** | Zero-token deterministic audit preventing "AI-slop" UI (purging generic purple gradients, unstyled buttons, and cement gray backdrops). Enforces Swiss/Linear dark mode aesthetics. |
+| **📸 Studio Image Prompt Harness** | **Gemini (Imagen 3+)** | Bumps Gemini image generation quality to match or surpass DALL-E 3 & GPT Image 2 by expanding raw prompts with 35mm lens physics, studio lighting, and strict negative constraints. |
 
 ---
 
@@ -51,12 +51,12 @@ Deterministic validator preventing generic LLM design mistakes in generated HTML
 - ❌ **Rejects unstyled raw buttons & generic gray-800 backdrops**.
 - ✅ **Enforces modern zinc/slate `#08090a` foundation palettes and strict typography**.
 
-### 2. 🎯 Studio Image Harness Engine — Exclusively for Gemini 3.7 (Imagen 3)
+### 2. 🎯 Studio Image Harness Engine — For Gemini (Imagen 3+)
 Eliminates domain hallucination and plastic-skin artifacts when generating images with Gemini:
 
 | Visual Domain | Target Engine | Enforcements | Negative Prompt (Banned AI Slop) |
 | :--- | :--- | :--- | :--- |
-| **💎 Gemini Imagen Pro** | Gemini 3.7 Imagen | Micro-texture physics, 8K studio lighting, camera depth | DALL-E cartoonish artifacts, plastic skin, oversaturated look |
+| **💎 Gemini Imagen Pro** | Gemini Imagen | Micro-texture physics, 8K studio lighting, camera depth | DALL-E cartoonish artifacts, plastic skin, oversaturated look |
 | **📷 Photorealism** | Gemini 3.7 Imagen | 35mm lens, neutral color balance, natural lighting physics | 3D render, cartoon, plastic skin |
 | **🌸 Anime & Manga** | Gemini 3.7 Imagen | Cel-shading, vibrant line art, Studio Ghibli palette | Photorealistic skin, 3D CGI, blurry lines |
 | **🧸 3D Animation** | Gemini 3.7 Imagen | Pixar render style, subsurface scattering, rim light | 2D flat, low-poly, photograph |

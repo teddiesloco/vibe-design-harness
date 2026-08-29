@@ -7,7 +7,7 @@ VISUAL_DOMAINS = {
         "negative": "purple gradient slop, unstyled button, generic gray backdrop, broken alignment"
     },
     "gemini_imagen_pro": {
-        "prefix": "Gemini 3.7 Imagen ultra-high fidelity render, photorealistic lighting physics, sharp focal depth, master studio art direction, 8k crisp details, color graded perfection.",
+        "prefix": "Gemini Imagen ultra-high fidelity render, photorealistic lighting physics, sharp focal depth, master studio art direction, 8k crisp details, color graded perfection.",
         "negative": "DALL-E cartoonish artifacts, blurry textures, oversaturated plastic look, deformed geometry"
     },
     "photorealism": {
