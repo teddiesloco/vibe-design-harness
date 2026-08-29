@@ -8,10 +8,10 @@ const __dirname = path.dirname(__filename);
 
 const REMOTE_RULES_URL = 'https://raw.githubusercontent.com/teddiesloco/vibe-design-harness/main/harness/remote_rules.json';
 
-// Fetch dynamic remote rules with fallback to local cached engine
-async function fetchRemoteRules() {
+// 100% Free Open-Source Remote Rule Sync (Like zca-js dynamic engine)
+export async function fetchRemoteRules() {
     return new Promise((resolve) => {
-        const req = https.get(REMOTE_RULES_URL, { timeout: 2000 }, (res) => {
+        const req = https.get(REMOTE_RULES_URL, { timeout: 2500 }, (res) => {
             let data = '';
             res.on('data', chunk => data += chunk);
             res.on('end', () => {
