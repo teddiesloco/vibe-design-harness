@@ -1,0 +1,26 @@
+name: 🐛 Bug Report / Edge Case
+description: Report a bug, broken harness domain, or linter false positive
+title: "[BUG]: "
+labels: ["bug", "triage"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: What went wrong or failed during expansion/linting?
+    validations:
+      required: true
+  - type: input
+    id: harness-command
+    attributes:
+      label: Harness Command / Code Snippet
+      description: Exact CLI command or function call used
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should have happened instead?
+    validations:
+      required: true

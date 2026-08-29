@@ -1,0 +1,19 @@
+name: 🚀 Feature Request / New Domain
+description: Propose a new visual domain, design system token, or agent workflow
+title: "[FEAT]: "
+labels: ["enhancement", "community"]
+body:
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature / Domain Idea
+      description: Describe the new domain, visual harness, or agent integration idea
+    validations:
+      required: true
+  - type: textarea
+    id: target-agents
+    attributes:
+      label: Target Coding Agents
+      description: Gemini 3.7, Codex CLI, Claude Code, OpenClaw, Hermes Agent, etc.
+    validations:
+      required: true
