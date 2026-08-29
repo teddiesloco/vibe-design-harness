@@ -50,6 +50,22 @@ VISUAL_DOMAINS = {
         "prefix": "Claude Design pitch deck slide presentation, 16:9 widescreen layout, Swiss typography, visual data cards, high contrast slide structure, executive summary design.",
         "negative": "wall of text, low contrast backgrounds, messy slide alignment, generic template slop"
     },
+        "pod_tshirt": {
+        "prefix": "Clean vector graphic for T-shirt POD print, isolated on solid background, zero background noise, crisp outline, high contrast artwork, vector artwork, print-ready 300 DPI aesthetic, bold composition.",
+        "negative": "photorealistic background noise, blurry edges, photorealistic human model, complex drop shadows, background clutter, raster artifacts"
+    },
+    "sticker_vector": {
+        "prefix": "Die-cut sticker design, clean white border contour outline, vibrant vector graphic, isolated on plain background, pop art aesthetic, crisp vector lines, sticker pack art.",
+        "negative": "no border contour, photorealistic background, realistic photo clutter, blurry line art, un-isolated canvas"
+    },
+    "shopify_storefront": {
+        "prefix": "High-converting Shopify store hero banner, clean ecommerce visual hierarchy, promotional product display, clear trust badge placement zones, WCAG compliant contrast, modern DTC visual aesthetic.",
+        "negative": "AI-slop gradients, unreadable promotional text, cluttered banner noise, cheap banner design"
+    },
+    "dropship_product": {
+        "prefix": "Amazon & Shopify product photography mockup, isolated white studio lighting, crisp product highlights, commercial DTC product showcase, clean drop shadow physics, high CTR visual appeal.",
+        "negative": "blurry reflection, dark muddy shadows, chaotic background clutter, distorted product geometry"
+    },
     "claude_design_hyperframe": {
         "prefix": "Claude Design HyperFrames HTML motion graphic, smooth CSS @keyframes animations, SVG vector path motion, staggered entry transitions, high-framerate kinetic typography.",
         "negative": "static image, choppy frame rates, unaligned layout shifts, low resolution export"
