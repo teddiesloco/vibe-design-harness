@@ -5,7 +5,11 @@
   "main": "index.js",
   "type": "module",
   "bin": {
-    "vibe-design-harness": "./bin/cli.js"
+    "vibe-design-harness": "./bin/cli.js",
+    "vibe-design-harness-mcp": "./bin/mcp-server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.0"
   },
   "scripts": {
     "test": "node tests/test.js",
