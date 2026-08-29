@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { lintUI, expandPrompt, generateDesignMD } = require('../index');
+import { lintUI, expandPrompt, generateDesignMD } from '../index.js';
 
 const command = process.argv[2];
 
