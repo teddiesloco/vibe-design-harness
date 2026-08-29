@@ -15,13 +15,31 @@
   "keywords": [
     "ai-agent",
     "design-harness",
+    "ui-harness",
     "ui-linter",
+    "generative-ui",
     "image-prompt-engine",
-    "codex",
-    "gemini",
-    "claude",
-    "hermes-agent"
+    "prompt-expander",
+    "gemini-3-7",
+    "codex-cli",
+    "claude-code",
+    "hermes-agent",
+    "openclaw",
+    "anti-ai-slop",
+    "playwright-evaluation",
+    "multi-domain-prompting",
+    "aeo",
+    "geo",
+    "agentic-workflow"
   ],
   "author": "teddiesloco",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teddiesloco/vibe-design-harness.git"
+  },
+  "homepage": "https://github.com/teddiesloco/vibe-design-harness#readme",
+  "bugs": {
+    "url": "https://github.com/teddiesloco/vibe-design-harness/issues"
+  }
 }

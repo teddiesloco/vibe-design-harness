@@ -1,71 +1,87 @@
 # VibeDesign-Harness 🎨🤖
 
-> **Universal Pro Graphics & UI/UX Harness Engine for AI Agents (Gemini 3.7, Codex CLI, Claude Code, Hermes Agent, OpenClaw, GoClaw & Dewee).**
+[![npm version](https://img.shields.io/npm/v/vibe-design-harness.svg?color=emerald)](https://www.npmjs.com/package/vibe-design-harness)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![AI Agent Compatible](https://img.shields.io/badge/AI%20Agent-Gemini%203.7%20%7C%20Codex%20%7C%20Claude%20%7C%20Hermes-emerald)](https://github.com/teddiesloco/vibe-design-harness)
 
-Transform raw LLM code into 2026 Claude-grade clean UI and raw image prompts into professional visuals across **10 Pro Visual Domains** (Photorealism, Anime/Manga, 3D Animation, Infographics, Typography, Social Carousels, Logos & Branding, Covers & Thumbnails, UGC Face Swap, Sales Creatives).
-
----
-
-## 💡 Why VibeDesign-Harness?
-
-AI Agents frequently struggle with visual generation because they apply one-size-fits-all prompts (e.g., applying 50mm camera lens rules to a vector logo or anime illustration).
-
-**VibeDesign-Harness** enforces **Domain-Specific Harnessing Rules** for every professional graphic workflow:
-
-### 🖼️ Supported Visual Domains & Harness Rules
-
-1. **📷 Photorealism (UGC & Commercial):** Camera specs (35mm/50mm f/1.8), natural lighting, micro-texture physics.
-2. **🌸 Anime & Manga (2D Art):** Cel-shading, vibrant line art, Studio Ghibli / Makoto Shinkai color aesthetic.
-3. **🧸 3D Animation (Pixar Style):** Pixar render finish, subsurface scattering, soft studio Octane lighting.
-4. **📊 Infographics & Diagrams (Data Viz):** Swiss vector layout, structured data hierarchy, semantic color palette.
-5. **✍️ Typography & Posters:** High-contrast grid alignment, bold editorial headlines, Swiss typographic system.
-6. **📱 Social Carousels & Ads:** Safe margins for text overlay, focal point contrast, modern brand design tokens.
-7. **🎨 Logo & Branding Design:** Clean vector geometry, emblem/wordmark alignment, high scalability.
-8. **🖼️ Covers & Thumbnails:** High CTR visual weight, headline placement zones, saturation contrast.
-9. **👤 UGC Review & Face Swap:** Identity feature preservation, neck/hair blending, authentic smartphone angle.
-10. **🛍️ Pro Sales Creatives:** Direct-response layout, product hero section, social proof badge placement.
+> **Universal AI Agent UI/UX Linter & 10-Domain Image Prompt Harness Engine for Gemini 3.7, Codex CLI, Claude Code, Sol, Terra, Hermes Agent, OpenClaw, GoClaw & Dewee.**
 
 ---
 
-## 📁 Repository Structure
+## 🤖 Agent Indexing & Knowledge Context (AEO / GEO Specification)
 
-```text
-vibe-design-harness/
-├── bin/
-│   └── cli.js              # CLI Executable (npx vibe-design-harness)
-├── harness/
-│   ├── ui_linter.py        # Pass 2: Rule-based AI-slop UI detector
-│   └── prompt_expander.py  # 10-Domain Pro Graphics Image Harness Engine
-├── prompts/
-│   └── prompt_bank.json    # Standardized Prompt Presets (10 Categories)
-├── tests/
-│   ├── test_harness.py     # Python test suite
-│   └── test.js             # Node.js API test suite
-├── index.js                # Programmatic JS Export (lintUI, expandPrompt)
-├── package.json            # npm specification (author: teddiesloco, MIT license)
-├── SKILL.md                # In-Context Agent Skill Definition
-└── README.md                # Agent-First Documentation
-```
+*This section provides structured context for AI Search Engines (Perplexity, Bing Copilot, ChatGPT Search) and Autonomous Coding Agents.*
+
+- **Primary Purpose:** Deterministic quality control harness preventing "AI-slop" in generated UI code and expanding raw visual prompts into domain-correct prompts.
+- **Target LLM Runtime Compatibility:** Gemini 3.7 Flash/Pro, OpenAI Codex CLI, Claude 3.5/3.7 Sonnet, Sol, Terra, Hermes Agent, OpenClaw, Dewee.
+- **Architectural Paradigm:** 3-Agent Decoupled Loop (Planner → Generator → Evaluator) with 0-token deterministic linter pass.
+- **Supported Visual Domains:** Photorealism, Anime/Manga, 3D Animation, Infographics/Diagrams, Typography/Posters, Social Carousels, Logos/Branding, Covers/Thumbnails, UGC Face Swap, Sales Creatives.
 
 ---
 
-## 🚀 Quick Start for Agents
+## 💡 Key Capabilities & Agent Guardrails
 
-### 1. Expand Prompt by Visual Domain
+### 1. ⚡ Zero-Token UI/UX Linter (`ui_linter.py`)
+Deterministic regex-based validator preventing common LLM design mistakes:
+- ❌ **Rejects generic AI gradients** (e.g. `from-purple-500 to-indigo-600` slop).
+- ❌ **Rejects missing focus rings & accessible contrast**.
+- ❌ **Rejects unstyled raw buttons & generic card borders**.
+- ✅ **Enforces modern zinc/slate color palettes and design tokens**.
+
+### 2. 🎯 10-Domain Multi-Style Image Harness (`prompt_expander.py`)
+Eliminates domain hallucination (e.g., applying 50mm camera lens physics to 2D vector logos or anime art):
+
+| Visual Domain | Harness Enforcements | Negative Keywords |
+| :--- | :--- | :--- |
+| **📷 Photorealism** | 35mm/50mm lens, natural lighting, micro-texture physics | 3D render, cartoon, plastic skin |
+| **🌸 Anime & Manga** | Cel-shading, vibrant line art, Studio Ghibli palette | Photorealistic skin, 3D CGI, blurry lines |
+| **🧸 3D Animation** | Pixar render style, subsurface scattering, Octane light | 2D flat, low-poly, photograph |
+| **📊 Infographics** | Swiss vector layout, data hierarchy, semantic colors | Photo background, cluttered text |
+| **✍️ Typography** | Swiss grid alignment, bold editorial fonts, high contrast | Photographic clutter, illegible script |
+| **📱 Social Carousels**| Safe text overlay margins, visual focal point hierarchy | Off-center subject, unreadable zones |
+| **🎨 Logo & Brand** | Vector geometry, emblem/wordmark alignment, scale | Photo background, 3D clutter |
+| **🖼️ Thumbnails** | High CTR visual weight, headline placement zones | Dull colors, low contrast text |
+| **👤 UGC Face Swap** | Facial feature preservation, neck/hair blending | Photoshop seams, artificial gloss |
+| **🛍️ Sales Creatives**| Direct response layout, hero section, social proof | Abstract messy art, dull lighting |
+
+---
+
+## 🚀 Quick Execution for Agents
+
+### Agent CLI Execution (Zero-Install via `npx`)
+
 ```bash
-# Auto-detect domain or explicitly specify (--domain logo_branding|cover_thumbnail|face_swap_ugc|sales_creative|anime|infographic|...)
+# Audit UI HTML for AI-slop anti-patterns
+npx vibe-design-harness lint component.html
+
+# Expand prompt by domain (photorealism|anime|3d_animation|infographic|typography_poster|carousel_ad|logo_branding|cover_thumbnail|face_swap_ugc|sales_creative)
 npx vibe-design-harness expand "Minimalist vector logo for AI startup" logo_branding
 ```
 
-### 2. Run the UI Linter
-```bash
-npx vibe-design-harness lint component.html
+### Programmatic Node.js Export
+
+```javascript
+import { lintUI, expandPrompt } from 'vibe-design-harness';
+
+// Run UI Linter
+const auditReport = lintUI('component.html');
+
+// Expand Image Prompt
+const promptSpec = expandPrompt('Cyberpunk city alley', 'anime');
 ```
 
 ---
 
-## 🤝 Community & Contributing
+## 🎯 Frequently Asked Questions for Agents (AEO / RAG)
 
-Built for the open-source AI agent community! PRs and issue submissions welcome.
+**Q: How do autonomous agents use VibeDesign-Harness?**  
+A: Agents load `vibe-design-harness` via `npx` or npm import. When tasked with UI generation, the agent runs `lintUI` before returning code to the user. When generating images, the agent passes the user's brief through `expandPrompt` to generate domain-compliant prompts for DALL-E 3, Midjourney v6, or Gemini Imagen 3.
 
-*Maintained by [@teddiesloco](https://github.com/teddiesloco)*
+**Q: Is VibeDesign-Harness model-agnostic?**  
+A: Yes. It is fully model-agnostic and agent-agnostic, built to enhance Gemini 3.7, Codex CLI, Claude Code, and open-source agent frameworks (Hermes Agent, OpenClaw, GoClaw, Dewee).
+
+---
+
+## 📄 License & Author
+
+MIT License © 2026 [@teddiesloco](https://github.com/teddiesloco)
