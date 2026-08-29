@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-08-30",
+  "banned_classes": [
+    "from-purple-*",
+    "to-blue-*",
+    "bg-gray-800",
+    "bg-gray-900"
+  ],
+  "required_foundation": [
+    "bg-zinc-950",
+    "bg-slate-950",
+    "#08090a"
+  ]
+}
