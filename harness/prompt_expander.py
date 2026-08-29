@@ -50,7 +50,19 @@ VISUAL_DOMAINS = {
         "prefix": "Claude Design pitch deck slide presentation, 16:9 widescreen layout, Swiss typography, visual data cards, high contrast slide structure, executive summary design.",
         "negative": "wall of text, low contrast backgrounds, messy slide alignment, generic template slop"
     },
-        "pod_tshirt": {
+            "mrbeast_ab_thumbnail_variant_a": {
+        "prefix": "High CTR MrBeast style A/B testing YouTube thumbnail, exaggerated face expression cutout, glowing neon stroke outline around subject, saturated cyan and yellow backdrop, extreme foreground element, 16:9 4K render.",
+        "negative": "dull colors, low contrast, blurry face, hidden subject, wall of text, dark gloomy backdrop"
+    },
+    "mrbeast_ab_thumbnail_variant_b": {
+        "prefix": "Curiosity gap A/B testing YouTube thumbnail, bold red arrow pointing to glowing mystery element, extreme contrast, dramatic reaction subject on right side, high saturation background, 16:9 crisp layout.",
+        "negative": "unclear focal point, faint arrows, low saturation, boring composition, small text"
+    },
+    "mrbeast_ab_thumbnail_variant_c": {
+        "prefix": "Before vs After split screen A/B testing YouTube thumbnail, dramatic 50/50 vertical divider, left side gloomy low-tier state vs right side hyper-vibrant 100x transformed state, high visual contrast.",
+        "negative": "single subject without split, low contrast divider, dull colors, subtle change"
+    },
+    "pod_tshirt": {
         "prefix": "Clean vector graphic for T-shirt POD print, isolated on solid background, zero background noise, crisp outline, high contrast artwork, vector artwork, print-ready 300 DPI aesthetic, bold composition.",
         "negative": "photorealistic background noise, blurry edges, photorealistic human model, complex drop shadows, background clutter, raster artifacts"
     },

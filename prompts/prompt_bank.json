@@ -38,5 +38,22 @@
   "sales_creative": {
     "direct_response_hero": "High-converting direct response landing page hero image showcasing an AI software dashboard on a sleek laptop, surrounded by floating key feature badges.",
     "ecommerce_product_bundle": "Pro product photography hero stack for e-commerce bundle, dramatic studio lighting, floating feature highlight callouts."
+  },
+  "youtube_ab_testing_thumbnails": {
+    "variant_a_exaggerated_expression": {
+      "style": "MrBeast High CTR Cutout",
+      "prompt": "Exaggerated shocked face reaction cutout on left side with bright cyan outline, holding giant $100,000 cash stack, ultra-vibrant yellow background with directional motion blur, 16:9 YouTube thumbnail ratio.",
+      "negative_prompt": "dull lighting, low contrast, dark background, small subject"
+    },
+    "variant_b_curiosity_red_arrow": {
+      "style": "Curiosity Gap & Red Arrow Interrupt",
+      "prompt": "Mysterious glowing gold vault on left side, bold 3D red arrow pointing directly at vault lock, intense curious face reaction on right side, hyper-saturated contrast backdrop, 16:9 YouTube thumbnail.",
+      "negative_prompt": "faint arrow, dark gloomy background, blurry vault detail"
+    },
+    "variant_c_split_transformation": {
+      "style": "Before vs After 50/50 Split Screen",
+      "prompt": "Vertical 50/50 split YouTube thumbnail: Left side shows sad face standing next to $0 empty wallet in monochrome dark room; Right side shows ecstatic face standing next to supercar in ultra-vibrant golden hour light, high CTR visual contrast.",
+      "negative_prompt": "subtle difference, low contrast split, dull lighting"
+    }
   }
 }
