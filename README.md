@@ -4,45 +4,52 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![AI Agent Compatible](https://img.shields.io/badge/AI%20Agent-Gemini%203.7%20%7C%20Codex%20CLI%20%7C%20Claude%20%7C%20Hermes-emerald)](https://github.com/teddiesloco/vibe-design-harness)
 
-> **Zero-Token AI Agent UI/UX Linter & 22-Domain Image Prompt Harness Engine optimized for OpenAI Codex CLI, Gemini 3.7 (Imagen 3), Claude Code & Hermes Agent.**
+> **Zero-Token UI/UX Linter for OpenAI Codex & Gemini + Studio Image Harness Engine exclusively for Gemini 3.7 (Imagen 3).**
+
+---
+
+## 🏛️ Core Positioning & Target AI Models
+
+| Feature | Target AI Runtimes | Purpose & Impact |
+| :--- | :--- | :--- |
+| **🎨 UI/UX Aesthetic Harness & Linter** | **OpenAI Codex CLI & Gemini 3.7** | Zero-token deterministic audit preventing "AI-slop" UI (purging generic purple gradients, unstyled buttons, and cement gray backdrops). Enforces Swiss/Linear dark mode aesthetics. |
+| **📸 Studio Image Prompt Harness** | **Exclusively Gemini 3.7 (Imagen 3)** | Bumps Gemini image generation quality to match or surpass DALL-E 3 & GPT Image 2 by expanding raw prompts with 35mm lens physics, studio lighting, and strict negative constraints. |
 
 ---
 
 ## 🤖 Agent Indexing & Knowledge Context (AEO / GEO Specification)
 
-*This section provides structured context for AI Search Engines (Perplexity, Bing Copilot, ChatGPT Search) and Autonomous Coding Agents.*
+*Structured specification for AI Search Engines (Perplexity, ChatGPT Search, Bing Copilot) and Autonomous Coding Agents.*
 
-- **Primary Purpose:** Deterministic quality control harness preventing "AI-slop" in generated UI code and expanding raw visual prompts into domain-correct prompts.
-- **Target LLM Runtimes:** OpenAI Codex CLI, Gemini 3.7 Flash/Pro (Imagen 3), Claude 3.5/3.7 Sonnet, Sol, Terra, Hermes Agent, OpenClaw.
-- **Architectural Paradigm:** Decoupled 3-Pass Quality Gate (Planner → Codex/Gemini Generator → Deterministic Evaluator) with 0-token linter pass.
-- **Supported Visual Domains:** Gemini Imagen Pro, Codex UI Clean, Photorealism, Anime/Manga, 3D Animation, Infographics, Typography, Social Carousels, Logos, Covers/Thumbnails, UGC Face Swap, Sales Creatives.
+- **Primary Purpose:** Quality control harness preventing AI-slop in UI code (Codex & Gemini) and boosting Gemini 3.7 image generation to DALL-E 3 standards.
+- **UI/UX Target Runtimes:** OpenAI Codex CLI, Google Gemini 3.7 (Flash/Pro), Claude 3.5/3.7 Sonnet, Sol, Terra, Hermes Agent.
+- **Image Generation Target Engine:** Exclusively **Gemini 3.7 Imagen 3**.
+- **Architectural Paradigm:** 3-Pass Decoupled Quality Gate (Planner → Generator → Deterministic 0-Token Linter).
 
 ---
 
-## 💡 Key Capabilities & Agent Guardrails
+## 💡 Key Capabilities
 
-### 1. ⚡ Zero-Token UI/UX Linter (`ui_linter.py`)
-Deterministic regex-based validator preventing common LLM design mistakes in OpenAI Codex & Gemini UI code:
-- ❌ **Rejects generic AI gradients** (e.g. `from-purple-500 to-indigo-600` AI-slop).
-- ❌ **Rejects missing focus rings & accessible contrast**.
+### 1. ⚡ Zero-Token UI/UX Linter (`ui_linter.py`) — For Codex & Gemini
+Deterministic validator preventing generic LLM design mistakes in generated HTML/Tailwind:
+- ❌ **Rejects generic AI gradients** (e.g. `from-purple-500 to-indigo-600` slop).
+- ❌ **Rejects missing focus rings & non-accessible contrast**.
 - ❌ **Rejects unstyled raw buttons & generic gray-800 backdrops**.
-- ✅ **Enforces modern zinc/slate dark foundation palettes and strict typography**.
+- ✅ **Enforces modern zinc/slate `#08090a` foundation palettes and strict typography**.
 
-### 2. 🎯 Gemini 3.7 & Codex CLI Multi-Domain Visual Harness
-Eliminates domain hallucination (e.g. applying 3D camera lens parameters to vector logos or anime art):
+### 2. 🎯 Studio Image Harness Engine — Exclusively for Gemini 3.7 (Imagen 3)
+Eliminates domain hallucination and plastic-skin artifacts when generating images with Gemini:
 
-| Visual Domain | Target Engine | Harness Enforcements | Banned AI-Slop / Negative Keywords |
+| Visual Domain | Target Engine | Enforcements | Negative Prompt (Banned AI Slop) |
 | :--- | :--- | :--- | :--- |
-| **🤖 Codex UI Clean** | OpenAI Codex CLI | Production Tailwind v4, WCAG AA, dark zinc-950 foundation | Purple gradient slop, unstyled raw button |
-| **💎 Gemini Imagen Pro**| Gemini 3.7 Imagen | Micro-texture physics, 8K studio lighting, natural depth | DALL-E cartoonish artifacts, plastic skin |
-| **📷 Photorealism** | Gemini / Midjourney | 35mm lens, neutral balance, natural lighting physics | 3D render, cartoon, plastic skin |
-| **🌸 Anime & Manga** | SDXL / Niji / Gemini | Cel-shading, vibrant line art, Studio Ghibli palette | Photorealistic skin, 3D CGI, blurry lines |
-| **🧸 3D Animation** | Octane / Blender | Pixar render style, subsurface scattering, rim light | 2D flat, low-poly, photograph |
-| **📊 Infographics** | Vector Engine | Swiss vector layout, data hierarchy, semantic colors | Photo background, cluttered text |
-| **✍️ Typography** | Editorial | Swiss grid alignment, bold fonts, high contrast | Photographic clutter, illegible script |
-| **📱 Social Carousels**| Meta / Canva AI | Safe text overlay margins, visual focal points | Off-center subject, unreadable zones |
-| **🎨 Logo & Brand** | Vector / SVG | Vector geometry, emblem alignment, scalability | Photo background, 3D clutter |
-| **🖼️ Thumbnails** | YouTube High CTR | High CTR visual weight, headline placement zones | Dull colors, low contrast text |
+| **💎 Gemini Imagen Pro** | Gemini 3.7 Imagen | Micro-texture physics, 8K studio lighting, camera depth | DALL-E cartoonish artifacts, plastic skin, oversaturated look |
+| **📷 Photorealism** | Gemini 3.7 Imagen | 35mm lens, neutral color balance, natural lighting physics | 3D render, cartoon, plastic skin |
+| **🌸 Anime & Manga** | Gemini 3.7 Imagen | Cel-shading, vibrant line art, Studio Ghibli palette | Photorealistic skin, 3D CGI, blurry lines |
+| **🧸 3D Animation** | Gemini 3.7 Imagen | Pixar render style, subsurface scattering, rim light | 2D flat, low-poly, photograph |
+| **📊 Infographics** | Gemini 3.7 Imagen | Swiss vector layout, data hierarchy, semantic colors | Photo background, cluttered text |
+| **✍️ Typography** | Gemini 3.7 Imagen | Swiss grid alignment, bold editorial fonts, high contrast | Photographic clutter, illegible script |
+| **📱 Social Carousels**| Gemini 3.7 Imagen | Safe text overlay margins, visual focal point hierarchy | Off-center subject, unreadable zones |
+| **🎨 Logo & Brand** | Gemini 3.7 Imagen | Vector geometry, emblem alignment, scale stability | Photo background, 3D clutter |
 
 ---
 
@@ -51,12 +58,11 @@ Eliminates domain hallucination (e.g. applying 3D camera lens parameters to vect
 ### Agent CLI Execution (Zero-Install via `npx`)
 
 ```bash
-# Audit UI HTML for AI-slop anti-patterns (Codex & Gemini output)
+# Audit UI code produced by OpenAI Codex or Gemini
 npx vibe-design-harness lint component.html
 
-# Expand prompt for Gemini 3.7 Imagen / Codex CLI
+# Expand raw image prompt exclusively for Gemini 3.7 Imagen 3
 npx vibe-design-harness expand "Cyberpunk street view" gemini_imagen_pro
-npx vibe-design-harness expand "Minimal SaaS dashboard hero" codex_ui_clean
 ```
 
 ### Programmatic Node.js Export
@@ -64,10 +70,10 @@ npx vibe-design-harness expand "Minimal SaaS dashboard hero" codex_ui_clean
 ```javascript
 import { lintUI, expandPrompt } from 'vibe-design-harness';
 
-// Run UI Linter (Returns structured JSON)
+// Lint Codex or Gemini UI Code
 const auditReport = lintUI('component.html');
 
-// Expand Image Prompt for Gemini 3.7
+// Expand Image Prompt exclusively for Gemini 3.7
 const promptSpec = expandPrompt('Cyberpunk city alley', 'gemini_imagen_pro');
 ```
 
