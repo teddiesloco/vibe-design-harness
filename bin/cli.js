@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { lintUI, expandPrompt, generateDesignMD } from '../index.js';
+import { lintUI, expandPrompt, generateDesignMD, listThemes, VISUAL_DOMAINS } from '../index.js';
 
 const command = process.argv[2];
 
@@ -25,19 +25,26 @@ if (command === 'lint') {
     const result = expandPrompt(prompt, domain);
     console.log(JSON.stringify(result, null, 2));
 } else if (command === 'design-system') {
-    const brand = process.argv[3] || 'Linear';
-    const doc = generateDesignMD(brand);
+    const brandOrTheme = process.argv[3] || 'linear';
+    const accent = process.argv[4] || null;
+    const doc = generateDesignMD(brandOrTheme, accent);
     console.log(doc);
+} else if (command === 'themes') {
+    console.log(JSON.stringify(listThemes(), null, 2));
+} else if (command === 'domains') {
+    console.log(JSON.stringify(Object.keys(VISUAL_DOMAINS), null, 2));
 } else {
     console.log(`
-VibeDesign-Harness CLI — Claude Design & 10-Domain Visual Engine
+VibeDesign-Harness CLI — 100% Pure JS AI UI/UX Linter & Multi-Domain Visual Engine
 
 Commands:
-  npx vibe-design-harness lint <file.html>            Lint UI HTML for AI-slop anti-patterns
-  npx vibe-design-harness expand "<prompt>" <domain>   Expand visual prompt by domain
-  npx vibe-design-harness design-system <brand>        Scaffold brand-grade DESIGN.md tokens
+  npx vibe-design-harness lint <file.html>             Lint UI HTML for AI-slop anti-patterns (Zero Python)
+  npx vibe-design-harness expand "<prompt>" <domain>    Expand visual prompt by domain (25+ domains)
+  npx vibe-design-harness design-system <theme> [accent] Scaffold multi-theme DESIGN.md tokens
+  npx vibe-design-harness themes                       List available design system themes
+  npx vibe-design-harness domains                      List all 25+ visual prompt domains
 
-Visual Domains:
-  photorealism, anime, 3d_animation, infographic, typography_poster, carousel_ad, logo_branding, cover_thumbnail, face_swap_ugc, sales_creative, claude_design_app, claude_design_deck, claude_design_hyperframe, pod_tshirt, sticker_vector, shopify_storefront, dropship_product, mrbeast_ab_thumbnail_variant_a, mrbeast_ab_thumbnail_variant_b, mrbeast_ab_thumbnail_variant_c
+Supported Themes:
+  linear (dark), stripe (light), vercel (mono dark), airbnb (warm light), luxury_gold (emerald gold), cyberpunk (neon)
 `);
 }
