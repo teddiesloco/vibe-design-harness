@@ -6,4 +6,4 @@ dist/
 .env.local
 *.tgz
 coverage/
-examples/*.html
+
