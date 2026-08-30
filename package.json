@@ -18,6 +18,9 @@
     "themes": "node bin/cli.js themes",
     "domains": "node bin/cli.js domains"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "ai-agent",
     "design-harness",
