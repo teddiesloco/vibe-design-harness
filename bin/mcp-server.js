@@ -1,15 +1,9 @@
 #!/usr/bin/env node
 
-/**
- * Model Context Protocol (MCP) Server for VibeDesign-Harness
- * 100% Pure JavaScript (Zero Python Dependency)
- * Exposes UI/UX Aesthetic Linter, Multi-Domain Image Engine, and Multi-Theme System Generator.
- */
-
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { CallToolRequestSchema, ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';
-import { lintUI, expandPrompt, generateDesignMD, listThemes, fetchRemoteRules } from '../index.js';
+import { lintUI, expandPrompt, generateDesignMD, listThemes, listComponents, scaffoldLandingPage, fetchRemoteRules } from '../index.js';
 
 const server = new Server(
     {
@@ -26,6 +20,25 @@ const server = new Server(
 server.setRequestHandler(ListToolsRequestSchema, async () => {
     return {
         tools: [
+            {
+                name: 'scaffold_landing_page',
+                description: 'Assembles a complete, high-converting, zero-slop landing page (Navbar, Hero Spotlight, Bento Grid, 3-Tier Pricing, Footer) directly inside AI agent context with auto-linting.',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        theme: {
+                            type: 'string',
+                            description: 'Design theme: minimalism, luxury_editorial, luxury_gold, linear, stripe, vercel, airbnb, nordic_clean, zen_japanese, neo_brutalism, glassmorphism_dark.',
+                            default: 'linear',
+                        },
+                        title: { type: 'string', description: 'Web page title' },
+                        brand: { type: 'string', description: 'Brand name' },
+                        heroTitle: { type: 'string', description: 'Hero main headline' },
+                        heroSubtitle: { type: 'string', description: 'Hero sub-headline' },
+                        customAccent: { type: 'string', description: 'Custom hex accent color override (e.g. #10b981)' },
+                    },
+                },
+            },
             {
                 name: 'lint_ui_aesthetic',
                 description: 'Deterministic zero-token UI/UX aesthetic linter for HTML/Tailwind. Detects and purges generic purple gradients, unstyled buttons, and weak gray backdrops. Runs 100% in Node.js (0ms lag, zero python).',
@@ -47,7 +60,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             },
             {
                 name: 'expand_image_prompt',
-                description: 'Studio Multi-Domain Image Prompt Engine for Gemini Imagen 3+, GPT Image 2, DALL-E, and Midjourney. Enforces lens physics, studio lighting, depth of field, and strict negative constraints across 25+ domains.',
+                description: 'Studio Multi-Domain Image Prompt Engine for Gemini Imagen 3+, GPT Image 2, DALL-E, and Midjourney. Enforces lens physics, studio lighting, depth of field, and strict negative constraints across 30+ domains.',
                 inputSchema: {
                     type: 'object',
                     properties: {
@@ -57,12 +70,12 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                         },
                         domain: {
                             type: 'string',
-                            description: 'Visual domain: photorealism, editorial_luxury, anime, cyberpunk_anime, 3d_animation, infographic, typography_poster, carousel_ad, sales_creative, logo_branding, mrbeast_ab_thumbnail_variant_a/b/c, pod_tshirt, sticker_vector, shopify_storefront, dropship_product, gemini_imagen_pro, etc.',
+                            description: 'Visual domain: luxury_editorial, quiet_luxury, minimalism_visual, photorealism, anime, cyberpunk_anime, 3d_animation, infographic, typography_poster, carousel_ad, sales_creative, logo_branding, mrbeast_ab_thumbnail_variant_a/b/c, pod_tshirt, sticker_vector, shopify_storefront, dropship_product, gemini_imagen_pro, etc.',
                             default: 'photorealism',
                         },
                         lighting: {
                             type: 'string',
-                            description: 'Optional custom lighting physics (e.g. golden hour, softbox, neon rim light).',
+                            description: 'Optional custom lighting physics (e.g. dramatic softbox, morning golden hour, neon rim light).',
                         },
                         aspectRatio: {
                             type: 'string',
@@ -74,13 +87,13 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             },
             {
                 name: 'generate_brand_design_md',
-                description: 'Generates DESIGN.md design system tokens across multiple themes (Linear dark, Stripe light, Vercel mono, Airbnb warm, Luxury Gold emerald, Cyberpunk neon) to pre-inject into coding agents.',
+                description: 'Generates DESIGN.md design system tokens across 12+ themes (Minimalism, Luxury Editorial, Nordic, Zen, Linear, Stripe, Vercel, Glassmorphism, etc.) to pre-inject into coding agents.',
                 inputSchema: {
                     type: 'object',
                     properties: {
                         theme: {
                             type: 'string',
-                            description: 'Design theme: linear, stripe, vercel, airbnb, luxury_gold, cyberpunk.',
+                            description: 'Design theme key (e.g. luxury_editorial, minimalism, linear, stripe).',
                             default: 'linear',
                         },
                         customAccent: {
@@ -98,12 +111,36 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                     properties: {},
                 },
             },
+            {
+                name: 'list_curated_components',
+                description: 'Lists available curated Pro component building blocks (Hero Spotlight, Bento Grid, Pricing Matrix, Navbar, Footer).',
+                inputSchema: {
+                    type: 'object',
+                    properties: {},
+                },
+            },
         ],
     };
 });
 
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const { name, arguments: args } = request;
+
+    if (name === 'scaffold_landing_page') {
+        const result = scaffoldLandingPage(args || {});
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: JSON.stringify({
+                        theme: result.theme,
+                        lint_passed: result.lint_passed,
+                        html: result.html
+                    }, null, 2),
+                },
+            ],
+        };
+    }
 
     if (name === 'lint_ui_aesthetic') {
         let options = {};
@@ -158,6 +195,17 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                 {
                     type: 'text',
                     text: JSON.stringify(listThemes(), null, 2),
+                },
+            ],
+        };
+    }
+
+    if (name === 'list_curated_components') {
+        return {
+            content: [
+                {
+                    type: 'text',
+                    text: JSON.stringify(listComponents(), null, 2),
                 },
             ],
         };

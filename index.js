@@ -2,20 +2,17 @@ import https from 'https';
 import { checkFile } from './harness/ui_linter.js';
 import { expandPrompt, registerDomain, VISUAL_DOMAINS, ALIASES } from './harness/prompt_expander.js';
 import { generateDesignMD, registerTheme, THEMES, listThemes } from './harness/claude_design_engine.js';
+import { COMPONENTS, getComponent, listComponents } from './harness/components.js';
+import { scaffoldLandingPage } from './harness/landing_assembler.js';
 
 const REMOTE_RULES_URL = 'https://raw.githubusercontent.com/teddiesloco/vibe-design-harness/main/harness/remote_rules.json';
 
-// In-memory cache for remote rules
 let remoteRulesCache = null;
 let lastFetchTime = 0;
 
-/**
- * 100% Free Open-Source Remote Rule Sync (Dynamic Rule Engine)
- * Fetches latest AI-slop patterns with 5s cache TTL
- */
 export async function fetchRemoteRules() {
     const now = Date.now();
-    if (remoteRulesCache && (now - lastFetchTime < 300000)) { // 5 min cache
+    if (remoteRulesCache && (now - lastFetchTime < 300000)) {
         return remoteRulesCache;
     }
 
@@ -38,11 +35,6 @@ export async function fetchRemoteRules() {
     });
 }
 
-/**
- * Deterministic Zero-Token UI/UX Linter (Pure JS)
- * @param {string} filePath Path to HTML file or raw HTML string
- * @param {Object} options Optional config or custom rules
- */
 export function lintUI(filePath, options = {}) {
     try {
         return checkFile(filePath, options);
@@ -57,6 +49,10 @@ export {
     generateDesignMD,
     registerTheme,
     listThemes,
+    getComponent,
+    listComponents,
+    scaffoldLandingPage,
+    COMPONENTS,
     THEMES,
     VISUAL_DOMAINS,
     ALIASES
@@ -69,7 +65,11 @@ export default {
     generateDesignMD,
     registerTheme,
     listThemes,
+    getComponent,
+    listComponents,
+    scaffoldLandingPage,
     fetchRemoteRules,
+    COMPONENTS,
     THEMES,
     VISUAL_DOMAINS,
     ALIASES
