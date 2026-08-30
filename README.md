@@ -2,67 +2,63 @@
 
 [![npm version](https://img.shields.io/npm/v/vibe-design-harness.svg?color=emerald)](https://www.npmjs.com/package/vibe-design-harness)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![MCP Server](https://img.shields.io/badge/MCP%20Server-Compatible-purple.svg)](https://modelcontextprotocol.io)
-[![Runtime](https://img.shields.io/badge/Runtime-100%25%20Pure%20JS%20(Zero%20Python)-brightgreen)](https://github.com/teddiesloco/vibe-design-harness)
+[![Pure JavaScript](https://img.shields.io/badge/Pure_JS-100%25-yellow.svg)](https://nodejs.org)
+[![Zero AI-Slop](https://img.shields.io/badge/AI--Slop-0%25_Deterministic-brightgreen.svg)](#)
 
-> **The Quality Harness for Vibe Coding.** Guarantees studio-grade UI/UX for Websites, SaaS WebApps, and Mini Apps by enforcing design system guardrails and purging AI-slop deterministically in <1ms.
-
----
-
-## 🎯 The Single Pain Point in Vibe Coding
-
-Everyone is **vibe coding** today with Claude 3.7, Cursor, Gemini, and Codex CLI. Coding functionality has become effortless, but **visual design quality remains completely unconstrained**:
-
-1. **AI-Slop Visual Drift:** Without deterministic guardrails, AI default to generic purple gradients (`from-purple-600 to-indigo-600`), unstyled raw buttons, washed-out gray backdrops (`bg-gray-800`), and claustrophobic whitespace.
-2. **Design System Fragmentation:** Prompts alone cannot reliably enforce token scales, typographic hierarchy, and WCAG AA contrast across multi-turn sessions.
-
-### 🛡️ The Solution: A Pure Design Harness
-`vibe-design-harness` is **not a heavy component library**. It is an **active quality harness** that sits between your AI coding agent and your output code:
-* **Pre-generation:** Injects unified architectural design tokens (`DESIGN.md`) across 12+ curated styles.
-* **Post-generation:** Audits and catches aesthetic anti-patterns in <1ms via zero-token deterministic AST/regex rules.
+> **Universal Quality Harness & Aesthetic Linter for AI Coding Agents.**  
+> Pre-generation design tokens + Post-generation deterministic anti-slop linter (<1ms) & auto-fixer. Built for **Cursor, Claude Code, Codex CLI, Gemini 3.7 & Hermes Agent**.
 
 ---
 
-## 💎 Verified Showcase Proofs (Generated via Gemini 3.7 + Harness)
+## 🎯 1 Problem. 1 Niche. 1 Market Gap.
 
-Inspect verified, zero-slop production samples built with Gemini 3.7 Flash & VibeDesign Harness in `examples/`:
-
-1. **[Vogue Luxury Editorial (`examples/luxury_editorial.html`)](https://github.com/teddiesloco/vibe-design-harness/blob/main/examples/luxury_editorial.html)**
-   * *Style:* Deep obsidian palette (`#050505`), Playfair serif typography, Champagne gold accents (`#d4af37`), generous editorial breathing room.
-2. **[Swiss Pure Minimalism (`examples/swiss_minimalism.html`)](https://github.com/teddiesloco/vibe-design-harness/blob/main/examples/swiss_minimalism.html)**
-   * *Style:* Monolithic layout, strict grid hierarchy, pristine high-contrast monochrome surfaces (`#ffffff` / `#000000`).
-3. **[Deep Space Glassmorphism SaaS (`examples/glassmorphism_saas.html`)](https://github.com/teddiesloco/vibe-design-harness/blob/main/examples/glassmorphism_saas.html)**
-   * *Style:* Frosted acrylic surfaces (`backdrop-blur-xl`), emerald cyan neon accents (`#00f0ff`), layered multi-tier depth.
+| The AI Coding Pain | The VibeDesign-Harness Fix |
+| :--- | :--- |
+| **Aesthetic AI-Slop:** AI models consistently generate cheap purple gradients (`from-purple-600 to-blue-600`), muddy gray backgrounds (`bg-gray-800`), and unstyled elements. | **Deterministic AST Linter (<1ms):** Intercepts and blocks 100% of generic AI anti-patterns before render. Supports `--fix` for instant token remediation. |
+| **Visual Inconsistency:** Coding agents drift from brand guidelines across multi-turn sessions. | **Zero-Token Pre-Engine:** Injects structured `DESIGN.md` tokens (12 architectural themes: Swiss Minimalism, Vogue Editorial, Linear Dark, Quiet Luxury). |
+| **Framework Lock-in:** Output locked into raw HTML. | **Modern Export:** Export directly to **React (TSX Tailwind / Lucide)** or clean standalone HTML. |
 
 ---
 
-## ⚡ Quick Start (CLI & NPX)
+## 🚀 Quickstart
 
-### 1. Audit Any UI Code for AI-Slop (Zero-Token Linter)
-Catch washed-out grays, purple gradient cliches, and unstyled interactive elements instantly:
 ```bash
-npx vibe-design-harness lint src/components/Dashboard.html
-```
+# 1. Audit any file or HTML component for AI-slop defects
+npx vibe-design-harness lint src/App.html
 
-### 2. Scaffold Instant Reference Layout
-Generate a baseline reference layout adhering 100% to selected design system rules:
-```bash
-npx vibe-design-harness scaffold luxury_editorial my_page.html
-npx vibe-design-harness scaffold minimalism webapp.html
-```
+# 2. Auto-fix detected AI-slop anti-patterns instantly
+npx vibe-design-harness lint src/App.html --fix
 
-### 3. Generate Agent Design System Tokens
-Pre-inject architectural design tokens into your coding agent's context window:
-```bash
-npx vibe-design-harness design-system luxury_gold "#d4af37"
-npx vibe-design-harness design-system minimalism
+# 3. Scaffold a studio-grade layout (React TSX or HTML)
+npx vibe-design-harness scaffold luxury_editorial page.tsx --framework react
+
+# 4. Generate DESIGN.md brand tokens for AI agents (Cursor / Claude)
+npx vibe-design-harness design-system luxury_gold "#d4af37" > DESIGN.md
+
+# 5. Expand visual prompt across 30+ domains (Midjourney, FLUX, Imagen 3, DALL-E 3)
+npx vibe-design-harness expand "perfume bottle on obsidian stone" photorealism
 ```
 
 ---
 
-## 🔌 Model Context Protocol (MCP) Setup
+## ⚙️ Custom Configuration (`.viberc.json`)
 
-Add to your `claude_desktop_config.json`, Cursor, or Hermes Agent:
+Customize brand rules and ban lists directly in your project root:
+
+```json
+{
+  "banned_patterns": [
+    "bg-red-500",
+    "font-comic-sans"
+  ]
+}
+```
+
+---
+
+## 🤖 Model Context Protocol (MCP Server)
+
+Plug into **Claude Desktop**, **Cursor**, or **Hermes Agent** in 1 line:
 
 ```json
 {
@@ -75,8 +71,24 @@ Add to your `claude_desktop_config.json`, Cursor, or Hermes Agent:
 }
 ```
 
+### 🛠️ Exposed MCP Tools
+* `lint_ui`: Deterministic UI/UX linter checking for AI-slop.
+* `fix_ui`: Remediate AI-slop anti-patterns automatically.
+* `get_design_system`: Generate `DESIGN.md` token specifications across 12 themes.
+* `scaffold_landing_page`: Assemble complete zero-slop UI components in HTML or React TSX.
+* `expand_image_prompt`: Studio-grade multi-model visual prompt generator (30+ domains).
+
 ---
 
-## 📄 License & Author
+## 💎 Verified Proof Cases (Generated with Gemini 3.7)
 
-MIT License © 2026 [@teddiesloco](https://github.com/teddiesloco) — Built for the Autonomous Vibe Coding Era.
+Pre-tested, zero-slop design samples available in `examples/`:
+1. 🏛️ `examples/luxury_editorial.html` — Vogue Haute Couture Obsidian (`#050505`, Playfair serif, Champagne gold).
+2. 📐 `examples/swiss_minimalism.html` — Swiss Pure Minimalism (High-contrast monochrome, Bauhaus ratio).
+3. 🌌 `examples/glassmorphism_saas.html` — Deep Space SaaS WebApp (Multi-layer acrylic backdrop blur).
+
+---
+
+## 📄 License
+
+MIT © [teddiesloco](https://github.com/teddiesloco)

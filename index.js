@@ -1,76 +1,64 @@
-import https from 'https';
-import { checkFile } from './harness/ui_linter.js';
-import { expandPrompt, registerDomain, VISUAL_DOMAINS, ALIASES } from './harness/prompt_expander.js';
-import { generateDesignMD, registerTheme, THEMES, listThemes } from './harness/claude_design_engine.js';
-import { COMPONENTS, getComponent, listComponents } from './harness/components.js';
+/**
+ * VibeDesign-Harness Main Entry Point
+ * 100% Pure JavaScript (Zero Python Dependency)
+ */
+
+import { checkFile, fixContent, loadLocalConfig } from './harness/ui_linter.js';
+import { expandPrompt, registerDomain, listDomains, VISUAL_DOMAINS } from './harness/prompt_expander.js';
+import { generateDesignMD, getTheme, registerTheme, listThemes, THEMES } from './harness/claude_design_engine.js';
+import { getComponent, listComponents, PRO_COMPONENTS } from './harness/components.js';
 import { scaffoldLandingPage } from './harness/landing_assembler.js';
 
-const REMOTE_RULES_URL = 'https://raw.githubusercontent.com/teddiesloco/vibe-design-harness/main/harness/remote_rules.json';
-
-let remoteRulesCache = null;
-let lastFetchTime = 0;
-
-export async function fetchRemoteRules() {
-    const now = Date.now();
-    if (remoteRulesCache && (now - lastFetchTime < 300000)) {
-        return remoteRulesCache;
-    }
-
-    return new Promise((resolve) => {
-        const req = https.get(REMOTE_RULES_URL, { timeout: 2500 }, (res) => {
-            let data = '';
-            res.on('data', chunk => data += chunk);
-            res.on('end', () => {
-                try {
-                    remoteRulesCache = JSON.parse(data);
-                    lastFetchTime = Date.now();
-                    resolve(remoteRulesCache);
-                } catch {
-                    resolve(null);
-                }
-            });
-        });
-        req.on('error', () => resolve(null));
-        req.on('timeout', () => { req.destroy(); resolve(null); });
-    });
+export function lintUI(filePathOrContent, options = {}) {
+    return checkFile(filePathOrContent, options);
 }
 
-export function lintUI(filePath, options = {}) {
+export function fixUI(content) {
+    return fixContent(content);
+}
+
+export async function fetchRemoteRules() {
     try {
-        return checkFile(filePath, options);
-    } catch (err) {
-        return { success: false, passed: false, error: err.message };
+        const response = await fetch('https://raw.githubusercontent.com/teddiesloco/vibe-design-harness/main/harness/remote_rules.json');
+        if (response.ok) {
+            return await response.json();
+        }
+    } catch (e) {
+        // Silently fallback to local rules
     }
+    return null;
 }
 
 export {
     expandPrompt,
     registerDomain,
+    listDomains,
+    VISUAL_DOMAINS,
     generateDesignMD,
+    getTheme,
     registerTheme,
     listThemes,
+    THEMES,
     getComponent,
     listComponents,
+    PRO_COMPONENTS,
     scaffoldLandingPage,
-    COMPONENTS,
-    THEMES,
-    VISUAL_DOMAINS,
-    ALIASES
+    loadLocalConfig
 };
 
 export default {
     lintUI,
+    fixUI,
     expandPrompt,
     registerDomain,
+    listDomains,
     generateDesignMD,
+    getTheme,
     registerTheme,
     listThemes,
     getComponent,
     listComponents,
     scaffoldLandingPage,
     fetchRemoteRules,
-    COMPONENTS,
-    THEMES,
-    VISUAL_DOMAINS,
-    ALIASES
+    loadLocalConfig
 };

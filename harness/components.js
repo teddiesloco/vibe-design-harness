@@ -273,8 +273,11 @@ export function listComponents() {
     }));
 }
 
+export const PRO_COMPONENTS = COMPONENTS;
+
 export default {
     COMPONENTS,
+    PRO_COMPONENTS,
     getComponent,
     listComponents
 };

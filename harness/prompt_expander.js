@@ -186,8 +186,16 @@ export function expandPrompt(prompt, domain = 'photorealism', options = {}) {
     return {
         original_prompt: prompt,
         domain: domKey,
+        domain_name: spec.name,
         expanded_prompt: expandedPrompt,
+        positive_prompt: expandedPrompt,
         negative_prompt: negative,
+        recommended_parameters: {
+            aspect_ratio: options.aspectRatio || '16:9',
+            sampler: 'euler_a / flow_match',
+            guidance_scale: 3.5,
+            negative_prompt: negative
+        },
         universal_compatibility: [
             "Midjourney v6+",
             "FLUX.1 (Pro/Schnell/Dev)",
@@ -201,9 +209,19 @@ export function expandPrompt(prompt, domain = 'photorealism', options = {}) {
     };
 }
 
+export function listDomains() {
+    return Object.keys(VISUAL_DOMAINS).map(k => ({
+        key: k,
+        name: VISUAL_DOMAINS[k].name,
+        category: VISUAL_DOMAINS[k].category || 'General',
+        lens: VISUAL_DOMAINS[k].lens || 'Standard'
+    }));
+}
+
 export default {
     expandPrompt,
     registerDomain,
+    listDomains,
     VISUAL_DOMAINS,
     ALIASES
 };

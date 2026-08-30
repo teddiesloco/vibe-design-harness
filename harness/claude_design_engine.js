@@ -288,6 +288,19 @@ export function registerTheme(key, themeSpec) {
     return THEMES[key.toLowerCase().trim()];
 }
 
+export function getTheme(key) {
+    const k = (key || 'linear').toLowerCase().trim();
+    const t = THEMES[k] || THEMES['linear'];
+    return {
+        ...t,
+        color_mode: t.mode || 'dark',
+        fonts: {
+            headline: t.font || 'sans-serif',
+            body: t.font || 'sans-serif'
+        }
+    };
+}
+
 export function listThemes() {
     return Object.keys(THEMES).map(k => ({
         key: k,
