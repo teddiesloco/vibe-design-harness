@@ -13,7 +13,7 @@ export const BANNED_PATTERNS = [
     { pattern: /\bbg-(gray|zinc|slate)-800\b/i, message: 'Weak gray background (use deep dark bg-zinc-950 or #08090a)', fix: 'bg-zinc-950' },
     { pattern: /<button(?![^>]*class=)/i, message: 'Unstyled native button tag detected', fix: '<button class="px-4 py-2 rounded-lg bg-zinc-100 text-zinc-900 font-medium hover:bg-white transition"' },
     { pattern: /style="[^"]*background:\s*linear-gradient[^"]*"/i, message: 'Raw inline gradient detected (use semantic tokens)', fix: 'class="bg-zinc-950 border border-zinc-800"' },
-    // 21st.dev & Design Engineer Anti-Slop Rules
+    // Professional UI/UX Anti-Slop Rules
     { pattern: /class="[^"]*w-\d+\s+h-\d+\s+rounded-[^"]*bg-gradient-to-[^"]*text-white[^"]*font-black[^"]*">\s*[A-Z0-9]{2,3}\s*<\/div>/i, message: 'Toy-box initial sticker logo detected (use minimalist SVG vector mark or typographic wordmark)' },
     { pattern: />\s*[🪙🔥⭐🎁🎉🚀💸]\s*</i, message: 'Raw emoji used as UI icon in element (use subtle monochrome 14-16px SVG vector icon)' },
     { pattern: /from-(rose|pink|purple|amber)-\d+\s+to-(indigo|blue|emerald|teal)-\d+/i, message: 'Harsh multi-gradient clash on surface (use neutral surface + 1 subtle semantic accent)' }

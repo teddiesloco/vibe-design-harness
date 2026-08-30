@@ -1,7 +1,7 @@
 {
   "name": "vibe-design-harness",
   "version": "1.3.0",
-  "description": "Deterministic Anti-Slop UI/UX Linter (<1ms), 21st.dev Apple Quiet Luxury Token Engine & Multi-Domain Visual Prompt Harness for AI Coding Agents.",
+  "description": "Deterministic Anti-Slop UI/UX Linter (<1ms), Precision Design Token Engine & Multi-Domain Visual Prompt Harness for AI Coding Agents.",
   "main": "index.js",
   "type": "module",
   "bin": {

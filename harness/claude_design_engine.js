@@ -90,9 +90,9 @@ export const THEMES = {
         mode: "dark"
     },
 
-    // 4. Apple Style & Quiet Luxury Light (21st.dev Inspired)
+    // 4. Precision Clean & Luxury Themes
     apple_luxury: {
-        name: "Apple Style Quiet Luxury Light",
+        name: "Precision Quiet Luxury Light",
         bg: "#fbfbfd",
         surface: "#ffffff",
         border: "#e5e5ea",
@@ -104,8 +104,8 @@ export const THEMES = {
         shadow: "0 2px 8px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.04)",
         mode: "light"
     },
-    shadcn_clean: {
-        name: "Shadcn 21st.dev Precision Light",
+    modern_clean: {
+        name: "Modern Precision Clean Light",
         bg: "#fafafa",
         surface: "#ffffff",
         border: "#e4e4e7",
