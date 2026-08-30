@@ -11,7 +11,7 @@ import json
 BANNED_PATTERNS = [
     (r'from-purple-\d+\s+to-blue-\d+', 'Generic purple-to-blue AI gradient detected'),
     (r'bg-gradient-to-r\s+from-indigo-\d+\s+via-purple-\d+', 'Cheesy generic AI gradient detected'),
-    (r'bg-(gray|zinc|slate)-800 ', 'Weak gray background (use deep dark bg-zinc-950 or #08090a)'),
+    (r'\bbg-(gray|zinc|slate)-800\b', 'Weak gray background (use deep dark bg-zinc-950 or #08090a)'),
     (r'<button(?![^>]*class=)', 'Unstyled native button tag detected'),
     (r'style="[^"]*background:\s*linear-gradient', 'Raw inline gradient detected (use semantic tokens)'),
 ]

@@ -131,8 +131,22 @@ BRAND_DESIGN_SYSTEMS = {
     }
 }
 
+ALIASES = {
+    "anime_manga": "anime",
+    "infographic_diagram": "infographic",
+    "social_carousel": "carousel_ad",
+    "typography": "typography_poster",
+    "gemini_imagen": "gemini_imagen_pro",
+    "claude_design": "claude_design_app",
+    "mrbeast_variant_a": "mrbeast_ab_thumbnail_variant_a",
+    "mrbeast_variant_b": "mrbeast_ab_thumbnail_variant_b",
+    "mrbeast_variant_c": "mrbeast_ab_thumbnail_variant_c"
+}
+
 def expand_prompt(prompt, domain="photorealism"):
     dom_key = domain.lower()
+    if dom_key in ALIASES:
+        dom_key = ALIASES[dom_key]
     if dom_key not in VISUAL_DOMAINS:
         dom_key = "photorealism"
     

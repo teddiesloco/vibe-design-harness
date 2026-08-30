@@ -12,6 +12,9 @@ if (command === 'lint') {
     }
     const report = lintUI(targetFile);
     console.log(JSON.stringify(report, null, 2));
+    if (!report.passed || report.success === false) {
+        process.exit(1);
+    }
 } else if (command === 'expand') {
     const prompt = process.argv[3];
     const domain = process.argv[4] || 'photorealism';
