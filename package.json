@@ -1,6 +1,6 @@
 {
   "name": "vibe-design-harness",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Universal 100% Pure JS AI Agent UI/UX Linter, Multi-Theme Design System Engine & 25+ Domain Visual Harness for Gemini, Codex, Claude & Hermes.",
   "main": "index.js",
   "type": "module",

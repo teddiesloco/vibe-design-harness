@@ -260,6 +260,23 @@ ${extraTokens}
 - **Button Standards:** Padding \`10px 20px\`, 1px solid border highlight, \`focus-visible:ring-2\` ring-offset-2. Never unstyled.
 - **Card Standards:** 1px perimeter border \`${mergedTheme.border}\`, surface token \`${mergedTheme.surface}\`.
 - **Transitions:** Micro-interactions with CSS \`transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1)\`.
+
+---
+
+## 4. ⚡ Tailwind CSS v4 (@theme CSS Tokens Preset)
+\`\`\`css
+@theme {
+  --color-background: ${mergedTheme.bg};
+  --color-surface: ${mergedTheme.surface};
+  --color-border: ${mergedTheme.border};
+  --color-primary: ${mergedTheme.accent};
+  --color-foreground: ${mergedTheme.textMain};
+  --color-muted: ${mergedTheme.textMuted};
+  --font-sans: ${mergedTheme.font};
+  --radius-base: ${mergedTheme.radius || '8px'};
+}
+\`\`\`
+
 `;
 }
 
