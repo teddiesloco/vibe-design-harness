@@ -1,48 +1,34 @@
 /**
- * VibeDesign-Harness Multi-Domain Visual Prompt Expander
+ * VibeDesign-Harness Universal Multi-Domain Image & Visual Prompt Expander
  * 100% Pure JavaScript (Zero Python Dependency)
+ * Universal compatibility: Midjourney v6+, FLUX.1 (Pro/Schnell/Dev), SDXL, Recraft V3,
+ * Ideogram 2.0, Google Imagen 3+, OpenAI GPT Image 2 / DALL-E 3, and ComfyUI workflows.
  * 30+ Specialized Visual Domains + Dynamic Domain Registration & Customization.
  */
 
 export const VISUAL_DOMAINS = {
-    // 1. CODEX & UI PROTOTYPING
-    "codex_ui_clean": {
-        "prefix": "OpenAI Codex CLI clean UI component spec, production-ready Tailwind CSS v4, accessible WCAG AA contrast, deep dark background slate-950, crisp zinc borders, strict typographic scale, micro-interactions.",
-        "negative": "purple gradient slop, unstyled button, generic gray backdrop, broken alignment"
-    },
-    "claude_design_app": {
-        "prefix": "Claude Design UI prototype, clean component-driven React HTML mockup, Tailwind CSS tokens, WCAG accessible contrast, modern dark/light mode toggle, sleek dashboard layout.",
-        "negative": "AI-slop purple gradients, low contrast text, unstyled raw buttons, clunky wireframes"
-    },
-    "claude_design_deck": {
-        "prefix": "Claude Design pitch deck slide presentation, 16:9 widescreen layout, Swiss typography, visual data cards, high contrast slide structure, executive summary design.",
-        "negative": "wall of text, low contrast backgrounds, messy slide alignment, generic template slop"
-    },
-    "claude_design_hyperframe": {
-        "prefix": "Claude Design HyperFrames HTML motion graphic, smooth CSS @keyframes animations, SVG vector path motion, staggered entry transitions, high-framerate kinetic typography.",
-        "negative": "static image, choppy frame rates, unaligned layout shifts, low resolution export"
-    },
-
-    // 2. STUDIO IMAGE HARNESS (Gemini Imagen 3 / GPT Image / DALL-E)
-    "gemini_imagen_pro": {
-        "prefix": "Gemini Imagen ultra-high fidelity render, photorealistic lighting physics, sharp focal depth, master studio art direction, 8k crisp details, color graded perfection.",
-        "negative": "DALL-E cartoonish artifacts, blurry textures, oversaturated plastic look, deformed geometry"
-    },
+    // 1. UNIVERSAL PRO PHOTOGRAPHY & CINEMATOGRAPHY
     "photorealism": {
-        "prefix": "Ultra-realistic photographic shot, raw 35mm lens camera capture, natural lighting physics, subsurface micro-textures, photorealistic depth of field, neutral color balance, highly detailed cinematic framing.",
-        "negative": "3d render, cartoon, illustration, painting, plastic skin, fake lighting, blurry, over-saturated, anime, CGI"
+        "prefix": "Award-winning ultra-photorealistic shot, captured on 35mm Hasselblad medium format camera, f/2.8 lens, natural lighting physics, subsurface micro-textures, authentic human skin pores, photorealistic depth of field, raw color balance, cinematic composition.",
+        "negative": "3d render, cartoon, illustration, painting, plastic skin, fake lighting, blurry, over-saturated, anime, CGI, airbrushed, lowres"
     },
     "editorial_luxury": {
-        "prefix": "Vogue/GQ editorial luxury fashion magazine photography, Hasselblad medium format camera, diffused studio softbox lighting, high-end color grading, subtle natural skin texture, haute couture aesthetic.",
-        "negative": "cheap lighting, low-res, plastic skin, fake background, amateur photography"
+        "prefix": "Vogue/GQ editorial luxury haute couture photography, Leica M11 optics, diffused high-end studio softbox lighting, high-fashion color grading, subtle natural skin texture, prestigious editorial aesthetic.",
+        "negative": "cheap lighting, low-res, plastic skin, fake backdrop, amateur snapshot, oversaturated colors"
     },
     "quiet_luxury": {
-        "prefix": "Old money quiet luxury aesthetic, understated elegance, muted earthy and cream tones, cashmere and linen textures, warm ambient natural sunlight, architectural minimalism, Leica M11 photography.",
-        "negative": "flashy gaudy logos, neon colors, plastic reflections, oversaturated contrast"
+        "prefix": "Old money quiet luxury aesthetic, understated timeless elegance, muted earthy and cream tones, cashmere and linen textures, warm ambient natural sunlight, architectural minimalism, Hasselblad camera capture.",
+        "negative": "flashy gaudy logos, neon colors, plastic reflections, oversaturated contrast, cheap synthetic fabrics"
     },
     "minimalism_visual": {
         "prefix": "Ultra-minimalist architectural photography, clean monolithic geometry, expansive negative space, soft ambient natural shadows, pristine white and concrete textures, disciplined composition.",
         "negative": "cluttered background, busy details, visual noise, complex chaotic patterns"
+    },
+
+    // 2. UNIVERSAL AI IMAGE GEN ENGINE (Midjourney / FLUX.1 / SDXL / Recraft / Imagen / DALL-E)
+    "universal_image_pro": {
+        "prefix": "Masterpiece digital visual, ultra-high fidelity render, photorealistic lighting physics, sharp focal depth, master studio art direction, 8k crisp details, balanced chromatic harmony, ray-traced subsurface scattering.",
+        "negative": "cartoonish artifacts, blurry textures, oversaturated plastic look, deformed geometry, bad hands, low resolution"
     },
     "anime": {
         "prefix": "Masterpiece anime illustration, vibrant 2D cel-shading art style, clean dynamic line art, Studio Ghibli and Makoto Shinkai visual aesthetics, dramatic volumetric sky and lighting.",
@@ -65,7 +51,25 @@ export const VISUAL_DOMAINS = {
         "negative": "photographic noise, low-resolution illegible text, script chaos, 3D realistic clutter"
     },
 
-    // 3. MARKETING, ADS & SOCIAL MEDIA CONVERSION
+    // 3. UI PROTOTYPING & AGENT GRAPHICS
+    "codex_ui_clean": {
+        "prefix": "OpenAI Codex & Claude clean UI component spec, production-ready Tailwind CSS v4, accessible WCAG AA contrast, deep dark background slate-950, crisp zinc borders, strict typographic scale, micro-interactions.",
+        "negative": "purple gradient slop, unstyled button, generic gray backdrop, broken alignment"
+    },
+    "claude_design_app": {
+        "prefix": "Claude Design UI prototype, clean component-driven React HTML mockup, Tailwind CSS tokens, WCAG accessible contrast, modern dark/light mode toggle, sleek dashboard layout.",
+        "negative": "AI-slop purple gradients, low contrast text, unstyled raw buttons, clunky wireframes"
+    },
+    "claude_design_deck": {
+        "prefix": "Claude Design pitch deck slide presentation, 16:9 widescreen layout, Swiss typography, visual data cards, high contrast slide structure, executive summary design.",
+        "negative": "wall of text, low contrast backgrounds, messy slide alignment, generic template slop"
+    },
+    "claude_design_hyperframe": {
+        "prefix": "Claude Design HyperFrames HTML motion graphic, smooth CSS @keyframes animations, SVG vector path motion, staggered entry transitions, high-framerate kinetic typography.",
+        "negative": "static image, choppy frame rates, unaligned layout shifts, low resolution export"
+    },
+
+    // 4. MARKETING, ADS & SOCIAL MEDIA CONVERSION
     "carousel_ad": {
         "prefix": "High-converting social ad carousel graphic, clear safe-zone margin for text CTA, pattern interrupt visual focal point, crisp UI elements, vibrant brand colors.",
         "negative": "off-center text clutter, unreadable zones, low contrast background, grainy photo"
@@ -95,7 +99,7 @@ export const VISUAL_DOMAINS = {
         "negative": "single subject without split, low contrast divider, dull colors, subtle change"
     },
 
-    // 4. E-COMMERCE, POD & BRANDING
+    // 5. E-COMMERCE, POD & BRANDING
     "logo_branding": {
         "prefix": "Professional vector logo design, minimalist geometry, high scalability, pristine negative space, clean vector line work, iconic brand emblem.",
         "negative": "3d photographic background, complex realistic texture, noisy clutter, raster pixels"
@@ -123,7 +127,12 @@ export const ALIASES = {
     "infographic_diagram": "infographic",
     "social_carousel": "carousel_ad",
     "typography": "typography_poster",
-    "gemini_imagen": "gemini_imagen_pro",
+    "gemini_imagen": "universal_image_pro",
+    "gemini_imagen_pro": "universal_image_pro",
+    "imagen": "universal_image_pro",
+    "midjourney": "universal_image_pro",
+    "flux": "universal_image_pro",
+    "sdxl": "universal_image_pro",
     "claude_design": "claude_design_app",
     "mrbeast_variant_a": "mrbeast_ab_thumbnail_variant_a",
     "mrbeast_variant_b": "mrbeast_ab_thumbnail_variant_b",
@@ -151,9 +160,9 @@ export function registerDomain(domainKey, prefix, negative = '') {
 }
 
 /**
- * Expand raw image prompt with domain-specific optics, lighting, and negative constraints
+ * Expand raw image prompt with universal camera physics, studio lighting, and negative constraints
  * @param {string} prompt Raw prompt concept
- * @param {string} domain Visual domain style
+ * @param {string} domain Visual domain style or target model
  * @param {Object} options Custom options (lighting, composition, mood, customPrefix, customNegative)
  */
 export function expandPrompt(prompt, domain = 'photorealism', options = {}) {
@@ -179,6 +188,15 @@ export function expandPrompt(prompt, domain = 'photorealism', options = {}) {
         domain: domKey,
         expanded_prompt: expandedPrompt,
         negative_prompt: negative,
+        universal_compatibility: [
+            "Midjourney v6+",
+            "FLUX.1 (Pro/Schnell/Dev)",
+            "Stable Diffusion SDXL",
+            "Google Imagen 3+",
+            "OpenAI GPT Image 2 / DALL-E 3",
+            "Recraft V3",
+            "Ideogram 2.0"
+        ],
         engine_guidance: 'Pass expanded_prompt as primary prompt and negative_prompt as negative prompt parameter.'
     };
 }

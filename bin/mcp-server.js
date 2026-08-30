@@ -60,7 +60,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             },
             {
                 name: 'expand_image_prompt',
-                description: 'Studio Multi-Domain Image Prompt Engine for Gemini Imagen 3+, GPT Image 2, DALL-E, and Midjourney. Enforces lens physics, studio lighting, depth of field, and strict negative constraints across 30+ domains.',
+                description: 'Universal Multi-Model Image Prompt Engine (Midjourney v6, FLUX.1, SDXL, Imagen 3, GPT Image 2, DALL-E 3, Recraft V3). Enforces camera optics, lens physics, studio lighting, and negative constraints across 30+ domains.',
                 inputSchema: {
                     type: 'object',
                     properties: {
@@ -70,7 +70,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                         },
                         domain: {
                             type: 'string',
-                            description: 'Visual domain: luxury_editorial, quiet_luxury, minimalism_visual, photorealism, anime, cyberpunk_anime, 3d_animation, infographic, typography_poster, carousel_ad, sales_creative, logo_branding, mrbeast_ab_thumbnail_variant_a/b/c, pod_tshirt, sticker_vector, shopify_storefront, dropship_product, gemini_imagen_pro, etc.',
+                            description: 'Visual domain: luxury_editorial, quiet_luxury, minimalism_visual, photorealism, anime, cyberpunk_anime, 3d_animation, infographic, typography_poster, carousel_ad, sales_creative, logo_branding, mrbeast_ab_thumbnail_variant_a/b/c, pod_tshirt, sticker_vector, shopify_storefront, dropship_product, universal_image_pro, etc.',
                             default: 'photorealism',
                         },
                         lighting: {
