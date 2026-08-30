@@ -1,7 +1,7 @@
 /**
  * VibeDesign-Harness Multi-Domain Visual Prompt Expander
  * 100% Pure JavaScript (Zero Python Dependency)
- * 25+ Specialized Visual Domains with dynamic multi-style/multi-theme support.
+ * 30+ Specialized Visual Domains + Dynamic Domain Registration & Customization.
  */
 
 export const VISUAL_DOMAINS = {
@@ -35,6 +35,14 @@ export const VISUAL_DOMAINS = {
     "editorial_luxury": {
         "prefix": "Vogue/GQ editorial luxury fashion magazine photography, Hasselblad medium format camera, diffused studio softbox lighting, high-end color grading, subtle natural skin texture, haute couture aesthetic.",
         "negative": "cheap lighting, low-res, plastic skin, fake background, amateur photography"
+    },
+    "quiet_luxury": {
+        "prefix": "Old money quiet luxury aesthetic, understated elegance, muted earthy and cream tones, cashmere and linen textures, warm ambient natural sunlight, architectural minimalism, Leica M11 photography.",
+        "negative": "flashy gaudy logos, neon colors, plastic reflections, oversaturated contrast"
+    },
+    "minimalism_visual": {
+        "prefix": "Ultra-minimalist architectural photography, clean monolithic geometry, expansive negative space, soft ambient natural shadows, pristine white and concrete textures, disciplined composition.",
+        "negative": "cluttered background, busy details, visual noise, complex chaotic patterns"
     },
     "anime": {
         "prefix": "Masterpiece anime illustration, vibrant 2D cel-shading art style, clean dynamic line art, Studio Ghibli and Makoto Shinkai visual aesthetics, dramatic volumetric sky and lighting.",
@@ -121,43 +129,63 @@ export const ALIASES = {
     "mrbeast_variant_b": "mrbeast_ab_thumbnail_variant_b",
     "mrbeast_variant_c": "mrbeast_ab_thumbnail_variant_c",
     "luxury": "editorial_luxury",
+    "quiet_luxury_aesthetic": "quiet_luxury",
+    "minimalism": "minimalism_visual",
+    "minimalist": "minimalism_visual",
     "cyberpunk": "cyberpunk_anime"
 };
+
+/**
+ * Register a custom visual prompt domain dynamically
+ * @param {string} domainKey Unique domain name
+ * @param {string} prefix Prompt enhancement prefix
+ * @param {string} negative Negative prompt constraints
+ */
+export function registerDomain(domainKey, prefix, negative = '') {
+    if (!domainKey || !prefix) {
+        throw new Error('registerDomain requires domainKey and prefix.');
+    }
+    const key = domainKey.toLowerCase().trim();
+    VISUAL_DOMAINS[key] = { prefix, negative };
+    return VISUAL_DOMAINS[key];
+}
 
 /**
  * Expand raw image prompt with domain-specific optics, lighting, and negative constraints
  * @param {string} prompt Raw prompt concept
  * @param {string} domain Visual domain style
- * @param {Object} options Custom options (lighting, composition, mood)
+ * @param {Object} options Custom options (lighting, composition, mood, customPrefix, customNegative)
  */
 export function expandPrompt(prompt, domain = 'photorealism', options = {}) {
     let domKey = (domain || 'photorealism').toLowerCase().trim();
     if (ALIASES[domKey]) {
         domKey = ALIASES[domKey];
     }
-    if (!VISUAL_DOMAINS[domKey]) {
-        domKey = 'photorealism';
-    }
 
-    const spec = VISUAL_DOMAINS[domKey];
+    let spec = VISUAL_DOMAINS[domKey] || VISUAL_DOMAINS['photorealism'];
+    let prefix = options.customPrefix || spec.prefix;
+    let negative = options.customNegative || spec.negative;
+
     let customModifier = '';
     if (options.lighting) customModifier += `, ${options.lighting} lighting`;
     if (options.composition) customModifier += `, ${options.composition} composition`;
     if (options.aspectRatio) customModifier += `, aspect ratio ${options.aspectRatio}`;
+    if (options.mood) customModifier += `, ${options.mood} atmosphere`;
 
-    const expandedPrompt = `${spec.prefix} ${prompt}${customModifier}. High quality, master art direction.`;
+    const expandedPrompt = `${prefix} ${prompt}${customModifier}. High quality, master art direction.`;
 
     return {
         original_prompt: prompt,
         domain: domKey,
         expanded_prompt: expandedPrompt,
-        negative_prompt: spec.negative,
+        negative_prompt: negative,
         engine_guidance: 'Pass expanded_prompt as primary prompt and negative_prompt as negative prompt parameter.'
     };
 }
 
 export default {
     expandPrompt,
+    registerDomain,
     VISUAL_DOMAINS,
     ALIASES
 };

@@ -1,7 +1,7 @@
 import https from 'https';
 import { checkFile } from './harness/ui_linter.js';
-import { expandPrompt, VISUAL_DOMAINS, ALIASES } from './harness/prompt_expander.js';
-import { generateDesignMD, THEMES, listThemes } from './harness/claude_design_engine.js';
+import { expandPrompt, registerDomain, VISUAL_DOMAINS, ALIASES } from './harness/prompt_expander.js';
+import { generateDesignMD, registerTheme, THEMES, listThemes } from './harness/claude_design_engine.js';
 
 const REMOTE_RULES_URL = 'https://raw.githubusercontent.com/teddiesloco/vibe-design-harness/main/harness/remote_rules.json';
 
@@ -53,7 +53,9 @@ export function lintUI(filePath, options = {}) {
 
 export {
     expandPrompt,
+    registerDomain,
     generateDesignMD,
+    registerTheme,
     listThemes,
     THEMES,
     VISUAL_DOMAINS,
@@ -63,7 +65,9 @@ export {
 export default {
     lintUI,
     expandPrompt,
+    registerDomain,
     generateDesignMD,
+    registerTheme,
     listThemes,
     fetchRemoteRules,
     THEMES,
