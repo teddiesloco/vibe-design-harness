@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VibeDesign — Autonomous AI Design Harness</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background-color: #030712;
+      color: #f9fafb;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="selection:bg-emerald-500/30 selection:text-emerald-300">
+  
+<header class="sticky top-0 z-50 w-full border-b backdrop-blur-md transition-all"
+        style="background: #030712cc; border-color: rgba(255, 255, 255, 0.12);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2 font-bold text-lg tracking-tight" style="color: #f9fafb;">
+      <span class="w-6 h-6 rounded-md flex items-center justify-center text-xs text-white" style="background: #818cf8;">VD</span>
+      <span>VibeDesign</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium" style="color: #9ca3af;">
+      <a href="#features" class="hover:text-white transition-colors">Features</a>
+      <a href="#themes" class="hover:text-white transition-colors">Themes</a>
+      <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+      <a href="#docs" class="hover:text-white transition-colors">Docs</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="#get-started" class="px-4 py-2 rounded-md text-xs font-semibold text-white transition-all hover:opacity-90"
+         style="background: #818cf8;">
+        Get Started
+      </a>
+    </div>
+  </div>
+</header>
+  <main>
+    
+<section class="relative overflow-hidden pt-24 pb-20 md:pt-32 md:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+  <!-- Radial Spotlight Beam -->
+  <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[350px] md:w-[900px] md:h-[450px] opacity-25 blur-3xl pointer-events-none rounded-full" 
+       style="background: radial-gradient(circle, #818cf8 0%, rgba(0,0,0,0) 70%);"></div>
+  
+  <!-- Shimmer Badge -->
+  <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium mb-8 border transition-all hover:scale-105"
+       style="background: rgba(17, 24, 39, 0.65); border-color: rgba(255, 255, 255, 0.12); color: #f9fafb;">
+    <span class="w-2 h-2 rounded-full animate-pulse" style="background: #818cf8;"></span>
+    <span>Engineered for Gemini 3.7 & Codex CLI</span>
+    <span class="text-xs opacity-60">→</span>
+  </div>
+
+  <!-- Hero Typography -->
+  <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight max-w-4xl mx-auto leading-[1.08] mb-6"
+      style="color: #f9fafb;">
+    High-Velocity AI Landing Pages. Zero AI Slop.
+  </h1>
+
+  <p class="text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed font-normal"
+     style="color: #9ca3af;">
+    Scaffold, audit, and ship production-grade landing pages directly inside your AI Agent context without pasting external code blocks.
+  </p>
+
+  <!-- CTA Action Group -->
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+    <a href="#get-started" 
+       class="w-full sm:w-auto px-7 py-3.5 rounded-lg font-semibold text-sm transition-all shadow-lg hover:opacity-90 active:scale-95 text-center text-white"
+       style="background: #818cf8;">
+      Start Building
+    </a>
+    <a href="#demo" 
+       class="w-full sm:w-auto px-7 py-3.5 rounded-lg font-medium text-sm border transition-all hover:bg-white/5 active:scale-95 text-center"
+       style="border-color: rgba(255, 255, 255, 0.12); color: #f9fafb; background: rgba(17, 24, 39, 0.65);">
+      View Architecture
+    </a>
+  </div>
+</section>
+    
+<section class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+  <div class="text-center max-w-3xl mx-auto mb-16">
+    <h2 class="text-xs uppercase tracking-widest font-semibold mb-3" style="color: #818cf8;">Precision Architecture</h2>
+    <h3 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4" style="color: #f9fafb;">Everything you need to ship world-class assets</h3>
+    <p class="text-base" style="color: #9ca3af;">No third-party boilerplate. No broken layouts. Just composable design primitives.</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
+    
+    <div class="col-span-1 md:col-span-2 lg:col-span-8 p-8 rounded-xl border relative overflow-hidden group transition-all duration-300 hover:-translate-y-1"
+         style="background: rgba(17, 24, 39, 0.65); border-color: rgba(255, 255, 255, 0.12);">
+      <div class="flex items-center justify-between mb-6">
+        <span class="px-2.5 py-1 rounded text-[11px] font-mono tracking-wide font-medium"
+              style="background: #030712; color: #818cf8; border: 1px solid rgba(255, 255, 255, 0.12);">
+          DETERMINISTIC
+        </span>
+        <span class="text-xs font-mono opacity-40">01</span>
+      </div>
+      <h4 class="text-xl font-semibold mb-2" style="color: #f9fafb;">Zero-Token UI Linter</h4>
+      <p class="text-sm leading-relaxed" style="color: #9ca3af;">Deterministic regex engine purging generic purple gradients and unstyled tags in under 1ms.</p>
+    </div>
+    <div class="col-span-1 md:col-span-1 lg:col-span-4 p-8 rounded-xl border relative overflow-hidden group transition-all duration-300 hover:-translate-y-1"
+         style="background: rgba(17, 24, 39, 0.65); border-color: rgba(255, 255, 255, 0.12);">
+      <div class="flex items-center justify-between mb-6">
+        <span class="px-2.5 py-1 rounded text-[11px] font-mono tracking-wide font-medium"
+              style="background: #030712; color: #818cf8; border: 1px solid rgba(255, 255, 255, 0.12);">
+          PRO GRAPHICS
+        </span>
+        <span class="text-xs font-mono opacity-40">02</span>
+      </div>
+      <h4 class="text-xl font-semibold mb-2" style="color: #f9fafb;">30+ Visual Domains</h4>
+      <p class="text-sm leading-relaxed" style="color: #9ca3af;">Studio optics, lens physics, and negative constraints for Imagen 3 & GPT Image 2.</p>
+    </div>
+    <div class="col-span-1 md:col-span-1 lg:col-span-4 p-8 rounded-xl border relative overflow-hidden group transition-all duration-300 hover:-translate-y-1"
+         style="background: rgba(17, 24, 39, 0.65); border-color: rgba(255, 255, 255, 0.12);">
+      <div class="flex items-center justify-between mb-6">
+        <span class="px-2.5 py-1 rounded text-[11px] font-mono tracking-wide font-medium"
+              style="background: #030712; color: #818cf8; border: 1px solid rgba(255, 255, 255, 0.12);">
+          MULTI-THEME
+        </span>
+        <span class="text-xs font-mono opacity-40">03</span>
+      </div>
+      <h4 class="text-xl font-semibold mb-2" style="color: #f9fafb;">12+ Design System Themes</h4>
+      <p class="text-sm leading-relaxed" style="color: #9ca3af;">Instant Swiss Minimalism, Luxury Gold, Nordic Sage, and Cyberpunk token injection.</p>
+    </div>
+    <div class="col-span-1 md:col-span-2 lg:col-span-8 p-8 rounded-xl border relative overflow-hidden group transition-all duration-300 hover:-translate-y-1"
+         style="background: rgba(17, 24, 39, 0.65); border-color: rgba(255, 255, 255, 0.12);">
+      <div class="flex items-center justify-between mb-6">
+        <span class="px-2.5 py-1 rounded text-[11px] font-mono tracking-wide font-medium"
+              style="background: #030712; color: #818cf8; border: 1px solid rgba(255, 255, 255, 0.12);">
+          READY-TO-USE
+        </span>
+        <span class="text-xs font-mono opacity-40">04</span>
+      </div>
+      <h4 class="text-xl font-semibold mb-2" style="color: #f9fafb;">Model Context Protocol (MCP)</h4>
+      <p class="text-sm leading-relaxed" style="color: #9ca3af;">Native MCP bridge ready to plug into Claude Desktop, Cursor, and Hermes Agent.</p>
+    </div>
+  </div>
+</section>
+    
+<section class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+  <div class="text-center max-w-2xl mx-auto mb-16">
+    <h2 class="text-xs uppercase tracking-widest font-semibold mb-3" style="color: #818cf8;">Transparent Pricing</h2>
+    <h3 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4" style="color: #f9fafb;">Invest in speed and design precision</h3>
+    <p class="text-base" style="color: #9ca3af;">One tool to replace fragment subscriptions and manual copy-pasting.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+    
+    <div class="p-8 rounded-2xl border flex flex-col justify-between relative transition-all duration-300 hover:border-slate-500"
+         style="background: #030712; border-color: rgba(255, 255, 255, 0.12);">
+      
+      <div>
+        <h4 class="text-lg font-semibold mb-2" style="color: #f9fafb;">Starter Kit</h4>
+        <p class="text-xs mb-6 min-h-[36px]" style="color: #9ca3af;">For solo builders and creators scaffolding initial concepts.</p>
+        <div class="flex items-baseline gap-1 mb-8">
+          <span class="text-4xl sm:text-5xl font-bold tracking-tight" style="color: #f9fafb;">$0</span>
+          <span class="text-sm" style="color: #9ca3af;">/forever</span>
+        </div>
+        <ul class="space-y-3 mb-8 text-sm">
+          
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>Zero-Token UI Linter</span>
+          </li>
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>6 Essential Design Themes</span>
+          </li>
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>10 Visual Prompt Domains</span>
+          </li>
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>Open-Source CLI & MCP</span>
+          </li>
+        </ul>
+      </div>
+      <button class="w-full py-3 rounded-lg font-semibold text-sm transition-all border hover:bg-white/5"
+              style="background: transparent; border-color: rgba(255, 255, 255, 0.12); color: #f9fafb;">
+        Start Free
+      </button>
+    </div>
+    <div class="p-8 rounded-2xl border flex flex-col justify-between relative transition-all duration-300 scale-105 shadow-2xl z-10"
+         style="background: rgba(17, 24, 39, 0.65); border-color: #818cf8;">
+      <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-xs font-semibold text-white tracking-wide" style="background: #818cf8;">MOST POPULAR</div>
+      <div>
+        <h4 class="text-lg font-semibold mb-2" style="color: #f9fafb;">Pro Engineer</h4>
+        <p class="text-xs mb-6 min-h-[36px]" style="color: #9ca3af;">For professional AI engineers and full-stack developers.</p>
+        <div class="flex items-baseline gap-1 mb-8">
+          <span class="text-4xl sm:text-5xl font-bold tracking-tight" style="color: #f9fafb;">$29</span>
+          <span class="text-sm" style="color: #9ca3af;">/month</span>
+        </div>
+        <ul class="space-y-3 mb-8 text-sm">
+          
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>All 12+ Premium Themes</span>
+          </li>
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>All 30+ Visual Domains</span>
+          </li>
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>Dynamic Remote Rule Sync</span>
+          </li>
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>Custom Token Generator</span>
+          </li>
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>Priority MCP Gateway</span>
+          </li>
+        </ul>
+      </div>
+      <button class="w-full py-3 rounded-lg font-semibold text-sm transition-all text-white shadow-md hover:opacity-90"
+              style="background: #818cf8; border-color: rgba(255, 255, 255, 0.12); color: #ffffff;">
+        Upgrade to Pro
+      </button>
+    </div>
+    <div class="p-8 rounded-2xl border flex flex-col justify-between relative transition-all duration-300 hover:border-slate-500"
+         style="background: #030712; border-color: rgba(255, 255, 255, 0.12);">
+      
+      <div>
+        <h4 class="text-lg font-semibold mb-2" style="color: #f9fafb;">Enterprise Studio</h4>
+        <p class="text-xs mb-6 min-h-[36px]" style="color: #9ca3af;">For digital agencies and multi-agent automated production swarms.</p>
+        <div class="flex items-baseline gap-1 mb-8">
+          <span class="text-4xl sm:text-5xl font-bold tracking-tight" style="color: #f9fafb;">$99</span>
+          <span class="text-sm" style="color: #9ca3af;">/month</span>
+        </div>
+        <ul class="space-y-3 mb-8 text-sm">
+          
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>Unlimited Custom Themes</span>
+          </li>
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>Automated CI/CD Quality Gates</span>
+          </li>
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>Multi-Tenant Agent Hooks</span>
+          </li>
+          <li class="flex items-center gap-3" style="color: #f9fafb;">
+            <span class="text-xs font-bold" style="color: #818cf8;">✓</span>
+            <span>Dedicated SLA & Support</span>
+          </li>
+        </ul>
+      </div>
+      <button class="w-full py-3 rounded-lg font-semibold text-sm transition-all border hover:bg-white/5"
+              style="background: transparent; border-color: rgba(255, 255, 255, 0.12); color: #f9fafb;">
+        Contact Team
+      </button>
+    </div>
+  </div>
+</section>
+  </main>
+  
+<footer class="border-t py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-xs"
+        style="border-color: rgba(255, 255, 255, 0.12); color: #9ca3af;">
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-3">
+      <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+      <span class="font-medium" style="color: #f9fafb;">VibeDesign</span>
+      <span>© 2026. All rights reserved.</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <a href="https://github.com/teddiesloco/vibe-design-harness" class="hover:underline">GitHub</a>
+      <a href="https://www.npmjs.com/package/vibe-design-harness" class="hover:underline">NPM Registry</a>
+      <a href="#privacy" class="hover:underline">Privacy</a>
+      <a href="#terms" class="hover:underline">Terms</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
