@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AGENTSEA OS — Nền Tảng Quản Trị & Cho Thuê AI Agent Toàn Diện</title>
+    <title>AGENTSEA OS — Trung Tâm Quản Trị & Cho Thuê AI Agent Toàn Diện</title>
     
     <!-- Apple SF Pro / Plus Jakarta Sans & JetBrains Mono Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,6 +14,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
     <script>
@@ -34,7 +35,7 @@
                             text: '#0f172a',
                             muted: '#64748b',
                             subtle: '#94a3b8',
-                            // Chuyên nghiệp: Lime Xanh Lá & Ruby Red
+                            // Phối màu sang trọng: Lime Xanh Lá & Ruby Red
                             lime: '#65a30d',
                             limeLight: '#f7fee7',
                             limeBorder: '#bef264',
@@ -64,100 +65,159 @@
         .apple-transition { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .nav-active {
+            color: #3f6212 !important;
+            background-color: #f7fee7 !important;
+            border-color: #bef264 !important;
+            font-weight: 700 !important;
+        }
     </style>
 </head>
 <body class="h-full bg-brand-canvas text-brand-text antialiased flex flex-col md:flex-row overflow-hidden font-sans selection:bg-lime-200 selection:text-lime-900">
 
-    <!-- 1. SIDEBAR QUẢN TRỊ MULTI-AGENT & DỊCH VỤ CHO THUÊ -->
-    <aside class="hidden md:flex flex-col w-64 h-full bg-brand-sidebar border-r border-brand-border shrink-0 select-none">
+    <!-- 1. SIDEBAR ĐIỀU HƯỚNG TỔNG THỂ (NAVIGATOR 8 MODULES) -->
+    <aside class="hidden md:flex flex-col w-64 h-full bg-brand-sidebar border-r border-brand-border shrink-0 select-none z-30">
         
-        <!-- Brand Header (Minimalist Wordmark) -->
-        <div class="h-16 px-6 border-b border-brand-borderSubtle flex items-center space-x-3">
-            <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">
-                AS
-            </div>
-            <div>
-                <div class="font-bold text-sm text-brand-text tracking-tight leading-none">AGENTSEA OS</div>
-                <div class="text-[10px] text-brand-muted font-medium mt-1">Multi-Agent & Leasing Hub</div>
-            </div>
-        </div>
-
-        <!-- Navigation Menu -->
-        <div class="flex-1 overflow-y-auto px-3 py-4 space-y-6">
-            
-            <!-- Trụ cột 1: Điều Hành Swarm -->
-            <div class="space-y-1">
-                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-brand-subtle">Hệ Thống Multi-Agent</div>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-lime-800 bg-lime-50/90 border border-lime-200/60 apple-transition">
-                    <i data-lucide="cpu" class="w-4 h-4 stroke-[2] text-lime-700"></i>
-                    <span>Bảng Điều Hành Swarm</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover apple-transition">
-                    <i data-lucide="bot" class="w-4 h-4 stroke-[1.5]"></i>
-                    <span>Danh Sách 8 Chuyên Viên</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover apple-transition">
-                    <i data-lucide="network" class="w-4 h-4 stroke-[1.5]"></i>
-                    <span>Mesh Nodes & Telemetry</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover apple-transition">
-                    <i data-lucide="shield-check" class="w-4 h-4 stroke-[1.5]"></i>
-                    <span>Rào Chắn Guardrail & AST</span>
-                </a>
-            </div>
-
-            <!-- Trụ cột 2: Dịch Vụ Cho Thuê & Khách Hàng (Services & Leasing) -->
-            <div class="space-y-1">
-                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-brand-subtle">Dịch Vụ & Khách Thuê</div>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover apple-transition">
-                    <i data-lucide="briefcase" class="w-4 h-4 stroke-[1.5]"></i>
-                    <span>Hợp Đồng Thuê (12 Khách)</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover apple-transition">
-                    <i data-lucide="wallet" class="w-4 h-4 stroke-[1.5]"></i>
-                    <span>Doanh Thu MRR Định Kỳ</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover apple-transition">
-                    <i data-lucide="package-check" class="w-4 h-4 stroke-[1.5]"></i>
-                    <span>Gói Dịch Vụ Turnkey Setup</span>
-                </a>
-            </div>
-
-            <!-- Trụ cột 3: Quản Trị Kênh & Tri Thức -->
-            <div class="space-y-1">
-                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-brand-subtle">Kênh & Tri Thức</div>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover apple-transition">
-                    <i data-lucide="message-square" class="w-4 h-4 stroke-[1.5]"></i>
-                    <span>Zalo / Telegram Bridges</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover apple-transition">
-                    <i data-lucide="book-marked" class="w-4 h-4 stroke-[1.5]"></i>
-                    <span>Kho Tri Thức & 800+ Skills</span>
-                </a>
-                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover apple-transition">
-                    <i data-lucide="sliders" class="w-4 h-4 stroke-[1.5]"></i>
-                    <span>Cấu Hình API & Quotas</span>
-                </a>
-            </div>
-
-        </div>
-
-        <!-- Sidebar Footer Status -->
-        <div class="p-4 border-t border-brand-borderSubtle flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-2.5 h-2.5 rounded-full bg-lime-500 ring-4 ring-lime-100"></div>
+        <!-- Brand Header & Role Switcher Trigger -->
+        <div class="h-16 px-5 border-b border-brand-borderSubtle flex items-center justify-between">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs shadow-sm">
+                    AS
+                </div>
                 <div>
-                    <div class="text-xs font-bold text-brand-text leading-none">Swarm MESH 100%</div>
-                    <div class="text-[10px] text-brand-muted font-mono mt-0.5">VPS Platinum 4C</div>
+                    <div class="font-bold text-xs text-brand-text tracking-tight leading-none">AGENTSEA OS</div>
+                    <div class="text-[10px] text-brand-muted font-medium mt-1">Multi-Agent Hub</div>
                 </div>
             </div>
-            <button onclick="refreshMesh()" class="p-1.5 rounded-lg hover:bg-brand-hover text-brand-muted hover:text-brand-text transition">
-                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+
+            <!-- Role Badge Dropdown -->
+            <button onclick="toggleUserDropdown()" class="flex items-center space-x-1 px-2 py-1 rounded-lg bg-slate-50 border border-brand-border hover:bg-slate-100 text-[10px] font-semibold text-slate-700 apple-transition" id="current-role-badge">
+                <span class="w-1.5 h-1.5 rounded-full bg-lime-500"></span>
+                <span id="role-label">Admin</span>
+                <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400"></i>
             </button>
+        </div>
+
+        <!-- Navigation Menu Items (8 Full Dynamic Views) -->
+        <div class="flex-1 overflow-y-auto px-3 py-4 space-y-5 no-scrollbar">
+            
+            <!-- Nhóm 1: Hệ Thống Multi-Agent -->
+            <div class="space-y-1">
+                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-brand-subtle">Hệ Thống Multi-Agent</div>
+                
+                <button onclick="switchView('swarm')" id="nav-swarm" class="nav-btn nav-active w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-brand-muted hover:text-brand-text hover:bg-brand-hover border border-transparent apple-transition text-left">
+                    <i data-lucide="cpu" class="w-4 h-4 stroke-[1.8] text-lime-700"></i>
+                    <span>Bảng Điều Hành Swarm</span>
+                </button>
+                
+                <button onclick="switchView('agents')" id="nav-agents" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover border border-transparent apple-transition text-left">
+                    <i data-lucide="bot" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>8 Chuyên Viên AI</span>
+                </button>
+                
+                <button onclick="switchView('bridges')" id="nav-bridges" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover border border-transparent apple-transition text-left">
+                    <i data-lucide="network" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Kênh & Bridge Daemons</span>
+                </button>
+            </div>
+
+            <!-- Nhóm 2: Dịch Vụ Cho Thuê (Leasing & Business) -->
+            <div class="space-y-1">
+                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-brand-subtle">Dịch Vụ Cho Thuê</div>
+                
+                <button onclick="switchView('leases')" id="nav-leases" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover border border-transparent apple-transition text-left">
+                    <i data-lucide="briefcase" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span class="flex-1">Hợp Đồng Cho Thuê</span>
+                    <span class="px-1.5 py-0.2 rounded bg-lime-100 text-lime-800 text-[9px] font-bold">12</span>
+                </button>
+                
+                <button onclick="switchView('revenue')" id="nav-revenue" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover border border-transparent apple-transition text-left">
+                    <i data-lucide="wallet" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Doanh Thu MRR Định Kỳ</span>
+                </button>
+                
+                <button onclick="switchView('packages')" id="nav-packages" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover border border-transparent apple-transition text-left">
+                    <i data-lucide="package-check" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Gói Dịch Vụ Turnkey</span>
+                </button>
+            </div>
+
+            <!-- Nhóm 3: Tri Thức & Cài Đặt -->
+            <div class="space-y-1">
+                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-brand-subtle">Tri Thức & Quản Trị</div>
+                
+                <button onclick="switchView('skills')" id="nav-skills" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover border border-transparent apple-transition text-left">
+                    <i data-lucide="book-marked" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Kho Tri Thức & 800+ Skills</span>
+                </button>
+                
+                <button onclick="switchView('settings')" id="nav-settings" class="nav-btn w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-brand-muted hover:text-brand-text hover:bg-brand-hover border border-transparent apple-transition text-left">
+                    <i data-lucide="sliders" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Cài Đặt & Guardrails</span>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Sidebar User Profile Box -->
+        <div class="p-3 border-t border-brand-borderSubtle bg-slate-50/50">
+            <div class="flex items-center justify-between p-2 rounded-xl bg-white border border-brand-border shadow-sm">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs" id="user-avatar-text">
+                        TH
+                    </div>
+                    <div class="overflow-hidden">
+                        <div class="text-xs font-bold text-brand-text leading-tight truncate" id="user-display-name">Teddy Huang</div>
+                        <div class="text-[10px] text-brand-muted font-mono" id="user-display-email">teddy@agentsea.vn</div>
+                    </div>
+                </div>
+                <button onclick="toggleUserDropdown()" class="p-1 rounded-lg text-brand-muted hover:text-brand-text hover:bg-slate-100 apple-transition">
+                    <i data-lucide="more-horizontal" class="w-4 h-4"></i>
+                </button>
+            </div>
         </div>
     </aside>
 
-    <!-- 2. MAIN WORKSPACE CONTAINER -->
+    <!-- 2. USER ROLE SWITCHER FLOATING DROPDOWN -->
+    <div id="user-role-dropdown" class="fixed top-16 left-12 md:left-48 w-60 bg-white rounded-2xl border border-brand-border shadow-brand-modal z-50 p-2 space-y-1 hidden apple-transition">
+        <div class="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-brand-subtle">Chuyển Đổi Quyền Xem</div>
+        
+        <!-- Option 1: Master Admin -->
+        <button onclick="changeRole('admin', 'Teddy Huang', 'teddy@agentsea.vn', 'TH')" class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-brand-text hover:bg-slate-50 apple-transition text-left">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-6 h-6 rounded bg-slate-900 text-white flex items-center justify-center text-[10px] font-bold">TH</div>
+                <div>
+                    <div>Master Admin (Teddy)</div>
+                    <div class="text-[10px] text-brand-muted font-normal">Toàn quyền hệ thống</div>
+                </div>
+            </div>
+            <span class="w-2 h-2 rounded-full bg-lime-500"></span>
+        </button>
+
+        <!-- Option 2: Khách Hàng Thuê -->
+        <button onclick="changeRole('client', 'Babylon Hotel Phú Quý', 'ops@babylonhotel.vn', 'BB')" class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-brand-text hover:bg-slate-50 apple-transition text-left">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-6 h-6 rounded bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">BB</div>
+                <div>
+                    <div>Khách Thuê (Babylon)</div>
+                    <div class="text-[10px] text-brand-muted font-normal">Xem Agent & Doanh số</div>
+                </div>
+            </div>
+        </button>
+
+        <!-- Option 3: Khách Vãng Lai Demo -->
+        <button onclick="changeRole('guest', 'Khách Demo Thử Nghiệm', 'guest@agentsea.vn', 'GT')" class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-brand-text hover:bg-slate-50 apple-transition text-left">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-6 h-6 rounded bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] font-bold">GT</div>
+                <div>
+                    <div>Khách Vãng Lai</div>
+                    <div class="text-[10px] text-brand-muted font-normal">Chế độ Sandbox Demo</div>
+                </div>
+            </div>
+        </button>
+    </div>
+
+    <!-- 3. MAIN WORKSPACE CONTAINER -->
     <div class="flex-1 flex flex-col h-full overflow-hidden">
         
         <!-- Top App Bar -->
@@ -170,22 +230,23 @@
                 <span class="font-bold text-xs text-brand-text">AGENTSEA OS</span>
             </div>
 
+            <!-- Breadcrumb Navigation -->
             <div class="hidden md:flex items-center space-x-2 text-xs">
-                <span class="text-brand-muted">Bảng điều hành</span>
+                <span class="text-brand-muted">Trung tâm điều hành</span>
                 <span class="text-brand-subtle">/</span>
-                <span class="font-semibold text-brand-text">Quản Lý Multi-Agent & Khách Hàng Thuê</span>
+                <span class="font-semibold text-brand-text" id="view-breadcrumb">Bảng Điều Hành Swarm</span>
             </div>
 
-            <!-- Top Actions: Status Badge + New Lease Button -->
+            <!-- Top Actions: Status Badge + New Lease Action Button -->
             <div class="flex items-center space-x-3">
                 
                 <!-- Live Health Tag (Lime Accent) -->
                 <div class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-full bg-lime-50 border border-lime-200">
                     <span class="w-2 h-2 rounded-full bg-lime-500 animate-pulse"></span>
-                    <span class="text-xs font-bold font-mono text-lime-800 tabular-nums">8/8 Chuyên Viên Online</span>
+                    <span class="text-xs font-bold font-mono text-lime-800 tabular-nums">8/8 Chuyên Viên Live</span>
                 </div>
 
-                <!-- Deploy / Cấp Mới Agent (Red Action Button) -->
+                <!-- Red Action Button (Cấp Mới Agent) -->
                 <button onclick="openProvisionModal()" class="h-8 px-3.5 rounded-lg bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-semibold text-xs shadow-brand-btn apple-transition flex items-center space-x-1.5">
                     <i data-lucide="plus" class="w-3.5 h-3.5 stroke-[2]"></i>
                     <span>Cấp Agent Mới</span>
@@ -193,380 +254,810 @@
             </div>
         </header>
 
-        <!-- Scrollable Workspace -->
-        <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8 space-y-6 pb-24 md:pb-8">
+        <!-- SCROLLABLE CONTENT BODY (DYNAMIC MULTI-VIEWS) -->
+        <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8 space-y-6 pb-24 md:pb-8" id="main-content-scroll">
             
-            <!-- Section Header -->
-            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-brand-border pb-5">
-                <div>
-                    <h1 class="text-xl sm:text-2xl font-bold text-brand-text tracking-tight">
-                        Trung Tâm Vận Hành & Cho Thuê Agent
-                    </h1>
-                    <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
-                        Điều phối toàn diện đội ngũ AI chuyên môn hóa, theo dõi hiệu năng và quản lý gói thuê dịch vụ của từng khách hàng.
-                    </p>
-                </div>
-
-                <!-- Filter Mode Chips (Lime Active States) -->
-                <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar">
-                    <button onclick="filterAgents('all')" class="agent-chip active px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-900 text-white shadow-sm transition" data-type="all">
-                        Tất cả (8)
-                    </button>
-                    <button onclick="filterAgents('leased')" class="agent-chip px-3 py-1.5 rounded-lg text-xs font-medium bg-white hover:bg-slate-50 text-brand-muted border border-brand-border transition" data-type="leased">
-                        Đang Cho Thuê (5)
-                    </button>
-                    <button onclick="filterAgents('internal')" class="agent-chip px-3 py-1.5 rounded-lg text-xs font-medium bg-white hover:bg-slate-50 text-brand-muted border border-brand-border transition" data-type="internal">
-                        Nội Bộ Công Ty (3)
-                    </button>
-                </div>
-            </div>
-
-            <!-- 4 Key Telemetry Metric Cards (Lime & Red Accents) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            <!-- ========================================== -->
+            <!-- VIEW 1: SWARM OVERVIEW (BẢNG ĐIỀU HÀNH SWARM) -->
+            <!-- ========================================== -->
+            <div id="view-swarm" class="view-panel space-y-6">
                 
-                <!-- KPI 1: Doanh Thu Cho Thuê MRR -->
-                <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition">
-                    <div class="flex justify-between items-start">
-                        <span class="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">Doanh Thu Thuê MRR</span>
-                        <div class="w-7 h-7 rounded-lg bg-lime-50 border border-lime-200 text-lime-700 flex items-center justify-center">
-                            <i data-lucide="trending-up" class="w-3.5 h-3.5 stroke-[2]"></i>
-                        </div>
-                    </div>
-                    <div class="text-2xl font-bold font-mono tabular-nums text-brand-text mt-3">
-                        68,500,000 <span class="text-xs font-sans text-brand-muted font-normal">đ/tháng</span>
-                    </div>
-                    <div class="text-[11px] text-lime-700 font-medium mt-1 flex items-center gap-1">
-                        <span>↑ +22.4%</span>
-                        <span class="text-brand-muted font-normal">từ 12 hợp đồng đang chạy</span>
-                    </div>
-                </div>
-
-                <!-- KPI 2: Tổng Agent Đang Phục Vụ -->
-                <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition">
-                    <div class="flex justify-between items-start">
-                        <span class="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">Agent Đang Chạy</span>
-                        <div class="w-7 h-7 rounded-lg bg-slate-50 border border-brand-border text-slate-700 flex items-center justify-center">
-                            <i data-lucide="bot" class="w-3.5 h-3.5 stroke-[1.5]"></i>
-                        </div>
-                    </div>
-                    <div class="text-2xl font-bold font-mono tabular-nums text-brand-text mt-3">
-                        8 <span class="text-xs font-sans text-brand-muted font-normal">chuyên viên</span>
-                    </div>
-                    <div class="text-[11px] text-lime-700 font-medium mt-1 flex items-center gap-1">
-                        <span>✓ 100% Sức khỏe tốt</span>
-                        <span class="text-brand-muted font-normal">(0 lỗi runtime)</span>
-                    </div>
-                </div>
-
-                <!-- KPI 3: Tỷ Lệ Cache & Tối Ưu Chi Phí -->
-                <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition">
-                    <div class="flex justify-between items-start">
-                        <span class="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">Tỷ Lệ Cache Hit</span>
-                        <div class="w-7 h-7 rounded-lg bg-lime-50 border border-lime-200 text-lime-700 flex items-center justify-center">
-                            <i data-lucide="database" class="w-3.5 h-3.5 stroke-[2]"></i>
-                        </div>
-                    </div>
-                    <div class="text-2xl font-bold font-mono tabular-nums text-brand-text mt-3">
-                        94.8<span class="text-xs font-sans text-brand-muted font-normal">%</span>
-                    </div>
-                    <div class="text-[11px] text-lime-700 font-medium mt-1 flex items-center gap-1">
-                        <span>Tiết kiệm 88% token chi phí</span>
-                    </div>
-                </div>
-
-                <!-- KPI 4: Rào Chắn & Rủi Ro Cần Chú Ý -->
-                <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition">
-                    <div class="flex justify-between items-start">
-                        <span class="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">Cảnh Báo & Rủi Ro</span>
-                        <div class="w-7 h-7 rounded-lg bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center">
-                            <i data-lucide="shield-alert" class="w-3.5 h-3.5 stroke-[2]"></i>
-                        </div>
-                    </div>
-                    <div class="text-2xl font-bold font-mono tabular-nums text-brand-text mt-3">
-                        0 <span class="text-xs font-sans text-brand-muted font-normal">vi phạm</span>
-                    </div>
-                    <div class="text-[11px] text-rose-600 font-medium mt-1 flex items-center gap-1">
-                        <span>100% Guardrail an toàn</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- AGENT FLEET & CLIENT LEASES MANAGEMENT TABLE -->
-            <div class="bg-white rounded-2xl border border-brand-border shadow-brand-card overflow-hidden">
-                
-                <div class="px-6 py-4 border-b border-brand-border flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <!-- Header -->
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-brand-border pb-5">
                     <div>
-                        <h3 class="text-sm font-bold text-brand-text">Quản Lý Chi Tiết Từng Chuyên Viên AI</h3>
-                        <p class="text-[11px] text-brand-muted">Xem tình trạng hoạt động, khách hàng thuê, kênh phân phối và chi phí định kỳ</p>
+                        <h1 class="text-xl sm:text-2xl font-bold text-brand-text tracking-tight">
+                            Tổng Quan Hệ Thống Multi-Agent & Cho Thuê
+                        </h1>
+                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
+                            Điều phối toàn diện đội ngũ AI chuyên môn hóa, giám sát sức khỏe mesh node và tiến độ chốt doanh số cho từng khách thuê.
+                        </p>
                     </div>
+
                     <div class="flex items-center space-x-2">
-                        <span class="text-[11px] text-brand-muted font-medium">Tự động đồng bộ:</span>
-                        <span class="px-2 py-0.5 rounded bg-slate-100 font-mono text-[10px] font-bold text-slate-700">Realtime (0.12s)</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 font-mono text-xs font-bold tabular-nums">
+                            MRR: 68,500,000 đ
+                        </span>
+                        <button onclick="switchView('leases')" class="px-3 py-1 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-slate-950 apple-transition">
+                            Xem hợp đồng →
+                        </button>
                     </div>
                 </div>
 
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-xs">
-                        <thead class="bg-slate-50/80 border-b border-brand-border text-brand-muted font-semibold uppercase text-[10px] tracking-wider">
-                            <tr>
-                                <th class="px-6 py-3.5">Chuyên Viên & Vai Trò</th>
-                                <th class="px-6 py-3.5">Khách Thuê / Phạm Vi</th>
-                                <th class="px-6 py-3.5">Kênh Triển Khai</th>
-                                <th class="px-6 py-3.5">Hạn Gói & Giá Thuê</th>
-                                <th class="px-6 py-3.5">Trạng Thái Sức Khỏe</th>
-                                <th class="px-6 py-3.5 text-right">Quản Trị</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-brand-borderSubtle" id="agent-table-body">
-                            
-                            <!-- AGENT 1: Amon Kemet -->
-                            <tr class="agent-row hover:bg-slate-50/60 apple-transition" data-type="leased">
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs shrink-0">
-                                            AK
-                                        </div>
-                                        <div>
-                                            <div class="font-bold text-brand-text flex items-center gap-1.5">
-                                                <span>Amon Kemet</span>
-                                                <span class="px-1.5 py-0.2 rounded bg-amber-50 text-amber-700 border border-amber-200 text-[9px] font-bold">Sales Closer</span>
-                                            </div>
-                                            <div class="text-[10px] text-brand-muted font-mono mt-0.5">Engine: Gemini 3.7 Flash High</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="font-semibold text-brand-text">Khách Sạn Babylon Phú Quý</div>
-                                    <div class="text-[10px] text-brand-muted">Gói Vận Hành Du Lịch & F&B</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-50 text-blue-700 border border-blue-200">
-                                        Zalo Personal :3871
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="font-mono font-bold text-brand-text">7,500,000 đ/tháng</div>
-                                    <div class="text-[10px] text-lime-700 font-medium">Gia hạn: Còn 22 ngày</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-lime-50 text-lime-800 border border-lime-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-lime-500 mr-1.5"></span>
-                                        Hoạt Động Tốt
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <button onclick="manageAgent('Amon Kemet')" class="px-3 py-1.5 rounded-lg border border-brand-border bg-white hover:bg-slate-50 text-brand-text font-semibold text-[11px] shadow-sm apple-transition">
-                                        Cấu hình
-                                    </button>
-                                </td>
-                            </tr>
+                <!-- 4 Telemetry Metric Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                    
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">Doanh Thu Thuê MRR</span>
+                            <div class="w-7 h-7 rounded-lg bg-lime-50 border border-lime-200 text-lime-700 flex items-center justify-center">
+                                <i data-lucide="trending-up" class="w-3.5 h-3.5 stroke-[2]"></i>
+                            </div>
+                        </div>
+                        <div class="text-2xl font-bold font-mono tabular-nums text-brand-text mt-3">
+                            68,500,000 <span class="text-xs font-sans text-brand-muted font-normal">đ/tháng</span>
+                        </div>
+                        <div class="text-[11px] text-lime-700 font-medium mt-1 flex items-center gap-1">
+                            <span>↑ +22.4%</span>
+                            <span class="text-brand-muted font-normal">12 khách hàng đang trả phí</span>
+                        </div>
+                    </div>
 
-                            <!-- AGENT 2: Trợ Lý Coach Lan Anh -->
-                            <tr class="agent-row hover:bg-slate-50/60 apple-transition" data-type="leased">
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
-                                            LA
-                                        </div>
-                                        <div>
-                                            <div class="font-bold text-brand-text flex items-center gap-1.5">
-                                                <span>Trợ Lý Voice Space</span>
-                                                <span class="px-1.5 py-0.2 rounded bg-rose-50 text-rose-700 border border-rose-200 text-[9px] font-bold">Chăm Sóc Học Viên</span>
-                                            </div>
-                                            <div class="text-[10px] text-brand-muted font-mono mt-0.5">Engine: Node.js Bridge :3873</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="font-semibold text-brand-text">Coach Vũ Ngọc Lan Anh</div>
-                                    <div class="text-[10px] text-brand-muted">Học Viện Luyện Giọng Voice Space</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-blue-50 text-blue-700 border border-blue-200">
-                                        Zalo DM 1-1 + SQLite
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="font-mono font-bold text-brand-text">5,000,000 đ/tháng</div>
-                                    <div class="text-[10px] text-lime-700 font-medium">Gia hạn: Còn 18 ngày</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-lime-50 text-lime-800 border border-lime-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-lime-500 mr-1.5"></span>
-                                        Hoạt Động Tốt
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <button onclick="manageAgent('Trợ Lý Voice Space')" class="px-3 py-1.5 rounded-lg border border-brand-border bg-white hover:bg-slate-50 text-brand-text font-semibold text-[11px] shadow-sm apple-transition">
-                                        Cấu hình
-                                    </button>
-                                </td>
-                            </tr>
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">Agent Đang Vận Hành</span>
+                            <div class="w-7 h-7 rounded-lg bg-slate-50 border border-brand-border text-slate-700 flex items-center justify-center">
+                                <i data-lucide="bot" class="w-3.5 h-3.5 stroke-[1.5]"></i>
+                            </div>
+                        </div>
+                        <div class="text-2xl font-bold font-mono tabular-nums text-brand-text mt-3">
+                            8 <span class="text-xs font-sans text-brand-muted font-normal">chuyên viên</span>
+                        </div>
+                        <div class="text-[11px] text-lime-700 font-medium mt-1 flex items-center gap-1">
+                            <span>✓ 100% Uptime</span>
+                            <span class="text-brand-muted font-normal">(0 lỗi runtime)</span>
+                        </div>
+                    </div>
 
-                            <!-- AGENT 3: Lead Hunter (FB Group Radar) -->
-                            <tr class="agent-row hover:bg-slate-50/60 apple-transition" data-type="leased">
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-xl bg-lime-700 text-white flex items-center justify-center font-bold text-xs shrink-0">
-                                            LH
-                                        </div>
-                                        <div>
-                                            <div class="font-bold text-brand-text flex items-center gap-1.5">
-                                                <span>Lead Radar Săn Khách</span>
-                                                <span class="px-1.5 py-0.2 rounded bg-lime-50 text-lime-800 border border-lime-200 text-[9px] font-bold">Tự Động Bắt SĐT</span>
-                                            </div>
-                                            <div class="text-[10px] text-brand-muted font-mono mt-0.5">Engine: CDP Chrome Daemon</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="font-semibold text-brand-text">Ẩm Thực Nhà Lầu & Tour Phú Quý</div>
-                                    <div class="text-[10px] text-brand-muted">Gói Thu Lead Tự Động B2C</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
-                                        Facebook Groups + Topic 831
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="font-mono font-bold text-brand-text">4,500,000 đ/tháng</div>
-                                    <div class="text-[10px] text-lime-700 font-medium">Gia hạn: Còn 29 ngày</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-lime-50 text-lime-800 border border-lime-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-lime-500 mr-1.5"></span>
-                                        Đang Quét 3.5s
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <button onclick="manageAgent('Lead Radar Săn Khách')" class="px-3 py-1.5 rounded-lg border border-brand-border bg-white hover:bg-slate-50 text-brand-text font-semibold text-[11px] shadow-sm apple-transition">
-                                        Cấu hình
-                                    </button>
-                                </td>
-                            </tr>
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">Tỷ Lệ Cache Hit</span>
+                            <div class="w-7 h-7 rounded-lg bg-lime-50 border border-lime-200 text-lime-700 flex items-center justify-center">
+                                <i data-lucide="database" class="w-3.5 h-3.5 stroke-[2]"></i>
+                            </div>
+                        </div>
+                        <div class="text-2xl font-bold font-mono tabular-nums text-brand-text mt-3">
+                            94.8<span class="text-xs font-sans text-brand-muted font-normal">%</span>
+                        </div>
+                        <div class="text-[11px] text-lime-700 font-medium mt-1 flex items-center gap-1">
+                            <span>Tiết kiệm 88% token chi phí</span>
+                        </div>
+                    </div>
 
-                            <!-- AGENT 4: Lavie Master Orchestrator (Internal) -->
-                            <tr class="agent-row hover:bg-slate-50/60 apple-transition" data-type="internal">
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-xs shrink-0">
-                                            LV
-                                        </div>
-                                        <div>
-                                            <div class="font-bold text-brand-text flex items-center gap-1.5">
-                                                <span>Lavie CEO Sentinel</span>
-                                                <span class="px-1.5 py-0.2 rounded bg-slate-100 text-slate-800 border border-slate-300 text-[9px] font-bold">Tổng Quản</span>
-                                            </div>
-                                            <div class="text-[10px] text-brand-muted font-mono mt-0.5">Soul: Executive Decision Core</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="font-semibold text-brand-text">Nội Bộ Portfolio Teddy</div>
-                                    <div class="text-[10px] text-brand-muted">Điều Phối Toàn Doanh Nghiệp</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-800 border border-slate-200">
-                                        Telegram DM Master
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="font-mono font-bold text-brand-text">Nội Bộ Công Ty</div>
-                                    <div class="text-[10px] text-brand-muted font-medium">Không giới hạn</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-lime-50 text-lime-800 border border-lime-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-lime-500 mr-1.5"></span>
-                                        24/7 Sẵn Sàng
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <button onclick="manageAgent('Lavie CEO Sentinel')" class="px-3 py-1.5 rounded-lg border border-brand-border bg-white hover:bg-slate-50 text-brand-text font-semibold text-[11px] shadow-sm apple-transition">
-                                        Cấu hình
-                                    </button>
-                                </td>
-                            </tr>
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition">
+                        <div class="flex justify-between items-start">
+                            <span class="text-[11px] font-semibold uppercase tracking-wider text-brand-muted">Rào Chắn Guardrail</span>
+                            <div class="w-7 h-7 rounded-lg bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center">
+                                <i data-lucide="shield-alert" class="w-3.5 h-3.5 stroke-[2]"></i>
+                            </div>
+                        </div>
+                        <div class="text-2xl font-bold font-mono tabular-nums text-brand-text mt-3">
+                            0 <span class="text-xs font-sans text-brand-muted font-normal">vi phạm</span>
+                        </div>
+                        <div class="text-[11px] text-rose-600 font-medium mt-1 flex items-center gap-1">
+                            <span>100% An Toàn & Bảo Mật</span>
+                        </div>
+                    </div>
 
-                            <!-- AGENT 5: VibeDesign AST Harness (Internal) -->
-                            <tr class="agent-row hover:bg-slate-50/60 apple-transition" data-type="internal">
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-xl bg-lime-800 text-white flex items-center justify-center font-bold text-xs shrink-0">
-                                            VD
-                                        </div>
-                                        <div>
-                                            <div class="font-bold text-brand-text flex items-center gap-1.5">
-                                                <span>VibeDesign Engine</span>
-                                                <span class="px-1.5 py-0.2 rounded bg-lime-50 text-lime-800 border border-lime-200 text-[9px] font-bold">Studio Linter</span>
-                                            </div>
-                                            <div class="text-[10px] text-brand-muted font-mono mt-0.5">Version: Pure JS v1.3.0</div>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="font-semibold text-brand-text">Open Source & Nội Bộ</div>
-                                    <div class="text-[10px] text-brand-muted">Kiểm Soát Chất Lượng UI/UX</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-800 border border-slate-200">
-                                        CLI & MCP Server :3000
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <div class="font-mono font-bold text-brand-text">0đ Token</div>
-                                    <div class="text-[10px] text-brand-muted font-medium">AST Linter Cực Nhanh</div>
-                                </td>
-                                <td class="px-6 py-4">
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold bg-lime-50 text-lime-800 border border-lime-300">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-lime-500 mr-1.5"></span>
-                                        Pass 100%
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 text-right">
-                                    <button onclick="manageAgent('VibeDesign Engine')" class="px-3 py-1.5 rounded-lg border border-brand-border bg-white hover:bg-slate-50 text-brand-text font-semibold text-[11px] shadow-sm apple-transition">
-                                        Cấu hình
-                                    </button>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
                 </div>
+
+                <!-- Swarm Node Grid Cards -->
+                <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-brand-card space-y-4">
+                    <div class="flex items-center justify-between border-b border-brand-border pb-3">
+                        <div>
+                            <h3 class="text-sm font-bold text-brand-text">Cấu Trúc Swarm Nodes & Phân Tầng AI</h3>
+                            <p class="text-[11px] text-brand-muted">Mỗi Agent đảm nhận một chức năng độc lập theo mô hình Outcome-as-a-Service</p>
+                        </div>
+                        <button onclick="switchView('agents')" class="text-xs font-bold text-lime-700 hover:text-lime-800 flex items-center gap-1">
+                            <span>Xem chi tiết 8 agent</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                        
+                        <div class="p-4 rounded-xl border border-brand-border bg-slate-50/50 hover:bg-slate-50 apple-transition space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-lime-100 text-lime-800 font-mono text-[10px] font-bold">NODE 01</span>
+                                <span class="w-2 h-2 rounded-full bg-lime-500"></span>
+                            </div>
+                            <div class="font-bold text-xs text-brand-text">Amon Kemet (Sales)</div>
+                            <div class="text-[11px] text-brand-muted leading-relaxed">Chuyên chốt sales, tư vấn phòng và bàn tiệc 1-1 trên Zalo Personal.</div>
+                            <div class="text-[10px] font-mono text-slate-500 pt-1 border-t border-brand-borderSubtle">Khách: Babylon Hotel</div>
+                        </div>
+
+                        <div class="p-4 rounded-xl border border-brand-border bg-slate-50/50 hover:bg-slate-50 apple-transition space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-lime-100 text-lime-800 font-mono text-[10px] font-bold">NODE 02</span>
+                                <span class="w-2 h-2 rounded-full bg-lime-500"></span>
+                            </div>
+                            <div class="font-bold text-xs text-brand-text">Voice Space Support</div>
+                            <div class="text-[11px] text-brand-muted leading-relaxed">Chăm sóc học viên khóa học, giải đáp bài tập và gửi tài liệu âm thanh.</div>
+                            <div class="text-[10px] font-mono text-slate-500 pt-1 border-t border-brand-borderSubtle">Khách: Coach Lan Anh</div>
+                        </div>
+
+                        <div class="p-4 rounded-xl border border-brand-border bg-slate-50/50 hover:bg-slate-50 apple-transition space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-lime-100 text-lime-800 font-mono text-[10px] font-bold">NODE 03</span>
+                                <span class="w-2 h-2 rounded-full bg-lime-500"></span>
+                            </div>
+                            <div class="font-bold text-xs text-brand-text">Lead Hunter (CDP)</div>
+                            <div class="text-[11px] text-brand-muted leading-relaxed">Quét tự động các hội nhóm Facebook, nhận diện SĐT và lọc lead nóng.</div>
+                            <div class="text-[10px] font-mono text-slate-500 pt-1 border-t border-brand-borderSubtle">Khách: Ẩm Thực Nhà Lầu</div>
+                        </div>
+
+                        <div class="p-4 rounded-xl border border-brand-border bg-slate-50/50 hover:bg-slate-50 apple-transition space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span class="px-2 py-0.5 rounded bg-slate-200 text-slate-800 font-mono text-[10px] font-bold">CORE</span>
+                                <span class="w-2 h-2 rounded-full bg-lime-500"></span>
+                            </div>
+                            <div class="font-bold text-xs text-brand-text">Lavie CEO Sentinel</div>
+                            <div class="text-[11px] text-brand-muted leading-relaxed">Bộ não điều phối cấp cao, thẩm định mã nguồn và kiểm soát rủi ro tài chính.</div>
+                            <div class="text-[10px] font-mono text-slate-500 pt-1 border-t border-brand-borderSubtle">Nội Bộ: Portfolio Master</div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Live Stream Console -->
+                <div class="bg-slate-950 text-slate-200 rounded-2xl p-5 border border-slate-800 shadow-brand-card font-mono text-xs space-y-3">
+                    <div class="flex items-center justify-between text-[11px] text-slate-400 border-b border-slate-800 pb-2">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2.5 h-2.5 rounded-full bg-lime-400 animate-pulse"></div>
+                            <span class="font-bold text-slate-200 uppercase tracking-wide">Live Swarm Execution & Rental Telemetry</span>
+                        </div>
+                        <span class="text-slate-400">Cluster: VPS_PLATINUM_4C</span>
+                    </div>
+                    <div class="space-y-1.5 text-[11px] leading-relaxed pt-1">
+                        <div class="flex items-start gap-2">
+                            <span class="text-slate-500">[19:12:04]</span>
+                            <span class="px-1.5 py-0.2 rounded bg-lime-950 text-lime-400 border border-lime-800 font-bold text-[10px]">LIME LEASE</span>
+                            <span class="text-slate-300">Amon Kemet vừa tư vấn thành công combo phòng view biển cho khách 091.228.xxxx tại Babylon Hotel.</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-slate-500">[19:12:45]</span>
+                            <span class="px-1.5 py-0.2 rounded bg-rose-950 text-rose-400 border border-rose-800 font-bold text-[10px]">RED GUARD</span>
+                            <span class="text-slate-300">Rào chắn Zero Auto-Reply phát hiện tin nhắn riêng trên Zalo cá nhân Teddy -> Chuyển sang chế độ im lặng chờ duyệt.</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-slate-500">[19:13:10]</span>
+                            <span class="px-1.5 py-0.2 rounded bg-lime-950 text-lime-400 border border-lime-800 font-bold text-[10px]">LIME ROUTE</span>
+                            <span class="text-slate-300">Prompt Caching hit 94.8% trên OpenRouter gateway -> Tiết kiệm 38,400 input tokens.</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- LIVE ACTIVITY STREAM (Sleek Slate Box with Lime/Red Event Tags) -->
-            <div class="bg-slate-950 text-slate-200 rounded-2xl p-5 border border-slate-800 shadow-brand-card font-mono text-xs space-y-3">
-                <div class="flex items-center justify-between text-[11px] text-slate-400 border-b border-slate-800 pb-2">
+            <!-- ========================================== -->
+            <!-- VIEW 2: 8 CHUYÊN VIÊN AI CHI TIẾT (AGENTS) -->
+            <!-- ========================================== -->
+            <div id="view-agents" class="view-panel space-y-6 hidden">
+                
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-brand-border pb-5">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-brand-text tracking-tight">
+                            Danh Sách 8 Chuyên Viên AI Độc Lập
+                        </h1>
+                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
+                            Mỗi chuyên viên là một thực thể độc lập với Soul, bộ nhớ SQLite riêng biệt, engine router và kịch bản phân vai chuẩn chỉnh.
+                        </p>
+                    </div>
+
+                    <button onclick="openProvisionModal()" class="h-8 px-3.5 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs shadow-brand-btn apple-transition flex items-center space-x-1.5">
+                        <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                        <span>Thêm Chuyên Viên</span>
+                    </button>
+                </div>
+
+                <!-- 8 Agents Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    
+                    <!-- Agent Card 1 -->
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm">AK</div>
+                                <span class="px-2.5 py-1 rounded-full bg-lime-50 text-lime-800 border border-lime-200 text-[10px] font-bold">Đang Cho Thuê</span>
+                            </div>
+                            <div class="mt-3">
+                                <h3 class="font-bold text-sm text-brand-text">Amon Kemet</h3>
+                                <div class="text-xs text-lime-700 font-semibold mt-0.5">Sales Closer & Customer Care</div>
+                                <p class="text-xs text-brand-muted mt-2 leading-relaxed">Tư vấn dịch vụ, chốt đặt phòng khách sạn, trả lời khách hàng 1-1 theo phong cách lịch thiệp, thấu cảm EQ cao.</p>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-brand-borderSubtle space-y-2 text-xs">
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Khách Thuê:</span> <span class="font-semibold text-brand-text">Babylon Hotel Phú Quý</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Kênh Triển Khai:</span> <span class="font-mono text-slate-700">Zalo Personal :3871</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Giá Thuê:</span> <span class="font-mono font-bold text-lime-700">7,500,000 đ/tháng</span></div>
+                            <button onclick="inspectAgent('Amon Kemet', 'Sales Closer', 'Gemini 3.7 Flash High', 'Babylon Hotel', '7.5M/tháng')" class="w-full mt-2 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-brand-border text-brand-text font-semibold text-xs apple-transition">
+                                Quản trị cấu hình
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Agent Card 2 -->
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-rose-600 text-white flex items-center justify-center font-bold text-sm">LA</div>
+                                <span class="px-2.5 py-1 rounded-full bg-lime-50 text-lime-800 border border-lime-200 text-[10px] font-bold">Đang Cho Thuê</span>
+                            </div>
+                            <div class="mt-3">
+                                <h3 class="font-bold text-sm text-brand-text">Trợ Lý Voice Space</h3>
+                                <div class="text-xs text-rose-600 font-semibold mt-0.5">Community & Học Viên AI</div>
+                                <p class="text-xs text-brand-muted mt-2 leading-relaxed">Hỗ trợ học viên luyện giọng, nhận diện file âm thanh ghi âm, nhắc lịch học và chấm bài tập thực hành.</p>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-brand-borderSubtle space-y-2 text-xs">
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Khách Thuê:</span> <span class="font-semibold text-brand-text">Coach Vũ Ngọc Lan Anh</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Kênh Triển Khai:</span> <span class="font-mono text-slate-700">Zalo Bridge :3873</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Giá Thuê:</span> <span class="font-mono font-bold text-lime-700">5,000,000 đ/tháng</span></div>
+                            <button onclick="inspectAgent('Trợ Lý Voice Space', 'Student Care', 'Node.js Daemon', 'Coach Lan Anh', '5.0M/tháng')" class="w-full mt-2 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-brand-border text-brand-text font-semibold text-xs apple-transition">
+                                Quản trị cấu hình
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Agent Card 3 -->
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-lime-700 text-white flex items-center justify-center font-bold text-sm">LH</div>
+                                <span class="px-2.5 py-1 rounded-full bg-lime-50 text-lime-800 border border-lime-200 text-[10px] font-bold">Đang Cho Thuê</span>
+                            </div>
+                            <div class="mt-3">
+                                <h3 class="font-bold text-sm text-brand-text">Facebook Lead Hunter</h3>
+                                <div class="text-xs text-lime-700 font-semibold mt-0.5">Radar Cào Quét & Bắt Số SĐT</div>
+                                <p class="text-xs text-brand-muted mt-2 leading-relaxed">Cào bài viết du lịch công khai, lọc số điện thoại khách có nhu cầu trong 7 ngày, đẩy vào hàng đợi Topic Telegram.</p>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-brand-borderSubtle space-y-2 text-xs">
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Khách Thuê:</span> <span class="font-semibold text-brand-text">Ẩm Thực Nhà Lầu & Tour</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Kênh Triển Khai:</span> <span class="font-mono text-slate-700">CDP Profile Chrome</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Giá Thuê:</span> <span class="font-mono font-bold text-lime-700">4,500,000 đ/tháng</span></div>
+                            <button onclick="inspectAgent('Facebook Lead Hunter', 'Lead Scanner', 'Chrome CDP', 'Ẩm Thực Nhà Lầu', '4.5M/tháng')" class="w-full mt-2 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-brand-border text-brand-text font-semibold text-xs apple-transition">
+                                Quản trị cấu hình
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Agent Card 4 -->
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center font-bold text-sm">LV</div>
+                                <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-800 border border-slate-300 text-[10px] font-bold">Nội Bộ Master</span>
+                            </div>
+                            <div class="mt-3">
+                                <h3 class="font-bold text-sm text-brand-text">Lavie CEO Sentinel</h3>
+                                <div class="text-xs text-slate-800 font-semibold mt-0.5">Executive Orchestrator</div>
+                                <p class="text-xs text-brand-muted mt-2 leading-relaxed">Cộng sự điều hành riêng của Teddy, tổng quản lý 100% agent, kiểm duyệt mã nguồn, điều phối task và bảo mật.</p>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-brand-borderSubtle space-y-2 text-xs">
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Phạm Vi:</span> <span class="font-semibold text-brand-text">Toàn Bộ Doanh Nghiệp</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Kênh:</span> <span class="font-mono text-slate-700">Telegram DM Direct</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Chi Phí:</span> <span class="font-mono font-bold text-slate-800">Master Core</span></div>
+                            <button onclick="inspectAgent('Lavie CEO Sentinel', 'CEO Orchestrator', 'Executive Brain', 'Nội Bộ', 'Vô Giá')" class="w-full mt-2 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-brand-border text-brand-text font-semibold text-xs apple-transition">
+                                Quản trị cấu hình
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Agent Card 5 -->
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-lime-800 text-white flex items-center justify-center font-bold text-sm">VD</div>
+                                <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-800 border border-slate-300 text-[10px] font-bold">Nội Bộ / OSS</span>
+                            </div>
+                            <div class="mt-3">
+                                <h3 class="font-bold text-sm text-brand-text">VibeDesign Engine</h3>
+                                <div class="text-xs text-lime-800 font-semibold mt-0.5">AST Linter & Design Harness</div>
+                                <p class="text-xs text-brand-muted mt-2 leading-relaxed">Bộ linter thuần JS kiểm tra và tự động sửa giao diện theo chuẩn 21st.dev & Apple Quiet Luxury (0đ token).</p>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-brand-borderSubtle space-y-2 text-xs">
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Phiên Bản:</span> <span class="font-mono font-semibold text-brand-text">v1.3.0 Pure JS</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Runtime:</span> <span class="font-mono text-slate-700">CLI & MCP Server</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Chi Phí:</span> <span class="font-mono font-bold text-lime-700">0đ Token</span></div>
+                            <button onclick="inspectAgent('VibeDesign Engine', 'AST Linter', 'Pure JS', 'GitHub OSS', '0đ Token')" class="w-full mt-2 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-brand-border text-brand-text font-semibold text-xs apple-transition">
+                                Quản trị cấu hình
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Agent Card 6 -->
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card hover:shadow-brand-card-hover apple-transition flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between">
+                                <div class="w-10 h-10 rounded-xl bg-amber-600 text-white flex items-center justify-center font-bold text-sm">TH</div>
+                                <span class="px-2.5 py-1 rounded-full bg-lime-50 text-lime-800 border border-lime-200 text-[10px] font-bold">Đang Cho Thuê</span>
+                            </div>
+                            <div class="mt-3">
+                                <h3 class="font-bold text-sm text-brand-text">Thoth Content Factory</h3>
+                                <div class="text-xs text-amber-700 font-semibold mt-0.5">Ghostwriting & SEO Articles</div>
+                                <p class="text-xs text-brand-muted mt-2 leading-relaxed">Viết bài dài chuẩn phong vị Linh Phan / Web5ngay, bóc tách cấu trúc viral và sản xuất nội dung đa kênh tự động.</p>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-brand-borderSubtle space-y-2 text-xs">
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Khách Thuê:</span> <span class="font-semibold text-brand-text">Beauty Factory Spa</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Kênh Triển Khai:</span> <span class="font-mono text-slate-700">Fanpage & Substack</span></div>
+                            <div class="flex justify-between text-[11px]"><span class="text-brand-muted">Giá Thuê:</span> <span class="font-mono font-bold text-lime-700">6,000,000 đ/tháng</span></div>
+                            <button onclick="inspectAgent('Thoth Content Factory', 'Ghostwriter', 'Gemini Flash', 'Beauty Factory', '6.0M/tháng')" class="w-full mt-2 py-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-brand-border text-brand-text font-semibold text-xs apple-transition">
+                                Quản trị cấu hình
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================================== -->
+            <!-- VIEW 3: HỢP ĐỒNG CHO THUÊ (LEASES) -->
+            <!-- ========================================== -->
+            <div id="view-leases" class="view-panel space-y-6 hidden">
+                
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-brand-border pb-5">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-brand-text tracking-tight">
+                            Quản Lý Hợp Đồng Cho Thuê Agent (12 Khách Hàng)
+                        </h1>
+                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
+                            Theo dõi thời hạn hợp đồng, doanh thu định kỳ MRR, trạng thái thanh toán VietQR tự động và SLA vận hành.
+                        </p>
+                    </div>
+
                     <div class="flex items-center space-x-2">
-                        <div class="w-2.5 h-2.5 rounded-full bg-lime-400 animate-pulse"></div>
-                        <span class="font-bold text-slate-200 uppercase tracking-wide">Live Swarm Execution & Rental Telemetry</span>
-                    </div>
-                    <span class="text-slate-400">Cluster: VPS_PLATINUM_4C</span>
-                </div>
-                <div class="space-y-1.5 text-[11px] leading-relaxed pt-1">
-                    <div class="flex items-start gap-2">
-                        <span class="text-slate-500">[18:50:12]</span>
-                        <span class="px-1.5 py-0.2 rounded bg-lime-950 text-lime-400 border border-lime-800 font-bold text-[10px]">LIME LEASE</span>
-                        <span class="text-slate-300">Amon Kemet phản hồi yêu cầu đặt bàn của khách 082.603.xxxx tại Babylon Hotel — Chốt thành công.</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <span class="text-slate-500">[18:50:28]</span>
-                        <span class="px-1.5 py-0.2 rounded bg-rose-950 text-rose-400 border border-rose-800 font-bold text-[10px]">RED GUARD</span>
-                        <span class="text-slate-300">Rào chắn Zero Auto-Reply kích hoạt trên kênh Zalo cá nhân — Giữ im lặng tuyệt đối an toàn.</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <span class="text-slate-500">[18:51:04]</span>
-                        <span class="px-1.5 py-0.2 rounded bg-lime-950 text-lime-400 border border-lime-800 font-bold text-[10px]">LIME ROUTE</span>
-                        <span class="text-slate-300">Prompt Caching hit 94.8% trên OpenRouter gateway — Tiết kiệm 42,800 tokens.</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-lime-50 text-lime-800 border border-lime-200 text-xs font-bold font-mono">
+                            Tổng Thu: 68.5M/tháng
+                        </span>
                     </div>
                 </div>
+
+                <!-- Leases Table -->
+                <div class="bg-white rounded-2xl border border-brand-border shadow-brand-card overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-slate-50/80 border-b border-brand-border text-brand-muted font-semibold uppercase text-[10px] tracking-wider">
+                                <tr>
+                                    <th class="px-6 py-3.5">Khách Hàng / Đơn Vị</th>
+                                    <th class="px-6 py-3.5">Chuyên Viên Đảm Nhiệm</th>
+                                    <th class="px-6 py-3.5">Gói Thuê & Giá</th>
+                                    <th class="px-6 py-3.5">Thời Hạn & Gia Hạn</th>
+                                    <th class="px-6 py-3.5">Trạng Thái</th>
+                                    <th class="px-6 py-3.5 text-right">Hành Động</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-brand-borderSubtle">
+                                
+                                <tr class="hover:bg-slate-50/60 apple-transition">
+                                    <td class="px-6 py-4">
+                                        <div class="font-bold text-brand-text">Khách Sạn Babylon Phú Quý</div>
+                                        <div class="text-[10px] text-brand-muted">Liên hệ: anh Thuận (Master F&B)</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="font-semibold text-brand-text">Amon Kemet (Sales Closer)</div>
+                                        <div class="text-[10px] text-brand-muted font-mono">Zalo Personal :3871</div>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono font-bold text-lime-700">7,500,000 đ/tháng</td>
+                                    <td class="px-6 py-4">
+                                        <div class="text-brand-text font-medium">Hết hạn: 22/09/2026</div>
+                                        <div class="text-[10px] text-lime-700">Còn 22 ngày</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-lime-50 text-lime-800 border border-lime-200">Đã thanh toán</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button onclick="alert('Đã gửi hóa đơn và bảng báo cáo tháng cho Babylon Hotel')" class="px-3 py-1 rounded-lg border border-brand-border bg-white hover:bg-slate-50 text-brand-text font-semibold text-[11px] shadow-sm">Gửi báo cáo</button>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-slate-50/60 apple-transition">
+                                    <td class="px-6 py-4">
+                                        <div class="font-bold text-brand-text">Học Viện Voice Space</div>
+                                        <div class="text-[10px] text-brand-muted">Liên hệ: Coach Vũ Ngọc Lan Anh</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="font-semibold text-brand-text">Trợ Lý Chăm Sóc Học Viên</div>
+                                        <div class="text-[10px] text-brand-muted font-mono">Zalo Bridge :3873</div>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono font-bold text-lime-700">5,000,000 đ/tháng</td>
+                                    <td class="px-6 py-4">
+                                        <div class="text-brand-text font-medium">Hết hạn: 18/09/2026</div>
+                                        <div class="text-[10px] text-lime-700">Còn 18 ngày</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-lime-50 text-lime-800 border border-lime-200">Đã thanh toán</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button onclick="alert('Đã đồng bộ báo cáo học viên cho Coach Lan Anh')" class="px-3 py-1 rounded-lg border border-brand-border bg-white hover:bg-slate-50 text-brand-text font-semibold text-[11px] shadow-sm">Gửi báo cáo</button>
+                                    </td>
+                                </tr>
+
+                                <tr class="hover:bg-slate-50/60 apple-transition">
+                                    <td class="px-6 py-4">
+                                        <div class="font-bold text-brand-text">Ẩm Thực Nhà Lầu</div>
+                                        <div class="text-[10px] text-brand-muted">Liên hệ: A. Thuận Nhà Lầu</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <div class="font-semibold text-brand-text">Lead Radar Săn Khách FB</div>
+                                        <div class="text-[10px] text-brand-muted font-mono">CDP Chrome Daemon</div>
+                                    </td>
+                                    <td class="px-6 py-4 font-mono font-bold text-lime-700">4,500,000 đ/tháng</td>
+                                    <td class="px-6 py-4">
+                                        <div class="text-brand-text font-medium">Hết hạn: 29/09/2026</div>
+                                        <div class="text-[10px] text-lime-700">Còn 29 ngày</div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-lime-50 text-lime-800 border border-lime-200">Đã thanh toán</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button onclick="alert('Xem danh sách 142 leads đã thu thập tháng này')" class="px-3 py-1 rounded-lg border border-brand-border bg-white hover:bg-slate-50 text-brand-text font-semibold text-[11px] shadow-sm">Xem leads</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ========================================== -->
+            <!-- VIEW 4: DOANH THU MRR ĐỊNH KỲ (REVENUE) -->
+            <!-- ========================================== -->
+            <div id="view-revenue" class="view-panel space-y-6 hidden">
+                
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-brand-border pb-5">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-brand-text tracking-tight">
+                            Báo Cáo Doanh Thu MRR & Dòng Tiền Thuê Agent
+                        </h1>
+                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
+                            Mô hình kinh doanh định kỳ (Recurring Revenue) với tỷ suất lợi nhuận trên 90% nhờ tự động hóa bằng code và 0đ token.
+                        </p>
+                    </div>
+
+                    <button onclick="alert('Đã tải xuống file CSV sao kê dòng tiền tháng này')" class="px-3.5 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-slate-950 apple-transition flex items-center space-x-1.5">
+                        <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                        <span>Xuất Báo Cáo CSV</span>
+                    </button>
+                </div>
+
+                <!-- Financial Metrics Breakdown -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-brand-card">
+                        <div class="text-[11px] font-semibold uppercase text-brand-muted tracking-wider">Tổng Doanh Thu Tháng Này</div>
+                        <div class="text-3xl font-bold font-mono text-brand-text mt-3 tabular-nums">68,500,000 đ</div>
+                        <div class="text-xs text-lime-700 font-semibold mt-2">↑ Tăng trưởng 22.4% so với tháng trước</div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-brand-card">
+                        <div class="text-[11px] font-semibold uppercase text-brand-muted tracking-wider">Chi Phí Vận Hành Server & API</div>
+                        <div class="text-3xl font-bold font-mono text-brand-text mt-3 tabular-nums">1,840,000 đ</div>
+                        <div class="text-xs text-lime-700 font-semibold mt-2">Chiếm 2.68% doanh thu (Biên lợi nhuận 97.3%)</div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-brand-card">
+                        <div class="text-[11px] font-semibold uppercase text-brand-muted tracking-wider">Lợi Nhuận Thuần (Net Profit)</div>
+                        <div class="text-3xl font-bold font-mono text-lime-700 mt-3 tabular-nums">66,660,000 đ</div>
+                        <div class="text-xs text-brand-muted mt-2">Dòng tiền tự động về tài khoản MB Bank VietQR</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ========================================== -->
+            <!-- VIEW 5: GÓI DỊCH VỤ TURNKEY (PACKAGES) -->
+            <!-- ========================================== -->
+            <div id="view-packages" class="view-panel space-y-6 hidden">
+                
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-brand-border pb-5">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-brand-text tracking-tight">
+                            Các Gói Dịch Vụ Cho Thuê & Setup AI Agent
+                        </h1>
+                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
+                            Đóng gói tiêu chuẩn 3 tầng giá phục vụ khách hàng cá nhân, chuyên gia coaching và doanh nghiệp vừa & nhỏ.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 3 Pricing Cards -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Tier 1 -->
+                    <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-brand-card flex flex-col justify-between space-y-5">
+                        <div class="space-y-3">
+                            <span class="px-2.5 py-1 rounded-full bg-slate-100 text-slate-800 text-[10px] font-bold">STARTER CARE</span>
+                            <h3 class="text-lg font-bold text-brand-text">Agent Chăm Sóc Khách Hàng</h3>
+                            <div class="text-2xl font-bold font-mono text-brand-text tabular-nums">3,500,000 <span class="text-xs text-brand-muted font-normal">đ/tháng</span></div>
+                            <p class="text-xs text-brand-muted">Phù hợp cá nhân kinh doanh, shop online hoặc chủ homestay nhỏ.</p>
+                            <ul class="space-y-2 text-xs text-slate-700 pt-2 border-t border-brand-borderSubtle">
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-lime-600"></i> 1 Agent Zalo hoặc Fanpage</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-lime-600"></i> Kịch bản trả lời tự động 24/7</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-lime-600"></i> Báo cáo tổng kết tuần</li>
+                            </ul>
+                        </div>
+                        <button onclick="openProvisionModal()" class="w-full py-2.5 rounded-xl border border-brand-border bg-slate-50 hover:bg-slate-100 font-bold text-xs text-brand-text apple-transition">
+                            Tạo hợp đồng gói này
+                        </button>
+                    </div>
+
+                    <!-- Tier 2 (Highlighted) -->
+                    <div class="bg-white rounded-2xl border-2 border-lime-500 p-6 shadow-brand-card flex flex-col justify-between space-y-5 relative">
+                        <span class="absolute -top-3 right-6 px-2.5 py-0.5 rounded-full bg-lime-600 text-white text-[10px] font-bold">PHỔ BIẾN NHẤT</span>
+                        <div class="space-y-3">
+                            <span class="px-2.5 py-1 rounded-full bg-lime-50 text-lime-800 border border-lime-200 text-[10px] font-bold">PRO CLOSER</span>
+                            <h3 class="text-lg font-bold text-brand-text">Agent Chốt Sales & Thu Lead</h3>
+                            <div class="text-2xl font-bold font-mono text-brand-text tabular-nums">5,500,000 <span class="text-xs text-brand-muted font-normal">đ/tháng</span></div>
+                            <p class="text-xs text-brand-muted">Dành cho Coach, Khách sạn, Spa, Nha khoa cần chốt deal 1-1.</p>
+                            <ul class="space-y-2 text-xs text-slate-700 pt-2 border-t border-brand-borderSubtle">
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-lime-600"></i> 2 Agent (Chăm sóc + Săn lead)</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-lime-600"></i> Tích hợp Zalo Personal + SQLite</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-lime-600"></i> Rào chắn Guardrail an toàn 100%</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-lime-600"></i> Báo cáo doanh số thời gian thực</li>
+                            </ul>
+                        </div>
+                        <button onclick="openProvisionModal()" class="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-950 text-white font-bold text-xs apple-transition shadow-brand-btn">
+                            Tạo hợp đồng gói này
+                        </button>
+                    </div>
+
+                    <!-- Tier 3 -->
+                    <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-brand-card flex flex-col justify-between space-y-5">
+                        <div class="space-y-3">
+                            <span class="px-2.5 py-1 rounded-full bg-rose-50 text-rose-800 border border-rose-200 text-[10px] font-bold">ENTERPRISE SWARM</span>
+                            <h3 class="text-lg font-bold text-brand-text">Hệ Thống Đa Agent Trọn Gói</h3>
+                            <div class="text-2xl font-bold font-mono text-brand-text tabular-nums">8,500,000 <span class="text-xs text-brand-muted font-normal">đ/tháng</span></div>
+                            <p class="text-xs text-brand-muted">Dành cho doanh nghiệp vừa, chuỗi cửa hàng, công ty du lịch lớn.</p>
+                            <ul class="space-y-2 text-xs text-slate-700 pt-2 border-t border-brand-borderSubtle">
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-lime-600"></i> Trọn bộ Swarm 4-8 Chuyên viên AI</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-lime-600"></i> Đa kênh Zalo + Fanpage + Telegram</li>
+                                <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-lime-600"></i> Tuỳ biến kịch bản sâu theo ngành</li>
+                            </ul>
+                        </div>
+                        <button onclick="openProvisionModal()" class="w-full py-2.5 rounded-xl border border-brand-border bg-slate-50 hover:bg-slate-100 font-bold text-xs text-brand-text apple-transition">
+                            Tạo hợp đồng gói này
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================================== -->
+            <!-- VIEW 6: KÊNH & BRIDGE DAEMONS (BRIDGES) -->
+            <!-- ========================================== -->
+            <div id="view-bridges" class="view-panel space-y-6 hidden">
+                
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-brand-border pb-5">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-brand-text tracking-tight">
+                            Quản Trị Kênh Kết Nối & Cổng Giao Tiếp (Bridges)
+                        </h1>
+                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
+                            Theo dõi trạng thái kết nối các cổng Zalo cá nhân, Zalo OA, Telegram Bot, Facebook CDP và OpenViking.
+                        </p>
+                    </div>
+
+                    <button onclick="alert('Đã ping kiểm tra toàn bộ 5 cổng bridge. Uptime 100%')" class="px-3.5 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-semibold hover:bg-slate-950 apple-transition flex items-center space-x-1.5">
+                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                        <span>Kiểm Tra Toàn Bộ</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-lime-500"></span>
+                                <span class="font-bold text-xs text-brand-text">Zalo Personal Bridge :3871</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded bg-lime-50 text-lime-800 text-[10px] font-bold">ONLINE</span>
+                        </div>
+                        <div class="text-xs text-brand-muted">Đang kết nối tài khoản Zalo cá nhân Master. Cơ chế Zero Auto-Reply đang bật an toàn.</div>
+                        <div class="flex justify-between items-center text-[10px] font-mono text-slate-500 pt-2 border-t border-brand-borderSubtle">
+                            <span>Độ trễ: 12ms</span>
+                            <span>Memory: 48MB</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-lime-500"></span>
+                                <span class="font-bold text-xs text-brand-text">Voice Space Client Bridge :3873</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded bg-lime-50 text-lime-800 text-[10px] font-bold">ONLINE</span>
+                        </div>
+                        <div class="text-xs text-brand-muted">Cổng kết nối Zalo riêng cho Coach Lan Anh. Đã xử lý 420 tin nhắn học viên hôm nay.</div>
+                        <div class="flex justify-between items-center text-[10px] font-mono text-slate-500 pt-2 border-t border-brand-borderSubtle">
+                            <span>Độ trễ: 18ms</span>
+                            <span>Memory: 52MB</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-lime-500"></span>
+                                <span class="font-bold text-xs text-brand-text">Telegram Gateway Bot (@Lavie)</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded bg-lime-50 text-lime-800 text-[10px] font-bold">ONLINE</span>
+                        </div>
+                        <div class="text-xs text-brand-muted">Đường truyền điều hành trực tiếp giữa Teddy và Lavie CEO.</div>
+                        <div class="flex justify-between items-center text-[10px] font-mono text-slate-500 pt-2 border-t border-brand-borderSubtle">
+                            <span>Topic #831 Active</span>
+                            <span>Ping: 8ms</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-brand-border p-5 shadow-brand-card space-y-3">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-2.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-lime-500"></span>
+                                <span class="font-bold text-xs text-brand-text">OpenViking Knowledge Base :1933</span>
+                            </div>
+                            <span class="px-2 py-0.5 rounded bg-lime-50 text-lime-800 text-[10px] font-bold">INDEXED</span>
+                        </div>
+                        <div class="text-xs text-brand-muted">Bộ nhớ tri thức bền vững, lưu trữ 2,400+ thực thể và lịch sử hội thoại toàn hệ thống.</div>
+                        <div class="flex justify-between items-center text-[10px] font-mono text-slate-500 pt-2 border-t border-brand-borderSubtle">
+                            <span>SQLite + Vector L2</span>
+                            <span>Search: 4ms</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================================== -->
+            <!-- VIEW 7: KHO TRI THỨC & 800+ SKILLS (SKILLS) -->
+            <!-- ========================================== -->
+            <div id="view-skills" class="view-panel space-y-6 hidden">
+                
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-brand-border pb-5">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-brand-text tracking-tight">
+                            Kho Tri Thức & 800+ Kỹ Năng Đóng Gói (Skills)
+                        </h1>
+                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
+                            Tài sản sở hữu trí tuệ (Reusable IP) tái sử dụng cho toàn bộ dịch vụ cho thuê và tự động hóa kinh doanh.
+                        </p>
+                    </div>
+
+                    <div class="w-full sm:w-64">
+                        <input type="text" placeholder="Tìm kiếm kỹ năng..." class="w-full px-3 py-1.5 text-xs bg-white border border-brand-border rounded-lg focus:outline-none focus:ring-1 focus:ring-slate-900">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    
+                    <div class="bg-white rounded-2xl border border-brand-border p-4 shadow-brand-card space-y-2">
+                        <span class="px-2 py-0.5 rounded bg-lime-50 text-lime-800 text-[9px] font-bold font-mono">MARKETING & SALES</span>
+                        <div class="font-bold text-xs text-brand-text">abs-copywriting-frameworks</div>
+                        <div class="text-[11px] text-brand-muted leading-relaxed">14 công thức viết bài bán hàng đỉnh cao (AIDA, PAS, BAB, Hormozi Value Equation).</div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-brand-border p-4 shadow-brand-card space-y-2">
+                        <span class="px-2 py-0.5 rounded bg-lime-50 text-lime-800 text-[9px] font-bold font-mono">AUTOMATION</span>
+                        <div class="font-bold text-xs text-brand-text">abs-zalo-bot</div>
+                        <div class="text-[11px] text-brand-muted leading-relaxed">Kịch bản điều phối bot Zalo tự động chăm sóc và chốt đơn cho khách thuê.</div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-brand-border p-4 shadow-brand-card space-y-2">
+                        <span class="px-2 py-0.5 rounded bg-lime-50 text-lime-800 text-[9px] font-bold font-mono">LEAD RADAR</span>
+                        <div class="font-bold text-xs text-brand-text">facebook-lead-radar</div>
+                        <div class="text-[11px] text-brand-muted leading-relaxed">Cào quét bài viết du lịch trên Facebook và phân loại số điện thoại chất lượng cao.</div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-brand-border p-4 shadow-brand-card space-y-2">
+                        <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-800 text-[9px] font-bold font-mono">DESIGN SYSTEM</span>
+                        <div class="font-bold text-xs text-brand-text">vibe-design-harness</div>
+                        <div class="text-[11px] text-brand-muted leading-relaxed">Kiểm tra AST và nâng cấp giao diện WebApp theo phong cách Apple Quiet Luxury.</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ========================================== -->
+            <!-- VIEW 8: CÀI ĐẶT & GUARDRAILS (SETTINGS) -->
+            <!-- ========================================== -->
+            <div id="view-settings" class="view-panel space-y-6 hidden">
+                
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-brand-border pb-5">
+                    <div>
+                        <h1 class="text-xl sm:text-2xl font-bold text-brand-text tracking-tight">
+                            Cài Đặt Hệ Thống & Rào Chắn Bảo Mật (Guardrails)
+                        </h1>
+                        <p class="text-xs sm:text-sm text-brand-muted mt-1 max-w-2xl leading-relaxed">
+                            Cấu hình Model Router, quản lý API key và các quy tắc kiểm soát rủi ro không thể xâm phạm.
+                        </p>
+                    </div>
+
+                    <button onclick="alert('Đã lưu thành công cấu hình hệ thống!')" class="h-8 px-4 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs shadow-brand-btn apple-transition">
+                        Lưu Thay Đổi
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    
+                    <!-- Settings Box 1 -->
+                    <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-brand-card space-y-4">
+                        <h3 class="text-sm font-bold text-brand-text border-b border-brand-border pb-2">AI Model Router & Fallback</h3>
+                        
+                        <div class="space-y-3 text-xs">
+                            <div>
+                                <label class="font-bold text-brand-text block mb-1">Mô hình AI Mặc Định (Fast & High Intelligence)</label>
+                                <input type="text" value="google/gemini-3.7-flash-high" readonly class="w-full px-3 py-2 bg-slate-50 border border-brand-border rounded-lg font-mono text-slate-700">
+                            </div>
+
+                            <div>
+                                <label class="font-bold text-brand-text block mb-1">Mô hình Reasoning & Kế Hoạch (Planning)</label>
+                                <input type="text" value="cx/gpt-5.6-sol" readonly class="w-full px-3 py-2 bg-slate-50 border border-brand-border rounded-lg font-mono text-slate-700">
+                            </div>
+
+                            <div>
+                                <label class="font-bold text-brand-text block mb-1">Mô hình Lập Trình & Sửa Mã Nguồn</label>
+                                <input type="text" value="cx/gpt-5.6-terra" readonly class="w-full px-3 py-2 bg-slate-50 border border-brand-border rounded-lg font-mono text-slate-700">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Settings Box 2 -->
+                    <div class="bg-white rounded-2xl border border-brand-border p-6 shadow-brand-card space-y-4">
+                        <h3 class="text-sm font-bold text-brand-text border-b border-brand-border pb-2">Rào Chắn Guardrail Bắt Buộc</h3>
+                        
+                        <div class="space-y-3 text-xs">
+                            <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-50 border border-brand-border cursor-pointer">
+                                <input type="checkbox" checked class="mt-0.5 text-lime-600 rounded">
+                                <div>
+                                    <div class="font-bold text-brand-text">Zero Auto-Reply trên Zalo Cá Nhân Teddy</div>
+                                    <div class="text-[11px] text-brand-muted">Cấm 100% agent tự trả lời khi đối phương nhắn lại. Luôn giữ im lặng chờ Teddy chỉ đạo.</div>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-50 border border-brand-border cursor-pointer">
+                                <input type="checkbox" checked class="mt-0.5 text-lime-600 rounded">
+                                <div>
+                                    <div class="font-bold text-brand-text">Lead Radar Rate-Limit & Topic #831 Preview</div>
+                                    <div class="text-[11px] text-brand-muted">Chỉ cào tối đa 8 bài/ngày, chỉ đăng bình luận khi có sự xác nhận của Teddy.</div>
+                                </div>
+                            </label>
+
+                            <label class="flex items-start space-x-3 p-3 rounded-xl bg-slate-50 border border-brand-border cursor-pointer">
+                                <input type="checkbox" checked class="mt-0.5 text-lime-600 rounded">
+                                <div>
+                                    <div class="font-bold text-brand-text">Cô Lập 100% Domain Khách Hàng</div>
+                                    <div class="text-[11px] text-brand-muted">Tuyệt đối không lưu trữ file rác hoặc chạy demo thử nghiệm trên thư mục của client.</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
         </main>
     </div>
 
-    <!-- 3. MODAL CẤP AGENT MỚI CHO KHÁCH THUÊ (Turnkey Provisioning) -->
+    <!-- 4. MODAL CẤP AGENT MỚI CHO KHÁCH THUÊ (Turnkey Provisioning) -->
     <div id="provision-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 apple-transition">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-brand-modal space-y-4 transform scale-95 apple-transition" id="provision-modal-content">
             
@@ -577,7 +1068,7 @@
                     </div>
                     <div>
                         <h3 class="text-sm font-bold text-brand-text">Cấp Agent Mới Cho Khách Thuê</h3>
-                        <p class="text-[11px] text-brand-muted">Đóng gói sẵn kịch bản và rào chắn triển khai trong 30 giây</p>
+                        <p class="text-[11px] text-brand-muted">Khởi tạo và đóng gói daemon riêng trong 30 giây</p>
                     </div>
                 </div>
                 <button onclick="closeProvisionModal()" class="text-brand-muted hover:text-brand-text">
@@ -648,48 +1139,103 @@
         </div>
     </div>
 
-    <!-- 4. MOBILE BOTTOM BAR -->
-    <nav class="md:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-brand-border z-30 px-6 py-2 flex items-center justify-between">
-        <a href="#" class="flex flex-col items-center text-lime-800 py-1 font-semibold">
+    <!-- 5. MOBILE BOTTOM NAVIGATION BAR -->
+    <nav class="md:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-brand-border z-30 px-4 py-2 flex items-center justify-around">
+        <button onclick="switchView('swarm')" class="flex flex-col items-center text-lime-800 py-1 font-semibold">
             <i data-lucide="cpu" class="w-4 h-4 stroke-[2]"></i>
             <span class="text-[9px] mt-1">Swarm</span>
-        </a>
-        <a href="#" class="flex flex-col items-center text-brand-muted hover:text-brand-text py-1">
+        </button>
+        <button onclick="switchView('agents')" class="flex flex-col items-center text-brand-muted hover:text-brand-text py-1">
+            <i data-lucide="bot" class="w-4 h-4 stroke-[1.5]"></i>
+            <span class="text-[9px] font-medium mt-1">8 Agent</span>
+        </button>
+        <button onclick="switchView('leases')" class="flex flex-col items-center text-brand-muted hover:text-brand-text py-1">
             <i data-lucide="briefcase" class="w-4 h-4 stroke-[1.5]"></i>
             <span class="text-[9px] font-medium mt-1">Cho Thuê</span>
-        </a>
-        <a href="#" onclick="openProvisionModal()" class="flex flex-col items-center text-rose-600 py-1 font-semibold">
-            <i data-lucide="plus-circle" class="w-4 h-4 stroke-[2]"></i>
-            <span class="text-[9px] mt-1">Cấp Mới</span>
-        </a>
-        <a href="#" class="flex flex-col items-center text-brand-muted hover:text-brand-text py-1">
-            <i data-lucide="book-marked" class="w-4 h-4 stroke-[1.5]"></i>
-            <span class="text-[9px] font-medium mt-1">Skills</span>
-        </a>
-        <a href="#" class="flex flex-col items-center text-brand-muted hover:text-brand-text py-1">
-            <i data-lucide="user" class="w-4 h-4 stroke-[1.5]"></i>
-            <span class="text-[9px] font-medium mt-1">Cá Nhân</span>
-        </a>
+        </button>
+        <button onclick="switchView('revenue')" class="flex flex-col items-center text-brand-muted hover:text-brand-text py-1">
+            <i data-lucide="wallet" class="w-4 h-4 stroke-[1.5]"></i>
+            <span class="text-[9px] font-medium mt-1">MRR</span>
+        </button>
+        <button onclick="switchView('settings')" class="flex flex-col items-center text-brand-muted hover:text-brand-text py-1">
+            <i data-lucide="sliders" class="w-4 h-4 stroke-[1.5]"></i>
+            <span class="text-[9px] font-medium mt-1">Cài Đặt</span>
+        </button>
     </nav>
 
-    <!-- Client Interactive JS -->
+    <!-- 6. JAVASCRIPT SPA ROUTER & INTERACTION ENGINE -->
     <script>
-        function filterAgents(type) {
-            document.querySelectorAll('.agent-chip').forEach(btn => {
-                btn.classList.remove('bg-slate-900', 'text-white', 'font-bold');
-                btn.classList.add('bg-white', 'text-brand-muted', 'border', 'border-brand-border', 'font-medium');
-                if (btn.getAttribute('data-type') === type) {
-                    btn.classList.add('bg-slate-900', 'text-white', 'font-bold');
-                    btn.classList.remove('bg-white', 'text-brand-muted', 'border', 'border-brand-border', 'font-medium');
-                }
+        // Mapping breadcrumbs
+        const viewTitles = {
+            'swarm': 'Bảng Điều Hành Swarm',
+            'agents': '8 Chuyên Viên AI Chi Tiết',
+            'leases': 'Quản Lý Hợp Đồng Cho Thuê (12 Khách)',
+            'revenue': 'Báo Cáo Doanh Thu MRR & Dòng Tiền',
+            'packages': 'Các Gói Dịch Vụ Turnkey',
+            'bridges': 'Kênh Kết Nối & Cổng Bridge Daemons',
+            'skills': 'Kho Tri Thức & 800+ Kỹ Năng (Skills)',
+            'settings': 'Cài Đặt Hệ Thống & Guardrails'
+        };
+
+        // Switch View Engine
+        function switchView(viewId) {
+            // Hide all views
+            document.querySelectorAll('.view-panel').forEach(panel => {
+                panel.classList.add('hidden');
             });
 
-            document.querySelectorAll('.agent-row').forEach(row => {
-                const rowType = row.getAttribute('data-type');
-                row.style.display = (type === 'all' || rowType === type) ? '' : 'none';
+            // Show selected view
+            const target = document.getElementById(`view-${viewId}`);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Update Nav Buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('nav-active');
             });
+            const activeNav = document.getElementById(`nav-${viewId}`);
+            if (activeNav) {
+                activeNav.classList.add('nav-active');
+            }
+
+            // Update Breadcrumb
+            const breadcrumb = document.getElementById('view-breadcrumb');
+            if (breadcrumb && viewTitles[viewId]) {
+                breadcrumb.textContent = viewTitles[viewId];
+            }
+
+            // Scroll to top
+            document.getElementById('main-content-scroll').scrollTop = 0;
         }
 
+        // Toggle User Role Switcher Dropdown
+        function toggleUserDropdown() {
+            const dd = document.getElementById('user-role-dropdown');
+            dd.classList.toggle('hidden');
+        }
+
+        // Change Role
+        function changeRole(roleKey, name, email, avatar) {
+            document.getElementById('user-display-name').textContent = name;
+            document.getElementById('user-display-email').textContent = email;
+            document.getElementById('user-avatar-text').textContent = avatar;
+            
+            const badge = document.getElementById('role-label');
+            if (roleKey === 'admin') badge.textContent = 'Admin';
+            else if (roleKey === 'client') badge.textContent = 'Khách Thuê';
+            else badge.textContent = 'Khách Demo';
+
+            toggleUserDropdown();
+            alert(`Đã chuyển đổi quyền giao diện sang: ${name} (${roleKey.toUpperCase()})`);
+        }
+
+        // Inspect Agent Detail
+        function inspectAgent(name, role, engine, client, price) {
+            alert(`Thông tin Agent: ${name}\n- Vai trò: ${role}\n- Engine: ${engine}\n- Khách thuê: ${client}\n- Giá thuê: ${price}\n\n-> Trạng thái: Hoạt động trơn tru 100%.`);
+        }
+
+        // Modal Controls
         function openProvisionModal() {
             const modal = document.getElementById('provision-modal');
             modal.classList.remove('hidden');
@@ -717,14 +1263,7 @@
             closeProvisionModal();
         }
 
-        function manageAgent(name) {
-            alert(`Mở bảng cấu hình chuyên sâu cho Agent: ${name}`);
-        }
-
-        function refreshMesh() {
-            alert('Đã kiểm tra và đồng bộ lại sức khỏe 8/8 Swarm Nodes. Độ trễ hiện tại: 0.11s');
-        }
-
+        // Initialize Lucide Icons
         lucide.createIcons();
     </script>
 </body>
