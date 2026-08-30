@@ -1,583 +1,343 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="vi" class="h-full bg-[#fbfbfd]">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AETHER OS — Autonomous AI Swarm & Revenue Command Center</title>
-    <!-- Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AETHER OS — Swarm AI & Telemetry Command Center</title>
+    
+    <!-- Fonts: Apple SF Pro System + JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Plus Jakarta Sans"', 'sans-serif'],
                         mono: ['"JetBrains Mono"', 'monospace'],
                     },
                     colors: {
-                        obsidian: '#07080a',
-                        surface: {
-                            DEFAULT: '#0d0f12',
-                            raised: '#13161b',
-                            overlay: '#1a1e24',
-                            border: '#222730',
-                            highlight: '#2f3642'
-                        },
-                        brand: {
-                            50: '#ecfdf5',
-                            500: '#10b981',
-                            600: '#059669',
-                            glow: 'rgba(16, 185, 129, 0.15)'
-                        },
-                        cyan: {
-                            500: '#06b6d4',
-                            glow: 'rgba(6, 182, 212, 0.15)'
+                        apple: {
+                            canvas: '#fbfbfd',
+                            card: '#ffffff',
+                            sidebar: '#ffffff',
+                            border: '#e5e5ea',
+                            borderSubtle: '#f2f2f7',
+                            text: '#1d1d1f',
+                            muted: '#86868b',
+                            subtle: '#aeaeb2',
+                            accent: '#0071e3', // Apple Precision Blue
+                            hover: '#f5f5f7'
                         }
                     },
                     boxShadow: {
-                        'glow-emerald': '0 0 25px -5px rgba(16, 185, 129, 0.25)',
-                        'glow-cyan': '0 0 25px -5px rgba(6, 182, 212, 0.25)',
-                        'subtle-card': '0 1px 1px rgba(0,0,0,0.4), 0 4px 20px -2px rgba(0,0,0,0.6)',
-                        'inner-bevel': 'inset 0 1px 0 rgba(255, 255, 255, 0.06)'
+                        'apple-card': '0 2px 8px -2px rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.02)',
+                        'apple-card-hover': '0 12px 24px -6px rgba(0, 0, 0, 0.06), 0 4px 8px -2px rgba(0, 0, 0, 0.02)',
+                        'apple-btn': '0 1px 2px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.15)'
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Custom scrollbar & micro-interactions */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #07080a; }
-        ::-webkit-scrollbar-thumb { background: #222730; border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb:hover { background: #2f3642; }
-        
-        .pulse-live {
-            animation: pulse-ring 2.4s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-        }
-        @keyframes pulse-ring {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-        }
-
-        .ambient-grid {
-            background-size: 32px 32px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-        }
-
-        .btn-sheen {
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-sheen::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(60deg, transparent, rgba(255,255,255,0.06), transparent);
-            transform: rotate(25deg) translateY(-100%);
-            transition: transform 0.6s ease;
-        }
-        .btn-sheen:hover::after {
-            transform: rotate(25deg) translateY(100%);
-        }
+        * { -webkit-tap-highlight-color: transparent; }
+        body { font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        .apple-transition { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
     </style>
 </head>
-<body class="bg-obsidian text-zinc-200 antialiased font-sans min-h-screen flex selection:bg-brand-500 selection:text-black ambient-grid">
+<body class="h-full bg-apple-canvas text-apple-text antialiased flex flex-col md:flex-row overflow-hidden font-sans selection:bg-slate-200">
 
-    <!-- 1. LEFT SIDEBAR: Ultra-Refined Minimalist Navigation -->
-    <aside class="w-64 border-r border-surface-border bg-surface/90 backdrop-blur-xl flex flex-col justify-between shrink-0 fixed inset-y-0 left-0 z-30">
-        <div>
-            <!-- Workspace Switcher Header -->
-            <div class="h-16 border-b border-surface-border px-5 flex items-center justify-between">
-                <div class="flex items-center space-x-3 cursor-pointer group">
-                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-600 to-cyan-500 flex items-center justify-center shadow-glow-emerald border border-white/20">
-                        <i data-lucide="sparkles" class="w-4 h-4 text-white"></i>
-                    </div>
-                    <div>
-                        <div class="text-xs font-bold text-white tracking-tight flex items-center gap-1.5">
-                            AETHER OS
-                            <span class="text-[9px] font-mono px-1.5 py-0.2 bg-brand-500/10 text-brand-500 border border-brand-500/20 rounded">PRO</span>
-                        </div>
-                        <div class="text-[11px] text-zinc-500 font-medium">Ted & Co. Autonomous</div>
-                    </div>
-                </div>
-                <button class="text-zinc-500 hover:text-zinc-300 p-1 rounded-md hover:bg-surface-raised transition">
-                    <i data-lucide="chevrons-up-down" class="w-3.5 h-3.5"></i>
-                </button>
+    <!-- 1. LEFT NAVIGATION SIDEBAR -->
+    <aside class="hidden md:flex flex-col w-64 h-full bg-apple-sidebar border-r border-apple-border shrink-0 select-none">
+        <!-- Brand Header -->
+        <div class="h-16 px-6 border-b border-apple-borderSubtle flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-mono font-bold text-xs tracking-tighter">
+                Æ
             </div>
-
-            <!-- Navigation Links -->
-            <div class="p-3 space-y-6">
-                <div>
-                    <div class="px-3 pb-2 text-[10px] font-mono font-semibold tracking-wider text-zinc-500 uppercase">Core Orchestration</div>
-                    <nav class="space-y-1">
-                        <a href="#" class="flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg bg-surface-raised text-white border border-surface-border shadow-inner-bevel">
-                            <div class="flex items-center gap-2.5">
-                                <i data-lucide="layout-dashboard" class="w-4 h-4 text-brand-500"></i>
-                                <span>Mission Control</span>
-                            </div>
-                            <span class="w-2 h-2 rounded-full bg-brand-500 pulse-live"></span>
-                        </a>
-                        <a href="#" class="flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-surface-raised/50 transition group">
-                            <div class="flex items-center gap-2.5">
-                                <i data-lucide="bot" class="w-4 h-4 text-zinc-500 group-hover:text-cyan-500 transition"></i>
-                                <span>Agent Swarm (8)</span>
-                            </div>
-                            <span class="text-[10px] font-mono text-zinc-500 bg-surface-overlay px-1.5 py-0.5 rounded">99.8%</span>
-                        </a>
-                        <a href="#" class="flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-surface-raised/50 transition group">
-                            <div class="flex items-center gap-2.5">
-                                <i data-lucide="network" class="w-4 h-4 text-zinc-500 group-hover:text-brand-500 transition"></i>
-                                <span>Pipeline Flow</span>
-                            </div>
-                        </a>
-                        <a href="#" class="flex items-center justify-between px-3 py-2 text-xs font-medium rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-surface-raised/50 transition group">
-                            <div class="flex items-center gap-2.5">
-                                <i data-lucide="zap" class="w-4 h-4 text-zinc-500 group-hover:text-amber-500 transition"></i>
-                                <span>Lead Radars</span>
-                            </div>
-                            <span class="text-[10px] font-mono font-bold text-brand-500 bg-brand-500/10 px-1.5 py-0.5 rounded border border-brand-500/20">+14 new</span>
-                        </a>
-                    </nav>
-                </div>
-
-                <div>
-                    <div class="px-3 pb-2 text-[10px] font-mono font-semibold tracking-wider text-zinc-500 uppercase">Intelligence & Telemetry</div>
-                    <nav class="space-y-1">
-                        <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-surface-raised/50 transition group">
-                            <i data-lucide="wallet-cards" class="w-4 h-4 text-zinc-500 group-hover:text-emerald-500 transition"></i>
-                            <span>Financial Engine</span>
-                        </a>
-                        <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-surface-raised/50 transition group">
-                            <i data-lucide="cpu" class="w-4 h-4 text-zinc-500 group-hover:text-indigo-500 transition"></i>
-                            <span>Token Firewall & AST</span>
-                        </a>
-                        <a href="#" class="flex items-center gap-2.5 px-3 py-2 text-xs font-medium rounded-lg text-zinc-400 hover:text-zinc-200 hover:bg-surface-raised/50 transition group">
-                            <i data-lucide="shield-check" class="w-4 h-4 text-zinc-500 group-hover:text-brand-500 transition"></i>
-                            <span>Audit & RBAC Logs</span>
-                        </a>
-                    </nav>
-                </div>
+            <div>
+                <div class="font-bold text-sm text-apple-text tracking-tight leading-none">AETHER OS</div>
+                <div class="text-[10px] text-apple-muted font-medium mt-1">Swarm Telemetry v1.3</div>
             </div>
         </div>
 
-        <!-- Bottom User Card & System Status -->
-        <div class="p-3 border-t border-surface-border bg-surface/50">
-            <div class="p-2.5 rounded-xl bg-surface-raised border border-surface-border flex items-center justify-between">
-                <div class="flex items-center space-x-2.5">
-                    <div class="relative">
-                        <div class="w-7 h-7 rounded-full bg-zinc-950 border border-zinc-700 flex items-center justify-center text-[10px] font-bold text-zinc-200">
-                            TD
-                        </div>
-                        <div class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-brand-500 border border-surface-raised"></div>
-                    </div>
-                    <div>
-                        <div class="text-xs font-semibold text-zinc-200">Teddy (Master)</div>
-                        <div class="text-[10px] text-zinc-500 font-mono">VPS: 4 vCPU / 8GB</div>
-                    </div>
-                </div>
-                <button class="text-zinc-500 hover:text-zinc-300 p-1 rounded transition">
-                    <i data-lucide="settings" class="w-3.5 h-3.5"></i>
-                </button>
+        <!-- Sidebar Navigation -->
+        <div class="flex-1 overflow-y-auto px-3 py-4 space-y-6">
+            <div class="space-y-1">
+                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-apple-subtle">Hệ Thống Swarm</div>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-apple-accent bg-blue-50/70 apple-transition">
+                    <i data-lucide="cpu" class="w-4 h-4 stroke-[2] text-apple-accent"></i>
+                    <span>Bảng điều hành</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="network" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Swarm Nodes (8/8)</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="terminal" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Execution Stream</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="shield-check" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Guardrails & AST</span>
+                </a>
             </div>
+
+            <div class="space-y-1">
+                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-apple-subtle">Kinh Doanh & Token</div>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="database" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Prompt Caching (94%)</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="activity" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Lead Radar Pipeline</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="wallet" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Doanh thu & MRR</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-apple-borderSubtle flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 ring-4 ring-emerald-50"></div>
+                <div>
+                    <div class="text-xs font-bold text-apple-text leading-none">Cluster ONLINE</div>
+                    <div class="text-[10px] text-apple-muted font-mono mt-0.5">VPS Platinum 4C</div>
+                </div>
+            </div>
+            <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-apple-muted hover:text-apple-text cursor-pointer apple-transition"></i>
         </div>
     </aside>
 
-    <!-- 2. MAIN CONTENT AREA -->
-    <main class="ml-64 flex-1 min-h-screen flex flex-col">
-
-        <!-- Top Sticky Header -->
-        <header class="h-16 border-b border-surface-border bg-obsidian/80 backdrop-blur-xl px-8 flex items-center justify-between sticky top-0 z-20">
-            <div class="flex items-center space-x-4">
-                <div class="flex items-center space-x-2 text-xs text-zinc-400">
-                    <span class="hover:text-zinc-200 cursor-pointer">Agent Portfolio</span>
-                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-zinc-600"></i>
-                    <span class="text-white font-medium">Real-time Telemetry Dashboard</span>
+    <!-- 2. MAIN WORKSPACE -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+        <!-- Top App Bar -->
+        <header class="h-16 bg-white/80 backdrop-blur-md border-b border-apple-border px-4 sm:px-8 flex items-center justify-between shrink-0 z-20">
+            <div class="flex items-center space-x-3 md:hidden">
+                <div class="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center font-mono font-bold text-xs">
+                    Æ
                 </div>
+                <span class="font-bold text-xs text-apple-text">AETHER OS</span>
             </div>
 
-            <!-- Global Action Bar: Search (Cmd+K), Real-time Ticker, Deploy CTA -->
+            <div class="hidden md:flex items-center space-x-2 text-xs">
+                <span class="text-apple-muted">Bảng điều hành</span>
+                <span class="text-apple-subtle">/</span>
+                <span class="font-semibold text-apple-text">Telemetry & Swarm Mesh</span>
+            </div>
+
             <div class="flex items-center space-x-3">
-                <!-- Search Button with shortcut pill -->
-                <button class="flex items-center space-x-2.5 px-3 py-1.5 bg-surface-raised border border-surface-border hover:border-surface-highlight rounded-lg text-xs text-zinc-400 hover:text-zinc-200 transition shadow-inner-bevel">
-                    <i data-lucide="search" class="w-3.5 h-3.5 text-zinc-500"></i>
-                    <span>Quick Dispatch...</span>
-                    <kbd class="font-mono text-[10px] bg-surface-overlay px-1.5 py-0.5 rounded border border-surface-border text-zinc-500">⌘K</kbd>
-                </button>
-
-                <!-- Model Router Status Pill -->
-                <div class="hidden lg:flex items-center space-x-2 px-2.5 py-1.5 bg-surface-raised border border-surface-border rounded-lg text-[11px] font-mono">
-                    <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
-                    <span class="text-zinc-400">Router:</span>
-                    <span class="text-zinc-200 font-semibold">Gemini 3.7 Flash High</span>
+                <!-- Command Palette Shortcut Pill -->
+                <div class="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-apple-border text-xs text-apple-muted font-mono">
+                    <i data-lucide="terminal" class="w-3.5 h-3.5"></i>
+                    <span>Quick Command</span>
+                    <kbd class="px-1.5 py-0.5 bg-white border border-apple-border rounded text-[10px] font-bold text-apple-text shadow-sm">⌘K</kbd>
                 </div>
-
-                <!-- Primary CTA: Studio-Grade Button with Sheen & Bevel -->
-                <button class="btn-sheen flex items-center space-x-2 px-3.5 py-1.5 bg-brand-500 hover:bg-brand-600 text-black font-semibold text-xs rounded-lg shadow-glow-emerald transition duration-200 active:scale-95">
-                    <i data-lucide="plus" class="w-3.5 h-3.5 stroke-[3]"></i>
+                <!-- Deploy Button -->
+                <button class="h-8 px-3.5 rounded-lg bg-slate-900 hover:bg-slate-950 active:scale-95 text-white font-semibold text-xs shadow-apple-btn apple-transition flex items-center space-x-1.5">
+                    <i data-lucide="plus" class="w-3.5 h-3.5 stroke-[2]"></i>
                     <span>Deploy Agent</span>
                 </button>
             </div>
         </header>
 
-        <!-- Main Body Grid -->
-        <div class="p-8 space-y-8 flex-1">
+        <!-- Scrollable Dashboard Content -->
+        <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8 space-y-6 pb-24 md:pb-8">
+            
+            <!-- Header Title -->
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-apple-border pb-5">
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold text-apple-text tracking-tight">
+                        Trung Tâm Chỉ Huy Swarm AI
+                    </h1>
+                    <p class="text-xs sm:text-sm text-apple-muted mt-1 max-w-xl leading-relaxed">
+                        Giám sát sức khỏe hạ tầng, thông lượng phản hồi thực tế và chi phí vận hành 0đ token trên toàn bộ portfolio.
+                    </p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
+                        8/8 Nodes Khả Dụng
+                    </span>
+                </div>
+            </div>
 
-            <!-- Section 1: KPI Stat Cards with Micro Sparklines & Status Rings -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- 4 Metric KPI Cards (Clean Light Surface, Crisp Monospace Numbers) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                 
-                <!-- Card 1: MRR & Cash Flow -->
-                <div class="p-5 rounded-2xl bg-surface border border-surface-border shadow-subtle-card hover:border-surface-highlight transition group relative overflow-hidden">
-                    <div class="flex items-center justify-between pb-3">
-                        <span class="text-xs font-semibold text-zinc-400">Monthly Recurring Revenue</span>
-                        <div class="w-7 h-7 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center text-brand-500">
-                            <i data-lucide="trending-up" class="w-4 h-4"></i>
+                <div class="bg-white rounded-2xl border border-apple-border p-5 shadow-apple-card hover:shadow-apple-card-hover apple-transition">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[11px] font-semibold uppercase tracking-wider text-apple-muted">Doanh Thu MRR</span>
+                        <div class="w-7 h-7 rounded-lg bg-slate-50 border border-apple-border flex items-center justify-center text-slate-700">
+                            <i data-lucide="trending-up" class="w-3.5 h-3.5 stroke-[1.5]"></i>
                         </div>
                     </div>
-                    <div class="flex items-baseline space-x-2">
-                        <div class="text-2xl font-bold font-sans text-white tracking-tight">128,450,000 <span class="text-xs font-mono text-zinc-500 font-normal">VND</span></div>
+                    <div class="text-2xl font-bold font-mono tabular-nums text-apple-text mt-3">128,450,000 <span class="text-xs font-sans text-apple-muted font-normal">đ</span></div>
+                    <div class="text-[11px] text-emerald-600 font-medium mt-1 flex items-center gap-1">
+                        <span>↑ +28.4%</span>
+                        <span class="text-apple-muted font-normal">so với tháng trước</span>
                     </div>
-                    <div class="mt-3 flex items-center space-x-2 text-[11px]">
-                        <span class="inline-flex items-center text-brand-500 font-semibold font-mono bg-brand-500/10 px-1.5 py-0.5 rounded">
-                            <i data-lucide="arrow-up-right" class="w-3 h-3 mr-0.5"></i> +28.4%
-                        </span>
-                        <span class="text-zinc-500">vs previous 30 days</span>
-                    </div>
-                    <!-- Background ambient glow -->
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-brand-500/5 rounded-full blur-2xl pointer-events-none"></div>
                 </div>
 
-                <!-- Card 2: Active AI Agent Swarm -->
-                <div class="p-5 rounded-2xl bg-surface border border-surface-border shadow-subtle-card hover:border-surface-highlight transition group relative overflow-hidden">
-                    <div class="flex items-center justify-between pb-3">
-                        <span class="text-xs font-semibold text-zinc-400">Active Agent Swarm</span>
-                        <div class="w-7 h-7 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-500">
-                            <i data-lucide="cpu" class="w-4 h-4"></i>
+                <div class="bg-white rounded-2xl border border-apple-border p-5 shadow-apple-card hover:shadow-apple-card-hover apple-transition">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[11px] font-semibold uppercase tracking-wider text-apple-muted">Độ Trễ Trung Bình</span>
+                        <div class="w-7 h-7 rounded-lg bg-slate-50 border border-apple-border flex items-center justify-center text-slate-700">
+                            <i data-lucide="zap" class="w-3.5 h-3.5 stroke-[1.5]"></i>
                         </div>
                     </div>
-                    <div class="flex items-baseline space-x-2">
-                        <div class="text-2xl font-bold font-sans text-white tracking-tight">8 <span class="text-xs font-mono text-zinc-500 font-normal">/ 8 Online</span></div>
+                    <div class="text-2xl font-bold font-mono tabular-nums text-apple-text mt-3">0.12 <span class="text-xs font-sans text-apple-muted font-normal">giây</span></div>
+                    <div class="text-[11px] text-emerald-600 font-medium mt-1 flex items-center gap-1">
+                        <span>✓ Cực kỳ tối ưu</span>
+                        <span class="text-apple-muted font-normal">(p99 < 0.35s)</span>
                     </div>
-                    <div class="mt-3 flex items-center space-x-2 text-[11px]">
-                        <span class="inline-flex items-center text-cyan-500 font-semibold font-mono bg-cyan-500/10 px-1.5 py-0.5 rounded">
-                            0.12s Avg Latency
-                        </span>
-                        <span class="text-zinc-500">Zero node drop</span>
-                    </div>
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none"></div>
                 </div>
 
-                <!-- Card 3: Token Efficiency & Prompt Cache -->
-                <div class="p-5 rounded-2xl bg-surface border border-surface-border shadow-subtle-card hover:border-surface-highlight transition group relative overflow-hidden">
-                    <div class="flex items-center justify-between pb-3">
-                        <span class="text-xs font-semibold text-zinc-400">Prompt Cache Hit Rate</span>
-                        <div class="w-7 h-7 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-                            <i data-lucide="zap" class="w-4 h-4"></i>
+                <div class="bg-white rounded-2xl border border-apple-border p-5 shadow-apple-card hover:shadow-apple-card-hover apple-transition">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[11px] font-semibold uppercase tracking-wider text-apple-muted">Tỷ Lệ Cache Hit Rate</span>
+                        <div class="w-7 h-7 rounded-lg bg-slate-50 border border-apple-border flex items-center justify-center text-slate-700">
+                            <i data-lucide="database" class="w-3.5 h-3.5 stroke-[1.5]"></i>
                         </div>
                     </div>
-                    <div class="flex items-baseline space-x-2">
-                        <div class="text-2xl font-bold font-sans text-white tracking-tight">94.2%</div>
-                        <span class="text-xs font-mono text-indigo-400">0-Token Cost</span>
+                    <div class="text-2xl font-bold font-mono tabular-nums text-apple-text mt-3">94.2<span class="text-xs font-sans text-apple-muted font-normal">%</span></div>
+                    <div class="text-[11px] text-blue-600 font-medium mt-1 flex items-center gap-1">
+                        <span>Tiết kiệm 85% chi phí API</span>
                     </div>
-                    <div class="mt-3 flex items-center space-x-2 text-[11px]">
-                        <span class="text-zinc-400 font-mono font-medium">Saved ~$420.50</span>
-                        <span class="text-zinc-500">on OpenRouter</span>
-                    </div>
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none"></div>
                 </div>
 
-                <!-- Card 4: Omnichannel Leads Qualified -->
-                <div class="p-5 rounded-2xl bg-surface border border-surface-border shadow-subtle-card hover:border-surface-highlight transition group relative overflow-hidden">
-                    <div class="flex items-center justify-between pb-3">
-                        <span class="text-xs font-semibold text-zinc-400">FB & Zalo Radar Leads</span>
-                        <div class="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500">
-                            <i data-lucide="target" class="w-4 h-4"></i>
+                <div class="bg-white rounded-2xl border border-apple-border p-5 shadow-apple-card hover:shadow-apple-card-hover apple-transition">
+                    <div class="flex justify-between items-start">
+                        <span class="text-[11px] font-semibold uppercase tracking-wider text-apple-muted">Lead Radar Đã Bóc Tách</span>
+                        <div class="w-7 h-7 rounded-lg bg-slate-50 border border-apple-border flex items-center justify-center text-slate-700">
+                            <i data-lucide="radar" class="w-3.5 h-3.5 stroke-[1.5]"></i>
                         </div>
                     </div>
-                    <div class="flex items-baseline space-x-2">
-                        <div class="text-2xl font-bold font-sans text-white tracking-tight">412 <span class="text-xs font-mono text-zinc-500 font-normal">Leads</span></div>
+                    <div class="text-2xl font-bold font-mono tabular-nums text-apple-text mt-3">412 <span class="text-xs font-sans text-apple-muted font-normal">leads</span></div>
+                    <div class="text-[11px] text-emerald-600 font-medium mt-1 flex items-center gap-1">
+                        <span>68.4% đạt chuẩn chốt đơn</span>
                     </div>
-                    <div class="mt-3 flex items-center space-x-2 text-[11px]">
-                        <span class="inline-flex items-center text-amber-500 font-semibold font-mono bg-amber-500/10 px-1.5 py-0.5 rounded">
-                            68.4% Qualified
-                        </span>
-                        <span class="text-zinc-500">Auto-routed to CRM</span>
-                    </div>
-                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl pointer-events-none"></div>
                 </div>
 
             </div>
 
-            <!-- Section 2: Real-time Interactive Execution Matrix & Live Console -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-                <!-- Left 2 Cols: Agent Live Operations & Telemetry Table -->
-                <div class="lg:col-span-2 rounded-2xl bg-surface border border-surface-border shadow-subtle-card overflow-hidden flex flex-col">
-                    
-                    <!-- Table Header & Filter Bar -->
-                    <div class="p-5 border-b border-surface-border flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-surface/60">
-                        <div>
-                            <div class="text-sm font-bold text-white flex items-center gap-2">
-                                Autonomous Workers
-                                <span class="text-[10px] font-mono bg-surface-raised px-2 py-0.5 rounded-full text-zinc-400 border border-surface-border">Live AST Monitored</span>
-                            </div>
-                            <div class="text-xs text-zinc-500 mt-0.5">Real-time status, token throughput, and deterministic guardrail integrity.</div>
-                        </div>
-
-                        <!-- Filter buttons -->
-                        <div class="flex items-center space-x-1.5 bg-surface-raised p-1 rounded-xl border border-surface-border">
-                            <button class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-surface-overlay text-white border border-surface-border shadow-inner-bevel">All (8)</button>
-                            <button class="px-2.5 py-1 text-xs font-medium rounded-lg text-zinc-400 hover:text-white transition">High Priority</button>
-                            <button class="px-2.5 py-1 text-xs font-medium rounded-lg text-zinc-400 hover:text-white transition">Idle</button>
-                        </div>
-                    </div>
-
-                    <!-- Table List -->
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-xs">
-                            <thead class="bg-surface-raised/40 text-zinc-500 font-mono text-[10px] uppercase border-b border-surface-border tracking-wider">
-                                <tr>
-                                    <th class="py-3 px-5">Agent & Model</th>
-                                    <th class="py-3 px-4">Primary Responsibility</th>
-                                    <th class="py-3 px-4">Throughput</th>
-                                    <th class="py-3 px-4">Guardrail / AST</th>
-                                    <th class="py-3 px-5 text-right">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-surface-border/60 font-sans">
-                                
-                                <!-- Row 1: Lavie CEO -->
-                                <tr class="hover:bg-surface-raised/40 transition group">
-                                    <td class="py-3.5 px-5 flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold">
-                                            LV
-                                        </div>
-                                        <div>
-                                            <div class="font-semibold text-white flex items-center gap-1.5">
-                                                Lavie CEO
-                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                            </div>
-                                            <div class="text-[11px] font-mono text-zinc-500">Gemini 3.7 Flash High</div>
-                                        </div>
-                                    </td>
-                                    <td class="py-3.5 px-4 text-zinc-300">
-                                        Executive Portfolio Routing & P&L Oversight
-                                    </td>
-                                    <td class="py-3.5 px-4 font-mono text-zinc-400">
-                                        142 tps <span class="text-[10px] text-emerald-500 font-bold">0-token RAG</span>
-                                    </td>
-                                    <td class="py-3.5 px-4">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                                            <i data-lucide="check" class="w-3 h-3 mr-1"></i> PASS 100%
-                                        </span>
-                                    </td>
-                                    <td class="py-3.5 px-5 text-right">
-                                        <button class="p-1.5 text-zinc-500 hover:text-zinc-200 hover:bg-surface-raised rounded-md transition">
-                                            <i data-lucide="more-horizontal" class="w-4 h-4"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <!-- Row 2: VibeDesign Linter Engine -->
-                                <tr class="hover:bg-surface-raised/40 transition group">
-                                    <td class="py-3.5 px-5 flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold">
-                                            VD
-                                        </div>
-                                        <div>
-                                            <div class="font-semibold text-white flex items-center gap-1.5">
-                                                VibeDesign Harness
-                                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-500"></span>
-                                            </div>
-                                            <div class="text-[11px] font-mono text-zinc-500">Pure JS AST Engine</div>
-                                        </div>
-                                    </td>
-                                    <td class="py-3.5 px-4 text-zinc-300">
-                                        Deterministic Anti-Slop UI & Token Validator
-                                    </td>
-                                    <td class="py-3.5 px-4 font-mono text-zinc-400">
-                                        < 1ms latency <span class="text-[10px] text-cyan-500 font-bold">Local</span>
-                                    </td>
-                                    <td class="py-3.5 px-4">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
-                                            <i data-lucide="shield" class="w-3 h-3 mr-1"></i> ACTIVE GUARD
-                                        </span>
-                                    </td>
-                                    <td class="py-3.5 px-5 text-right">
-                                        <button class="p-1.5 text-zinc-500 hover:text-zinc-200 hover:bg-surface-raised rounded-md transition">
-                                            <i data-lucide="more-horizontal" class="w-4 h-4"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <!-- Row 3: Amon Zalo Gateway -->
-                                <tr class="hover:bg-surface-raised/40 transition group">
-                                    <td class="py-3.5 px-5 flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold">
-                                            AM
-                                        </div>
-                                        <div>
-                                            <div class="font-semibold text-white flex items-center gap-1.5">
-                                                Amon Zalo Gateway
-                                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                                            </div>
-                                            <div class="text-[11px] font-mono text-zinc-500">Zalo Personal MCP</div>
-                                        </div>
-                                    </td>
-                                    <td class="py-3.5 px-4 text-zinc-300">
-                                        Outbound 1-1 Prospecting & Lead Consultation
-                                    </td>
-                                    <td class="py-3.5 px-4 font-mono text-zinc-400">
-                                        24 msg/hr <span class="text-[10px] text-zinc-500">Rate limited</span>
-                                    </td>
-                                    <td class="py-3.5 px-4">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-zinc-950 text-zinc-300 border border-zinc-700">
-                                            <i data-lucide="lock" class="w-3 h-3 mr-1 text-amber-400"></i> ZERO AUTO-REPLY
-                                        </span>
-                                    </td>
-                                    <td class="py-3.5 px-5 text-right">
-                                        <button class="p-1.5 text-zinc-500 hover:text-zinc-200 hover:bg-surface-raised rounded-md transition">
-                                            <i data-lucide="more-horizontal" class="w-4 h-4"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <!-- Row 4: Phú Quý Local Radar -->
-                                <tr class="hover:bg-surface-raised/40 transition group">
-                                    <td class="py-3.5 px-5 flex items-center space-x-3">
-                                        <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold">
-                                            PQ
-                                        </div>
-                                        <div>
-                                            <div class="font-semibold text-white flex items-center gap-1.5">
-                                                Phú Quý Radar
-                                                <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                                            </div>
-                                            <div class="text-[11px] font-mono text-zinc-500">Python HTTP Cursor</div>
-                                        </div>
-                                    </td>
-                                    <td class="py-3.5 px-4 text-zinc-300">
-                                        Sea-state Telemetry & Ferry Schedule Engine
-                                    </td>
-                                    <td class="py-3.5 px-4 font-mono text-zinc-400">
-                                        15m Interval <span class="text-[10px] text-blue-400 font-bold">0đ API</span>
-                                    </td>
-                                    <td class="py-3.5 px-4">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                                            <i data-lucide="check" class="w-3 h-3 mr-1"></i> VERIFIED LIVE
-                                        </span>
-                                    </td>
-                                    <td class="py-3.5 px-5 text-right">
-                                        <button class="p-1.5 text-zinc-500 hover:text-zinc-200 hover:bg-surface-raised rounded-md transition">
-                                            <i data-lucide="more-horizontal" class="w-4 h-4"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Footer Pagination & Fast Refresh -->
-                    <div class="p-4 border-t border-surface-border bg-surface-raised/20 flex items-center justify-between text-xs text-zinc-500">
-                        <div class="flex items-center space-x-2 font-mono text-[11px]">
-                            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                            <span>Swarm Sync: WebSocket Connected (:1933)</span>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <button class="px-3 py-1 bg-surface-raised hover:bg-surface-overlay border border-surface-border text-zinc-300 rounded-lg transition text-xs">
-                                View Full Trace
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right 1 Col: Live Neural Stream & Quick Command Palette -->
-                <div class="rounded-2xl bg-surface border border-surface-border shadow-subtle-card p-5 flex flex-col justify-between">
+            <!-- Swarm Active Agents Table (Studio Clean Layout) -->
+            <div class="bg-white rounded-2xl border border-apple-border shadow-apple-card overflow-hidden">
+                <div class="px-5 py-4 border-b border-apple-border flex items-center justify-between">
                     <div>
-                        <!-- Header -->
-                        <div class="flex items-center justify-between pb-4 border-b border-surface-border">
-                            <div class="flex items-center space-x-2">
-                                <i data-lucide="terminal" class="w-4 h-4 text-brand-500"></i>
-                                <span class="text-xs font-bold text-white uppercase tracking-wider font-mono">Neural Execution Stream</span>
-                            </div>
-                            <span class="text-[10px] font-mono text-zinc-500 px-1.5 py-0.5 rounded bg-surface-raised">Tail -f</span>
-                        </div>
-
-                        <!-- Console Log Area -->
-                        <div class="mt-4 p-3.5 rounded-xl bg-obsidian border border-surface-border font-mono text-[11px] space-y-2.5 text-zinc-400 overflow-y-auto max-h-64">
-                            <div class="flex items-start gap-2">
-                                <span class="text-zinc-600">17:42:01</span>
-                                <div>
-                                    <span class="text-brand-500 font-semibold">[AST_LINTER]</span>
-                                    <span class="text-zinc-300">Audited 12 templates: 0 violations found.</span>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-zinc-600">17:42:15</span>
-                                <div>
-                                    <span class="text-cyan-400 font-semibold">[ROUTER]</span>
-                                    <span class="text-zinc-300">Dispatched prompt expansion -> Gemini 3.7.</span>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-zinc-600">17:42:30</span>
-                                <div>
-                                    <span class="text-indigo-400 font-semibold">[CACHE]</span>
-                                    <span class="text-zinc-300">Read 64,200 prompt tokens (93% cache hit).</span>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-2">
-                                <span class="text-zinc-600">17:43:02</span>
-                                <div>
-                                    <span class="text-amber-400 font-semibold">[FB_RADAR]</span>
-                                    <span class="text-zinc-300">Captured high-intent booking lead on Island group.</span>
-                                </div>
-                            </div>
-                        </div>
+                        <h3 class="text-sm font-bold text-apple-text">Danh Sách Autonomous Agents</h3>
+                        <p class="text-[11px] text-apple-muted">Theo dõi thời gian thực trạng thái và lưu lượng của từng Agent trong mạng lưới</p>
                     </div>
-
-                    <!-- Interactive Quick Action Box -->
-                    <div class="mt-5 pt-4 border-t border-surface-border space-y-3">
-                        <div class="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider font-mono">Execute One-Shot Action</div>
-                        <div class="grid grid-cols-2 gap-2">
-                            <button class="p-2.5 rounded-xl bg-surface-raised hover:bg-surface-overlay border border-surface-border text-left transition group">
-                                <div class="flex items-center space-x-1.5 text-xs font-semibold text-zinc-200 group-hover:text-brand-500">
-                                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-                                    <span>Sync Tokens</span>
-                                </div>
-                                <div class="text-[10px] text-zinc-500 mt-0.5">Flush DESIGN.md</div>
-                            </button>
-                            <button class="p-2.5 rounded-xl bg-surface-raised hover:bg-surface-overlay border border-surface-border text-left transition group">
-                                <div class="flex items-center space-x-1.5 text-xs font-semibold text-zinc-200 group-hover:text-cyan-400">
-                                    <i data-lucide="play" class="w-3.5 h-3.5"></i>
-                                    <span>Run Linter</span>
-                                </div>
-                                <div class="text-[10px] text-zinc-500 mt-0.5">Check AST Health</div>
-                            </button>
-                        </div>
-                    </div>
-
+                    <button class="text-xs font-semibold text-apple-accent hover:underline flex items-center gap-1">
+                        <span>Xem chi tiết log</span>
+                        <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+                    </button>
                 </div>
 
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead class="bg-slate-50/70 border-b border-apple-border text-apple-muted font-semibold uppercase text-[10px] tracking-wider">
+                            <tr>
+                                <th class="px-5 py-3">Tên Agent</th>
+                                <th class="px-5 py-3">Engine Backend</th>
+                                <th class="px-5 py-3">Trạng Thái</th>
+                                <th class="px-5 py-3">Thông Lượng</th>
+                                <th class="px-5 py-3">Guardrail AST</th>
+                                <th class="px-5 py-3 text-right">Thao Tác</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-apple-borderSubtle">
+                            
+                            <tr class="hover:bg-slate-50/50 apple-transition">
+                                <td class="px-5 py-3.5 font-semibold text-apple-text flex items-center gap-2.5">
+                                    <div class="w-6 h-6 rounded-md bg-slate-900 text-white flex items-center justify-center text-[10px] font-bold">L</div>
+                                    <span>Lavie CEO Sentinel</span>
+                                </td>
+                                <td class="px-5 py-3.5 font-mono text-[11px] text-apple-muted">Gemini 3.7 Flash High</td>
+                                <td class="px-5 py-3.5">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        Active • 24/7
+                                    </span>
+                                </td>
+                                <td class="px-5 py-3.5 font-mono tabular-nums text-slate-700">142 tps</td>
+                                <td class="px-5 py-3.5 text-emerald-600 font-medium">✓ 100% Passed</td>
+                                <td class="px-5 py-3.5 text-right">
+                                    <button class="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-[11px] apple-transition">Config</button>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-slate-50/50 apple-transition">
+                                <td class="px-5 py-3.5 font-semibold text-apple-text flex items-center gap-2.5">
+                                    <div class="w-6 h-6 rounded-md bg-blue-600 text-white flex items-center justify-center text-[10px] font-bold">V</div>
+                                    <span>VibeDesign Harness Engine</span>
+                                </td>
+                                <td class="px-5 py-3.5 font-mono text-[11px] text-apple-muted">Pure JS AST v1.3.0</td>
+                                <td class="px-5 py-3.5">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        Ready • Zero-Token
+                                    </span>
+                                </td>
+                                <td class="px-5 py-3.5 font-mono tabular-nums text-slate-700">Instant (0ms)</td>
+                                <td class="px-5 py-3.5 text-emerald-600 font-medium">✓ 100% Passed</td>
+                                <td class="px-5 py-3.5 text-right">
+                                    <button class="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-[11px] apple-transition">Rules</button>
+                                </td>
+                            </tr>
+
+                            <tr class="hover:bg-slate-50/50 apple-transition">
+                                <td class="px-5 py-3.5 font-semibold text-apple-text flex items-center gap-2.5">
+                                    <div class="w-6 h-6 rounded-md bg-rose-600 text-white flex items-center justify-center text-[10px] font-bold">A</div>
+                                    <span>Amon Zalo Gateway</span>
+                                </td>
+                                <td class="px-5 py-3.5 font-mono text-[11px] text-apple-muted">Node.js Daemon :3871</td>
+                                <td class="px-5 py-3.5">
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        Connected
+                                    </span>
+                                </td>
+                                <td class="px-5 py-3.5 font-mono tabular-nums text-slate-700">18 msgs/min</td>
+                                <td class="px-5 py-3.5 text-emerald-600 font-medium">✓ Zero-Reply Gate</td>
+                                <td class="px-5 py-3.5 text-right">
+                                    <button class="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-[11px] apple-transition">Bridge</button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-        </div>
-    </main>
+            <!-- Realtime Neural Execution Terminal (Clean Slate Dark Box) -->
+            <div class="bg-zinc-950 text-zinc-200 rounded-2xl p-5 border border-zinc-800 shadow-apple-card font-mono text-xs space-y-2">
+                <div class="flex items-center justify-between text-[11px] text-zinc-400 border-b border-zinc-800 pb-2">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                        <span class="font-bold text-zinc-200 uppercase">Live Neural Execution Console</span>
+                    </div>
+                    <span>Cluster: VPS_PLATINUM_4C</span>
+                </div>
+                <div class="space-y-1 text-[11px] leading-relaxed pt-1">
+                    <div class="text-zinc-400">[18:42:01] <span class="text-emerald-400">INFO</span> [VibeDesign AST]: Verified /examples/apple_rewards_dashboard.html — 0 violations found.</div>
+                    <div class="text-zinc-400">[18:42:15] <span class="text-blue-400">ROUTER</span> Prompt cache hit 94.2% on OpenRouter endpoint (gemini-3.7-flash-high).</div>
+                    <div class="text-zinc-400">[18:43:02] <span class="text-emerald-400">SUCCESS</span> Published live release v1.3.0 to teddiesloco/vibe-design-harness.</div>
+                </div>
+            </div>
 
-    <!-- Initialize Lucide Icons -->
+        </main>
+    </div>
+
+    <!-- Init Lucide Icons -->
     <script>
         lucide.createIcons();
     </script>
