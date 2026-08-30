@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full bg-[#fbfbfd]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>1-1-1 BUSINESS — Kho Tri Thức & Phần Thưởng Độc Quyền</title>
+    
+    <!-- Apple SF Pro / Inter Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons (Monochrome 1.5px stroke) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        apple: {
+                            canvas: '#fbfbfd',
+                            card: '#ffffff',
+                            sidebar: '#ffffff',
+                            border: '#e5e5ea',
+                            borderSubtle: '#f2f2f7',
+                            text: '#1d1d1f',
+                            muted: '#86868b',
+                            subtle: '#aeaeb2',
+                            accent: '#e11d48', // 1-1-1 Business Deep Ruby Accent
+                            blue: '#0071e3',
+                            hover: '#f5f5f7'
+                        }
+                    },
+                    boxShadow: {
+                        'apple-card': '0 2px 8px -2px rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.02)',
+                        'apple-card-hover': '0 12px 24px -6px rgba(0, 0, 0, 0.06), 0 4px 8px -2px rgba(0, 0, 0, 0.02)',
+                        'apple-modal': '0 24px 48px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0,0,0,0.04)',
+                        'apple-btn': '0 1px 2px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 0 rgba(255, 255, 255, 0.15)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { -webkit-tap-highlight-color: transparent; }
+        body { font-feature-settings: "cv02", "cv03", "cv04", "cv11"; }
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        
+        /* 21st.dev Precision Book Cover Spine (Quiet Luxury, No Clashing Gradients) */
+        .book-spine-effect {
+            box-shadow: 
+                inset 3px 0 6px -2px rgba(255,255,255,0.4),
+                inset -3px 0 8px -2px rgba(0,0,0,0.25),
+                0 8px 20px -4px rgba(0,0,0,0.12);
+        }
+
+        .apple-transition {
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
+</head>
+<body class="h-full bg-apple-canvas text-apple-text antialiased flex flex-col md:flex-row overflow-hidden font-sans selection:bg-rose-100 selection:text-rose-900">
+
+    <!-- 1. LEFT NAVIGATION SIDEBAR (Exact 1-1-1 Business Structure from Screenshot) -->
+    <aside class="hidden md:flex flex-col w-64 h-full bg-apple-sidebar border-r border-apple-border shrink-0 select-none">
+        
+        <!-- Brand Header (Minimalist Wordmark, No Clunky Sticker Logo) -->
+        <div class="h-16 px-6 border-b border-apple-borderSubtle flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-extrabold text-xs tracking-tighter">
+                111
+            </div>
+            <div>
+                <div class="font-bold text-sm text-apple-text tracking-tight leading-none">1-1-1 BUSINESS</div>
+                <div class="text-[10px] text-apple-muted font-medium mt-1">Hệ Thống Solo Founder</div>
+            </div>
+        </div>
+
+        <!-- Sidebar Navigation Menu -->
+        <div class="flex-1 overflow-y-auto px-3 py-4 space-y-6">
+            
+            <!-- Group: Tổng Quan -->
+            <div class="space-y-1">
+                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-apple-subtle">Tổng Quan</div>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="layout-dashboard" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Tổng quan</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="trophy" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Bảng xếp hạng</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="flame" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Thử thách</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="award" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Huy hiệu</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 bg-rose-50/70 apple-transition">
+                    <i data-lucide="gift" class="w-4 h-4 stroke-[2] text-rose-600"></i>
+                    <span>Phần thưởng</span>
+                </a>
+            </div>
+
+            <!-- Group: Quản Lý Khóa Học -->
+            <div class="space-y-1">
+                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-apple-subtle">Khóa Học & Cộng Đồng</div>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="book-open" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Bài học & Roadmap</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="messages-square" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Thảo luận cộng đồng</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="users" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Danh sách thành viên</span>
+                </a>
+            </div>
+
+            <!-- Group: Hệ Thống -->
+            <div class="space-y-1">
+                <div class="px-3 text-[10px] font-bold uppercase tracking-wider text-apple-subtle">Quản Trị</div>
+                <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-apple-muted hover:text-apple-text hover:bg-apple-hover apple-transition">
+                    <i data-lucide="settings" class="w-4 h-4 stroke-[1.5]"></i>
+                    <span>Cài đặt hệ thống</span>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Sidebar Footer Profile (Clean Apple Style) -->
+        <div class="p-4 border-t border-apple-borderSubtle flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-slate-100 border border-slate-300 text-slate-700 font-bold text-xs flex items-center justify-center">
+                    NT
+                </div>
+                <div class="text-left">
+                    <div class="text-xs font-bold text-apple-text leading-none">Nguyen Thanh</div>
+                    <div class="text-[10px] text-apple-muted font-medium mt-0.5">Level 2 Member</div>
+                </div>
+            </div>
+            <i data-lucide="log-out" class="w-4 h-4 text-apple-muted hover:text-apple-text cursor-pointer transition"></i>
+        </div>
+    </aside>
+
+    <!-- 2. MAIN CONTENT AREA (Clean Quiet Luxury Dashboard View) -->
+    <div class="flex-1 flex flex-col h-full overflow-hidden">
+        
+        <!-- Top App Bar (Header with Search, Points Wallet Pill) -->
+        <header class="h-16 bg-white/80 backdrop-blur-md border-b border-apple-border px-4 sm:px-8 flex items-center justify-between shrink-0 z-20">
+            
+            <!-- Mobile Brand Toggle -->
+            <div class="flex items-center space-x-3 md:hidden">
+                <div class="w-7 h-7 rounded-lg bg-slate-900 text-white flex items-center justify-center font-extrabold text-[10px]">
+                    111
+                </div>
+                <span class="font-bold text-xs text-apple-text">1-1-1 BUSINESS</span>
+            </div>
+
+            <!-- Breadcrumb / Header Title (Desktop) -->
+            <div class="hidden md:flex items-center space-x-2 text-xs">
+                <span class="text-apple-muted">Bảng điều khiển</span>
+                <span class="text-apple-subtle">/</span>
+                <span class="font-semibold text-apple-text">Kho Phần Thưởng & Tài Liệu</span>
+            </div>
+
+            <!-- Right Controls: Coin Balance + Notifications -->
+            <div class="flex items-center space-x-3">
+                
+                <!-- Coin / Xu Balance Pill (Minimalist 21st.dev Style, No Raw Emoji) -->
+                <div class="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-slate-50 border border-slate-200/80 shadow-sm">
+                    <div class="w-4 h-4 rounded-full bg-amber-500/15 text-amber-600 flex items-center justify-center text-[10px] font-black">
+                        ¢
+                    </div>
+                    <span id="header-points" class="text-xs font-bold font-mono tabular-nums text-slate-800">850</span>
+                    <span class="text-[10px] font-medium text-slate-500 uppercase tracking-wider">Xu khả dụng</span>
+                </div>
+
+                <!-- Notifications Button -->
+                <button class="w-8 h-8 rounded-full border border-apple-border bg-white hover:bg-apple-hover flex items-center justify-center text-apple-muted transition">
+                    <i data-lucide="bell" class="w-3.5 h-3.5 stroke-[1.5]"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Scrollable Workspace (Apple Style Padding & Max-Width) -->
+        <main class="flex-1 overflow-y-auto px-4 sm:px-8 py-6 sm:py-8 space-y-6 pb-24 md:pb-8">
+            
+            <!-- Header Hero / Section Info -->
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-apple-border pb-5">
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-bold text-apple-text tracking-tight">
+                        Cửa Hàng Phần Thưởng
+                    </h1>
+                    <p class="text-xs sm:text-sm text-apple-muted mt-1 max-w-xl leading-relaxed">
+                        Sử dụng điểm tích lũy từ hoạt động sprint và đóng góp để nhận quyền truy cập vào các bản dịch sách kinh điển và SOP độc quyền.
+                    </p>
+                </div>
+
+                <!-- Fast Filter & Search Bar -->
+                <div class="flex items-center space-x-2 shrink-0">
+                    <div class="relative w-48 sm:w-60">
+                        <i data-lucide="search" class="w-3.5 h-3.5 text-apple-subtle absolute left-3 top-1/2 -translate-y-1/2"></i>
+                        <input id="store-search" oninput="filterStore()" type="text" placeholder="Tìm tài liệu..." class="w-full pl-8 pr-3 py-1.5 bg-white border border-apple-border rounded-lg text-xs text-apple-text placeholder-apple-subtle focus:outline-none focus:ring-1 focus:ring-slate-900 transition">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category Pills Bar (Apple Segmented Style) -->
+            <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar pb-1">
+                <button onclick="setCategory('all')" class="cat-pill active px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-900 text-white shadow-sm transition" data-cat="all">
+                    Tất cả tài liệu
+                </button>
+                <button onclick="setCategory('book')" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-white hover:bg-slate-50 text-apple-muted border border-apple-border transition" data-cat="book">
+                    Sách & Ebook PDF
+                </button>
+                <button onclick="setCategory('sop')" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-white hover:bg-slate-50 text-apple-muted border border-apple-border transition" data-cat="sop">
+                    SOP & Quy Trình
+                </button>
+                <button onclick="setCategory('prompt')" class="cat-pill px-3.5 py-1.5 rounded-lg text-xs font-medium bg-white hover:bg-slate-50 text-apple-muted border border-apple-border transition" data-cat="prompt">
+                    Hệ Thống AI Prompt
+                </button>
+            </div>
+
+            <!-- PRODUCT CATALOG GRID (Quiet Luxury 4-Column Layout, 9/10 with User Image) -->
+            <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+                
+                <!-- CARD 1: Cỗ Máy Nội Dung (Content Machine) -->
+                <div class="product-item bg-white rounded-2xl border border-apple-border p-4 shadow-apple-card hover:shadow-apple-card-hover apple-transition flex flex-col justify-between" data-cat="sop" data-cost="500" data-id="1">
+                    <div class="space-y-3">
+                        <!-- Quiet Luxury Book Visual Container -->
+                        <div class="aspect-[4/3] rounded-xl bg-gradient-to-tr from-slate-900 to-slate-800 p-4 text-white flex flex-col justify-between relative overflow-hidden book-spine-effect">
+                            <div class="flex justify-between items-center z-10">
+                                <span class="text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-white/15 border border-white/20">
+                                    Notion SOP
+                                </span>
+                                <span class="text-[10px] font-mono text-slate-300">v2.4</span>
+                            </div>
+                            <div class="z-10">
+                                <div class="text-sm font-bold uppercase tracking-tight leading-tight">CỖ MÁY NỘI DUNG</div>
+                                <div class="text-[10px] text-slate-300 font-normal mt-0.5">Tự Động Hóa Đa Kênh</div>
+                            </div>
+                            <!-- Subtle geometric grid overlay -->
+                            <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:12px_12px] opacity-10 pointer-events-none"></div>
+                        </div>
+
+                        <div>
+                            <div class="text-[10px] font-semibold text-rose-600 uppercase tracking-wider">Hệ Thống Độc Quyền</div>
+                            <h3 class="text-xs font-bold text-apple-text line-clamp-1 mt-0.5">
+                                Cỗ Máy Nội Dung — Tái Tận Dụng Đa Kênh
+                            </h3>
+                            <p class="text-[11px] text-apple-muted line-clamp-2 mt-1 leading-relaxed">
+                                Quy trình chuyển hóa 1 ý tưởng thành 10+ asset nội dung trên Facebook, Threads và kịch bản video.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer: Points & Action Button -->
+                    <div class="mt-4 pt-3 border-t border-apple-borderSubtle flex items-center justify-between">
+                        <div class="flex items-baseline space-x-1">
+                            <span class="text-xs font-bold font-mono tabular-nums text-apple-text">500</span>
+                            <span class="text-[10px] text-apple-muted font-medium">Xu</span>
+                        </div>
+                        <button onclick="handleRedeem(1, 'Cỗ Máy Nội Dung — Tái Tận Dụng Đa Kênh', 500)" class="h-8 px-3.5 rounded-lg bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-semibold text-xs shadow-apple-btn apple-transition flex items-center space-x-1.5">
+                            <i data-lucide="gift" class="w-3 h-3 stroke-[2]"></i>
+                            <span>Đổi quà</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 2: $100M Money Leads (Alex Hormozi) -->
+                <div class="product-item bg-white rounded-2xl border border-apple-border p-4 shadow-apple-card hover:shadow-apple-card-hover apple-transition flex flex-col justify-between" data-cat="book" data-cost="500" data-id="2">
+                    <div class="space-y-3">
+                        <div class="aspect-[4/3] rounded-xl bg-gradient-to-tr from-slate-900 to-blue-950 p-4 text-white flex flex-col justify-between relative overflow-hidden book-spine-effect">
+                            <div class="flex justify-between items-center z-10">
+                                <span class="text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-white/15 border border-white/20">
+                                    PDF Ebook
+                                </span>
+                                <span class="text-[10px] font-mono text-blue-200">Tiếng Việt</span>
+                            </div>
+                            <div class="z-10">
+                                <div class="text-sm font-bold uppercase tracking-tight leading-tight">$100M LEADS</div>
+                                <div class="text-[10px] text-slate-300 font-normal mt-0.5">Alex Hormozi</div>
+                            </div>
+                            <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:12px_12px] opacity-10 pointer-events-none"></div>
+                        </div>
+
+                        <div>
+                            <div class="text-[10px] font-semibold text-blue-600 uppercase tracking-wider">Alex Hormozi</div>
+                            <h3 class="text-xs font-bold text-apple-text line-clamp-1 mt-0.5">
+                                $100M Money Leads — Thu Hút Khách Hàng
+                            </h3>
+                            <p class="text-[11px] text-apple-muted line-clamp-2 mt-1 leading-relaxed">
+                                Phương pháp tạo phễu khách hàng tiềm năng qua Warm Outreach, Cold Outreach và Paid Media.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-apple-borderSubtle flex items-center justify-between">
+                        <div class="flex items-baseline space-x-1">
+                            <span class="text-xs font-bold font-mono tabular-nums text-apple-text">500</span>
+                            <span class="text-[10px] text-apple-muted font-medium">Xu</span>
+                        </div>
+                        <button onclick="handleRedeem(2, '$100M Money Leads — Alex Hormozi', 500)" class="h-8 px-3.5 rounded-lg bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-semibold text-xs shadow-apple-btn apple-transition flex items-center space-x-1.5">
+                            <i data-lucide="gift" class="w-3 h-3 stroke-[2]"></i>
+                            <span>Đổi quà</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 3: $100M Offer (Alex Hormozi) -->
+                <div class="product-item bg-white rounded-2xl border border-apple-border p-4 shadow-apple-card hover:shadow-apple-card-hover apple-transition flex flex-col justify-between" data-cat="book" data-cost="500" data-id="3">
+                    <div class="space-y-3">
+                        <div class="aspect-[4/3] rounded-xl bg-gradient-to-tr from-slate-900 to-amber-950 p-4 text-white flex flex-col justify-between relative overflow-hidden book-spine-effect">
+                            <div class="flex justify-between items-center z-10">
+                                <span class="text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-white/15 border border-white/20">
+                                    PDF Ebook
+                                </span>
+                                <span class="text-[10px] font-mono text-amber-200">Tiếng Việt</span>
+                            </div>
+                            <div class="z-10">
+                                <div class="text-sm font-bold uppercase tracking-tight leading-tight">$100M OFFERS</div>
+                                <div class="text-[10px] text-slate-300 font-normal mt-0.5">Alex Hormozi</div>
+                            </div>
+                            <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:12px_12px] opacity-10 pointer-events-none"></div>
+                        </div>
+
+                        <div>
+                            <div class="text-[10px] font-semibold text-amber-600 uppercase tracking-wider">Alex Hormozi</div>
+                            <h3 class="text-xs font-bold text-apple-text line-clamp-1 mt-0.5">
+                                $100M Offer — Ưu Đãi Không Thể Chối Từ
+                            </h3>
+                            <p class="text-[11px] text-apple-muted line-clamp-2 mt-1 leading-relaxed">
+                                Công thức định giá sản phẩm giá cao và xây dựng ưu đãi Grand Slam Offer vượt trội thị trường.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-apple-borderSubtle flex items-center justify-between">
+                        <div class="flex items-baseline space-x-1">
+                            <span class="text-xs font-bold font-mono tabular-nums text-apple-text">500</span>
+                            <span class="text-[10px] text-apple-muted font-medium">Xu</span>
+                        </div>
+                        <button onclick="handleRedeem(3, '$100M Offer — Alex Hormozi', 500)" class="h-8 px-3.5 rounded-lg bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-semibold text-xs shadow-apple-btn apple-transition flex items-center space-x-1.5">
+                            <i data-lucide="gift" class="w-3 h-3 stroke-[2]"></i>
+                            <span>Đổi quà</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 4: Buy Back Your Time (Dan Martell) -->
+                <div class="product-item bg-white rounded-2xl border border-apple-border p-4 shadow-apple-card hover:shadow-apple-card-hover apple-transition flex flex-col justify-between" data-cat="book" data-cost="600" data-id="4">
+                    <div class="space-y-3">
+                        <div class="aspect-[4/3] rounded-xl bg-gradient-to-tr from-slate-900 to-emerald-950 p-4 text-white flex flex-col justify-between relative overflow-hidden book-spine-effect">
+                            <div class="flex justify-between items-center z-10">
+                                <span class="text-[9px] font-bold tracking-wider uppercase px-2 py-0.5 rounded bg-white/15 border border-white/20">
+                                    PDF Ebook
+                                </span>
+                                <span class="text-[10px] font-mono text-emerald-200">Tiếng Việt</span>
+                            </div>
+                            <div class="z-10">
+                                <div class="text-sm font-bold uppercase tracking-tight leading-tight">BUY BACK TIME</div>
+                                <div class="text-[10px] text-slate-300 font-normal mt-0.5">Dan Martell</div>
+                            </div>
+                            <div class="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:12px_12px] opacity-10 pointer-events-none"></div>
+                        </div>
+
+                        <div>
+                            <div class="text-[10px] font-semibold text-emerald-600 uppercase tracking-wider">Dan Martell</div>
+                            <h3 class="text-xs font-bold text-apple-text line-clamp-1 mt-0.5">
+                                Buy Back Your Time — Mua Lại Thời Gian
+                            </h3>
+                            <p class="text-[11px] text-apple-muted line-clamp-2 mt-1 leading-relaxed">
+                                Phương pháp quản trị vận hành và xây dựng hệ thống tự vận hành cho doanh nghiệp 1 người.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-apple-borderSubtle flex items-center justify-between">
+                        <div class="flex items-baseline space-x-1">
+                            <span class="text-xs font-bold font-mono tabular-nums text-apple-text">600</span>
+                            <span class="text-[10px] text-apple-muted font-medium">Xu</span>
+                        </div>
+                        <button onclick="handleRedeem(4, 'Buy Back Your Time — Dan Martell', 600)" class="h-8 px-3.5 rounded-lg bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-semibold text-xs shadow-apple-btn apple-transition flex items-center space-x-1.5">
+                            <i data-lucide="gift" class="w-3 h-3 stroke-[2]"></i>
+                            <span>Đổi quà</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- 3. REDEMPTION CONFIRMATION DIALOG (Apple Style Blur & Spring Motion) -->
+    <div id="apple-modal" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0 apple-transition">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-apple-modal space-y-4 transform scale-95 apple-transition text-center" id="apple-modal-content">
+            <div class="w-12 h-12 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center mx-auto">
+                <i data-lucide="gift" class="w-6 h-6 stroke-[1.5]"></i>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-apple-text" id="modal-item-title">Xác Nhận Đổi Phần Thưởng</h3>
+                <p class="text-xs text-apple-muted mt-1 leading-relaxed" id="modal-item-desc">
+                    Bạn sẽ dùng <span class="font-mono font-bold text-apple-text" id="modal-item-cost">500 Xu</span> để mở khóa tài liệu này.
+                </p>
+            </div>
+            <div class="pt-2 flex items-center space-x-2">
+                <button onclick="closeAppleModal()" class="w-1/2 py-2 rounded-lg border border-apple-border text-apple-muted font-medium text-xs hover:bg-apple-hover apple-transition">
+                    Hủy
+                </button>
+                <button onclick="executeRedeem()" class="w-1/2 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white font-semibold text-xs shadow-apple-btn apple-transition active:scale-95">
+                    Xác nhận
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. MOBILE BOTTOM NAV BAR (Fixed iOS Style) -->
+    <nav class="md:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-apple-border z-30 px-6 py-2 flex items-center justify-between">
+        <a href="#" class="flex flex-col items-center text-apple-muted hover:text-apple-text py-1">
+            <i data-lucide="layout-dashboard" class="w-4 h-4 stroke-[1.5]"></i>
+            <span class="text-[9px] font-medium mt-1">Tổng quan</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-apple-muted hover:text-apple-text py-1">
+            <i data-lucide="trophy" class="w-4 h-4 stroke-[1.5]"></i>
+            <span class="text-[9px] font-medium mt-1">Xếp hạng</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-rose-600 py-1 font-semibold">
+            <i data-lucide="gift" class="w-4 h-4 stroke-[2]"></i>
+            <span class="text-[9px] mt-1">Phần thưởng</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-apple-muted hover:text-apple-text py-1">
+            <i data-lucide="messages-square" class="w-4 h-4 stroke-[1.5]"></i>
+            <span class="text-[9px] font-medium mt-1">Cộng đồng</span>
+        </a>
+        <a href="#" class="flex flex-col items-center text-apple-muted hover:text-apple-text py-1">
+            <i data-lucide="user" class="w-4 h-4 stroke-[1.5]"></i>
+            <span class="text-[9px] font-medium mt-1">Tài khoản</span>
+        </a>
+    </nav>
+
+    <!-- Client Interactive Scripts -->
+    <script>
+        let currentBalance = 850;
+        let pendingItem = null;
+        const redeemedSet = new Set();
+
+        function setCategory(cat) {
+            document.querySelectorAll('.cat-pill').forEach(btn => {
+                btn.classList.remove('bg-slate-900', 'text-white', 'shadow-sm', 'font-semibold');
+                btn.classList.add('bg-white', 'text-apple-muted', 'border', 'border-apple-border', 'font-medium');
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.classList.add('bg-slate-900', 'text-white', 'shadow-sm', 'font-semibold');
+                    btn.classList.remove('bg-white', 'text-apple-muted', 'border', 'border-apple-border', 'font-medium');
+                }
+            });
+
+            document.querySelectorAll('.product-item').forEach(card => {
+                const itemCat = card.getAttribute('data-cat');
+                card.style.display = (cat === 'all' || itemCat === cat) ? 'flex' : 'none';
+            });
+        }
+
+        function filterStore() {
+            const q = document.getElementById('store-search').value.toLowerCase();
+            document.querySelectorAll('.product-item').forEach(card => {
+                const title = card.innerText.toLowerCase();
+                card.style.display = title.includes(q) ? 'flex' : 'none';
+            });
+        }
+
+        function handleRedeem(id, title, cost) {
+            if (redeemedSet.has(id)) {
+                alert('Tài liệu đã được mở khóa. Đang tải tệp PDF về máy...');
+                return;
+            }
+            if (currentBalance < cost) {
+                alert('Số dư xu không đủ để thực hiện đổi phần thưởng này.');
+                return;
+            }
+            pendingItem = { id, title, cost };
+            document.getElementById('modal-item-title').innerText = title;
+            document.getElementById('modal-item-cost').innerText = cost + ' Xu';
+
+            const modal = document.getElementById('apple-modal');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                document.getElementById('apple-modal-content').classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeAppleModal() {
+            const modal = document.getElementById('apple-modal');
+            modal.classList.add('opacity-0');
+            document.getElementById('apple-modal-content').classList.add('scale-95');
+            setTimeout(() => modal.classList.add('hidden'), 200);
+            pendingItem = null;
+        }
+
+        function executeRedeem() {
+            if (!pendingItem) return;
+            currentBalance -= pendingItem.cost;
+            document.getElementById('header-points').innerText = currentBalance;
+            redeemedSet.add(pendingItem.id);
+
+            const card = document.querySelector(`[data-id="${pendingItem.id}"]`);
+            if (card) {
+                const btn = card.querySelector('button');
+                btn.className = "h-8 px-3.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 font-semibold text-xs apple-transition flex items-center space-x-1";
+                btn.innerHTML = `<i data-lucide="check" class="w-3 h-3 stroke-[2]"></i><span>Đã mở khóa</span>`;
+                lucide.createIcons();
+            }
+
+            confetti({
+                particleCount: 50,
+                spread: 50,
+                origin: { y: 0.6 }
+            });
+
+            closeAppleModal();
+        }
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

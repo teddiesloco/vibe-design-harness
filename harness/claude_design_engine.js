@@ -90,6 +90,34 @@ export const THEMES = {
         mode: "dark"
     },
 
+    // 4. Apple Style & Quiet Luxury Light (21st.dev Inspired)
+    apple_luxury: {
+        name: "Apple Style Quiet Luxury Light",
+        bg: "#fbfbfd",
+        surface: "#ffffff",
+        border: "#e5e5ea",
+        textMain: "#1d1d1f",
+        textMuted: "#86868b",
+        accent: "#0071e3",
+        font: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Plus Jakarta Sans', sans-serif",
+        radius: "12px",
+        shadow: "0 2px 8px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.04)",
+        mode: "light"
+    },
+    shadcn_clean: {
+        name: "Shadcn 21st.dev Precision Light",
+        bg: "#fafafa",
+        surface: "#ffffff",
+        border: "#e4e4e7",
+        textMain: "#09090b",
+        textMuted: "#71717a",
+        accent: "#18181b",
+        font: "Geist, 'Plus Jakarta Sans', sans-serif",
+        radius: "8px",
+        shadow: "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.03)",
+        mode: "light"
+    },
+
     // 3. Luxury & Editorial
     luxury_gold: {
         name: "Luxury Dark Emerald & Gold",
