@@ -17,17 +17,17 @@ export const BANNED_PATTERNS = [
     { pattern: /class="[^"]*w-\d+\s+h-\d+\s+rounded-[^"]*bg-gradient-to-[^"]*text-white[^"]*font-black[^"]*">\s*[A-Z0-9]{2,3}\s*<\/div>/i, message: 'Toy-box initial sticker logo detected (use minimalist SVG vector mark or typographic wordmark)' },
     { pattern: />\s*[🪙🔥⭐🎁🎉🚀💸]\s*</i, message: 'Raw emoji used as UI icon in element (use subtle monochrome 14-16px SVG vector icon)' },
     { pattern: /from-(rose|pink|purple|amber)-\d+\s+to-(indigo|blue|emerald|teal)-\d+/i, message: 'Harsh multi-gradient clash on surface (use neutral surface + 1 subtle semantic accent)' },
-    // Hallmark 57 + Impeccable + Taste Gates: Typography, Motion & Copy Rules
+    // Hallmark 57 + Extended Motion & Copy Gates: Typography, Motion & Copy Rules
     { pattern: /\b(Space\s*Grotesk|Syne|Outfit|Sora|Chivo|Unbounded)\b/i, message: 'Banned AI-slop font detected (use Inter, Plus Jakarta Sans, Inter Tight, or Oswald)' },
     { pattern: /rounded-full\s+px-(?:10|12|14|16)/i, message: 'Elongated pill CTA button detected (use rounded-lg or rounded-xl with balanced padding)' },
-    // Impeccable 41-rule gates (learned from pbakaus/impeccable)
-    { pattern: /animate-bounce/i, message: '[Impeccable] animate-bounce = AI motion slop (use transition-all or purposeful easing)' },
-    { pattern: /conic-gradient/i, message: '[Impeccable] conic-gradient = visual slop (use palette-matched low-chroma tonal grade)' },
-    { pattern: /gradient.*text|bg-clip-text\s+text-transparent/i, message: '[Impeccable] Gradient headline text = lazy premium shortcut (use solid high-contrast + single accent)' },
-    // Taste Skill anti-copy & anti-brand-slop (learned from tasteskill/tasteskill)
-    { pattern: /unleash|revolutionize|next-gen|seamless.*platform|transformative\s+platform/i, message: '[Taste] Generic startup copy detected (write short, specific, believable copy instead)' },
-    { pattern: /\b(Acme|Nexus\s|Flowbit|Quantumly|NovaCore)\b/i, message: '[Taste] Fake placeholder brand name detected (use real name or design-safe copy)' },
-    { pattern: /from-pink-\d+\s+to-orange-\d+/i, message: '[Taste] Pink-to-orange creator gradient = slop (use palette-matched tonal grade)' }
+    // Motion & visual slop gates
+    { pattern: /animate-bounce/i, message: 'Bounce animation = AI motion slop (use transition-all or purposeful easing)' },
+    { pattern: /conic-gradient/i, message: 'Conic-gradient = visual slop (use palette-matched low-chroma tonal grade)' },
+    { pattern: /gradient.*text|bg-clip-text\s+text-transparent/i, message: 'Gradient headline text = lazy premium shortcut (use solid high-contrast + single accent)' },
+    // Copy & brand-placeholder slop gates
+    { pattern: /unleash|revolutionize|next-gen|seamless.*platform|transformative\s+platform/i, message: 'Generic startup copy detected (write short, specific, believable copy instead)' },
+    { pattern: /\b(Acme|Nexus\s|Flowbit|Quantumly|NovaCore)\b/i, message: 'Fake placeholder brand name detected (use real name or design-safe copy)' },
+    { pattern: /from-pink-\d+\s+to-orange-\d+/i, message: 'Pink-to-orange creator gradient = slop (use palette-matched tonal grade)' }
 ];
 
 export const REQUIRED_PATTERNS = [

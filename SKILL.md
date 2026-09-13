@@ -1,13 +1,13 @@
 ---
 name: vibe-harness-design
 description: "Universal AI Agent UI/UX Design System Engine & Anti-Slop Harness for Frontend, Landing Pages, and Web Apps."
-version: 1.5.0
+version: 1.5.1
 ---
 
-# Vibe-Harness-Design v1.5.0 — Universal UI/UX & Anti-Slop Engine
+# Vibe-Harness-Design v1.5.1 — Universal UI/UX & Anti-Slop Engine
 
-> **Học từ:** ABS Design Tokens · Hallmark 57 · UX/UI Triad · **Impeccable** (pbakaus, 48k⭐) · **Taste Skill** (tasteskill, 82k⭐)  
-> **Mục tiêu:** Antigravity / Gemini Flash tạo UI đẹp ngang Claude + Codex. Triệt tiêu 100% mùi AI-slop.
+> **Powered by:** ABS Design System · Hallmark 57 Gates · UX/UI Triad · Image-First Pipeline · 5-Dim Audit Standard  
+> **Mục tiêu:** Mọi AI model tầm trung tạo UI đẹp ngang Claude + Codex. Triệt tiêu 100% mùi AI-slop.
 
 ---
 
@@ -20,7 +20,7 @@ Tự động khi người dùng yêu cầu:
 
 ---
 
-## 🏛️ Pipeline 4 Bước (Học từ Taste Skill Image-First + Impeccable)
+## 🏛️ Pipeline 4 Bước (Image-First + Lint Guard)
 
 ```
 [BƯỚC 0: IMAGE REFERENCE]  ──▶ [BƯỚC 1: TOKENS]  ──▶ [BƯỚC 2: CODE]  ──▶ [BƯỚC 3: LINT]
@@ -50,7 +50,7 @@ Tự động khi người dùng yêu cầu:
 - Ưu tiên: `centered over full-bleed image` · `bottom-left text over background` · `stacked center` · `off-grid editorial offset`.
 - Chỉ dùng left-text/right-image khi đó thực sự là lựa chọn tốt nhất.
 
-**4 Chế độ thiết kế (Impeccable Modes — chọn 1 trước khi code):**
+**4 Chế độ thiết kế (chọn 1 trước khi code):**
 | Mode | Khi nào | Ưu tiên |
 |------|---------|---------|
 | **Persuade** | Landing page, marketing, pricing | Kiếm sự chú ý và hành động |
@@ -70,7 +70,7 @@ Trước khi viết bất kỳ dòng code nào:
 2. **Accent High-Contrast:** Emerald `#10b981` · Teal `#14b8a6` · Amber `#f59e0b` · Cyber Blue `#06b6d4`  
    **CẤM:** gradient tím-hồng (`from-purple-500 to-pink-500`), pink-to-orange creator gradient
 
-3. **Font chuẩn (Hallmark + Impeccable):**  
+3. **Font chuẩn (ABS Standard):**  
    Heading: `Plus Jakarta Sans` · `Inter Tight` · `Oswald` · `Bricolage Grotesque` (kèm `tracking-tight`)  
    Body: `Inter` · `Be Vietnam Pro`  
    **CẤM TIỆT:** `Space Grotesk` · `Syne` · `Outfit` · `Sora` · `Chivo` · `Unbounded` · gradient headline text
@@ -114,7 +114,7 @@ node /root/vibe-design-harness/bin/cli.js lint <file.html>
 
 ---
 
-## 🔎 Audit Checklist (Impeccable audit.md — sau khi build)
+## 🔎 Audit Checklist (sau khi build)
 
 Chấm điểm 5 chiều (0-4 mỗi chiều, tổng 20):
 1. **Accessibility** — contrast ≥4.5:1, ARIA, keyboard nav, semantic HTML
@@ -144,4 +144,3 @@ npx vibe-design-harness expand "Luxury skincare serum bottle on dark granite" lu
 - Palette / font ngành cụ thể: `skill_view(name="abs-ux-ui-triad")`
 - 21 Hallmark themes, study URL/ảnh: `skill_view(name="hallmark")`
 - 3D WebGL / Canvas effects: `skill_view(name="threeui")`
-- Nguồn gốc học: `github.com/pbakaus/impeccable` · `github.com/tasteskill/tasteskill`
