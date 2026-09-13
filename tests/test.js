@@ -18,7 +18,13 @@ const slopHtml = '<div class="from-purple-600 to-blue-600 bg-gray-800"><button>C
 const lintResult = lintUI(slopHtml);
 assert.strictEqual(lintResult.passed, false, 'Slop HTML must fail lint check');
 assert(lintResult.violation_count >= 2, 'Must detect at least 2 violations');
-console.log('✅ Test 2 Passed: Deterministic UI Linter correctly detected slop.');
+
+// Test 2b: Hallmark 57 Gates (Font & Pill button check)
+const hallmarkSlop = '<div class="font-[Syne]"><button class="rounded-full px-12 py-3">Pill</button></div>';
+const hallmarkLint = lintUI(hallmarkSlop);
+assert.strictEqual(hallmarkLint.passed, false, 'Hallmark slop must fail lint check');
+assert(hallmarkLint.violation_count >= 2, 'Must detect Syne font and pill button');
+console.log('✅ Test 2 Passed: Deterministic UI Linter correctly detected slop (including Hallmark gates).');
 
 // Test 3: Auto-Fixer
 console.log('\nTest 3: Verifying Auto-Fixer remediation...');

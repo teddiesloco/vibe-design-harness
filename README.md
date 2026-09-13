@@ -13,9 +13,9 @@
 
 ## 🎯 1 Problem. 1 Niche. 1 Market Gap.
 
-| The AI Coding Pain | The VibeDesign-Harness Fix (v1.3.0) |
+| The AI Coding Pain | The VibeDesign-Harness Fix (v1.4.0) |
 | :--- | :--- |
-| **Aesthetic AI-Slop & Toy-Box Logos:** AI models consistently generate cheap purple gradients (`from-purple-600 to-blue-600`), toy-box sticker initial squares, raw emoji badges, and muddy gray backgrounds (`bg-gray-800`). | **Deterministic AST Linter (<1ms):** Intercepts and blocks 100% of generic AI anti-patterns before render. Enforces `tabular-nums` and monochrome micro-depth. Supports `--fix` for instant token remediation. |
+| **Aesthetic AI-Slop & Toy-Box Logos:** AI models consistently generate cheap purple gradients (`from-purple-600 to-blue-600`), toy-box sticker initial squares, raw emoji badges, muddy gray backgrounds (`bg-gray-800`), and AI-slop fonts (`Syne`, `Space Grotesk`, `Outfit`). | **Deterministic AST Linter (<1ms):** Intercepts and blocks 100% of generic AI anti-patterns before render (including Hallmark 57 gates, font blacklists, and elongated pill buttons). Supports `--fix` for instant token remediation. |
 | **Visual Inconsistency:** Coding agents drift from brand guidelines across multi-turn sessions. | **Zero-Token Pre-Engine:** Injects structured `DESIGN.md` tokens (14 architectural themes: Precision Quiet Luxury, Swiss Minimalism, Vogue Haute Couture, Linear Dark, Modern Clean). |
 | **Framework Lock-in:** Output locked into raw HTML. | **Modern Export:** Export directly to **React (TSX Tailwind / Lucide)** or clean standalone High-Converting Sales Pages / WebApp HTML. |
 
@@ -50,6 +50,8 @@ Our linter runs 100% deterministic pattern matching at zero token cost:
 * 🚫 **`emoji-in-badge`**: Bans raw decorative emojis (`🔥`, `⭐`, `🪙`, `🎁`) inside buttons or status badges — enforces monochrome SVG stroke icons (`stroke-width="1.5"`).
 * 🚫 **`harsh-multi-gradient`**: Blocks violent multi-gradient color clashes (e.g. red-to-cyan or pink-to-yellow) on cards.
 * 🚫 **`generic-purple-ai`**: Blocks generic `from-purple-600 to-blue-600` default AI patterns.
+* 🚫 **`ai-slop-fonts`**: Blocks generic AI fonts (`Space Grotesk`, `Syne`, `Outfit`, `Sora`, `Chivo`). Enforces clean grotesque or serif (`Inter`, `Plus Jakarta Sans`, `Oswald`).
+* 🚫 **`elongated-pill-cta`**: Blocks unstyled `rounded-full px-12+` pill buttons; enforces balanced `rounded-lg` or `rounded-xl`.
 * ✅ **`tabular-nums`**: Enforces strict monospace numeric alignment on telemetry dashboards and price tags.
 
 ---

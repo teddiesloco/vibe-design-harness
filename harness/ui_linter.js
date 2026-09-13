@@ -16,7 +16,10 @@ export const BANNED_PATTERNS = [
     // Professional UI/UX Anti-Slop Rules
     { pattern: /class="[^"]*w-\d+\s+h-\d+\s+rounded-[^"]*bg-gradient-to-[^"]*text-white[^"]*font-black[^"]*">\s*[A-Z0-9]{2,3}\s*<\/div>/i, message: 'Toy-box initial sticker logo detected (use minimalist SVG vector mark or typographic wordmark)' },
     { pattern: />\s*[🪙🔥⭐🎁🎉🚀💸]\s*</i, message: 'Raw emoji used as UI icon in element (use subtle monochrome 14-16px SVG vector icon)' },
-    { pattern: /from-(rose|pink|purple|amber)-\d+\s+to-(indigo|blue|emerald|teal)-\d+/i, message: 'Harsh multi-gradient clash on surface (use neutral surface + 1 subtle semantic accent)' }
+    { pattern: /from-(rose|pink|purple|amber)-\d+\s+to-(indigo|blue|emerald|teal)-\d+/i, message: 'Harsh multi-gradient clash on surface (use neutral surface + 1 subtle semantic accent)' },
+    // Hallmark 57 Slop Gates: Typography & CTA Rules
+    { pattern: /\b(Space\s*Grotesk|Syne|Outfit|Sora|Chivo|Unbounded)\b/i, message: 'Banned AI-slop font detected (use Inter, Plus Jakarta Sans, Inter Tight, or Oswald)' },
+    { pattern: /rounded-full\s+px-(?:10|12|14|16)/i, message: 'Elongated pill CTA button detected (use rounded-lg or rounded-xl with balanced padding)' }
 ];
 
 export const REQUIRED_PATTERNS = [
