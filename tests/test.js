@@ -24,7 +24,13 @@ const hallmarkSlop = '<div class="font-[Syne]"><button class="rounded-full px-12
 const hallmarkLint = lintUI(hallmarkSlop);
 assert.strictEqual(hallmarkLint.passed, false, 'Hallmark slop must fail lint check');
 assert(hallmarkLint.violation_count >= 2, 'Must detect Syne font and pill button');
-console.log('✅ Test 2 Passed: Deterministic UI Linter correctly detected slop (including Hallmark gates).');
+
+// Test 2c: Impeccable + Taste gates
+const impeccableTasteSlop = '<div class="animate-bounce"><h1 class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-orange-500">Unleash your potential</h1></div>';
+const it2cLint = lintUI(impeccableTasteSlop);
+assert.strictEqual(it2cLint.passed, false, 'Impeccable+Taste slop must fail lint check');
+assert(it2cLint.violation_count >= 3, 'Must detect animate-bounce, gradient text, pink-to-orange, and startup copy');
+console.log('✅ Test 2 Passed: Deterministic UI Linter correctly detected slop (including Hallmark + Impeccable + Taste gates).');
 
 // Test 3: Auto-Fixer
 console.log('\nTest 3: Verifying Auto-Fixer remediation...');
