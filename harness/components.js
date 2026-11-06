@@ -67,10 +67,10 @@ export const COMPONENTS = {
                     col: "col-span-1 md:col-span-2 lg:col-span-8"
                 },
                 {
-                    title: "30+ Visual Domains",
-                    desc: "Studio optics, lens physics, and negative constraints for Midjourney, FLUX, and Gemini Image.",
-                    tag: "PRO GRAPHICS",
-                    meta: "OPTICS",
+                    title: "60fps Scroll Choreography",
+                    desc: "5 scroll grammars, 16 data-sc-* devices, and the 6-dimension uniqueness gate powered by VibeScroll.",
+                    tag: "MOTION",
+                    meta: "60FPS GPU",
                     col: "col-span-1 md:col-span-1 lg:col-span-4"
                 },
                 {
