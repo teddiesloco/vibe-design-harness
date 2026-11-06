@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * AGS Design & Visual Studio Harness Unified CLI (v1.6.0)
+ * AGS Design & Visual Studio Harness Unified CLI (v2.1.0)
  */
 
 import {
@@ -21,7 +21,16 @@ import {
     checkVietnameseFontSupport,
     formatForPlatform,
     exportTypographyAsset,
-    CAPCUT_VN_TYPOGRAPHY_PRESETS
+    CAPCUT_VN_TYPOGRAPHY_PRESETS,
+    DASHBOARD_FACES,
+    SCREEN_CONTENT_LAYOUTS,
+    INDUSTRY_ACCENT_PALETTES,
+    LOCKED_ARCHITECTURAL_RULES,
+    recommendDashboardSystem,
+    generateAppTokensCSS,
+    getAppUIReference,
+    runLiveUIProbe,
+    scaffoldDashboardApp
 } from '../index.js';
 import fs from 'fs';
 import path from 'path';
@@ -31,34 +40,35 @@ const command = args[0];
 
 function printHelp() {
     console.log(`
-🎨 AGS Design & Visual Studio Harness CLI v1.6.0 — Deterministic UI/UX Design System & Anti-Slop Harness
+🎨 AGS Design & Visual Studio Harness CLI v2.1.0 — Deterministic UI/UX Design System, App Dashboard Architecture & Anti-Slop Harness
 
 Usage:
   npx vibe-design-harness <command> [options]
 
 Commands:
-  lint <file> [--fix] [--scope <scope>]  Audit HTML/JSX for 30+ AI-slop rules (scopes: all|color|layout|type|motion|copy|slop)
-  rules [--scope <scope>]                List all 30+ deterministic detector rules
+  lint <file> [--fix] [--scope <scope>]  Audit HTML/JSX for 35+ AI-slop & Dashboard rules (scopes: all|color|layout|type|motion|copy|slop|dashboard)
+  rules [--scope <scope>]                List all 35+ deterministic detector rules
+  dashboard [userRole] [--job <job>] [--industry <ind>] Recommend Dashboard Face (10 Faces), Screen Layout & Industry Accent
+  scaffold-dashboard [face] [output] [--framework react|html] Assemble zero-slop App Dashboard screen (clean, dark_sidebar, soft, midnight, etc.)
+  tokens-css [face] [accent] [output]    Generate production Tailwind v4 tokens.css (:root, .dark, @theme inline, 4px autohide scrollbar)
+  ui-ref [topic]                         Read or list the 49 Cleanroom App UI/UX reference specs (app, styles, review, checklist, charts, button, etc.)
+  probe [url] [--quick] [--stress] [--sweep] Run live Playwright multi-viewport DOM & WCAG inspector (probe.mjs)
   command [name]                         Get AGS Studio-grade post-processing playbook (audit, critique, polish, distill, bolder, quieter, delight, harden, animate, clarify, adapt, overdrive)
   init-context [theme] [--name <brand>]  Generate paired PRODUCT.md + DESIGN.md in current directory
-  scaffold <theme> [output] [--framework react|html] Assemble studio-grade zero-slop UI (HTML or React TSX)
+  scaffold <theme> [output] [--framework react|html] Assemble studio-grade zero-slop Landing Page (HTML or React TSX)
   expand <prompt> [domain]               Generate studio-grade camera physics visual prompts
   design-system <theme> [accent]         Generate DESIGN.md brand tokens for AI agents
-  themes                                 List all 14 supported design themes
+  themes                                 List all 14 supported landing themes + 10 dashboard faces
   domains                                List all 30+ visual prompt domains
   components                             List curated Pro component blocks
 
-Options:
-  --remote                               Fetch latest remote ban rules when linting
-  --fix                                  Auto-fix detectable AI-slop defects in file
-  --scope <scope>                        Filter lint rules by scope (color, layout, type, motion, copy, slop)
-  --framework react                      Export scaffold as React / TSX Tailwind component
-
 Examples:
-  npx vibe-design-harness lint src/App.html --fix
-  npx vibe-design-harness command polish
-  npx vibe-design-harness init-context apple_luxury --name "ViecLamRemote"
-  npx vibe-design-harness scaffold luxury_editorial page.tsx --framework react
+  npx vibe-design-harness lint src/App.tsx --fix
+  npx vibe-design-harness dashboard "ketoan" --job "bang du lieu" --industry "tai chinh"
+  npx vibe-design-harness scaffold-dashboard clean dashboard.html
+  npx vibe-design-harness tokens-css soft indigo globals.css
+  npx vibe-design-harness ui-ref layouts/app
+  npx vibe-design-harness probe http://localhost:3000 --quick
 `);
 }
 
@@ -116,9 +126,87 @@ async function main() {
     if (command === 'rules') {
         const scopeIdx = args.indexOf('--scope');
         const scope = scopeIdx !== -1 ? args[scopeIdx + 1] : 'all';
-        console.log(`\n🛡️ Deterministic Anti-Slop Detector Rules (scope: ${scope}):`);
+        console.log(`\n🛡️ Deterministic Anti-Slop & App UI Detector Rules (scope: ${scope}):`);
         console.table(listLintRules(scope));
         process.exit(0);
+    }
+
+    if (command === 'dashboard') {
+        const userRole = args[1] && !args[1].startsWith('--') ? args[1] : '';
+        const jobIdx = args.indexOf('--job');
+        const primaryJob = jobIdx !== -1 ? args[jobIdx + 1] : '';
+        const indIdx = args.indexOf('--industry');
+        const industry = indIdx !== -1 ? args[indIdx + 1] : '';
+        const exp = args.includes('--experimental');
+
+        const rec = recommendDashboardSystem({ userRole, primaryJob, industry, allowExperimental: exp });
+        console.log('\n📐 Recommended App & Dashboard System Architecture:');
+        console.log(JSON.stringify(rec, null, 2));
+        process.exit(0);
+    }
+
+    if (command === 'scaffold-dashboard') {
+        const face = (args[1] && !args[1].startsWith('--')) ? args[1] : 'clean';
+        const outputFile = (args[2] && !args[2].startsWith('--')) ? args[2] : null;
+        const framework = args.includes('--framework') ? args[args.indexOf('--framework') + 1] : 'html';
+        const brandIdx = args.indexOf('--brand');
+        const brand = brandIdx !== -1 ? args[brandIdx + 1] : 'AgentSea Workspace';
+        const accentIdx = args.indexOf('--accent');
+        const accent = accentIdx !== -1 ? args[accentIdx + 1] : 'indigo';
+
+        const result = scaffoldDashboardApp({ face, framework, brand, accent });
+        if (outputFile) {
+            const resolvedPath = path.resolve(process.cwd(), outputFile);
+            fs.writeFileSync(resolvedPath, result.code, 'utf-8');
+            console.log(`🎉 Assembled App Dashboard (${result.face} / ${result.framework}) -> ${outputFile}`);
+        } else {
+            console.log(result.code);
+        }
+        process.exit(0);
+    }
+
+    if (command === 'tokens-css') {
+        const face = (args[1] && !args[1].startsWith('--')) ? args[1] : 'clean';
+        const accent = (args[2] && !args[2].startsWith('--')) ? args[2] : 'neutral';
+        const outputFile = (args[3] && !args[3].startsWith('--')) ? args[3] : null;
+        const res = generateAppTokensCSS({ face, accent });
+        if (outputFile) {
+            const resolvedPath = path.resolve(process.cwd(), outputFile);
+            fs.writeFileSync(resolvedPath, res.css, 'utf-8');
+            console.log(`✅ Generated Tailwind v4 App Tokens CSS (Face: ${res.face}, Accent: ${res.accent.name}) -> ${outputFile}`);
+        } else {
+            console.log(res.css);
+        }
+        process.exit(0);
+    }
+
+    if (command === 'ui-ref' || command === 'ref') {
+        const topic = args[1] || 'list';
+        const res = getAppUIReference(topic);
+        if (res.content) {
+            console.log(res.content);
+        } else {
+            console.log(JSON.stringify(res, null, 2));
+        }
+        process.exit(0);
+    }
+
+    if (command === 'probe') {
+        const url = args[1] && !args[1].startsWith('--') ? args[1] : '';
+        const res = runLiveUIProbe({
+            url,
+            quick: args.includes('--quick'),
+            stress: args.includes('--stress'),
+            dark: args.includes('--dark'),
+            sweep: args.includes('--sweep'),
+            dryRun: !url || args.includes('--dry-run')
+        });
+        if (res.stdout) console.log(res.stdout);
+        if (res.stderr) console.error(res.stderr);
+        if (!url || args.includes('--dry-run')) {
+            console.log(JSON.stringify(res, null, 2));
+        }
+        process.exit(res.exit_code || 0);
     }
 
     if (command === 'command' || command === 'commands') {
@@ -196,8 +284,18 @@ async function main() {
     }
 
     if (command === 'themes') {
-        console.log('\n🎨 Supported Design Themes:');
+        console.log('\n🎨 Supported Design Themes (14 Landing Themes):');
         console.table(listThemes());
+        console.log('\n📐 Supported App & Dashboard Faces (10 Faces across 5 Axes):');
+        console.table(Object.values(DASHBOARD_FACES).map(f => ({
+            id: f.id,
+            name: f.name,
+            verified: f.verified,
+            nav: f.nav,
+            container: f.container,
+            surface: f.surface,
+            font: f.font
+        })));
         process.exit(0);
     }
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * AGS Design & Visual Studio Harness — MCP Server (v2.0.0)
+ * AGS Design & Visual Studio Harness — MCP Server (v2.1.0)
  */
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
@@ -21,13 +21,18 @@ import {
     listDesignCommands,
     getDesignCommand,
     scaffoldLandingPage,
-    fetchRemoteRules
+    fetchRemoteRules,
+    recommendDashboardSystem,
+    generateAppTokensCSS,
+    getAppUIReference,
+    runLiveUIProbe,
+    scaffoldDashboardApp
 } from '../index.js';
 
 const server = new Server(
     {
         name: 'ags-design-harness-mcp',
-        version: '2.0.0',
+        version: '2.1.0',
     },
     {
         capabilities: {
@@ -140,8 +145,71 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                 },
             },
             {
+                name: 'recommend_dashboard_system',
+                description: 'Recommends the optimal App Dashboard Face (from 10 Named Faces across 5 Axes: Clean, Dark Sidebar, Soft, Midnight, Inset, Paper, Float, Rail, Topbar, Editorial), Screen Content Layout (10 job-driven layouts), and WCAG-verified Industry Accent Palette.',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        userRole: { type: 'string', description: 'Who uses the app (e.g. accountant, spa owner, NOC shift operator, B2B sales).' },
+                        primaryJob: { type: 'string', description: 'Main job on this screen (e.g. overview, data table, ticket queue, kanban, calendar, analytics, settings form).' },
+                        industry: { type: 'string', description: 'Industry vertical (e.g. finance, clinic, food, spa, retail, education, real estate, logistics, hr, crm, travel).' },
+                        navCount: { type: 'number', description: 'Number of top-level navigation items (default 5).', default: 5 },
+                        allowExperimental: { type: 'boolean', description: 'Whether to include experimental faces (Inset, Paper, Float, Rail, Topbar, Editorial).', default: false },
+                    },
+                },
+            },
+            {
+                name: 'scaffold_dashboard_app',
+                description: 'Assembles a zero-slop App Dashboard screen (HTML or React TSX) adhering to the 10-Face Architecture, unified metric strip, asymmetric widget grid, and 19 Locked Rules.',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        face: { type: 'string', description: 'Dashboard face: clean, dark_sidebar, soft, midnight, inset, paper, float, rail, topbar, editorial.', default: 'clean' },
+                        framework: { type: 'string', description: 'Output format: html or react (TSX).', default: 'html' },
+                        brand: { type: 'string', description: 'Workspace / Brand name.', default: 'AgentSea Workspace' },
+                        title: { type: 'string', description: 'Page title (`text-xl`).', default: 'Tổng quan vận hành' },
+                        accent: { type: 'string', description: 'Brand accent key: blue, indigo, violet, fuchsia, teal, green, orange, neutral.', default: 'indigo' },
+                    },
+                },
+            },
+            {
+                name: 'generate_app_tokens_css',
+                description: 'Generates the complete Tailwind v4 `tokens.css` stylesheet (:root, .dark, .force-light/.force-dark, @theme inline, semantic danger/error/warning/success tokens, and 4px autohide scrollbar).',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        face: { type: 'string', description: 'Dashboard face (clean, dark_sidebar, soft, midnight, etc.).', default: 'clean' },
+                        accent: { type: 'string', description: 'Accent color key (neutral, blue, indigo, violet, fuchsia, teal, green, orange) or hex.', default: 'neutral' },
+                    },
+                },
+            },
+            {
+                name: 'get_app_ui_reference',
+                description: 'Reads or lists the 49 Cleanroom App UI/UX reference specifications (e.g. list, PLAYBOOK, styles, budgets, locked-rules, review, checklist, layouts/app, layouts/overlay, layouts/form, components/charts, components/button, components/choice-controls).',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        topic: { type: 'string', description: 'Reference key or "list" to browse all 49 cleanroom reference files.', default: 'list' },
+                    },
+                },
+            },
+            {
+                name: 'run_live_ui_probe',
+                description: 'Runs or returns the CLI command for the Playwright multi-viewport live DOM & WCAG inspector (`scripts/probe.mjs`).',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        url: { type: 'string', description: 'Live URL to inspect (leave empty or set dryRun=true to get CLI command & flags).' },
+                        quick: { type: 'boolean', description: 'Static layout/contrast/overflow check only (4x faster).', default: true },
+                        stress: { type: 'boolean', description: 'Inject 60-char Vietnamese strings and 10-digit numbers to test layout resilience.', default: false },
+                        dark: { type: 'boolean', description: 'Inspect in dark mode.', default: false },
+                        dryRun: { type: 'boolean', description: 'Return command without launching browser.', default: false },
+                    },
+                },
+            },
+            {
                 name: 'lint_ui_aesthetic',
-                description: 'Deterministic zero-token 30-gate UI/UX aesthetic linter for HTML/JSX/Tailwind.',
+                description: 'Deterministic zero-token 35+ gate UI/UX aesthetic & dashboard architectural linter for HTML/JSX/Tailwind.',
                 inputSchema: {
                     type: 'object',
                     properties: {
@@ -151,7 +219,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                         },
                         scope: {
                             type: 'string',
-                            description: 'Optional detector scope: all, color, layout, type, motion, copy, slop.',
+                            description: 'Optional detector scope: all, color, layout, type, motion, copy, slop, dashboard.',
                             default: 'all',
                         },
                         autoFix: {
@@ -250,8 +318,41 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     }
 
     if (name === 'scaffold_landing_page') {
-        const code = scaffoldLandingPage(args.theme || 'ags_editorial', args);
-        return { content: [{ type: 'text', text: code }] };
+        const res = scaffoldLandingPage({
+            theme: args.theme || 'ags_editorial',
+            framework: args.framework || 'html',
+            title: args.title,
+            brand: args.brand,
+            heroTitle: args.heroTitle,
+            heroSubtitle: args.heroSubtitle,
+            customAccent: args.customAccent
+        });
+        return { content: [{ type: 'text', text: typeof res === 'string' ? res : JSON.stringify(res, null, 2) }] };
+    }
+
+    if (name === 'recommend_dashboard_system') {
+        const res = recommendDashboardSystem(args);
+        return { content: [{ type: 'text', text: JSON.stringify(res, null, 2) }] };
+    }
+
+    if (name === 'scaffold_dashboard_app') {
+        const res = scaffoldDashboardApp(args);
+        return { content: [{ type: 'text', text: JSON.stringify(res, null, 2) }] };
+    }
+
+    if (name === 'generate_app_tokens_css') {
+        const res = generateAppTokensCSS(args);
+        return { content: [{ type: 'text', text: res.css }] };
+    }
+
+    if (name === 'get_app_ui_reference') {
+        const res = getAppUIReference(args.topic || 'list');
+        return { content: [{ type: 'text', text: res.content ? res.content : JSON.stringify(res, null, 2) }] };
+    }
+
+    if (name === 'run_live_ui_probe') {
+        const res = runLiveUIProbe(args);
+        return { content: [{ type: 'text', text: JSON.stringify(res, null, 2) }] };
     }
 
     if (name === 'lint_ui_aesthetic') {

@@ -21,10 +21,19 @@ import {
     listLintRules,
     listDesignCommands,
     getDesignCommand,
-    scaffoldLandingPage
+    scaffoldLandingPage,
+    DASHBOARD_FACES,
+    SCREEN_CONTENT_LAYOUTS,
+    INDUSTRY_ACCENT_PALETTES,
+    LOCKED_ARCHITECTURAL_RULES,
+    recommendDashboardSystem,
+    generateAppTokensCSS,
+    getAppUIReference,
+    runLiveUIProbe,
+    scaffoldDashboardApp
 } from '../index.js';
 
-console.log('🧪 Starting VibeDesign-Harness v1.6.0 Complete Test Suite...\n');
+console.log('🧪 Starting VibeDesign-Harness v2.1.0 Complete Test Suite...\n');
 
 // Test 1: Design Engine & 14 Built-in Themes
 console.log('Test 1: Verifying 14 Built-in Themes (including Quiet Luxury & Modern Clean)...');
@@ -157,4 +166,47 @@ assert(asset.svg.includes('<svg') && asset.svg.includes('Kỷ Nguyên Doanh Nghi
 assert.strictEqual(asset.json.schema, 'ags.capcut.typography.v2', 'Must generate CapCut/Figma JSON v2 schema');
 console.log('✅ Test 7 Passed: Platform Adapters, Vietnamese Font Checker & CapCut SVG/JSON Exporter verified.');
 
-console.log('\n🎉 ALL 6 TEST SUITES PASSED (100% Zero Defect — v1.6.0 Ready).\n');
+// Test 8: Cleanroom App & Dashboard Architecture Engine (10 Faces, 10 Content Layouts, 12 Industry Palettes, 49 Reference Specs, Dashboard Linter & Scaffold)
+console.log('\nTest 8: Verifying Cleanroom App & Dashboard Architecture Engine...');
+assert.strictEqual(Object.keys(DASHBOARD_FACES).length, 10, 'Must expose all 10 Dashboard Faces');
+assert.strictEqual(Object.keys(SCREEN_CONTENT_LAYOUTS).length, 10, 'Must expose all 10 Screen Content Layouts');
+assert.strictEqual(Object.keys(INDUSTRY_ACCENT_PALETTES).length, 12, 'Must expose all 12 Industry Accent Palettes');
+assert.strictEqual(LOCKED_ARCHITECTURAL_RULES.length, 19, 'Must expose all 19 Locked Architectural Rules');
+
+const rec = recommendDashboardSystem({
+    userRole: 'Nhân viên vận hành CRM mở cả ngày',
+    primaryJob: 'Dò bảng khách hàng',
+    industry: 'CRM B2B SaaS'
+});
+assert.strictEqual(rec.recommended_face.id, 'dark_sidebar', 'CRM full-day operator must map to Dark Sidebar face');
+assert.strictEqual(rec.recommended_layout.id, 'table_first', 'Table scanning job must map to table_first layout');
+assert.strictEqual(rec.industry_palette.default_accent, 'indigo', 'CRM B2B SaaS must default to indigo accent');
+
+const tokensOut = generateAppTokensCSS({ face: 'soft', accent: 'violet' });
+assert(tokensOut.css.includes('@theme inline'), 'Generated tokens.css must include Tailwind v4 @theme inline block');
+assert(tokensOut.css.includes('#7c3aed'), 'Generated tokens.css must inject violet primary (#7c3aed)');
+assert(tokensOut.css.includes('--scrollbar-thumb: transparent'), 'Generated tokens.css must include 4px autohide scrollbar');
+
+const refList = getAppUIReference('list');
+assert(refList.total_files >= 49, `Must have at least 49 cleanroom reference files, got ${refList.total_files}`);
+const appLayoutRef = getAppUIReference('layouts/app');
+assert.strictEqual(appLayoutRef.found, true, 'Must resolve layouts/app reference');
+assert(appLayoutRef.content.includes('Bố cục nội dung: chọn theo việc chính'), 'layouts/app must contain content layout table');
+
+const dashHtml = scaffoldDashboardApp({ face: 'clean', framework: 'html', accent: 'indigo' });
+const dashLint = lintUI(dashHtml.code);
+assert.strictEqual(dashLint.passed, true, `Scaffolded dashboard HTML must pass 100% of lint gates: ${JSON.stringify(dashLint.errors)}`);
+
+const dashSlop = '<div class="bg-[#f4f4f6] font-sans"><nav class="gap-0.5"></nav><button class="bg-rose-600 text-white">Xoá</button></div>';
+const dashSlopLint = lintUI(dashSlop, { scope: 'dashboard' });
+assert.strictEqual(dashSlopLint.passed, false, 'Dashboard scope linter must catch solid red destructive button and gap-0.5 nav');
+assert(dashSlopLint.violation_count >= 2, 'Must detect both solid-red-destructive-button and tight-stacked-nav-gap');
+
+const dashFixed = fixUI(dashSlop);
+assert(dashFixed.fixedContent.includes('bg-rose-500/10'), 'Auto-fixer must remediate solid red button to subtle rose semantic button');
+
+const probeDry = runLiveUIProbe({ url: 'http://localhost:3000', quick: true, stress: true, dryRun: true });
+assert(probeDry.cli_command.includes('probe.mjs') && probeDry.cli_command.includes('--quick') && probeDry.cli_command.includes('--stress'));
+console.log('✅ Test 8 Passed: Cleanroom 10-Face Dashboard Engine, 49 Reference Specs, Dashboard Gates & Probe Runner verified.');
+
+console.log('\n🎉 ALL 8 TEST SUITES PASSED (100% Zero Defect — v2.1.0 Ready).\n');

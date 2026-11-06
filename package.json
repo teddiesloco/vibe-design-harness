@@ -1,7 +1,7 @@
 {
   "name": "vibe-design-harness",
-  "version": "2.0.0",
-  "description": "AGS Design & Visual Studio Harness v2.0 — 30-Gate Anti-Slop UI Linter (<1ms), 5-Platform Image Prompt Compiler (Nano Banana Pro, GPT-Image-2, Seedance 2.5, Midjourney V7, FLUX), Vietnamese Font Glyph Checker, and CapCut SVG/JSON Asset Exporter.",
+  "version": "2.1.0",
+  "description": "AGS Design & Visual Studio Harness v2.1 — 35+ Gate Anti-Slop & App Dashboard Linter (<1ms), Cleanroom 10-Face Dashboard Architecture, 49 App UI/UX Specs, Live Playwright DOM Probe, 5-Platform Image Prompt Compiler, and CapCut Vietnamese Typography Engine.",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -17,12 +17,18 @@
     "test": "node tests/test.js",
     "lint": "node bin/cli.js lint",
     "rules": "node bin/cli.js rules",
+    "dashboard": "node bin/cli.js dashboard",
+    "scaffold-dashboard": "node bin/cli.js scaffold-dashboard",
+    "tokens-css": "node bin/cli.js tokens-css",
+    "ui-ref": "node bin/cli.js ui-ref",
+    "probe": "node bin/cli.js probe",
     "command": "node bin/cli.js command",
     "expand": "node bin/cli.js expand",
     "themes": "node bin/cli.js themes",
     "domains": "node bin/cli.js domains",
     "export-typography": "node bin/cli.js export-typography",
-    "check-font": "node bin/cli.js check-font"
+    "check-font": "node bin/cli.js check-font",
+    "lint-refs": "node scripts/lint-skill.mjs --all"
   },
   "publishConfig": {
     "access": "public"
@@ -31,8 +37,13 @@
     "ags",
     "agentsea",
     "ags-design-harness",
-    "design-harness",
+    "vibe-design-harness",
+    "dashboard-architecture",
+    "app-ui-ux",
+    "design-tokens",
+    "tailwind-v4",
     "ui-linter",
+    "playwright-probe",
     "nano-banana-pro",
     "gpt-image-2",
     "seedance",

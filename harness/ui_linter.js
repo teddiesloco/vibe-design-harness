@@ -211,12 +211,54 @@ export const BANNED_PATTERNS = [
         scope: 'copy',
         pattern: /Not\s+a\s+[a-z]+\.\s+A\s+[a-z]+\.|No\s+fluff\.\s+No\s+bloat\.\s+Just\b/i,
         message: 'Manufactured-contrast aphorism ("Not a X. A Y." / "No fluff. Just Z.") reads as AI cadence [aphoristic-cadence]'
+    },
+
+    // --- APP & DASHBOARD ARCHITECTURAL GATES (Cleanroom App UI/UX Spec) ---
+    {
+        id: 'solid-red-destructive-button',
+        scope: 'dashboard',
+        pattern: /<button[^>]*class(?:Name)?=["'][^"']*\bbg-(?:rose|red)-(?:500|600|700)\b[^"']*\btext-white\b[^"']*["']/i,
+        message: 'Locked Rule #2 (I4): Destructive buttons must use subtle rose fill (bg-rose-500/10 text-rose-700), never solid bg-rose-500/600 text-white [solid-red-destructive-button]',
+        fix: 'bg-rose-500/10 text-rose-700 hover:bg-rose-500/15'
+    },
+    {
+        id: 'hover-scale-on-card',
+        scope: 'dashboard',
+        pattern: /class(?:Name)?=["'][^"']*\brounded-(?:xl|2xl|3xl)\b[^"']*\bhover:scale-(?:105|110)\b[^"']*["']/i,
+        message: 'Rule P7/F22: hover:scale-105 on cards blurs text during transition; elevate shadow one step (hover:shadow-md) instead [hover-scale-on-card]',
+        fix: 'hover:shadow-md'
+    },
+    {
+        id: 'scrollbar-width-none-on-vertical',
+        scope: 'dashboard',
+        pattern: /overflow-y-(?:auto|scroll)[^"']*\bscrollbar-none\b/i,
+        message: 'Locked Rule #13 (I18): Never hide vertical scrollbars with scrollbar-width:none (causes horizontal layout jump); use 4px transparent-thumb autohide [scrollbar-width-none-on-vertical]'
+    },
+    {
+        id: 'tight-stacked-nav-gap',
+        scope: 'dashboard',
+        pattern: /<(?:nav|aside)[^>]*class(?:Name)?=["'][^"']*\b(?:gap-0\.5|space-y-0\.5)\b[^"']*["']/i,
+        message: 'Locked Rule #19: Stacked interactive nav/sidebar items require at least 4px gap (gap-1), never gap-0.5 or space-y-0.5 [tight-stacked-nav-gap]',
+        fix: 'gap-1'
+    },
+    {
+        id: 'hardcoded-white-on-primary-token',
+        scope: 'dashboard',
+        pattern: /\bbg-primary\s+text-white\b/i,
+        message: 'Brand Token Rule: Use bg-primary text-primary-foreground instead of bg-primary text-white so dark-mode inverted primary remains legible [hardcoded-white-on-primary-token]',
+        fix: 'bg-primary text-primary-foreground'
+    },
+    {
+        id: 'tailwind-v4-self-referential-token',
+        scope: 'dashboard',
+        pattern: /--color-([a-z0-9-]+):\s*var\(--color-\1\)/i,
+        message: 'Tailwind v4 Trap (W2): Self-referential @theme token (--color-x: var(--color-x)) creates a circular CSS variable; map to var(--x) instead [tailwind-v4-self-referential-token]'
     }
 ];
 
 export const REQUIRED_PATTERNS = [
-    { pattern: /(bg-zinc-950|bg-slate-950|#08090a|#09090b|#050505|bg-white|#ffffff|#fbfbfd|#fafafa|#f8fbfd|#f4f6f5|#f7f5f0)/i, message: 'Foundation background color token missing' },
-    { pattern: /(font-|tracking-tight|inter|geist|oswald|sans-serif|serif)/i, message: 'Modern typography scale declaration missing' }
+    { pattern: /(bg-zinc-950|bg-slate-950|#08090a|#09090b|#050505|#05060f|#f4f4f6|bg-surface|bg-background|bg-white|#ffffff|#fbfbfd|#fafafa|#f8fbfd|#f4f6f5|#f7f5f0)/i, message: 'Foundation background color token missing' },
+    { pattern: /(font-|tracking-tight|inter|be vietnam|ibm plex|geist|oswald|sans-serif|serif|--app-font)/i, message: 'Modern typography scale declaration missing' }
 ];
 
 /**
@@ -426,6 +468,27 @@ export function fixContent(content) {
     // 9. Fix text-justify without hyphens
     if (/\btext-justify\b(?![^"']*hyphens-auto)/i.test(fixed)) {
         fixed = fixed.replace(/\btext-justify\b/gi, 'text-left');
+        fixCount++;
+    }
+
+    // 10. Fix bg-primary text-white -> bg-primary text-primary-foreground
+    if (/\bbg-primary\s+text-white\b/i.test(fixed)) {
+        fixed = fixed.replace(/\bbg-primary\s+text-white\b/gi, 'bg-primary text-primary-foreground');
+        fixCount++;
+    }
+
+    // 11. Fix solid red destructive buttons -> subtle rose semantic button (Locked Rule #2)
+    if (/<button([^>]*)class=["']([^"']*)\bbg-(?:rose|red)-(?:500|600|700)\b([^"']*)\btext-white\b([^"']*)["']/i.test(fixed)) {
+        fixed = fixed.replace(
+            /\bbg-(?:rose|red)-(?:500|600|700)\b(\s+)\btext-white\b/gi,
+            'bg-rose-500/10$1text-rose-700 hover:bg-rose-500/15'
+        );
+        fixCount++;
+    }
+
+    // 12. Fix hover:scale-105 on cards -> hover:shadow-md (Rule P7/F22)
+    if (/\bhover:scale-(?:105|110)\b/i.test(fixed)) {
+        fixed = fixed.replace(/\bhover:scale-(?:105|110)\b/gi, 'hover:shadow-md');
         fixCount++;
     }
 
