@@ -2,18 +2,7 @@ import assert from 'assert';
 import {
     lintUI,
     fixUI,
-    expandPrompt,
-    compileStudioImagePrompt,
-    sanitizeImagePrompt,
-    inferStudioAspectRatio,
-    CAPCUT_VN_TYPOGRAPHY_PRESETS,
     checkVietnameseFontSupport,
-    toMidjourneyFormat,
-    toOpenAIFormat,
-    toFluxFormat,
-    toNanoBananaFormat,
-    toSeedanceFormat,
-    exportTypographyAsset,
     generateDesignMD,
     generateProductMD,
     getTheme,
@@ -30,13 +19,20 @@ import {
     generateAppTokensCSS,
     getAppUIReference,
     runLiveUIProbe,
-    scaffoldDashboardApp
+    scaffoldDashboardApp,
+    SCROLL_GRAMMARS,
+    CHOREOGRAPHY_DEVICES,
+    VISUAL_WORLDS,
+    recommendScrollChoreography,
+    verifyScrollFingerprint,
+    getScrollChoreographyReference,
+    scaffoldScrollStoryPage
 } from '../index.js';
 
-console.log('🧪 Starting VibeDesign-Harness v2.1.0 Complete Test Suite...\n');
+console.log('🧪 Starting VibeDesign-Harness v3.0.0 Unified UI/UX Test Suite...\n');
 
 // Test 1: Design Engine & 14 Built-in Themes
-console.log('Test 1: Verifying 14 Built-in Themes (including Quiet Luxury & Modern Clean)...');
+console.log('Test 1: Verifying 14 Built-in Themes (Quiet Luxury, Modern Clean, Linear, Editorial)...');
 const themes = listThemes();
 assert(themes.length >= 14, `Must have at least 14 themes, got ${themes.length}`);
 const luxury = getTheme('luxury_editorial');
@@ -46,23 +42,23 @@ const appleLuxury = getTheme('apple_luxury');
 assert.strictEqual(appleLuxury.color_mode, 'light');
 console.log('✅ Test 1 Passed: 14 Themes correctly registered.');
 
-// Test 2: 30-Gate Deterministic UI Linter AI-Slop Detection
-console.log('\nTest 2: Verifying 30-Gate Deterministic UI Linter AI-Slop Detection...');
+// Test 2: 35+ Gate Deterministic UI Linter AI-Slop Detection
+console.log('\nTest 2: Verifying 35+ Gate Deterministic UI Linter AI-Slop Detection...');
 const rules = listLintRules();
-assert(rules.length >= 28, `Must have at least 28 deterministic rules, got ${rules.length}`);
+assert(rules.length >= 35, `Must have at least 35 deterministic rules, got ${rules.length}`);
 
 const slopHtml = '<div class="from-purple-600 to-blue-600 bg-gray-800"><button>Click me</button></div>';
 const lintResult = lintUI(slopHtml);
 assert.strictEqual(lintResult.passed, false, 'Slop HTML must fail lint check');
 assert(lintResult.violation_count >= 2, 'Must detect at least 2 violations');
 
-// Test 2b: Hallmark 57 Gates (Font & Pill button check)
-const hallmarkSlop = '<div class="font-[Syne]"><button class="rounded-full px-12 py-3">Pill</button></div>';
-const hallmarkLint = lintUI(hallmarkSlop);
-assert.strictEqual(hallmarkLint.passed, false, 'Hallmark slop must fail lint check');
-assert(hallmarkLint.violation_count >= 2, 'Must detect Syne font and pill button');
+// Test 2b: Typography & Pill button check
+const fontPillSlop = '<div class="font-[Syne]"><button class="rounded-full px-12 py-3">Pill</button></div>';
+const fontPillLint = lintUI(fontPillSlop);
+assert.strictEqual(fontPillLint.passed, false, 'Font/Pill slop must fail lint check');
+assert(fontPillLint.violation_count >= 2, 'Must detect overused display font and pill button');
 
-// Test 2c: AGS Studio + Taste gates (pulsing dot, side-tab border, aphoristic cadence, italic serif H1)
+// Test 2c: Taste & Structural gates (pulsing dot, side-tab border, aphoristic cadence, italic serif H1)
 const agsTasteSlop = `
 <div class="animate-bounce rounded-xl border-l-4">
   <span class="w-2 h-2 rounded-full animate-pulse"></span>
@@ -70,7 +66,7 @@ const agsTasteSlop = `
   <p class="text-justify">Not a tool. A platform. Stop security theater.</p>
 </div>`;
 const it2cLint = lintUI(agsTasteSlop);
-assert.strictEqual(it2cLint.passed, false, 'AGS Studio+Taste slop must fail lint check');
+assert.strictEqual(it2cLint.passed, false, 'Taste slop must fail lint check');
 assert(it2cLint.violation_count >= 7, `Must detect >=7 violations, got ${it2cLint.violation_count}`);
 
 // Test 2d: Scoped detection & inline ignore support
@@ -81,7 +77,7 @@ assert(copyOnlyLint.violation_count >= 2, 'Copy scope must catch buzzword + thea
 const ignoredHtml = '<!-- vibe-disable generic-purple-gradient, weak-gray-backdrop, harsh-multi-gradient --><div class="from-purple-600 to-blue-600 bg-gray-800 font-sans">Clean</div>';
 const ignoredLint = lintUI(ignoredHtml);
 assert.strictEqual(ignoredLint.passed, true, 'Inline vibe-disable comment must suppress specified rules');
-console.log('✅ Test 2 Passed: 30-Gate Linter, Scoped Detection, and Inline Ignores verified.');
+console.log('✅ Test 2 Passed: 35+ Gate Linter, Scoped Detection, and Inline Ignores verified.');
 
 // Test 3: Auto-Fixer
 console.log('\nTest 3: Verifying Auto-Fixer remediation...');
@@ -92,7 +88,7 @@ assert(fixRes.fixedContent.includes('bg-zinc-950'), 'Fixed content must have bg-
 console.log('✅ Test 3 Passed: Auto-fixer remediated defects successfully.');
 
 // Test 4: HTML & React TSX Scaffold Zero-Slop Self-Verification
-console.log('\nTest 4: Verifying HTML & React TSX scaffolds pass 100% of 30+ Lint Gates...');
+console.log('\nTest 4: Verifying HTML & React TSX scaffolds pass 100% of Lint Gates...');
 const htmlScaffold = scaffoldLandingPage({ theme: 'luxury_editorial', framework: 'html' });
 assert.strictEqual(htmlScaffold.lint_passed, true, `HTML scaffold failed lint: ${JSON.stringify(htmlScaffold.lint_violations)}`);
 
@@ -103,71 +99,26 @@ assert(reactScaffold.code.includes("'use client'"), 'React scaffold must include
 assert(reactScaffold.code.includes('export default function LandingPage()'), 'React scaffold must export component');
 console.log('✅ Test 4 Passed: Both HTML & React TSX scaffolds pass 100% zero-slop verification.');
 
-// Test 5: Universal Prompt Expander (30+ Domains)
-console.log('\nTest 5: Verifying Universal Prompt Expander with 30+ Domains...');
-const expanded = expandPrompt('luxury perfume bottle on obsidian rock', 'photorealism');
-assert(expanded.positive_prompt.includes('photorealistic'), 'Must contain optical photorealism tokens');
-assert(expanded.negative_prompt.includes('plastic skin'), 'Must contain negative slop constraints');
-console.log('✅ Test 5 Passed: Universal Prompt Expander verified.');
-
-// Test 5b: Nano Banana Pro + GPT-Image-2 + Seedance 2.5 + CapCut VN Typography Compiler
-console.log('\nTest 5b: Verifying 2026 Studio Image Brief & CapCut Vietnamese Typography Guard...');
-const dirtyVnPrompt = "Close-up mobile UI mockup on an iPhone 16 Pro ('Ti - Cố vấn Trưởng 60 năm kinh nghiệm') of 'Thuyền Giấy', 1) first card (SF Pro Bold, 34pt), (#FBFBFD), Dribbble and Behance top award-winning showcase, 8k render.";
-const studioBrief = compileStudioImagePrompt(dirtyVnPrompt);
-assert(studioBrief.includes('CANVAS 9:16'), 'Must auto-infer 9:16 portrait aspect ratio from iPhone mobile UI');
-assert(!studioBrief.includes('34pt') && !studioBrief.includes('SF Pro Bold'), 'Must strip CSS font specs that leak onto images');
-assert(!studioBrief.includes('#FBFBFD') && !studioBrief.includes('8k render'), 'Must strip raw HEX codes and AI-slop buzzwords');
-assert(!studioBrief.includes('1)'), 'Must convert numbered list markers so #1/#2 are never printed');
-assert(studioBrief.includes('CRITICAL VIETNAMESE TEXT GUARD'), 'Must inject Vietnamese diacritic & skeleton-bar subtext guard');
-assert(Object.keys(CAPCUT_VN_TYPOGRAPHY_PRESETS).length >= 8, 'Must expose 8 CapCut Vietnamese typography presets');
-console.log('✅ Test 5b Passed: Nano Banana Pro 7-Part Brief & CapCut Vietnamese Typography Guard verified.');
-
-// Test 6: 12 Post-Processing Design Commands & PRODUCT.md Generator
-console.log('\nTest 6: Verifying 12 Post-Processing Design Commands & Paired PRODUCT.md...');
+// Test 5: 12 Post-Processing Design Commands, Paired PRODUCT.md & Vietnamese Font Guard
+console.log('\nTest 5: Verifying 12 Post-Processing Design Commands, Paired PRODUCT.md & Vietnamese Font Guard...');
 const cmds = listDesignCommands();
 assert.strictEqual(cmds.length, 12, 'Must expose all 12 post-processing design commands');
 const polishCmd = getDesignCommand('polish');
 assert.strictEqual(polishCmd.name, 'polish');
 assert(Array.isArray(polishCmd.checklist) && polishCmd.checklist.length >= 4);
-const productMd = generateProductMD({ name: 'ViecLamRemote' });
-assert(productMd.includes('# PRODUCT.md — ViecLamRemote'), 'Must generate valid PRODUCT.md');
+const productMd = generateProductMD({ name: 'AgentSeaCloud' });
+assert(productMd.includes('# PRODUCT.md — AgentSeaCloud'), 'Must generate valid PRODUCT.md');
 const designMd = generateDesignMD('apple_luxury');
 assert(designMd.includes('Precision Quiet Luxury Light'), 'Must generate valid DESIGN.md');
-console.log('✅ Test 6 Passed: 12 Design Commands & PRODUCT.md/DESIGN.md context generator verified.');
 
-// Test 7: Platform Adapters, Vietnamese Font Glyph/Blacklist Checker & CapCut SVG/JSON Asset Exporter
-console.log('\nTest 7: Verifying 5 Platform Adapters, Vietnamese Font Checker & CapCut Asset Exporter...');
-const mj = toMidjourneyFormat('Poster dọc du lịch đảo Phú Quý hoàng hôn, chữ: "Khám Phá Phú Quý"');
-assert(mj.command.includes('--ar 9:16') && mj.command.includes('--v 7') && mj.command.includes('--no '), 'Midjourney adapter must format --ar 9:16 --v 7 --no');
-const oai = toOpenAIFormat('Poster dọc du lịch đảo Phú Quý');
-assert.strictEqual(oai.payload.size, '1024x1536', 'OpenAI GPT-Image-2 adapter must map 9:16 to 1024x1536');
-const flux = toFluxFormat('Studio ceramic coffee cup');
-assert(flux.payload.negative_prompt.length > 10, 'FLUX adapter must provide dedicated negative_prompt field');
-const nb = toNanoBananaFormat('Banner ngang MacBook Pro');
-assert.strictEqual(nb.payload.generationConfig.imageConfig.aspectRatio, '16:9', 'Nano Banana adapter must lock imageConfig.aspectRatio');
-const sd = toSeedanceFormat('Hero product video frame', { referenceCount: 2 });
-assert(sd.prompt.includes('@Image 1'), 'Seedance 2.5 adapter must bind @Image 1 reference');
-
-const badFont = checkVietnameseFontSupport('Impact');
+const badFont = checkVietnameseFontSupport('Impact', 'Hệ thống quản trị doanh nghiệp');
 assert.strictEqual(badFont.supported, false, 'Impact must be flagged as unsupported/blacklisted for Vietnamese diacritics');
-assert.strictEqual(badFont.blacklisted, true);
-assert(badFont.recommended_replacement.includes('DelaGothic'), 'Impact must map to DelaGothic-Bold');
-
-const goodFont = checkVietnameseFontSupport('Be Vietnam Pro');
+const goodFont = checkVietnameseFontSupport('Be Vietnam Pro', 'Hệ thống quản trị doanh nghiệp');
 assert.strictEqual(goodFont.supported, true, 'Be Vietnam Pro must pass Vietnamese glyph verification');
+console.log('✅ Test 5 Passed: 12 Design Commands, PRODUCT.md/DESIGN.md & Vietnamese Font Guard verified.');
 
-const asset = exportTypographyAsset({
-    preset: 'bold_impact',
-    title: 'Kỷ Nguyên Doanh Nghiệp 1 Người',
-    subtitle: 'Tự động hóa vận hành cùng AGS Studio',
-    badge: 'AGS 2026'
-});
-assert(asset.svg.includes('<svg') && asset.svg.includes('Kỷ Nguyên Doanh Nghiệp 1 Người'), 'Must generate valid transparent SVG with Vietnamese headline');
-assert.strictEqual(asset.json.schema, 'ags.capcut.typography.v2', 'Must generate CapCut/Figma JSON v2 schema');
-console.log('✅ Test 7 Passed: Platform Adapters, Vietnamese Font Checker & CapCut SVG/JSON Exporter verified.');
-
-// Test 8: Cleanroom App & Dashboard Architecture Engine (10 Faces, 10 Content Layouts, 12 Industry Palettes, 49 Reference Specs, Dashboard Linter & Scaffold)
-console.log('\nTest 8: Verifying Cleanroom App & Dashboard Architecture Engine...');
+// Test 6: Cleanroom App & Dashboard Architecture Engine (10 Faces, 10 Content Layouts, 12 Industry Palettes, 49 Reference Specs)
+console.log('\nTest 6: Verifying Cleanroom App & Dashboard Architecture Engine...');
 assert.strictEqual(Object.keys(DASHBOARD_FACES).length, 10, 'Must expose all 10 Dashboard Faces');
 assert.strictEqual(Object.keys(SCREEN_CONTENT_LAYOUTS).length, 10, 'Must expose all 10 Screen Content Layouts');
 assert.strictEqual(Object.keys(INDUSTRY_ACCENT_PALETTES).length, 12, 'Must expose all 12 Industry Accent Palettes');
@@ -207,6 +158,73 @@ assert(dashFixed.fixedContent.includes('bg-rose-500/10'), 'Auto-fixer must remed
 
 const probeDry = runLiveUIProbe({ url: 'http://localhost:3000', quick: true, stress: true, dryRun: true });
 assert(probeDry.cli_command.includes('probe.mjs') && probeDry.cli_command.includes('--quick') && probeDry.cli_command.includes('--stress'));
-console.log('✅ Test 8 Passed: Cleanroom 10-Face Dashboard Engine, 49 Reference Specs, Dashboard Gates & Probe Runner verified.');
+console.log('✅ Test 6 Passed: Cleanroom 10-Face Dashboard Engine, 49 Reference Specs, Dashboard Gates & Probe Runner verified.');
 
-console.log('\n🎉 ALL 8 TEST SUITES PASSED (100% Zero Defect — v2.1.0 Ready).\n');
+// Test 7: Cleanroom Scroll Choreography & Scrollytelling Engine (5 Grammars, 16 Devices, 8 Worlds, VibeScroll Runtime & Fingerprint Gate)
+console.log('\nTest 7: Verifying Cleanroom Scroll Choreography & Scrollytelling Engine...');
+assert.strictEqual(Object.keys(SCROLL_GRAMMARS).length, 5, 'Must expose all 5 Scroll Grammars');
+assert.strictEqual(Object.keys(CHOREOGRAPHY_DEVICES).length, 16, 'Must expose all 16 Choreography Devices');
+assert.strictEqual(Object.keys(VISUAL_WORLDS).length, 8, 'Must expose all 8 Visual Worlds');
+
+const wfRec = recommendScrollChoreography({ brief: 'Luxury architectural resort spatial flythrough experience' });
+assert.strictEqual(wfRec.grammar.id, 'worldflight', 'Spatial flythrough brief must recommend worldflight grammar');
+
+const scrollRefs = getScrollChoreographyReference('list');
+assert(scrollRefs.count >= 13, `Must have at least 13 cleanroom scroll choreography reference files, got ${scrollRefs.count}`);
+
+const jsRuntime = getScrollChoreographyReference('engine/vibe-scroll.js');
+assert.strictEqual(jsRuntime.found, true, 'Must resolve engine/vibe-scroll.js runtime');
+assert(jsRuntime.content.includes('VibeScroll'), 'Runtime must expose cleanroom VibeScroll namespace');
+
+const fpPass = verifyScrollFingerprint(
+    {
+        grammar: 'worldflight',
+        navTreatment: 'hud-waypoint',
+        heroDevice: 'continuous-camera-leg',
+        actSequence: '4-legs-seam-0.12',
+        closePattern: 'docked-ledger',
+        signatureMove: 'svg-elevation-trace'
+    },
+    [
+        {
+            project: 'Prior Build 1',
+            grammar: 'filmic_six_act',
+            navTreatment: 'floating-quiet-bar',
+            heroDevice: 'pinned-scrub',
+            actSequence: 'scrub-pin-flow-scrub-pan-pin',
+            closePattern: 'pinned-spotlight',
+            signatureMove: 'cursor-waveform'
+        }
+    ]
+);
+assert.strictEqual(fpPass.passed, true, 'Distinct build must pass 6-dimension fingerprint gate');
+
+const fpFail = verifyScrollFingerprint(
+    {
+        grammar: 'filmic_six_act',
+        navTreatment: 'floating-quiet-bar',
+        heroDevice: 'pinned-scrub',
+        actSequence: 'scrub-pin-flow-scrub-pan-pin',
+        closePattern: 'pinned-spotlight',
+        signatureMove: 'new-move-only'
+    },
+    [
+        {
+            project: 'Prior Build 1',
+            grammar: 'filmic_six_act',
+            navTreatment: 'floating-quiet-bar',
+            heroDevice: 'pinned-scrub',
+            actSequence: 'scrub-pin-flow-scrub-pan-pin',
+            closePattern: 'pinned-spotlight',
+            signatureMove: 'cursor-waveform'
+        }
+    ]
+);
+assert.strictEqual(fpFail.passed, false, 'Clone build differing on <4 dimensions must fail fingerprint gate');
+
+const storyPage = scaffoldScrollStoryPage({ brandName: 'AETHER', inlineRuntime: true });
+assert(storyPage.html.includes('data-sc-act="pin"'), 'Scaffolded scroll story must contain choreography acts');
+assert(storyPage.html.includes('window.VibeScroll.mount'), 'Scaffolded scroll story must mount VibeScroll');
+console.log('✅ Test 7 Passed: Scroll Choreography Engine, VibeScroll Runtime & 6-Dimension Fingerprint Gate verified.');
+
+console.log('\n🎉 ALL 7 UNIFIED UI/UX TEST SUITES PASSED (100% Zero Defect — v3.0.0 Ready).\n');

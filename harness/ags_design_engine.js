@@ -370,9 +370,51 @@ export function listThemes() {
     }));
 }
 
+/**
+ * Vietnamese Diacritics & Typography Guard (UI/UX Typography Verification)
+ */
+export const VIETNAMESE_FONT_BLACKLIST = [
+    'Impact', 'Bebas Neue', 'Anton', 'Brush Script MT', 'Comic Sans MS', 'Papyrus', 'Lobster', 'Pacifico'
+];
+
+export const VIETNAMESE_SAFE_FONTS = {
+    sans: ['Be Vietnam Pro', 'Plus Jakarta Sans', 'Inter', 'Public Sans', 'Manrope', 'Lexend'],
+    display: ['Bricolage Grotesque', 'Syne', 'Space Grotesk', 'Outfit'],
+    serif: ['Playfair Display', 'Newsreader', 'Lora', 'Merriweather', 'Cormorant Garamond'],
+    mono: ['JetBrains Mono', 'Geist Mono', 'IBM Plex Mono']
+};
+
+export function hasVietnameseDiacritics(text = '') {
+    return /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(String(text));
+}
+
+export function checkVietnameseFontSupport(fontName = '', sampleText = '') {
+    const clean = String(fontName).split(',')[0].replace(/['"]/g, '').trim();
+    const isBlacklisted = VIETNAMESE_FONT_BLACKLIST.some(f => f.toLowerCase() === clean.toLowerCase());
+    const allSafe = Object.values(VIETNAMESE_SAFE_FONTS).flat();
+    const isKnownSafe = allSafe.some(f => f.toLowerCase() === clean.toLowerCase());
+    const hasVN = hasVietnameseDiacritics(sampleText);
+
+    return {
+        font: clean,
+        hasVietnameseText: hasVN,
+        supported: !isBlacklisted,
+        isKnownSafe,
+        warning: isBlacklisted
+            ? `Font "${clean}" breaks Vietnamese diacritics (dấu tiếng Việt). Switch to "${VIETNAMESE_SAFE_FONTS.sans[0]}" or "${VIETNAMESE_SAFE_FONTS.display[0]}".`
+            : null,
+        recommendedFallbacks: VIETNAMESE_SAFE_FONTS.sans
+    };
+}
+
 export default {
     THEMES,
     generateDesignMD,
+    getTheme,
     registerTheme,
-    listThemes
+    listThemes,
+    VIETNAMESE_FONT_BLACKLIST,
+    VIETNAMESE_SAFE_FONTS,
+    hasVietnameseDiacritics,
+    checkVietnameseFontSupport
 };

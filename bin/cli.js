@@ -1,36 +1,36 @@
 #!/usr/bin/env node
 
 /**
- * AGS Design & Visual Studio Harness Unified CLI (v2.1.0)
+ * VibeDesign-Harness Unified CLI (v3.0.0)
+ * 100% Pure UI/UX Engineering, App Dashboard Architecture, Scroll Choreography & Anti-Slop Harness
  */
 
 import {
     lintUI,
-    expandPrompt,
+    fixUI,
     generateDesignMD,
     generateProductMD,
     listThemes,
-    listDomains,
     listComponents,
     listLintRules,
     listDesignCommands,
     getDesignCommand,
     scaffoldLandingPage,
     fetchRemoteRules,
-    fixUI,
     checkVietnameseFontSupport,
-    formatForPlatform,
-    exportTypographyAsset,
-    CAPCUT_VN_TYPOGRAPHY_PRESETS,
     DASHBOARD_FACES,
-    SCREEN_CONTENT_LAYOUTS,
-    INDUSTRY_ACCENT_PALETTES,
-    LOCKED_ARCHITECTURAL_RULES,
     recommendDashboardSystem,
     generateAppTokensCSS,
     getAppUIReference,
     runLiveUIProbe,
-    scaffoldDashboardApp
+    scaffoldDashboardApp,
+    SCROLL_GRAMMARS,
+    CHOREOGRAPHY_DEVICES,
+    VISUAL_WORLDS,
+    recommendScrollChoreography,
+    verifyScrollFingerprint,
+    getScrollChoreographyReference,
+    scaffoldScrollStoryPage
 } from '../index.js';
 import fs from 'fs';
 import path from 'path';
@@ -40,35 +40,41 @@ const command = args[0];
 
 function printHelp() {
     console.log(`
-🎨 AGS Design & Visual Studio Harness CLI v2.1.0 — Deterministic UI/UX Design System, App Dashboard Architecture & Anti-Slop Harness
+🎨 VibeDesign-Harness CLI v3.0.0 — Unified UI/UX Design System, App Dashboard Architecture & Scroll Choreography Engine
 
 Usage:
   npx vibe-design-harness <command> [options]
 
-Commands:
-  lint <file> [--fix] [--scope <scope>]  Audit HTML/JSX for 35+ AI-slop & Dashboard rules (scopes: all|color|layout|type|motion|copy|slop|dashboard)
+Core UI/UX Commands:
+  lint <file> [--fix] [--scope <scope>]  Audit HTML/JSX/CSS for 35+ AI-slop & Dashboard rules (scopes: all|color|layout|type|motion|copy|slop|dashboard)
   rules [--scope <scope>]                List all 35+ deterministic detector rules
-  dashboard [userRole] [--job <job>] [--industry <ind>] Recommend Dashboard Face (10 Faces), Screen Layout & Industry Accent
-  scaffold-dashboard [face] [output] [--framework react|html] Assemble zero-slop App Dashboard screen (clean, dark_sidebar, soft, midnight, etc.)
+  command [name]                         Get post-processing UI playbook (audit, critique, polish, distill, bolder, quieter, delight, harden, animate, clarify, adapt, overdrive)
+  init-context [theme] [--name <brand>]  Generate paired PRODUCT.md + DESIGN.md in current directory
+  design-system <theme> [accent]         Generate DESIGN.md brand tokens for AI coding agents
+  scaffold <theme> [output] [--framework react|html] Assemble studio-grade zero-slop Landing Page
+  themes                                 List all 14 Landing Themes + 10 Dashboard Faces + 5 Scroll Grammars
+  components                             List curated Pro UI component blocks
+  check-font <fontName>                  Verify Vietnamese Unicode diacritics support (U+0102–U+1EF9)
+
+App & Dashboard Commands (10-Face Architecture):
+  dashboard [userRole] [--job <job>] [--industry <ind>] Recommend Dashboard Face, Screen Layout & Industry Accent
+  scaffold-dashboard [face] [output] [--framework react|html] Assemble zero-slop App Dashboard screen
   tokens-css [face] [accent] [output]    Generate production Tailwind v4 tokens.css (:root, .dark, @theme inline, 4px autohide scrollbar)
   ui-ref [topic]                         Read or list the 49 Cleanroom App UI/UX reference specs (app, styles, review, checklist, charts, button, etc.)
-  probe [url] [--quick] [--stress] [--sweep] Run live Playwright multi-viewport DOM & WCAG inspector (probe.mjs)
-  command [name]                         Get AGS Studio-grade post-processing playbook (audit, critique, polish, distill, bolder, quieter, delight, harden, animate, clarify, adapt, overdrive)
-  init-context [theme] [--name <brand>]  Generate paired PRODUCT.md + DESIGN.md in current directory
-  scaffold <theme> [output] [--framework react|html] Assemble studio-grade zero-slop Landing Page (HTML or React TSX)
-  expand <prompt> [domain]               Generate studio-grade camera physics visual prompts
-  design-system <theme> [accent]         Generate DESIGN.md brand tokens for AI agents
-  themes                                 List all 14 supported landing themes + 10 dashboard faces
-  domains                                List all 30+ visual prompt domains
-  components                             List curated Pro component blocks
+  probe [url] [--quick] [--stress] [--sweep] Run live Playwright multi-viewport DOM & WCAG inspector
+
+Scroll Choreography Commands (60fps Scrollytelling Engine):
+  scroll [brief] [--grammar <g>] [--world <w>] Recommend Scroll Grammar (5 grammars), Visual World (8 worlds) & 16 Choreography Devices
+  scaffold-scroll [output] [--grammar <g>] [--world <w>] [--brand <name>] [--inline] Assemble a 60fps Scrollytelling page powered by VibeScroll
+  scroll-ref [topic]                     Read or list the 14 Cleanroom Scroll Choreography specs & runtime (engine/vibe-scroll.js, engine/vibe-scroll.css, devices, worldflight, etc.)
+  fingerprint <jsonCandidate> [jsonHistory] Validate a build against the 6-dimension Uniqueness Fingerprint Gate (>= 4/6 dimensions must differ)
 
 Examples:
   npx vibe-design-harness lint src/App.tsx --fix
   npx vibe-design-harness dashboard "ketoan" --job "bang du lieu" --industry "tai chinh"
   npx vibe-design-harness scaffold-dashboard clean dashboard.html
-  npx vibe-design-harness tokens-css soft indigo globals.css
-  npx vibe-design-harness ui-ref layouts/app
-  npx vibe-design-harness probe http://localhost:3000 --quick
+  npx vibe-design-harness scroll "luxury resort spatial flythrough" --grammar worldflight
+  npx vibe-design-harness scaffold-scroll story.html --brand "AETHER" --inline
 `);
 }
 
@@ -98,7 +104,7 @@ async function main() {
         const scopeIdx = args.indexOf('--scope');
         const scope = scopeIdx !== -1 ? args[scopeIdx + 1] : 'all';
         const useRemote = args.includes('--remote');
-        let options = { scope };
+        const options = { scope };
 
         if (useRemote) {
             console.log('🔄 Fetching remote aesthetic rules...');
@@ -191,6 +197,60 @@ async function main() {
         process.exit(0);
     }
 
+    if (command === 'scroll') {
+        const brief = (args[1] && !args[1].startsWith('--')) ? args[1] : '';
+        const gIdx = args.indexOf('--grammar');
+        const grammar = gIdx !== -1 ? args[gIdx + 1] : null;
+        const wIdx = args.indexOf('--world');
+        const world = wIdx !== -1 ? args[wIdx + 1] : null;
+        const rec = recommendScrollChoreography({ brief, grammar, world });
+        console.log('\n🎬 Recommended Scroll Choreography & Scrollytelling Blueprint:');
+        console.log(JSON.stringify(rec, null, 2));
+        process.exit(0);
+    }
+
+    if (command === 'scaffold-scroll') {
+        const outputFile = (args[1] && !args[1].startsWith('--')) ? args[1] : null;
+        const gIdx = args.indexOf('--grammar');
+        const grammar = gIdx !== -1 ? args[gIdx + 1] : 'filmic_six_act';
+        const wIdx = args.indexOf('--world');
+        const world = wIdx !== -1 ? args[wIdx + 1] : 'low_key_cinematic';
+        const bIdx = args.indexOf('--brand');
+        const brandName = bIdx !== -1 ? args[bIdx + 1] : 'AETHER';
+        const inlineRuntime = args.includes('--inline');
+
+        const res = scaffoldScrollStoryPage({ brandName, grammar, world, inlineRuntime });
+        if (outputFile) {
+            const resolvedPath = path.resolve(process.cwd(), outputFile);
+            fs.writeFileSync(resolvedPath, res.html, 'utf-8');
+            console.log(`🎉 Assembled 60fps Scrollytelling Page (${res.grammar.id} / ${res.world.id}) -> ${outputFile}`);
+        } else {
+            console.log(res.html);
+        }
+        process.exit(0);
+    }
+
+    if (command === 'scroll-ref') {
+        const topic = args[1] || 'list';
+        const res = getScrollChoreographyReference(topic);
+        if (res.content) {
+            console.log(res.content);
+        } else {
+            console.log(JSON.stringify(res, null, 2));
+        }
+        process.exit(0);
+    }
+
+    if (command === 'fingerprint') {
+        const candStr = args[1] || '{}';
+        const histStr = args[2] || '[]';
+        const candidate = JSON.parse(candStr);
+        const history = JSON.parse(histStr);
+        const res = verifyScrollFingerprint(candidate, history);
+        console.log(JSON.stringify(res, null, 2));
+        process.exit(res.passed ? 0 : 1);
+    }
+
     if (command === 'probe') {
         const url = args[1] && !args[1].startsWith('--') ? args[1] : '';
         const res = runLiveUIProbe({
@@ -257,24 +317,6 @@ async function main() {
         process.exit(0);
     }
 
-    if (command === 'expand') {
-        const prompt = args[1];
-        const domain = args[2] || 'photorealism';
-        if (!prompt) {
-            console.error('❌ Error: Please specify a prompt to expand.');
-            process.exit(1);
-        }
-        const result = expandPrompt(prompt, domain);
-        console.log('\n--- 📸 UNIVERSAL IMAGE PROMPT EXPANSION ---');
-        console.log(`Domain: ${result.domain_name} (${result.domain})`);
-        console.log(`\nPositive Prompt:\n${result.positive_prompt}`);
-        console.log(`\n2026 Studio Brief (Nano Banana Pro / GPT-Image-2 / CapCut VN Guard):\n${result.studio_brief}`);
-        console.log(`\nNegative Constraints:\n${result.negative_prompt}`);
-        console.log('\n--- 💡 Recommended Parameters ---');
-        console.log(JSON.stringify(result.recommended_parameters, null, 2));
-        process.exit(0);
-    }
-
     if (command === 'design-system') {
         const theme = args[1] || 'linear';
         const accent = args[2] || null;
@@ -284,7 +326,7 @@ async function main() {
     }
 
     if (command === 'themes') {
-        console.log('\n🎨 Supported Design Themes (14 Landing Themes):');
+        console.log('\n🎨 Supported Landing Themes (14 Themes):');
         console.table(listThemes());
         console.log('\n📐 Supported App & Dashboard Faces (10 Faces across 5 Axes):');
         console.table(Object.values(DASHBOARD_FACES).map(f => ({
@@ -296,30 +338,13 @@ async function main() {
             surface: f.surface,
             font: f.font
         })));
-        process.exit(0);
-    }
-
-    if (command === 'domains') {
-        console.log('\n📸 Supported Visual Prompt Domains (30+ Domains):');
-        console.table(listDomains());
-        process.exit(0);
-    }
-
-    if (command === 'export-typography') {
-        const presetIdx = args.indexOf('--preset');
-        const preset = presetIdx !== -1 ? args[presetIdx + 1] : (args[1] && !args[1].startsWith('--') ? args[1] : 'editorial_luxury');
-        const titleIdx = args.indexOf('--title');
-        const title = titleIdx !== -1 ? args[titleIdx + 1] : 'Hệ Thống AI Agent Tự Động Hóa';
-        const subIdx = args.indexOf('--subtitle');
-        const subtitle = subIdx !== -1 ? args[subIdx + 1] : 'Chuẩn hóa thiết kế & vận hành 24/7 cho doanh nghiệp';
-        const badgeIdx = args.indexOf('--badge');
-        const badge = badgeIdx !== -1 ? args[badgeIdx + 1] : 'AGS STUDIO';
-        const outIdx = args.indexOf('--out');
-        const outputDir = outIdx !== -1 ? args[outIdx + 1] : process.cwd();
-        const exported = exportTypographyAsset({ preset, title, subtitle, badge, outputDir });
-        console.log(`\n✨ Exported CapCut / Figma Vietnamese Typography Asset (preset: ${exported.preset})`);
-        console.log(`   SVG Overlay : ${exported.svg_path}`);
-        console.log(`   JSON Config : ${exported.json_path}`);
+        console.log('\n🎬 Supported Scroll Choreography Grammars (5 Grammars):');
+        console.table(Object.values(SCROLL_GRAMMARS).map(g => ({
+            id: g.id,
+            name: g.name,
+            vhBudget: `${g.vhBudget[0]}-${g.vhBudget[1]}vh`,
+            acts: g.acts.length
+        })));
         process.exit(0);
     }
 
@@ -327,14 +352,6 @@ async function main() {
         const fontName = args.slice(1).join(' ') || 'Be Vietnam Pro';
         console.log('\n🔤 Vietnamese Font Support Check (U+0102–U+1EF9):');
         console.log(JSON.stringify(checkVietnameseFontSupport(fontName), null, 2));
-        process.exit(0);
-    }
-
-    if (command === 'format') {
-        const promptText = args[1] || '';
-        const platIdx = args.indexOf('--platform');
-        const platform = platIdx !== -1 ? args[platIdx + 1] : 'nano_banana_pro';
-        console.log(JSON.stringify(formatForPlatform(promptText, platform), null, 2));
         process.exit(0);
     }
 

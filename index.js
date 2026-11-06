@@ -1,32 +1,19 @@
 /**
- * AGS Design & Visual Studio Harness (v2.1.0)
- * 100% Pure JavaScript (Zero Python Dependency)
+ * VibeDesign-Harness (v3.0.0) — Unified UI/UX Design System, App Architecture & Scroll Choreography Engine
+ * 100% Pure JavaScript (Zero Python Dependency, Single-Purpose UI/UX Engineering)
  */
 import { checkFile, fixContent, loadLocalConfig, listLintRules, BANNED_PATTERNS, REQUIRED_PATTERNS } from './harness/ui_linter.js';
 import {
-    expandPrompt,
-    compileStudioImagePrompt,
-    sanitizeImagePrompt,
-    inferStudioAspectRatio,
-    CAPCUT_VN_TYPOGRAPHY_PRESETS,
-    registerDomain,
-    listDomains,
-    VISUAL_DOMAINS
-} from './harness/prompt_expander.js';
-import {
+    generateDesignMD,
+    getTheme,
+    registerTheme,
+    listThemes,
+    THEMES,
     VIETNAMESE_FONT_BLACKLIST,
     VIETNAMESE_SAFE_FONTS,
     hasVietnameseDiacritics,
-    checkVietnameseFontSupport,
-    toMidjourneyFormat,
-    toOpenAIFormat,
-    toFluxFormat,
-    toNanoBananaFormat,
-    toSeedanceFormat,
-    formatForPlatform,
-    exportTypographyAsset
-} from './harness/studio_image_engine.js';
-import { generateDesignMD, getTheme, registerTheme, listThemes, THEMES } from './harness/ags_design_engine.js';
+    checkVietnameseFontSupport
+} from './harness/ags_design_engine.js';
 import { getComponent, listComponents, PRO_COMPONENTS } from './harness/components.js';
 import { scaffoldLandingPage } from './harness/landing_assembler.js';
 import { CRAFT_FLOOR, DESIGN_COMMANDS, listDesignCommands, getDesignCommand, generateProductMD } from './harness/design_commands.js';
@@ -44,6 +31,15 @@ import {
     runLiveUIProbe,
     scaffoldDashboardApp
 } from './harness/app_ui_system.js';
+import {
+    SCROLL_GRAMMARS,
+    CHOREOGRAPHY_DEVICES,
+    VISUAL_WORLDS,
+    recommendScrollChoreography,
+    verifyScrollFingerprint,
+    getScrollChoreographyReference,
+    scaffoldScrollStoryPage
+} from './harness/scroll_choreography.js';
 
 export function lintUI(filePathOrContent, options = {}) {
     return checkFile(filePathOrContent, options);
@@ -66,30 +62,15 @@ export async function fetchRemoteRules() {
 }
 
 export {
-    expandPrompt,
-    compileStudioImagePrompt,
-    sanitizeImagePrompt,
-    inferStudioAspectRatio,
-    CAPCUT_VN_TYPOGRAPHY_PRESETS,
-    VIETNAMESE_FONT_BLACKLIST,
-    VIETNAMESE_SAFE_FONTS,
-    hasVietnameseDiacritics,
-    checkVietnameseFontSupport,
-    toMidjourneyFormat,
-    toOpenAIFormat,
-    toFluxFormat,
-    toNanoBananaFormat,
-    toSeedanceFormat,
-    formatForPlatform,
-    exportTypographyAsset,
-    registerDomain,
-    listDomains,
-    VISUAL_DOMAINS,
     generateDesignMD,
     getTheme,
     registerTheme,
     listThemes,
     THEMES,
+    VIETNAMESE_FONT_BLACKLIST,
+    VIETNAMESE_SAFE_FONTS,
+    hasVietnameseDiacritics,
+    checkVietnameseFontSupport,
     getComponent,
     listComponents,
     PRO_COMPONENTS,
@@ -114,34 +95,27 @@ export {
     generateAppTokensCSS,
     getAppUIReference,
     runLiveUIProbe,
-    scaffoldDashboardApp
+    scaffoldDashboardApp,
+    SCROLL_GRAMMARS,
+    CHOREOGRAPHY_DEVICES,
+    VISUAL_WORLDS,
+    recommendScrollChoreography,
+    verifyScrollFingerprint,
+    getScrollChoreographyReference,
+    scaffoldScrollStoryPage
 };
 
 export default {
     lintUI,
     fixUI,
-    expandPrompt,
-    compileStudioImagePrompt,
-    sanitizeImagePrompt,
-    inferStudioAspectRatio,
-    CAPCUT_VN_TYPOGRAPHY_PRESETS,
-    VIETNAMESE_FONT_BLACKLIST,
-    VIETNAMESE_SAFE_FONTS,
-    hasVietnameseDiacritics,
-    checkVietnameseFontSupport,
-    toMidjourneyFormat,
-    toOpenAIFormat,
-    toFluxFormat,
-    toNanoBananaFormat,
-    toSeedanceFormat,
-    formatForPlatform,
-    exportTypographyAsset,
-    registerDomain,
-    listDomains,
     generateDesignMD,
     getTheme,
     registerTheme,
     listThemes,
+    VIETNAMESE_FONT_BLACKLIST,
+    VIETNAMESE_SAFE_FONTS,
+    hasVietnameseDiacritics,
+    checkVietnameseFontSupport,
     getComponent,
     listComponents,
     scaffoldLandingPage,
@@ -164,5 +138,12 @@ export default {
     generateAppTokensCSS,
     getAppUIReference,
     runLiveUIProbe,
-    scaffoldDashboardApp
+    scaffoldDashboardApp,
+    SCROLL_GRAMMARS,
+    CHOREOGRAPHY_DEVICES,
+    VISUAL_WORLDS,
+    recommendScrollChoreography,
+    verifyScrollFingerprint,
+    getScrollChoreographyReference,
+    scaffoldScrollStoryPage
 };

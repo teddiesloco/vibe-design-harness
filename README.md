@@ -1,82 +1,80 @@
-# AGS Design & Visual Studio Harness (v2.1.0)
+# VibeDesign-Harness (v3.0.0)
 
-[![Version](https://img.shields.io/badge/version-2.1.0-10b981.svg)](#)
-[![Engine](https://img.shields.io/badge/Engine-AGS_Studio_2026-0e1116.svg)](#)
+[![Version](https://img.shields.io/badge/version-3.0.0-10b981.svg)](#)
+[![Focus](https://img.shields.io/badge/Single_Purpose-Pure_UI%2FUX_Engineering-0e1116.svg)](#)
 [![App_UI_UX](https://img.shields.io/badge/App_Dashboard_Faces-10_Faces_%C3%97_49_Specs-4f46e5.svg)](#)
-[![Vietnamese Diacritics](https://img.shields.io/badge/Vietnamese_Glyphs-134%2F134_Verified-1f6f3d.svg)](#)
+[![Scroll_Choreography](https://img.shields.io/badge/Scroll_Choreography-60fps_VibeScroll_Engine-f59e0b.svg)](#)
 
-> **Industrial-Grade UI/UX & App Dashboard Architecture Engine + 35-Gate Anti-Slop Linter (<1ms) + Live Playwright DOM Probe + 5-Platform Visual Prompt Compiler + CapCut Vietnamese Typography Engine for AI Agents.**  
-> Built by **AGS (AgentSea Design System)** for Claude Code, Cursor, Codex, and Hermes Agents.
+> **Single-Purpose, Industrial-Grade UI/UX Engineering Harness for AI Agents:**
+> 1. **App & Dashboard Architecture Engine** (10 Named Faces · 10 Screen Content Layouts · 12 Industry Accent Palettes · 19 Locked Rules · 49 Cleanroom Specs · Tailwind v4 Token Generator).
+> 2. **60fps Scroll Choreography & Scrollytelling Engine** (5 Scroll Grammars · 16 `data-sc-*` Choreography Devices · 8 Visual Worlds · Worldflight Mode · 6-Dimension Uniqueness Fingerprint Gate · Zero-Dependency `vibe-scroll.js` + `vibe-scroll.css`).
+> 3. **Landing Page & Design System Engine** (14 Brand Themes · Paired `DESIGN.md` + `PRODUCT.md` · 12 Post-Processing UI Flows · Curated Pro Component Blocks · Vietnamese Diacritics Guard).
+> 4. **35+ Gate Anti-Slop Linter & Live Playwright DOM Probe** (`lintUI()` / `fixUI()` in `<1ms` + `scripts/probe.mjs` & `scripts/scroll-shoot.mjs`).
 
 ---
 
-## 🏛️ Architecture Overview (v2.1.0)
+## 🏛️ Unified 4-Pillar UI/UX Architecture (v3.0.0)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                         AGS DESIGN & VISUAL STUDIO HARNESS v2.1.0                               │
+│                              VIBE-DESIGN-HARNESS v3.0.0 (PURE UI/UX)                            │
 ├────────────────────────┬────────────────────────┬────────────────────────┬──────────────────────┤
-│ 1. App & Dashboard     │ 2. UI/UX Anti-Slop     │ 3. 5-Engine Studio     │ 4. CapCut VN         │
-│    Architecture Engine │    Linter & Probe      │    Prompt Compiler     │    Typography        │
+│ 1. App & Dashboard     │ 2. Scroll Choreography │ 3. Landing & Design    │ 4. Anti-Slop Linter  │
+│    10-Face System      │    (60fps VibeScroll)  │    System Tokens       │    & Live DOM Probe  │
 ├────────────────────────┼────────────────────────┼────────────────────────┼──────────────────────┤
-│ • 10 Named Faces (5 Ax)│ • 35+ AST/Regex Gates  │ • Nano Banana Pro (2.1)│ • 38 CapCut Fonts    │
-│ • 10 Content Layouts   │ • Scoped Audits & Fix  │ • OpenAI GPT-Image-2   │ • U+0102–U+1EF9      │
-│ • 12 Industry Palettes │ • Live Playwright DOM  │ • ByteDance Seedance   │   Glyph Checker      │
-│ • 19 Locked Rules      │   Probe (probe.mjs)    │ • Midjourney V7        │ • Transparent SVG +  │
-│ • 49 Cleanroom Specs   │ • 15 Landing Themes    │ • FLUX.1 Pro / SDXL    │   CapCut JSON Export │
+│ • 10 Named Faces (5 Ax)│ • 5 Scroll Grammars    │ • 14 Curated Themes    │ • 35+ AST/Regex Gates│
+│ • 10 Content Layouts   │ • 16 data-sc-* Devices │ • Paired DESIGN.md &   │ • Auto-Fixer (<1ms)  │
+│ • 12 Industry Palettes │ • 8 Visual Worlds      │   PRODUCT.md Generator │ • Live Playwright    │
+│ • 19 Locked Rules      │ • Worldflight Rig      │ • 12 Post-Processing   │   Probe (probe.mjs)  │
+│ • 49 Cleanroom Specs   │ • 6-Dim Fingerprint    │   Refinement Flows     │ • Scroll Contact     │
+│ • Tailwind v4 Tokens   │ • vibe-scroll.js/.css  │ • VN Font Glyph Guard  │   Sheet (shoot.mjs)  │
 └────────────────────────┴────────────────────────┴────────────────────────┴──────────────────────┘
 ```
 
 ---
 
-## 🚀 Key Capabilities (v2.1.0)
+## 🚀 Key Capabilities (v3.0.0)
 
-| Module | Capability | Output / Guarantee |
+| Pillar | Core Functions | Output / Guarantee |
 | :--- | :--- | :--- |
-| **10-Face Dashboard Engine** | `recommendDashboardSystem()` & `scaffoldDashboardApp()` | Selects and scaffolds the right App Dashboard Face across 5 orthogonal axes (`Clean`, `Dark Sidebar`, `Soft`, `Midnight`, `Inset`, `Paper`, `Float`, `Rail`, `Topbar`, `Editorial`), 10 job-driven screen layouts, and 12 WCAG-verified industry accent palettes. |
-| **Tailwind v4 Token Generator** | `generateAppTokensCSS()` | Generates complete `:root`, `.dark`, `.force-light`, `.force-dark`, `@theme inline`, semantic status tokens, and 4px transparent-thumb autohide scrollbars (`tokens.css`). |
-| **49 Cleanroom UI/UX Specs** | `getAppUIReference()` | Instant programmatic or CLI lookup across 49 deep layout & component playbooks (`layouts/app`, `layouts/overlay`, `layouts/form`, `styles`, `budgets`, `locked-rules`, `review`, `checklist`, `components/*`). |
-| **Live Playwright DOM Probe** | `runLiveUIProbe()` (`scripts/probe.mjs`) | Multi-viewport (`375..1920`) computed DOM & WCAG inspector with `--quick`, `--stress` (60-char Vietnamese strings & 10-digit numbers), `--sweep`, and `--dark`. |
-| **35+ Gate UI Linter** | `lintUI()` & `fixUI()` | Sub-millisecond audit blocking purple AI gradients, banned fonts, nested cards, solid-red destructive buttons (`I4`), `hover:scale-105` card blur, `scrollbar-none` layout shifts, and Tailwind v4 circular tokens. |
-| **Studio Brief Compiler** | `compileStudioImagePrompt()` | Converts natural Vietnamese or English into a 7-part Art Director Brief + 5 platform adapters (`Nano Banana Pro`, `GPT-Image-2`, `Midjourney V7`, `FLUX`, `Seedance 2.5`). |
-| **CapCut VN Typography** | `checkVietnameseFontSupport()` & `exportTypographyAsset()` | Verifies 134/134 Vietnamese stacked diacritics (`U+0102–U+1EF9`) and exports transparent SVG + CapCut/Figma JSON overlays. |
+| **1. App & Dashboard System** | `recommendDashboardSystem()`, `scaffoldDashboardApp()`, `generateAppTokensCSS()`, `getAppUIReference()` | Selects and scaffolds the optimal App Dashboard Face (`Clean`, `Dark Sidebar`, `Soft`, `Midnight`, `Inset`, `Paper`, `Float`, `Rail`, `Topbar`, `Editorial`), 10 job-driven screen layouts, 12 WCAG-verified industry accents, Tailwind v4 `tokens.css`, and 49 Cleanroom specs. |
+| **2. Scroll Choreography Engine** | `recommendScrollChoreography()`, `scaffoldScrollStoryPage()`, `verifyScrollFingerprint()`, `getScrollChoreographyReference()` | 60fps scrollytelling powered by `vibe-scroll.js` & `vibe-scroll.css` (`scrub`, `pin`, `pan`, `flow`, `worldflight`, `kinetic`, `reveal`, `drift`, `tilt`, `magnet`, `spotlight`). Enforces the 6-dimension Uniqueness Fingerprint Gate (`>= 4/6` dimensions must differ from every prior build). |
+| **3. Landing & Design System** | `generateDesignMD()`, `generateProductMD()`, `scaffoldLandingPage()`, `getDesignCommand()`, `checkVietnameseFontSupport()` | Generates paired `DESIGN.md` + `PRODUCT.md`, scaffolds zero-slop HTML/React TSX landing pages across 14 themes, runs 12 post-processing flows (`polish`, `distill`, `harden`, `critique`, etc.), and guards Vietnamese typography (`U+0102–U+1EF9`). |
+| **4. Linter & Live DOM Probe** | `lintUI()`, `fixUI()`, `runLiveUIProbe()` | Sub-millisecond static audit blocking 35+ AI-slop & dashboard anti-patterns + live Playwright multi-viewport DOM & WCAG inspection (`375..1920`) and scroll contact-sheet verification. |
 
 ---
 
 ## ⚡ CLI Reference
 
 ```bash
-# 1. Recommend App Dashboard Face, Screen Content Layout & Industry Accent
-npx vibe-design-harness dashboard "Nhân viên kế toán" --job "Bảng dữ liệu" --industry "Tài chính"
-
-# 2. Scaffold a zero-slop App Dashboard screen (HTML or React TSX)
+# 1. App & Dashboard Architecture (10 Faces × 10 Layouts × 49 Specs)
+npx vibe-design-harness dashboard "ketoan" --job "bang du lieu" --industry "tai chinh"
 npx vibe-design-harness scaffold-dashboard clean Dashboard.html
-npx vibe-design-harness scaffold-dashboard dark_sidebar Dashboard.tsx --framework react --accent indigo
-
-# 3. Generate production Tailwind v4 tokens.css (:root, .dark, @theme inline, 4px autohide scrollbar)
 npx vibe-design-harness tokens-css soft violet tokens.css
-
-# 4. Browse or read any of the 49 Cleanroom App UI/UX reference specs
-npx vibe-design-harness ui-ref list
 npx vibe-design-harness ui-ref layouts/app
-npx vibe-design-harness ui-ref components/charts
 
-# 5. Run live Playwright multi-viewport DOM & WCAG inspector
-npx vibe-design-harness probe http://localhost:3000 --quick --stress
+# 2. Scroll Choreography & Scrollytelling (5 Grammars × 16 Devices × 8 Worlds)
+npx vibe-design-harness scroll "luxury architectural resort spatial flythrough"
+npx vibe-design-harness scaffold-scroll Story.html --brand "AETHER" --grammar filmic_six_act --inline
+npx vibe-design-harness scroll-ref devices
+npx vibe-design-harness scroll-ref engine/vibe-scroll.js
 
-# 6. Audit & auto-fix HTML/React TSX files for 35+ AI-slop & Dashboard rules (<1ms)
-npx vibe-design-harness lint src/App.tsx --fix
-
-# 7. Compile visual prompts & check Vietnamese fonts (U+0102–U+1EF9)
-npx vibe-design-harness format "Poster dọc du lịch đảo Phú Quý hoàng hôn" --platform midjourney
+# 3. Landing Pages, Design System Tokens & 12 Post-Processing Commands
+npx vibe-design-harness init-context ags_editorial --name "AgentSea"
+npx vibe-design-harness scaffold linear Landing.tsx --framework react
+npx vibe-design-harness command polish
 npx vibe-design-harness check-font "Be Vietnam Pro"
+
+# 4. 35+ Gate Anti-Slop Linter & Live Playwright DOM Probe
+npx vibe-design-harness lint src/App.tsx --fix
+npx vibe-design-harness probe http://localhost:3000 --quick --stress
 ```
 
 ---
 
-## 🔌 Model Context Protocol (MCP Server — 14 Tools)
+## 🔌 Model Context Protocol (MCP Server — 13 UI/UX Tools)
 
-Add **AGS Design Harness MCP** to Claude Desktop, Claude Code, Cursor, or Hermes Agent:
+Add **VibeDesign-Harness MCP** to Claude Code, Cursor, Codex, or Hermes Agent:
 
 ```json
 {
@@ -89,53 +87,52 @@ Add **AGS Design Harness MCP** to Claude Desktop, Claude Code, Cursor, or Hermes
 }
 ```
 
-### Exposed MCP Tools (14 Tools)
-1. `recommend_dashboard_system` — Recommends Dashboard Face (10 Faces), Screen Content Layout (10 layouts), and WCAG Industry Accent Palette.
-2. `scaffold_dashboard_app` — Scaffolds zero-slop App Dashboard screens (HTML or React TSX) following the 10-Face Architecture and 19 Locked Rules.
-3. `generate_app_tokens_css` — Generates Tailwind v4 `tokens.css` with `:root`, `.dark`, `@theme inline`, and 4px autohide scrollbars.
-4. `get_app_ui_reference` — Reads or lists the 49 Cleanroom App UI/UX reference playbooks & component specifications.
-5. `run_live_ui_probe` — Runs or builds the CLI command for the live Playwright multi-viewport DOM & WCAG probe (`scripts/probe.mjs`).
-6. `lint_ui_aesthetic` — Runs the 35+ gate deterministic UI/UX & Dashboard anti-slop linter + auto-fixer.
-7. `scaffold_landing_page` — Scaffolds complete HTML or React TSX landing pages across 15 themes.
-8. `run_design_command` — Executes 12 post-processing design flows (`audit`, `critique`, `polish`, `distill`, `bolder`, `quieter`, `delight`, `harden`, `clarify`, `adapt`, `colorize`, `animate`).
-9. `generate_design_system` — Generates paired `DESIGN.md` + `PRODUCT.md` brand specifications.
-10. `compile_studio_brief` — Compiles natural Vietnamese/English prompts into a 7-part Studio Image Brief + platform-specific payload.
-11. `get_capcut_preset` — Returns verified CapCut Vietnamese typography presets.
-12. `check_vietnamese_font` — Checks font compatibility with Vietnamese extended Unicode (`U+0102–U+1EF9`).
-13. `export_typography_asset` — Generates transparent SVG + CapCut/Figma JSON typography overlays.
-14. `expand_image_prompt` — Expands prompts across 35+ camera-physics domains.
+### Exposed MCP Tools (13 Focused UI/UX Tools)
+1. `lint_ui_aesthetic` — Runs the 35+ gate deterministic UI/UX & Dashboard anti-slop linter + auto-fixer.
+2. `generate_design_system` — Generates paired `DESIGN.md` + `PRODUCT.md` brand specifications across 14 themes.
+3. `scaffold_landing_page` — Scaffolds complete HTML or React TSX landing pages.
+4. `recommend_dashboard_system` — Recommends Dashboard Face (10 Faces), Screen Content Layout (10 layouts), and WCAG Industry Accent Palette.
+5. `scaffold_dashboard_app` — Scaffolds zero-slop App Dashboard screens (HTML or React TSX) following the 10-Face Architecture and 19 Locked Rules.
+6. `generate_app_tokens_css` — Generates Tailwind v4 `tokens.css` with `:root`, `.dark`, `@theme inline`, and 4px autohide scrollbars.
+7. `get_app_ui_reference` — Reads or lists the 49 Cleanroom App UI/UX reference playbooks & component specifications.
+8. `recommend_scroll_choreography` — Recommends a 60fps Scroll Choreography Blueprint (5 Scroll Grammars, 8 Visual Worlds, 16 Choreography Devices).
+9. `scaffold_scroll_story` — Scaffolds a 60fps Scrollytelling page powered by `vibe-scroll.js` and `vibe-scroll.css`.
+10. `get_scroll_choreography_reference` — Reads or lists the 14 Cleanroom Scroll Choreography specifications & runtime engine files.
+11. `verify_scroll_fingerprint` — Validates a planned scrollytelling build against the 6-dimension Uniqueness Fingerprint Gate (`>= 4/6` differences).
+12. `run_live_ui_probe` — Runs or builds the CLI command for the live Playwright multi-viewport DOM & WCAG probe (`scripts/probe.mjs`).
+13. `run_design_command` & `check_vietnamese_font` — Executes 12 post-processing UI flows and validates Vietnamese font glyph support.
 
 ---
 
-## 📂 Repository Structure
+## 📂 Clean Repository Structure
 
 ```
 vibe-design-harness/
 ├── bin/
-│   ├── cli.js                    # Unified CLI (dashboard, scaffold-dashboard, tokens-css, ui-ref, probe, lint, etc.)
-│   └── mcp-server.js             # 14-Tool Model Context Protocol (MCP) stdio server
+│   ├── cli.js                        # Unified UI/UX CLI (lint, dashboard, scroll, scaffold, tokens-css, probe)
+│   └── mcp-server.js                 # 13-Tool Model Context Protocol (MCP) stdio server
 ├── harness/
-│   ├── app_ui_system.js          # Cleanroom 10-Face Dashboard Engine, 10 Content Layouts, 12 Industry Palettes, Token Generator
-│   ├── ags_design_engine.js      # 15 Brand Themes (incl. ags_editorial) & DESIGN.md generator
-│   ├── studio_image_engine.js    # 5 Platform Adapters, VN Font Checker & CapCut SVG/JSON Exporter
-│   ├── prompt_expander.js        # 7-Part Studio Image Compiler & 35+ Visual Domains
-│   ├── ui_linter.js              # 35+ Gate Sub-Millisecond Anti-Slop & Dashboard UI/UX Linter & Auto-Fixer
-│   ├── design_commands.js        # 12 Post-Processing Design Flows & Craft Floor
-│   ├── components.js             # Curated Pro UI Component Blocks (HTML & React TSX)
-│   ├── landing_assembler.js      # Full-Page Landing Page Assembler
-│   └── remote_rules.json         # Syncable Anti-Slop Ban Rules
+│   ├── ags_design_engine.js          # 14 Brand Themes, DESIGN.md generator & Vietnamese Font Guard
+│   ├── app_ui_system.js              # 10-Face Dashboard Engine, 10 Content Layouts, 12 Industry Palettes, Token Generator
+│   ├── scroll_choreography.js        # 60fps Scroll Choreography Engine (5 Grammars, 16 Devices, 8 Worlds, Fingerprint Gate)
+│   ├── ui_linter.js                  # 35+ Gate Sub-Millisecond Anti-Slop & Dashboard Linter & Auto-Fixer
+│   ├── design_commands.js            # 12 Post-Processing UI Flows & Craft Floor
+│   ├── components.js                 # Curated Pro UI Component Blocks (HTML & React TSX)
+│   ├── landing_assembler.js          # Full-Page Landing Page Assembler
+│   └── remote_rules.json             # Syncable Anti-Slop Ban Rules
 ├── references/
-│   └── app-ui-ux/                # 49 Cleanroom App UI/UX Markdown & CSS Specifications (layouts, components, rules, tokens.css)
+│   ├── app-ui-ux/                    # 49 Cleanroom App & Dashboard UI/UX Specifications (layouts, components, rules, tokens.css)
+│   └── scroll-choreography/          # 14 Cleanroom Scrollytelling Specs & Runtime (engine/vibe-scroll.js, engine/vibe-scroll.css)
 ├── scripts/
-│   ├── probe.mjs                 # Live Playwright Multi-Viewport DOM, Overflow, Contrast & Stress Probe
-│   └── lint-skill.mjs            # Cleanroom Prose & Specification Linter
-├── prompts/
-│   └── prompt_bank.json          # Curated Studio Prompt Templates
+│   ├── probe.mjs                     # Live Playwright Multi-Viewport DOM, Overflow, Contrast & Stress Probe
+│   ├── scroll-shoot.mjs              # Playwright Scroll Contact-Sheet & Cue Settlement Harness
+│   ├── worldflight-assert.mjs        # Continuous Camera Worldflight Rig Assertions
+│   └── lint-skill.mjs                # Cleanroom Reference Prose & Specification Linter
 ├── tests/
-│   └── test.js                   # Zero-Defect Automated Test Runner
-├── index.js                      # ESM Public API Entry Point
-├── SKILL.md                      # Agent Skill Specification
-└── package.json                  # Package Manifest (v2.1.0)
+│   └── test.js                       # 7-Suite Zero-Defect Automated Test Runner
+├── index.js                          # ESM Public API Entry Point
+├── SKILL.md                          # Agent Skill Specification
+└── package.json                      # Package Manifest (v3.0.0)
 ```
 
 ---

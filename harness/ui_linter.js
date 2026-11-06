@@ -1,10 +1,10 @@
 /**
- * VibeDesign-Harness UI Linter & Aesthetic Auditor (v1.6.0 — 30+ Anti-Slop Gates + AGS Studio Engine)
+ * VibeDesign-Harness UI Linter & Aesthetic Auditor (v3.0.0 — 35+ Anti-Slop & Architecture Gates)
  * 100% Pure JavaScript (Zero Python Dependency, Zero External Runtime, <1ms execution)
  * Supports:
- *  - .viberc.json / .impeccable/config.json auto-loading
- *  - Scoped detection (--scope layout|type|color|motion|copy|slop|all)
- *  - Inline ignore comments (<!-- vibe-disable rule-id --> or <!-- impeccable-disable rule-id -->)
+ *  - .viberc.json / .vibe-design/config.json auto-loading
+ *  - Scoped detection (--scope layout|type|color|motion|copy|slop|dashboard|all)
+ *  - Inline ignore comments (<!-- vibe-disable rule-id -->)
  *  - --fix deterministic auto-remediation
  */
 
@@ -278,14 +278,14 @@ export function listLintRules(scope = null) {
 }
 
 /**
- * Auto-discover and load local .viberc.json, vibe.config.json, or .impeccable/config.json if present
+ * Auto-discover and load local .viberc.json, vibe.config.json, or .vibe-design/config.json if present
  */
 export function loadLocalConfig(customPath = null) {
     const candidates = customPath ? [customPath] : [
         path.resolve(process.cwd(), '.viberc.json'),
         path.resolve(process.cwd(), '.viberc'),
         path.resolve(process.cwd(), 'vibe.config.json'),
-        path.resolve(process.cwd(), '.impeccable/config.json')
+        path.resolve(process.cwd(), '.vibe-design/config.json')
     ];
 
     for (const file of candidates) {
@@ -302,11 +302,11 @@ export function loadLocalConfig(customPath = null) {
 }
 
 /**
- * Parse inline ignore comments: <!-- vibe-disable rule1, rule2 --> or <!-- impeccable-disable rule1 -->
+ * Parse inline ignore comments: <!-- vibe-disable rule1, rule2 -->
  */
 function extractInlineIgnores(content) {
     const ignored = new Set();
-    const regex = /(?:vibe-disable|impeccable-disable)(?:-line|-next-line)?\s+([a-z0-9_,\s*-]+?)(?:-->|\*\/|\n|$)/gi;
+    const regex = /(?:vibe-disable)(?:-line|-next-line)?\s+([a-z0-9_,\s*-]+?)(?:-->|\*\/|\n|$)/gi;
     let match;
     while ((match = regex.exec(content)) !== null) {
         const tokens = match[1].split(/[,\s]+/).map(s => s.trim().toLowerCase()).filter(Boolean);
