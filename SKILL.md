@@ -1,11 +1,11 @@
 ---
 name: vibe-design-harness
-description: "Use when designing UI/UX, dashboards, web apps, landing pages, scrollytelling experiences, forms, or tables. Enforces the Cleanroom 10-Face App Dashboard Architecture (49 specs), 60fps Scroll Choreography Engine (5 grammars, 16 devices, VibeScroll runtime), 14 Brand Themes, 35+ Gate Anti-Slop Linter, and Live Playwright DOM Probe."
+description: "Use when designing UI/UX, dashboards, web apps, landing pages, scrollytelling experiences, forms, or tables. Enforces the Cleanroom 10-Face App Dashboard Architecture (49 specs), 60fps Scroll Choreography Engine (5 grammars, 16 devices, VibeScroll runtime), Reverse DESIGN.md Extractor, W3C DTCG 3-Tier Token Compiler, 2-Layer Material Discipline, 14 Brand Themes, 40+ Gate Anti-Slop Linter, and Interactive Truth Verifier."
 ---
 
-# VibeDesign-Harness (v3.0.0) — Pure UI/UX Engineering System
+# VibeDesign-Harness (v3.1.0) — Pure UI/UX Engineering System
 
-> **Single-Purpose UI/UX Engine:** Unifies **App & Dashboard Architecture** (10 Named Faces · 10 Screen Content Layouts · 12 Industry Palettes · 49 Reference Specs), **60fps Scroll Choreography** (5 Scroll Grammars · 16 `data-sc-*` Devices · 8 Visual Worlds · `vibe-scroll.js`/`.css`), **Landing Page & Design System Tokens** (14 Themes · 12 Post-Processing Flows · Vietnamese Font Guard), and **35+ Gate Anti-Slop Linter + Live Playwright DOM Probe**.
+> **Single-Purpose UI/UX Engine:** Unifies **App & Dashboard Architecture** (10 Named Faces · 10 Screen Content Layouts · 12 Industry Palettes · 49 Reference Specs), **60fps Scroll Choreography** (5 Scroll Grammars · 16 `data-sc-*` Devices · 8 Visual Worlds · `vibe-scroll.js`/`.css`), **Reverse DESIGN.md Extractor & W3C DTCG 3-Tier Token Compiler**, **2-Layer Spatial Material Discipline (Liquid Glass vs. Opaque Content)**, **Landing Page & Design System Tokens** (14 Themes · 12 Post-Processing Flows · Vietnamese Font Guard), and **40+ Gate Anti-Slop Linter + Interactive Truth & Live Playwright DOM Probe**.
 
 ## 1. App & Dashboard UI/UX Workflow (10-Face Architecture)
 
@@ -36,15 +36,27 @@ Whenever building an immersive product launch, cinematic landing page, spatial f
 3. **Scaffold & Verify (`scaffoldScrollStoryPage` / CLI `scaffold-scroll` / `scripts/scroll-shoot.mjs`)**:
    - Generates self-contained or linked HTML using `references/scroll-choreography/engine/vibe-scroll.js` and `vibe-scroll.css`.
 
-## 3. Anti-Slop Linting, Post-Processing & Live Playwright Verification
+## 3. Reverse DESIGN.md Extraction, W3C DTCG Tokens, 2-Layer Material & Thesis Preview (v3.1.0)
 
-1. **Initialize Paired Design Context (`PRODUCT.md` + `DESIGN.md`)**:
-   ```bash
-   npx vibe-design-harness init-context ags_editorial --name "AgentSea"
-   ```
-2. **Audit & Auto-Fix Every UI File Before Delivery (`<1ms`)**:
+1. **Reverse-Engineer `DESIGN.md` from Any Existing Repo (`extractDesignSystemFromRepo` / CLI `extract-design` / MCP `extract_design_system_from_repo`)**:
+   - Scans existing CSS/Tailwind/TSX/HTML files to extract surface luminance roles, CSS custom properties, typography, border radii, and spacing rhythm before adding new screens.
+2. **Compile W3C DTCG 3-Tier Tokens (`compileDTCGTokens` / CLI `compile-dtcg` / MCP `compile_dtcg_tokens`)**:
+   - Resolves `Primitive -> Semantic -> Component` aliases and re-resolves component tokens in `.dark` mode so dark surfaces never inherit light ink.
+3. **Enforce 2-Layer Spatial Material Discipline (`TWO_LAYER_MATERIAL_SPEC` / CLI `material-spec` / MCP `get_two_layer_material_spec`)**:
+   - **Functional Layer** (`header`, `nav`, floating toolbars, sheets, popovers): Allowed to use Liquid Glass (`backdrop-blur-xl`) with mandatory `@media (prefers-reduced-transparency: reduce)` opaque fallback.
+   - **Content Layer** (`main`, `section`, `article`, `table`, data cards): Must remain **100% opaque**; `backdrop-blur` on Content Layer elements is blocked by the linter (`liquid-glass-on-content-card`).
+4. **Generate Interactive Visual & Motion Thesis Preview (`generateDesignPreviewHTML` / CLI `preview-thesis` / MCP `generate_design_preview_html`)**:
+   - Produces a self-contained HTML specimen plotting the SVG `cubic-bezier` curve, live motion replay, dual-polarity WCAG contrast swatches, and the 5-state interactive button matrix.
+
+## 4. 40+ Gate Anti-Slop Linting, Interactive Truth & Live Playwright Verification
+
+1. **Audit & Auto-Fix Every UI File Before Delivery (`<1ms`)**:
    ```bash
    npx vibe-design-harness lint <file.html|file.tsx> --fix
+   ```
+2. **Run Interactive Truth & Token-by-Intent Verification**:
+   ```bash
+   npx vibe-design-harness verify-interactive <file.html|url>
    ```
 3. **Run 12 Post-Processing UI Flows**:
    ```bash

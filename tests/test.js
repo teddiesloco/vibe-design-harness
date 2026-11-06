@@ -26,8 +26,17 @@ import {
     recommendScrollChoreography,
     verifyScrollFingerprint,
     getScrollChoreographyReference,
-    scaffoldScrollStoryPage
+    scaffoldScrollStoryPage,
+    TWO_LAYER_MATERIAL_SPEC,
+    DEFAULT_DTCG_TOKENS,
+    getContrastRatio,
+    extractDesignSystemFromRepo,
+    compileDTCGTokens,
+    generateDesignPreviewHTML
 } from '../index.js';
+import fs from 'fs';
+import path from 'path';
+import { runInteractiveTruthAudit } from '../scripts/verify-interactive.mjs';
 
 console.log('🧪 Starting VibeDesign-Harness v3.0.0 Unified UI/UX Test Suite...\n');
 
@@ -227,4 +236,41 @@ assert(storyPage.html.includes('data-sc-act="pin"'), 'Scaffolded scroll story mu
 assert(storyPage.html.includes('window.VibeScroll.mount'), 'Scaffolded scroll story must mount VibeScroll');
 console.log('✅ Test 7 Passed: Scroll Choreography Engine, VibeScroll Runtime & 6-Dimension Fingerprint Gate verified.');
 
-console.log('\n🎉 ALL 7 UNIFIED UI/UX TEST SUITES PASSED (100% Zero Defect — v3.0.0 Ready).\n');
+// Test 8: v3.1.0 Reverse DESIGN.md Extractor, W3C DTCG 3-Tier Compiler, 2-Layer Material Gate & Thesis Preview
+console.log('\nTest 8: Verifying Reverse DESIGN.md Extractor, W3C DTCG 3-Tier Compiler & 2-Layer Material Gate...');
+const extracted = extractDesignSystemFromRepo(process.cwd(), { projectName: 'VibeDesignHarness' });
+assert(extracted.filesScanned >= 5, `Extractor must scan code/CSS files, got ${extracted.filesScanned}`);
+assert(extracted.designMD.includes('# DESIGN.md — Reverse-Engineered Design System (VibeDesignHarness)'), 'Extractor must output structured DESIGN.md');
+
+const dtcgOut = compileDTCGTokens(DEFAULT_DTCG_TOKENS);
+assert.strictEqual(dtcgOut.valid, true, `DTCG compiler must have zero unresolved aliases, got: ${JSON.stringify(dtcgOut.unresolved)}`);
+assert(dtcgOut.css.includes('--card-bg: #ffffff;'), 'Light mode component token must resolve through semantic tier');
+assert(dtcgOut.css.includes('--card-bg: #18181b;'), 'Dark mode component token must re-resolve through dark semantic override map');
+
+assert(TWO_LAYER_MATERIAL_SPEC.functional_layer.locked_rules.length >= 4, 'Must define 2-Layer Material locked rules');
+assert(getContrastRatio('#09090b', '#ffffff') >= 18, 'Contrast calculator must compute accurate WCAG ratio');
+
+const glassMisuseHtml = '<main class="bg-zinc-950 font-sans backdrop-blur-xl"><div>SYSTEM // 2025</div><span>ESTD. 2019</span><div>Scroll to explore</div><div class="min-h-screen"></div></main>';
+const glassLint = lintUI(glassMisuseHtml);
+assert.strictEqual(glassLint.passed, false, 'Must reject backdrop-blur on Content Layer, fabricated tells, and min-h-screen');
+assert(glassLint.violation_count >= 5, `Expected >=5 violations for glass + tells + viewport trap, got ${glassLint.violation_count}`);
+
+const fixedViewport = fixUI(glassMisuseHtml);
+assert(fixedViewport.fixedContent.includes('min-h-dvh'), 'Auto-fixer must upgrade min-h-screen to min-h-dvh');
+
+const previewHtml = generateDesignPreviewHTML({ brandName: 'AgentSea Studio', primaryHex: '#4f46e5' });
+const previewLint = lintUI(previewHtml);
+assert.strictEqual(previewLint.passed, true, `Generated Thesis Preview HTML must pass 100% of lint gates: ${JSON.stringify(previewLint.errors)}`);
+
+const tmpPreviewPath = path.resolve(process.cwd(), '.tmp-thesis-preview.html');
+fs.writeFileSync(tmpPreviewPath, previewHtml, 'utf-8');
+try {
+    const liveAudit = await runInteractiveTruthAudit(tmpPreviewPath);
+    assert.strictEqual(liveAudit.passed, true, `Live Playwright Interactive Truth Audit must pass on Thesis Preview: ${JSON.stringify(liveAudit.failures)}`);
+    assert(liveAudit.testedControls >= 2, 'Interactive Truth Audit must click and verify toggle controls');
+} finally {
+    if (fs.existsSync(tmpPreviewPath)) fs.unlinkSync(tmpPreviewPath);
+}
+console.log('✅ Test 8 Passed: Reverse DESIGN.md Extractor, DTCG 3-Tier Compiler, 2-Layer Material Gate & Live Playwright Interactive Truth verified.');
+
+console.log('\n🎉 ALL 8 UNIFIED UI/UX TEST SUITES PASSED (100% Zero Defect — v3.1.0 Ready).\n');

@@ -21,7 +21,7 @@ import { ArrowRight, ShieldCheck, Zap, Layers } from 'lucide-react';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen ${theme.color_mode === 'dark' ? 'bg-zinc-950 text-zinc-100' : 'bg-white text-zinc-900'} antialiased font-sans selection:bg-zinc-800 selection:text-white">
+    <div className="min-h-dvh ${theme.color_mode === 'dark' ? 'bg-zinc-950 text-zinc-100' : 'bg-white text-zinc-900'} antialiased font-sans selection:bg-zinc-800 selection:text-white">
       {/* 1. Header Navigation */}
       <header className="sticky top-0 z-50 backdrop-blur-md border-b ${theme.color_mode === 'dark' ? 'border-zinc-800/80 bg-zinc-950/70' : 'border-zinc-200/80 bg-white/70'}">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">

@@ -30,10 +30,16 @@ import {
     recommendScrollChoreography,
     verifyScrollFingerprint,
     getScrollChoreographyReference,
-    scaffoldScrollStoryPage
+    scaffoldScrollStoryPage,
+    TWO_LAYER_MATERIAL_SPEC,
+    DEFAULT_DTCG_TOKENS,
+    extractDesignSystemFromRepo,
+    compileDTCGTokens,
+    generateDesignPreviewHTML
 } from '../index.js';
 import fs from 'fs';
 import path from 'path';
+import { spawnSync } from 'child_process';
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -68,6 +74,13 @@ Scroll Choreography Commands (60fps Scrollytelling Engine):
   scaffold-scroll [output] [--grammar <g>] [--world <w>] [--brand <name>] [--inline] Assemble a 60fps Scrollytelling page powered by VibeScroll
   scroll-ref [topic]                     Read or list the 14 Cleanroom Scroll Choreography specs & runtime (engine/vibe-scroll.js, engine/vibe-scroll.css, devices, worldflight, etc.)
   fingerprint <jsonCandidate> [jsonHistory] Validate a build against the 6-dimension Uniqueness Fingerprint Gate (>= 4/6 dimensions must differ)
+
+Advanced v3.1.0 Token & Interactive Truth Commands:
+  extract-design [dirOrFile] [--out <file>] Reverse-engineer DESIGN.md & CSS tokens from an existing codebase
+  compile-dtcg [jsonFile] [--out <file>] Compile W3C DTCG 3-tier tokens (Primitive -> Semantic -> Component + Dark Mode)
+  preview-thesis [output.html] [--brand <name>] [--primary <hex>] Generate self-contained Interactive Visual & Motion Thesis Preview HTML
+  material-spec                          Print 2-Layer Spatial Material Discipline (Liquid Glass vs. Opaque Content Layer) & cross-platform adapters
+  verify-interactive <urlOrHtml> [--json] Run live Playwright Interactive Truth, Token-by-Intent & Screen Economy audit
 
 Examples:
   npx vibe-design-harness lint src/App.tsx --fix
@@ -359,6 +372,72 @@ async function main() {
         console.log('\n🧱 Curated Pro Component Blocks:');
         console.table(listComponents());
         process.exit(0);
+    }
+
+    if (command === 'extract-design') {
+        const target = (args[1] && !args[1].startsWith('--')) ? args[1] : process.cwd();
+        const outIdx = args.indexOf('--out');
+        const outFile = outIdx !== -1 ? args[outIdx + 1] : null;
+        const res = extractDesignSystemFromRepo(target);
+        if (outFile) {
+            const resolvedOut = path.resolve(process.cwd(), outFile);
+            fs.writeFileSync(resolvedOut, res.designMD, 'utf-8');
+            console.log(`✅ Extracted DESIGN.md from ${res.filesScanned} files -> ${outFile}`);
+        } else {
+            console.log(res.designMD);
+        }
+        process.exit(0);
+    }
+
+    if (command === 'compile-dtcg') {
+        const inputPath = (args[1] && !args[1].startsWith('--')) ? args[1] : null;
+        const outIdx = args.indexOf('--out');
+        const outFile = outIdx !== -1 ? args[outIdx + 1] : null;
+        const tree = inputPath && fs.existsSync(inputPath)
+            ? JSON.parse(fs.readFileSync(inputPath, 'utf-8'))
+            : DEFAULT_DTCG_TOKENS;
+        const res = compileDTCGTokens(tree);
+        if (outFile) {
+            const resolvedOut = path.resolve(process.cwd(), outFile);
+            fs.writeFileSync(resolvedOut, res.css, 'utf-8');
+            console.log(`✅ Compiled W3C DTCG 3-tier tokens (${res.lightTokenCount} light / ${res.darkTokenCount} dark) -> ${outFile}`);
+        } else {
+            console.log(res.css);
+        }
+        process.exit(res.valid ? 0 : 1);
+    }
+
+    if (command === 'preview-thesis') {
+        const outFile = (args[1] && !args[1].startsWith('--')) ? args[1] : null;
+        const bIdx = args.indexOf('--brand');
+        const brandName = bIdx !== -1 ? args[bIdx + 1] : 'AgentSea Studio';
+        const pIdx = args.indexOf('--primary');
+        const primaryHex = pIdx !== -1 ? args[pIdx + 1] : '#4f46e5';
+        const html = generateDesignPreviewHTML({ brandName, primaryHex });
+        if (outFile) {
+            const resolvedOut = path.resolve(process.cwd(), outFile);
+            fs.writeFileSync(resolvedOut, html, 'utf-8');
+            console.log(`🎉 Generated Interactive Visual & Motion Thesis Preview -> ${outFile}`);
+        } else {
+            console.log(html);
+        }
+        process.exit(0);
+    }
+
+    if (command === 'material-spec') {
+        console.log(JSON.stringify(TWO_LAYER_MATERIAL_SPEC, null, 2));
+        process.exit(0);
+    }
+
+    if (command === 'verify-interactive') {
+        const target = args[1];
+        if (!target) {
+            console.error('Usage: npx vibe-design-harness verify-interactive <url-or-html-file> [--json]');
+            process.exit(1);
+        }
+        const scriptPath = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../scripts/verify-interactive.mjs');
+        const proc = spawnSync(process.execPath, [scriptPath, ...args.slice(1)], { stdio: 'inherit' });
+        process.exit(proc.status ?? 0);
     }
 
     console.error(`❌ Unknown command: ${command}`);

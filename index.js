@@ -1,5 +1,6 @@
 /**
- * VibeDesign-Harness (v3.0.0) — Unified UI/UX Design System, App Architecture & Scroll Choreography Engine
+ * VibeDesign-Harness (v3.1.0) — Unified UI/UX Design System, App Architecture,
+ * Scroll Choreography, Reverse Token Extractor & Interactive Truth Engine
  * 100% Pure JavaScript (Zero Python Dependency, Single-Purpose UI/UX Engineering)
  */
 import { checkFile, fixContent, loadLocalConfig, listLintRules, BANNED_PATTERNS, REQUIRED_PATTERNS } from './harness/ui_linter.js';
@@ -40,6 +41,16 @@ import {
     getScrollChoreographyReference,
     scaffoldScrollStoryPage
 } from './harness/scroll_choreography.js';
+import {
+    TWO_LAYER_MATERIAL_SPEC,
+    DEFAULT_DTCG_TOKENS,
+    hexToRgb,
+    relativeLuminance,
+    getContrastRatio,
+    extractDesignSystemFromRepo,
+    compileDTCGTokens,
+    generateDesignPreviewHTML
+} from './harness/design_extractor.js';
 
 export function lintUI(filePathOrContent, options = {}) {
     return checkFile(filePathOrContent, options);
@@ -102,7 +113,15 @@ export {
     recommendScrollChoreography,
     verifyScrollFingerprint,
     getScrollChoreographyReference,
-    scaffoldScrollStoryPage
+    scaffoldScrollStoryPage,
+    TWO_LAYER_MATERIAL_SPEC,
+    DEFAULT_DTCG_TOKENS,
+    hexToRgb,
+    relativeLuminance,
+    getContrastRatio,
+    extractDesignSystemFromRepo,
+    compileDTCGTokens,
+    generateDesignPreviewHTML
 };
 
 export default {
@@ -145,5 +164,13 @@ export default {
     recommendScrollChoreography,
     verifyScrollFingerprint,
     getScrollChoreographyReference,
-    scaffoldScrollStoryPage
+    scaffoldScrollStoryPage,
+    TWO_LAYER_MATERIAL_SPEC,
+    DEFAULT_DTCG_TOKENS,
+    hexToRgb,
+    relativeLuminance,
+    getContrastRatio,
+    extractDesignSystemFromRepo,
+    compileDTCGTokens,
+    generateDesignPreviewHTML
 };

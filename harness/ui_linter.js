@@ -253,6 +253,39 @@ export const BANNED_PATTERNS = [
         scope: 'dashboard',
         pattern: /--color-([a-z0-9-]+):\s*var\(--color-\1\)/i,
         message: 'Tailwind v4 Trap (W2): Self-referential @theme token (--color-x: var(--color-x)) creates a circular CSS variable; map to var(--x) instead [tailwind-v4-self-referential-token]'
+    },
+
+    // --- 2-LAYER MATERIAL (LIQUID GLASS) & FABRICATED AI TELL GATES (v3.1.0) ---
+    {
+        id: 'liquid-glass-on-content-card',
+        scope: 'material',
+        pattern: /<(?:article|section|table|tr|td|li|main)[^>]*class(?:Name)?=["'][^"']*\bbackdrop-blur(?:-(?:sm|md|lg|xl|2xl|3xl))?\b[^"']*["']/i,
+        message: '2-Layer Material Rule: Translucent glass (backdrop-blur) belongs strictly on the Functional Layer (floating nav, toolbar, tabbar, sheet, modal), never on Content Layer elements (<article>, <section>, <table>, <li>, <main>) [liquid-glass-on-content-card]'
+    },
+    {
+        id: 'fabricated-slash-year-label',
+        scope: 'slop',
+        pattern: /\b(?:SYSTEM|METRICS|EDITION|ARCHIVE|PROTOCOL|RELEASE|STATUS)\s*\/\/\s*202[0-9]\b/i,
+        message: 'Fabricated "LABEL // YEAR" header (e.g., SYSTEM // 2025) is a signature AI decoration tell [fabricated-slash-year-label]'
+    },
+    {
+        id: 'fabricated-estd-badge',
+        scope: 'slop',
+        pattern: />\s*EST(?:D|ABLISHED)?\.?\s+(?:19|20)\d{2}\s*</i,
+        message: 'Invented "ESTD. YYYY" heritage badge in a generated UI is an AI fabrication tell [fabricated-estd-badge]'
+    },
+    {
+        id: 'scroll-to-explore-filler',
+        scope: 'copy',
+        pattern: />\s*(?:Scroll\s+to\s+explore|Swipe\s+down\s+to\s+discover|Scroll\s+down\s+for\s+more)\s*</i,
+        message: 'Filler scroll prompt ("Scroll to explore") is a banned AI cliché; use visual framing to pull the reader down [scroll-to-explore-filler]'
+    },
+    {
+        id: 'viewport-h-screen-ios-trap',
+        scope: 'layout',
+        pattern: /\bmin-h-screen\b|\bh-screen\b/i,
+        message: 'Viewport Trap: Use min-h-dvh or h-dvh instead of min-h-screen / h-screen to prevent iOS Safari dynamic address-bar layout jumps [viewport-h-screen-ios-trap]',
+        fix: 'min-h-dvh'
     }
 ];
 
@@ -489,6 +522,16 @@ export function fixContent(content) {
     // 12. Fix hover:scale-105 on cards -> hover:shadow-md (Rule P7/F22)
     if (/\bhover:scale-(?:105|110)\b/i.test(fixed)) {
         fixed = fixed.replace(/\bhover:scale-(?:105|110)\b/gi, 'hover:shadow-md');
+        fixCount++;
+    }
+
+    // 13. Fix min-h-screen / h-screen -> min-h-dvh / h-dvh (iOS Safari viewport jump)
+    if (/\bmin-h-screen\b/i.test(fixed)) {
+        fixed = fixed.replace(/\bmin-h-screen\b/gi, 'min-h-dvh');
+        fixCount++;
+    }
+    if (/\bh-screen\b/i.test(fixed)) {
+        fixed = fixed.replace(/\bh-screen\b/gi, 'h-dvh');
         fixCount++;
     }
 

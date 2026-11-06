@@ -23,13 +23,18 @@ import {
     recommendScrollChoreography,
     verifyScrollFingerprint,
     getScrollChoreographyReference,
-    scaffoldScrollStoryPage
+    scaffoldScrollStoryPage,
+    TWO_LAYER_MATERIAL_SPEC,
+    DEFAULT_DTCG_TOKENS,
+    extractDesignSystemFromRepo,
+    compileDTCGTokens,
+    generateDesignPreviewHTML
 } from '../index.js';
 
 const server = new Server(
     {
         name: 'vibe-design-harness-mcp',
-        version: '3.0.0',
+        version: '3.1.0',
     },
     {
         capabilities: {
@@ -247,6 +252,49 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                     required: ['fontName'],
                 },
             },
+            {
+                name: 'extract_design_system_from_repo',
+                description: 'Reverse-engineers a complete DESIGN.md specification, color luminance roles, CSS custom properties, and geometry tokens from an existing codebase directory or CSS/TSX file.',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        targetPath: { type: 'string', description: 'Directory or file path to scan.' },
+                        projectName: { type: 'string', description: 'Optional project name for the DESIGN.md header.' },
+                    },
+                    required: ['targetPath'],
+                },
+            },
+            {
+                name: 'compile_dtcg_tokens',
+                description: 'Compiles a W3C DTCG 3-tier token tree (Primitive -> Semantic -> Component + Dark Mode) into deterministic CSS variables and checks for unresolved aliases.',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        tokenTree: { type: 'object', description: 'Optional custom W3C DTCG JSON object (uses built-in 3-tier default if omitted).' },
+                    },
+                },
+            },
+            {
+                name: 'generate_design_preview_html',
+                description: 'Generates a self-contained HTML Interactive Visual & Motion Thesis Preview page (SVG Cubic-Bezier plot, live motion trajectory replay, WCAG Light/Dark contrast swatches, and 5-state button matrix).',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        brandName: { type: 'string', default: 'AgentSea Studio' },
+                        thesis: { type: 'string' },
+                        primaryHex: { type: 'string', default: '#4f46e5' },
+                        durationMs: { type: 'number', default: 320 },
+                    },
+                },
+            },
+            {
+                name: 'get_two_layer_material_spec',
+                description: 'Returns the 2-Layer Spatial Material Discipline (Functional Liquid Glass Layer vs. Opaque Content Layer) and cross-platform adapters (Web Tailwind, Tauri/Electron, SwiftUI, Flutter).',
+                inputSchema: {
+                    type: 'object',
+                    properties: {},
+                },
+            },
         ],
     };
 });
@@ -339,6 +387,25 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const designMd = generateDesignMD(args.theme || 'ags_editorial', { customAccent: args.customAccent });
         const productMd = generateProductMD({ name: args.brandName || 'AgentSea', theme: args.theme || 'ags_editorial' });
         return { content: [{ type: 'text', text: JSON.stringify({ DESIGN_MD: designMd, PRODUCT_MD: productMd }, null, 2) }] };
+    }
+
+    if (name === 'extract_design_system_from_repo') {
+        const res = extractDesignSystemFromRepo(args.targetPath || process.cwd(), { projectName: args.projectName });
+        return { content: [{ type: 'text', text: JSON.stringify(res, null, 2) }] };
+    }
+
+    if (name === 'compile_dtcg_tokens') {
+        const res = compileDTCGTokens(args.tokenTree || DEFAULT_DTCG_TOKENS);
+        return { content: [{ type: 'text', text: JSON.stringify(res, null, 2) }] };
+    }
+
+    if (name === 'generate_design_preview_html') {
+        const html = generateDesignPreviewHTML(args);
+        return { content: [{ type: 'text', text: html }] };
+    }
+
+    if (name === 'get_two_layer_material_spec') {
+        return { content: [{ type: 'text', text: JSON.stringify(TWO_LAYER_MATERIAL_SPEC, null, 2) }] };
     }
 
     throw new Error(`Unknown MCP tool: ${name}`);

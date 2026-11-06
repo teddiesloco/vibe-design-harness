@@ -749,8 +749,8 @@ export function scaffoldDashboardApp(options = {}) {
     ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 9999px; }
   </style>
 </head>
-<body class="${bgClass} min-h-screen antialiased selection:bg-indigo-600 selection:text-white">
-  <div class="flex min-h-screen">
+<body class="${bgClass} min-h-dvh antialiased selection:bg-indigo-600 selection:text-white">
+  <div class="flex min-h-dvh">
     <!-- Sidebar (w-64 shrink-0, h-10 rounded-xl links, gap-1, no border-r on light classic) -->
     <aside class="hidden lg:flex w-64 shrink-0 flex-col justify-between ${sidebarClass}">
       <div>
@@ -967,8 +967,8 @@ import React from 'react';
  */
 export default function DashboardScreen() {
   return (
-    <div className="${bgClass} min-h-screen antialiased">
-      <div className="flex min-h-screen">
+    <div className="${bgClass} min-h-dvh antialiased">
+      <div className="flex min-h-dvh">
         <aside className="hidden lg:flex w-64 shrink-0 flex-col justify-between ${sidebarClass}">
           <div>
             <div className="flex h-14 items-center justify-between px-4 border-b border-zinc-200/60">
