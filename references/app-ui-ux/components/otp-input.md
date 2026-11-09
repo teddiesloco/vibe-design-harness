@@ -8,7 +8,7 @@ trang thì theo card một mình (`M29`) và chiều cao `h-12` của form xác 
 <p class="text-sm text-muted">Mã gồm 6 số vừa được gửi tới</p>
 <p class="text-sm font-medium">
   <!-- In email bằng EmailText (description-list.md), không wrap-anywhere trơn -->
-  minh.khang@gmail.com
+  tran.anh.tuan@gmail.com
   <a href="#" class="ml-1 whitespace-nowrap font-normal text-muted underline underline-offset-2 outline-hidden hover:text-foreground">Đổi email</a>
 </p>
 

@@ -42,7 +42,7 @@ function getAvatarTone(seed: string): AvatarTone {
   return avatarTones[Math.abs(hash) % avatarTones.length];
 }
 
-// "Nguyễn Minh Khang" -> "T"; tên một chữ -> chữ đó
+// "Trần Nguyễn Anh Tuấn" -> "T"; tên một chữ -> chữ đó
 function getInitial(name: string): string {
   return name.trim().charAt(0).toLocaleUpperCase("vi");
 }

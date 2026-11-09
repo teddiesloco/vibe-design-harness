@@ -1,7 +1,7 @@
 {
   "name": "vibe-design-harness",
-  "version": "3.1.0",
-  "description": "VibeDesign-Harness v3.1 — Unified UI/UX Design System, 10-Face App Dashboard Architecture, 60fps Scroll Choreography Engine (VibeScroll), Reverse DESIGN.md Extractor, W3C DTCG Token Compiler, 2-Layer Material Discipline, 40+ Gate Anti-Slop Linter (<1ms), and Live Playwright Interactive Truth Probe.",
+  "version": "3.2.0",
+  "description": "VibeDesign-Harness v3.2 — Unified UI/UX Design System, 10-Face Web Dashboard & 9-Face Mobile App Prototype Architecture (97 Cleanroom Specs), 60fps Scroll Choreography Engine (VibeScroll), Reverse DESIGN.md Extractor, W3C DTCG Token Compiler, 2-Layer Material Discipline, 40+ Gate Anti-Slop Linter (<1ms), and Live Playwright Interactive Truth & Mobile Probe.",
   "main": "index.js",
   "type": "module",
   "bin": {
@@ -19,6 +19,8 @@
     "rules": "node bin/cli.js rules",
     "dashboard": "node bin/cli.js dashboard",
     "scaffold-dashboard": "node bin/cli.js scaffold-dashboard",
+    "mobile": "node bin/cli.js mobile",
+    "scaffold-mobile": "node bin/cli.js scaffold-mobile",
     "tokens-css": "node bin/cli.js tokens-css",
     "ui-ref": "node bin/cli.js ui-ref",
     "scroll": "node bin/cli.js scroll",

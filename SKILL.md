@@ -1,28 +1,28 @@
 ---
 name: vibe-design-harness
-description: "Use when designing UI/UX, dashboards, web apps, landing pages, scrollytelling experiences, forms, or tables. Enforces the Cleanroom 10-Face App Dashboard Architecture (49 specs), 60fps Scroll Choreography Engine (5 grammars, 16 devices, VibeScroll runtime), Reverse DESIGN.md Extractor, W3C DTCG 3-Tier Token Compiler, 2-Layer Material Discipline, 14 Brand Themes, 40+ Gate Anti-Slop Linter, and Interactive Truth Verifier."
+description: "Use when designing UI/UX, dashboards, web apps, mobile app prototypes (iOS/Android/React Native/Flutter), landing pages, scrollytelling experiences, forms, or tables. Enforces the Cleanroom 10-Face App Dashboard & 9-Face Mobile Prototype Architecture (97 specs), 60fps Scroll Choreography Engine (5 grammars, 16 devices, VibeScroll runtime), Reverse DESIGN.md Extractor, W3C DTCG 3-Tier Token Compiler, 2-Layer Material Discipline, 14 Brand Themes, 40+ Gate Anti-Slop Linter, and Interactive Truth Verifier."
 ---
 
-# VibeDesign-Harness (v3.1.0) — Pure UI/UX Engineering System
+# VibeDesign-Harness (v3.2.0) — Pure UI/UX Engineering System
 
-> **Single-Purpose UI/UX Engine:** Unifies **App & Dashboard Architecture** (10 Named Faces · 10 Screen Content Layouts · 12 Industry Palettes · 49 Reference Specs), **60fps Scroll Choreography** (5 Scroll Grammars · 16 `data-sc-*` Devices · 8 Visual Worlds · `vibe-scroll.js`/`.css`), **Reverse DESIGN.md Extractor & W3C DTCG 3-Tier Token Compiler**, **2-Layer Spatial Material Discipline (Liquid Glass vs. Opaque Content)**, **Landing Page & Design System Tokens** (14 Themes · 12 Post-Processing Flows · Vietnamese Font Guard), and **40+ Gate Anti-Slop Linter + Interactive Truth & Live Playwright DOM Probe**.
+> **Single-Purpose UI/UX Engine:** Unifies **App, Dashboard & Mobile Prototype Architecture** (10 Web Dashboard Faces · 9 Mobile App Faces · 6 Mobile Tab Bar Styles · 12 Screen Content Layouts · 12 Industry Palettes · 97 Reference Specs), **60fps Scroll Choreography** (5 Scroll Grammars · 16 `data-sc-*` Devices · 8 Visual Worlds · `vibe-scroll.js`/`.css`), **Reverse DESIGN.md Extractor & W3C DTCG 3-Tier Token Compiler**, **2-Layer Spatial Material Discipline (Liquid Glass vs. Opaque Content)**, **Landing Page & Design System Tokens** (14 Themes · 12 Post-Processing Flows · Vietnamese Font Guard), and **40+ Gate Anti-Slop Linter + Interactive Truth & Live Playwright DOM/Mobile Probe**.
 
-## 1. App & Dashboard UI/UX Workflow (10-Face Architecture)
+## 1. App, Dashboard & Mobile Prototype UI/UX Workflow (10 Web Faces + 9 Mobile Faces)
 
-Whenever designing or reviewing an App Screen, Dashboard, CRM, Admin Panel, Table, Kanban, Calendar, or Form:
+Whenever designing or reviewing a Web App Screen, Dashboard, CRM, Admin Panel, Table, Kanban, Calendar, Form, or Mobile App Prototype (iOS / Android / React Native / Flutter):
 
 1. **Recommend Dashboard Face, Content Layout & Industry Accent (`recommendDashboardSystem` / CLI `dashboard` / MCP `recommend_dashboard_system`)**:
    - **5 Orthogonal Axes**: `nav` (`sidebar`, `sidebar-dark`, `rail`, `rail-labeled`, `topnav`) × `container` (`classic`, `inset`, `unified`, `floating`, `canvas`) × `header` (`content`, `full`) × `surface` (`flat`, `elevated`, `dark`, `borderless`, `layered`, `editorial`) × `font` (`Inter`, `Be Vietnam Pro`, `IBM Plex Sans`).
    - **10 Named Faces**: `Clean`, `Dark Sidebar`, `Soft`, `Midnight` (verified defaults) + `Inset`, `Paper`, `Float`, `Rail`, `Topbar`, `Editorial`.
-   - **10 Job-Driven Screen Content Layouts**: `overview_blocks`, `table_first`, `list_detail`, `kanban`, `calendar_grid`, `chart_first`, `narrative_numbers`, `split_workspace`, `activity_stream`, `form_first`.
+   - **12 Job-Driven Screen Content Layouts**: `overview_blocks`, `table_first`, `list_detail`, `kanban`, `calendar_grid`, `chart_first`, `narrative_numbers`, `split_workspace`, `activity_stream`, `form_first`, `entity_grid`, `live_monitor`.
    - **12 Empirical Industry Accent Palettes**: Verified WCAG AA (`>= 5.0:1` white text contrast); never uses red/rose for brand primary because `--danger` (`#c70036`) owns destructive actions (`I4`).
 2. **Generate Tailwind v4 Semantic Tokens (`generateAppTokensCSS` / CLI `tokens-css` / MCP `generate_app_tokens_css`)**:
    - Outputs `:root`, `.dark`, `.force-light`, `.force-dark`, `@theme inline`, semantic status tokens, and the 4px transparent-thumb autohide scrollbar (`I18`).
-3. **Consult the 49 Cleanroom UI/UX Reference Specs (`getAppUIReference` / CLI `ui-ref` / MCP `get_app_ui_reference`)**:
-   - Deep component & layout specs under `references/app-ui-ux/` (`layouts/app`, `layouts/overlay`, `layouts/form`, `styles`, `budgets`, `locked-rules`, `review`, `checklist`, `components/*`).
-4. **Scaffold Zero-Slop Dashboard Screens (`scaffoldDashboardApp` / CLI `scaffold-dashboard` / MCP `scaffold_dashboard_app`)**:
-   - Builds HTML or React TSX screens adhering to unified metric strips (`divide-x`), asymmetric `col-span-2` primary widgets, and all 19 Locked Architectural Rules.
-
+3. **Consult the 97 Cleanroom UI/UX Reference Specs (`getAppUIReference` / CLI `ui-ref` / MCP `get_app_ui_reference`)**:
+   - Deep component, web layout, wireframe & mobile specs under `references/app-ui-ux/` (`layouts/app/*`, `layouts/mobile-*.html`, `mobile/*`, `wireframe`, `styles`, `budgets`, `locked-rules`, `review`, `checklist`, `components/*`).
+4. **Scaffold Zero-Slop Web Dashboards & Clickable Mobile App Prototypes (`scaffoldDashboardApp` / `recommendMobileSystem` / `scaffoldMobileApp`)**:
+   - Web: Builds HTML or React TSX screens adhering to unified metric strips (`divide-x`), asymmetric `col-span-2` primary widgets, and all 19 Locked Architectural Rules.
+   - Mobile (`J1`–`J19`): Recommends 9 Mobile App Faces (`Clean`, `Photo`, `Playful`, `Immersive`, `Brand`, `Tinted`, `Glow`, `Mono`, `Editorial`) + 6 Tab Bar Styles (`float`, `center`, `pill`, `dark`, `bubbles`, `glass`), and scaffolds multi-screen clickable HTML prototypes inside a `390×844` phone frame + Desktop Flow Board (`>=900px`), audited via `node scripts/probe.mjs <file> --mobile --widths 390,1280`.
 ## 2. Scroll Choreography & Scrollytelling Workflow (60fps VibeScroll)
 
 Whenever building an immersive product launch, cinematic landing page, spatial flythrough, or interactive story:

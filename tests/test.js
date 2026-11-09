@@ -12,14 +12,18 @@ import {
     getDesignCommand,
     scaffoldLandingPage,
     DASHBOARD_FACES,
+    MOBILE_APP_FACES,
+    MOBILE_TABBAR_STYLES,
     SCREEN_CONTENT_LAYOUTS,
     INDUSTRY_ACCENT_PALETTES,
     LOCKED_ARCHITECTURAL_RULES,
     recommendDashboardSystem,
+    recommendMobileSystem,
     generateAppTokensCSS,
     getAppUIReference,
     runLiveUIProbe,
     scaffoldDashboardApp,
+    scaffoldMobileApp,
     SCROLL_GRAMMARS,
     CHOREOGRAPHY_DEVICES,
     VISUAL_WORLDS,
@@ -38,7 +42,7 @@ import fs from 'fs';
 import path from 'path';
 import { runInteractiveTruthAudit } from '../scripts/verify-interactive.mjs';
 
-console.log('🧪 Starting VibeDesign-Harness v3.0.0 Unified UI/UX Test Suite...\n');
+console.log('🧪 Starting VibeDesign-Harness v3.2.0 Unified UI/UX Test Suite...\n');
 
 // Test 1: Design Engine & 14 Built-in Themes
 console.log('Test 1: Verifying 14 Built-in Themes (Quiet Luxury, Modern Clean, Linear, Editorial)...');
@@ -126,13 +130,14 @@ const goodFont = checkVietnameseFontSupport('Be Vietnam Pro', 'Hệ thống qu�
 assert.strictEqual(goodFont.supported, true, 'Be Vietnam Pro must pass Vietnamese glyph verification');
 console.log('✅ Test 5 Passed: 12 Design Commands, PRODUCT.md/DESIGN.md & Vietnamese Font Guard verified.');
 
-// Test 6: Cleanroom App & Dashboard Architecture Engine (10 Faces, 10 Content Layouts, 12 Industry Palettes, 49 Reference Specs)
-console.log('\nTest 6: Verifying Cleanroom App & Dashboard Architecture Engine...');
+// Test 6: Cleanroom App, Dashboard & Mobile Prototype Architecture Engine (10 Web Faces, 9 Mobile Faces, 6 Tab Bars, 12 Content Layouts, 12 Industry Palettes, 97 Reference Specs)
+console.log('\nTest 6: Verifying Cleanroom App, Dashboard & Mobile Prototype Architecture Engine...');
 assert.strictEqual(Object.keys(DASHBOARD_FACES).length, 10, 'Must expose all 10 Dashboard Faces');
-assert.strictEqual(Object.keys(SCREEN_CONTENT_LAYOUTS).length, 10, 'Must expose all 10 Screen Content Layouts');
+assert.strictEqual(Object.keys(MOBILE_APP_FACES).length, 9, 'Must expose all 9 Mobile App Faces');
+assert.strictEqual(Object.keys(MOBILE_TABBAR_STYLES).length, 6, 'Must expose all 6 Mobile Tab Bar Styles');
+assert.strictEqual(Object.keys(SCREEN_CONTENT_LAYOUTS).length, 12, 'Must expose all 12 Screen Content Layouts');
 assert.strictEqual(Object.keys(INDUSTRY_ACCENT_PALETTES).length, 12, 'Must expose all 12 Industry Accent Palettes');
 assert.strictEqual(LOCKED_ARCHITECTURAL_RULES.length, 19, 'Must expose all 19 Locked Architectural Rules');
-
 const rec = recommendDashboardSystem({
     userRole: 'Nhân viên vận hành CRM mở cả ngày',
     primaryJob: 'Dò bảng khách hàng',
@@ -148,11 +153,29 @@ assert(tokensOut.css.includes('#7c3aed'), 'Generated tokens.css must inject viol
 assert(tokensOut.css.includes('--scrollbar-thumb: transparent'), 'Generated tokens.css must include 4px autohide scrollbar');
 
 const refList = getAppUIReference('list');
-assert(refList.total_files >= 49, `Must have at least 49 cleanroom reference files, got ${refList.total_files}`);
+assert(refList.total_files >= 97, `Must have at least 97 cleanroom reference files, got ${refList.total_files}`);
+assert(refList.categories.mobile.length >= 11, `Must have at least 11 mobile reference specs, got ${refList.categories.mobile.length}`);
 const appLayoutRef = getAppUIReference('layouts/app');
 assert.strictEqual(appLayoutRef.found, true, 'Must resolve layouts/app reference');
 assert(appLayoutRef.content.includes('Bố cục nội dung: chọn theo việc chính'), 'layouts/app must contain content layout table');
 
+const mobileFacesRef = getAppUIReference('mobile/faces');
+assert.strictEqual(mobileFacesRef.found, true, 'Must resolve mobile/faces reference');
+assert(mobileFacesRef.content.includes('chín bộ có tên'), 'mobile/faces must contain 9 named mobile faces');
+
+const mobRec = recommendMobileSystem({
+    userRole: 'Khách đặt cà phê',
+    primaryJob: 'Order đồ uống và thanh toán',
+    industry: 'F&B'
+});
+assert.strictEqual(mobRec.recommended_face.id, 'photo', 'Cafe ordering app must recommend Photo mobile face');
+assert.strictEqual(mobRec.industry_palette.default_accent, 'orange', 'F&B industry must default to orange accent');
+
+const mobProto = scaffoldMobileApp({ face: 'clean', title: 'AgentSea Chi Tiêu', accent: 'teal' });
+assert.strictEqual(mobProto.face, 'Clean');
+assert(mobProto.screens.length >= 4, `Expected >=4 screens in mobile prototype, got ${mobProto.screens.length}`);
+assert(mobProto.code.includes('<title>AgentSea Chi Tiêu</title>'), 'Mobile prototype must inject custom title');
+assert(mobProto.code.includes('--primary: #0f766e;'), 'Mobile prototype must inject teal primary accent');
 const dashHtml = scaffoldDashboardApp({ face: 'clean', framework: 'html', accent: 'indigo' });
 const dashLint = lintUI(dashHtml.code);
 assert.strictEqual(dashLint.passed, true, `Scaffolded dashboard HTML must pass 100% of lint gates: ${JSON.stringify(dashLint.errors)}`);
@@ -165,9 +188,9 @@ assert(dashSlopLint.violation_count >= 2, 'Must detect both solid-red-destructiv
 const dashFixed = fixUI(dashSlop);
 assert(dashFixed.fixedContent.includes('bg-rose-500/10'), 'Auto-fixer must remediate solid red button to subtle rose semantic button');
 
-const probeDry = runLiveUIProbe({ url: 'http://localhost:3000', quick: true, stress: true, dryRun: true });
-assert(probeDry.cli_command.includes('probe.mjs') && probeDry.cli_command.includes('--quick') && probeDry.cli_command.includes('--stress'));
-console.log('✅ Test 6 Passed: Cleanroom 10-Face Dashboard Engine, 49 Reference Specs, Dashboard Gates & Probe Runner verified.');
+const probeDry = runLiveUIProbe({ url: 'http://localhost:3000', mobile: true, quick: true, stress: true, dryRun: true });
+assert(probeDry.cli_command.includes('probe.mjs') && probeDry.cli_command.includes('--mobile') && probeDry.cli_command.includes('--quick') && probeDry.cli_command.includes('--stress'));
+console.log('✅ Test 6 Passed: Cleanroom 10 Web Faces + 9 Mobile Faces Engine, 97 Reference Specs, Mobile Prototypes & Probe Runner verified.');
 
 // Test 7: Cleanroom Scroll Choreography & Scrollytelling Engine (5 Grammars, 16 Devices, 8 Worlds, VibeScroll Runtime & Fingerprint Gate)
 console.log('\nTest 7: Verifying Cleanroom Scroll Choreography & Scrollytelling Engine...');
@@ -273,4 +296,4 @@ try {
 }
 console.log('✅ Test 8 Passed: Reverse DESIGN.md Extractor, DTCG 3-Tier Compiler, 2-Layer Material Gate & Live Playwright Interactive Truth verified.');
 
-console.log('\n🎉 ALL 8 UNIFIED UI/UX TEST SUITES PASSED (100% Zero Defect — v3.1.0 Ready).\n');
+console.log('\n🎉 ALL 8 UNIFIED UI/UX TEST SUITES PASSED (100% Zero Defect — v3.2.0 Ready).\n');

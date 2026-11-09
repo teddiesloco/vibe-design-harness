@@ -29,7 +29,7 @@ Nhận chế độ từ đề, không hỏi, rồi nói một dòng ở phần m
 | Dòng Gu | chỉ nêu, mặc định không chọn | **chọn sẵn**, người dùng bỏ dòng nào thì bỏ | chọn sẵn |
 | Dòng Cấu trúc (`V1b`) | không có | có: sắp lại thì chọn sẵn, bỏ bớt thông tin thì không | như cột giữa |
 | Dòng Gọn (`V1c`) | không có | **có, chọn sẵn**: mỗi khối chính một dòng, làm gọn theo gu skill, giữ màu | như cột giữa |
-| Dòng Có màu (`V1d`) | không có | có ở trang lướt để chọn hoặc dashboard (công thức B của `P12`), **không chọn sẵn**: một dòng cho cả route, màu từ màu nhấn của dự án | như cột giữa |
+| Dòng Có màu (`V1d`) | không có | có ở trang lướt để chọn (`P12`) hoặc dashboard (Sắc Tinted của `P17`), **không chọn sẵn**: một dòng cho cả route, màu từ màu nhấn của dự án | như cột giữa |
 | Dáng: bóng, viền, nhịp, cỡ chữ, nhãn, lớp phủ trên ảnh | giữ | **theo gu skill** | theo gu skill |
 | Màu theo vai, logo, font | giữ | **giữ** | chỉ giữ logo và màu nhấn chính |
 | Component | không viết lại, sửa đúng chỗ lỗi | được thay control gốc và khối tự chế bằng mẫu của skill (bảng dưới) | như cột giữa |
@@ -93,10 +93,10 @@ dựng bản thứ hai (`S9`); chưa có thì dựng mới theo mẫu, không t�
 | Checkbox, radio, công tắc, ô chọn ngày | `components/choice-controls.md`. `accent-color` trên `<input>` gốc không tính là đã tô |
 | Tab, chip lọc, phân trang | `components/small-controls.md` |
 | Ô nhập, ô tìm | `components/input.md` |
-| Nút, **hàng nút trên header** | `components/button.md`; hàng nút header theo "Nhóm nút bên phải thanh header" ở `layouts/app.md` |
+| Nút, **hàng nút trên header** | `components/button.md`; hàng nút header theo "Nhóm nút bên phải thanh header" ở `layouts/app/shell.md` |
 | Viền card, khung lớp nổi, vạch chia | `M14`: bậc xám nhạt nhất của dự án; token viền cỡ `#e2e8f0` chỉ cho ô nhập, nút viền |
 | Thanh cuộn (`::-webkit-scrollbar`) | khối scrollbar của `tokens.css`: 4px, ẩn tới khi rê hay cuộn |
-| Link sidebar, nhãn nhóm | `layouts/app.md`, mục Sidebar: mục thường chữ thường (400) `text-foreground/70`, chỉ mục đang chọn `font-medium`; nhãn nhóm IN HOA `text-muted`. Màu nền mục đang chọn theo bảng vai màu |
+| Link sidebar, nhãn nhóm | `layouts/app/shell.md`, mục Sidebar: mục thường chữ thường (400) `text-foreground/70`, chỉ mục đang chọn `font-medium`; nhãn nhóm IN HOA `text-muted`. Màu nền mục đang chọn theo bảng vai màu |
 | Vòng focus | `I13` |
 
 Lúc giao có một dòng **"Dáng:"** đi qua đủ các dòng trên mà trang có, mỗi dòng ghi đã thay
@@ -132,7 +132,7 @@ một chút nào"*.
 
 | Hạng | Căn cứ | Ví dụ | Mặc định |
 | --- | --- | --- | --- |
-| **Hỏng** | Sai với mọi brand | Tương phản dưới 4.5:1 (chữ lớn 3:1), trang cuộn ngang, chữ bị cắt hay bị giấu mất nghĩa, vùng bấm dưới 24px, lớp nổi lòi khỏi màn, dialog cao quá màn mà không cuộn, rê chuột làm nhảy bố cục | Đề xuất sửa |
+| **Hỏng** | Sai với mọi brand | Tương phản dưới 4.5:1 (chữ lớn 3:1), trang cuộn ngang, chữ bị cắt hay bị giấu mất nghĩa, vùng bấm dưới 24px, lớp nổi lòi khỏi màn, dialog cao quá màn mà không cuộn, rê chuột làm nhảy bố cục, màn hay khối lỗi chỉ ghi "Đã có lỗi xảy ra" (không nói vì sao, không nút Thử lại hay lối khác, `flows.md`), màn con không có nút quay lại | Đề xuất sửa |
 | **Lệch hệ** | Token và component **của chính dự án** | Ba kiểu bo góc nút, hai màu cho cùng một trạng thái, khoảng cách lẻ ngoài thang của họ, mã hex viết cứng gần giống token | Đề xuất sửa, theo hệ của họ |
 | **Gu** | `principles.md` và luật skill | Sidebar có viền phải, badge nền đậm, nền rê đậm nhạt | Chỉ nêu, ghi "gu, tuỳ bạn", mặc định không chọn |
 
@@ -234,8 +234,10 @@ sang hạng theo bảng này. Những mục xếp Hỏng thì probe đã tự go
 | --- | --- |
 | Trang tự cuộn khi vừa tải, cuộn ngang, lớp nổi lòi khỏi màn, lớp nổi mở bằng nút bị vỡ, rê chuột làm nhảy bố cục, tương phản chữ dưới ngưỡng, khung giấu mất chữ, chữ cắt còn quá ngắn, chữ trong nút xuống dòng, nhãn số đè lên đường biểu đồ, badge đè mất icon, khối bị bóp chiều cao, chữ cắt nuốt mất số, rê ra đúng màu mục đang chọn, rê vào ô đã chọn làm mất màu nhấn, scale / translate / rotate không chạy chuyển động (`W10`), hàng cuộn ngang chuột không tới được (`responsive.md`, sau `R10`), đường ngăn thẳng hàng mà khác màu (một đường nửa nhạt nửa đậm, sai với mọi brand) | Hỏng |
 | Chỗ bấm dưới 32px | Mục có ghi "(dưới 24px)" là Hỏng, còn lại (24 tới 31px) là Gu |
+| App điện thoại (`--mobile`): mục `P` ghi "app điện thoại" (chỗ bấm dưới 44px, chữ dưới 11px, dòng cuối nằm dưới thanh tab hay thanh giỏ, sheet không lớp phủ tối, nút nổi đè chữ, chữ chui vào tai thỏ) | Hỏng. Không theo ngưỡng web của dòng trên và dòng "chữ dưới 12px": nút 28px hay nhãn 10px trên máy là bấm trượt, đọc không ra. Thu vùng bấm bằng `before:` nới ra 44 vẫn tính là sửa đúng |
+| App điện thoại: dòng khác trong khối APP ĐIỆN THOẠI (thanh tab có mục "Thêm", màn con không sáng tab cha…) | Lệch hệ, theo luật `J` ghi cuối dòng |
 | Hàng trong header / nav rớt dòng | Hỏng khi đè hay đẩy lệch khối khác, không thì Lệch hệ (so với cách hàng đó ở khổ khác). Xem ảnh mới quyết |
-| Hàng nút trên header không đồng cỡ | Lệch hệ. Chế độ dựng lại thì vào dòng Gọn của header (`V1c`), theo "Nhóm nút bên phải thanh header" trong `layouts/app.md` |
+| Hàng nút trên header không đồng cỡ | Lệch hệ. Chế độ dựng lại thì vào dòng Gọn của header (`V1c`), theo "Nhóm nút bên phải thanh header" trong `layouts/app/shell.md` |
 | Hàng control lệch trên dưới, placeholder dài hơn ô, khối trông như ô nhập mà chữ xuống dòng, phân trang chỉ có nút chữ, thanh header trong suốt trên nền xám, vạch chia trong menu đậm hơn viền khung, khung / vạch lớp nổi đậm hơn token `--border`, vạch trái bị bo góc khung cắt, khung hộp thoại mờ lồng trong lớp nền mờ, cao gần bằng mà không bằng, đường ngăn hai cột kề nhau lệch, chữ cùng cột lệch mép, dấu ngăn cách không đều, control còn kiểu mặc định của trình duyệt, khung khai viền mà viền không thấy, khối cùng component bo góc khác nhau, Tab tới không thấy gì trong khi dự án vẽ vòng focus ở chỗ khác (ngoại lệ của `I13`), khối con biến mất lúc rê, lớp nổi có dải trống, lớp nổi bật tắt không chuyển động, control gốc trong lớp nổi (checkbox, radio, thanh trượt, ô tệp; select, ô ngày gốc đã tô thì theo dòng "Select gốc đã tô trên desktop"), viền trang trí đậm, thanh cuộn khác mẫu, sidebar chữ đậm hay mục sát nhau, số viết sai kiểu tiếng Việt | Lệch hệ |
 | Nền rê gần như không thấy, nền rê tan vào nền ngoài khung hay trùng nền phía sau (gộp một dòng, ghi các nút; hai chế độ dựng lại thì tự sửa theo `components/button.md`), nền rê trùng màu viền của chính nút, viền đổi màu lúc rê, rê khác hình mục đang chọn, bấm xong còn dấu thừa, Tab tới còn vẽ vòng focus (`I13`: chế độ soi ghi một dòng Gu, hai chế độ dựng lại thì gỡ), bảng cuộn ngang mất cột, nhóm lựa chọn xếp lưới, số tiền ngắt dòng, số không thẳng hàng, nhãn số lòi ra ngoài vùng vẽ, dấu câu rơi xuống đầu dòng, chữ dưới 12px (gộp một dòng, ghi cỡ nhỏ nhất và chỗ; sửa lên ít nhất 12px), cột dính mà cuộn riêng, nội dung trôi giữa màn rộng (`layouts/app.md`), mục lặp dày chữ | Gu |
 | Select gốc đã tô trên desktop, ô ngày / giờ gốc đã tô, kể cả trong lớp nổi | Chế độ soi: không vào bảng. Hai chế độ dựng lại: Lệch hệ, thay bằng Select dựng (từ 8 mục có ô tìm) và ô chọn ngày có popover lịch |
@@ -336,15 +338,15 @@ Hay gặp:
 
 Dựng lại cho gọn xong mà trang vẫn "buồn màu" là chuyện hay gặp ở trang người dùng cuối.
 Nên hai chế độ dựng lại đưa thêm **một dòng Có màu** cho cả
-route, theo `P12` trong `styles.md`.
+route, theo `P12` (trang lướt để chọn) hay Sắc Tinted của `P17` (dashboard) trong `styles.md`.
 
 - **Chỉ khi cả ba đúng**: trang người dùng cuối lướt để chọn (tìm việc, tìm phòng, sản phẩm,
-  khoá học, bài viết) theo công thức A của `P12`, **hoặc dashboard** theo công thức B (ô icon
-  màu nhạt ở card số liệu, biểu đồ nhiều sắc); dự án đang phẳng (`P4` ra flat); route chưa có
+  khoá học, bài viết) theo công thức A của `P12`, **hoặc dashboard** theo Sắc Tinted của `P17`
+  (ô icon theo loại, badge có chấm, biểu đồ theo `--cat-*`; Vivid chỉ khi người dùng xin); dự án đang phẳng (`P4` ra flat); route chưa có
   dòng nào ở trên đã đổi màu. Form, cài đặt, bảng quản lý thuần thì không có dòng này.
 - **Không chọn sẵn.** Đổi độ đậm màu cả trang là việc của người dùng quyết, khác dòng Gọn.
-- Cột Sửa liệt kê đúng các chỗ của công thức `P12` áp vào trang này (A: dải đầu trang, chân
-  trang, mục nổi bật, chữ, điểm nhỏ; B: ô icon, ô đầu dòng, biểu đồ, trạng thái, sidebar). Chỗ nào không áp được thì ghi vì sao, ví dụ *"mục nổi bật: dữ liệu chưa
+- Cột Sửa liệt kê đúng các chỗ áp vào trang này (`P12` công thức A: dải đầu trang, chân
+  trang, mục nổi bật, chữ, điểm nhỏ; Tinted của `P17`: các dòng trong bảng Tinted). Chỗ nào không áp được thì ghi vì sao, ví dụ *"mục nổi bật: dữ liệu chưa
   có trường gấp / hot, bỏ"*. Không thêm field, không bịa nhãn (bảng ba chế độ, "Logic, handler,
   dữ liệu, câu chữ").
 - **Bắt buộc ảnh trước / sau** như dòng Gọn (`V5`), chụp cả màn ở 1440 để thấy dải.
@@ -559,7 +561,7 @@ lời "bản mới còn lỗi gì"; người hỏi "có gì hơn" muốn biết 
 
 1. Trang gốc còn chạy (URL thật, link người dùng gửi): chụp thẳng.
 2. Bản gốc chỉ còn trong git: tìm commit trước lần dựng lại bằng `git log -- <file của route>`,
-   rồi `git worktree add "$TMPDIR/vibe-origin" <commit>`, cài, chạy ở cổng khác, chụp. **Chạy lần
+   rồi `git worktree add "$TMPDIR/vibe-goc" <commit>`, cài, chạy ở cổng khác, chụp. **Chạy lần
    lượt, không bật hai dev server cùng lúc**: chụp bản gốc xong thì tắt, rồi mới chụp bản mới.
    Xong thì `git worktree remove`. Không chắc commit nào là gốc thì hỏi một câu.
 3. Chỉ còn ảnh: ảnh "trước" của lần dựng lại (`$TMPDIR/vibe-review`) hay ảnh người dùng gửi. Dùng

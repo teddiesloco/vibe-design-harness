@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 /**
- * VibeDesign-Harness Unified CLI (v3.0.0)
- * 100% Pure UI/UX Engineering, App Dashboard Architecture, Scroll Choreography & Anti-Slop Harness
+ * VibeDesign-Harness Unified CLI (v3.2.0)
+ * 100% Pure UI/UX Engineering, App Dashboard & Mobile Prototype Architecture, Scroll Choreography & Anti-Slop Harness
  */
 
 import {
@@ -19,11 +19,15 @@ import {
     fetchRemoteRules,
     checkVietnameseFontSupport,
     DASHBOARD_FACES,
+    MOBILE_APP_FACES,
+    MOBILE_TABBAR_STYLES,
     recommendDashboardSystem,
+    recommendMobileSystem,
     generateAppTokensCSS,
     getAppUIReference,
     runLiveUIProbe,
     scaffoldDashboardApp,
+    scaffoldMobileApp,
     SCROLL_GRAMMARS,
     CHOREOGRAPHY_DEVICES,
     VISUAL_WORLDS,
@@ -46,7 +50,7 @@ const command = args[0];
 
 function printHelp() {
     console.log(`
-🎨 VibeDesign-Harness CLI v3.0.0 — Unified UI/UX Design System, App Dashboard Architecture & Scroll Choreography Engine
+🎨 VibeDesign-Harness CLI v3.2.0 — Unified UI/UX Design System, App/Mobile Architecture & Scroll Choreography Engine
 
 Usage:
   npx vibe-design-harness <command> [options]
@@ -58,16 +62,18 @@ Core UI/UX Commands:
   init-context [theme] [--name <brand>]  Generate paired PRODUCT.md + DESIGN.md in current directory
   design-system <theme> [accent]         Generate DESIGN.md brand tokens for AI coding agents
   scaffold <theme> [output] [--framework react|html] Assemble studio-grade zero-slop Landing Page
-  themes                                 List all 14 Landing Themes + 10 Dashboard Faces + 5 Scroll Grammars
+  themes                                 List all 14 Landing Themes + 10 Dashboard Faces + 9 Mobile App Faces + 5 Scroll Grammars
   components                             List curated Pro UI component blocks
   check-font <fontName>                  Verify Vietnamese Unicode diacritics support (U+0102–U+1EF9)
 
-App & Dashboard Commands (10-Face Architecture):
-  dashboard [userRole] [--job <job>] [--industry <ind>] Recommend Dashboard Face, Screen Layout & Industry Accent
+App, Dashboard & Mobile Prototype Commands (10 Web Faces + 9 Mobile Faces):
+  dashboard [userRole] [--job <job>] [--industry <ind>] Recommend Dashboard Face, Screen Layout (12 layouts) & Industry Accent
   scaffold-dashboard [face] [output] [--framework react|html] Assemble zero-slop App Dashboard screen
+  mobile [userRole] [--job <job>] [--industry <ind>] [--platform ios|android] Recommend Mobile App Face (9 faces), Tab Bar (6 styles) & Prototype Template
+  scaffold-mobile [face] [output] [--title <title>] [--accent <accent>] Assemble clickable Mobile App HTML Prototype (390x844 phone frame + Desktop Flow Board)
   tokens-css [face] [accent] [output]    Generate production Tailwind v4 tokens.css (:root, .dark, @theme inline, 4px autohide scrollbar)
-  ui-ref [topic]                         Read or list the 49 Cleanroom App UI/UX reference specs (app, styles, review, checklist, charts, button, etc.)
-  probe [url] [--quick] [--stress] [--sweep] Run live Playwright multi-viewport DOM & WCAG inspector
+  ui-ref [topic]                         Read or list the 97 Cleanroom App & Mobile UI/UX reference specs (app/*, mobile/*, components/*, wireframe, etc.)
+  probe [url] [--mobile] [--quick] [--stress] [--sweep] Run live Playwright multi-viewport DOM, Mobile & WCAG inspector
 
 Scroll Choreography Commands (60fps Scrollytelling Engine):
   scroll [brief] [--grammar <g>] [--world <w>] Recommend Scroll Grammar (5 grammars), Visual World (8 worlds) & 16 Choreography Devices
@@ -183,6 +189,41 @@ async function main() {
         }
         process.exit(0);
     }
+    if (command === 'mobile') {
+        const userRole = args[1] && !args[1].startsWith('--') ? args[1] : '';
+        const jobIdx = args.indexOf('--job');
+        const primaryJob = jobIdx !== -1 ? args[jobIdx + 1] : '';
+        const indIdx = args.indexOf('--industry');
+        const industry = indIdx !== -1 ? args[indIdx + 1] : '';
+        const platIdx = args.indexOf('--platform');
+        const platform = platIdx !== -1 ? args[platIdx + 1] : 'ios';
+        const showcaseMode = args.includes('--showcase');
+
+        const rec = recommendMobileSystem({ userRole, primaryJob, industry, platform, showcaseMode });
+        console.log('\n📱 Recommended Mobile App Architecture (Law J1-J19):');
+        console.log(JSON.stringify(rec, null, 2));
+        process.exit(0);
+    }
+
+    if (command === 'scaffold-mobile') {
+        const face = (args[1] && !args[1].startsWith('--')) ? args[1] : 'clean';
+        const outputFile = (args[2] && !args[2].startsWith('--')) ? args[2] : null;
+        const titleIdx = args.indexOf('--title');
+        const title = titleIdx !== -1 ? args[titleIdx + 1] : null;
+        const accentIdx = args.indexOf('--accent');
+        const accent = accentIdx !== -1 ? args[accentIdx + 1] : null;
+
+        const result = scaffoldMobileApp({ face, title, accent });
+        if (outputFile) {
+            const resolvedPath = path.resolve(process.cwd(), outputFile);
+            fs.writeFileSync(resolvedPath, result.code, 'utf-8');
+            console.log(`🎉 Assembled Mobile App Prototype (Face: ${result.face}, Screens: ${result.screens.length}, Flows: ${result.flows.length}) -> ${outputFile}`);
+        } else {
+            console.log(result.code);
+        }
+        process.exit(0);
+    }
+
 
     if (command === 'tokens-css') {
         const face = (args[1] && !args[1].startsWith('--')) ? args[1] : 'clean';
@@ -268,6 +309,7 @@ async function main() {
         const url = args[1] && !args[1].startsWith('--') ? args[1] : '';
         const res = runLiveUIProbe({
             url,
+            mobile: args.includes('--mobile'),
             quick: args.includes('--quick'),
             stress: args.includes('--stress'),
             dark: args.includes('--dark'),
@@ -350,6 +392,15 @@ async function main() {
             container: f.container,
             surface: f.surface,
             font: f.font
+        })));
+        console.log('\n📱 Supported Mobile App Faces (9 Faces + 6 Tab Bar Styles):');
+        console.table(Object.values(MOBILE_APP_FACES).map(f => ({
+            id: f.id,
+            name: f.name,
+            verified: f.verified,
+            surface_mode: f.surface_mode,
+            font: f.font,
+            template_file: f.template_file
         })));
         console.log('\n🎬 Supported Scroll Choreography Grammars (5 Grammars):');
         console.table(Object.values(SCROLL_GRAMMARS).map(g => ({

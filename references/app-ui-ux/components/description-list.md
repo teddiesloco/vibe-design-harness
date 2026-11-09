@@ -59,7 +59,7 @@ Nằm trong card (`card.md`), mỗi hàng một cặp nhãn và giá trị, theo
 - **Giá trị có avatar (người phụ trách) là `flex h-5 items-center gap-2`, không `inline-flex`.** `inline-flex` nằm trong dòng chữ nên cả cụm bị đẩy theo baseline: hàng cao 24px thay vì 20px, chữ tên thấp hơn chữ nhãn 1,5px, nhìn rõ nhãn "Phụ trách" nổi lên cao hơn tên (đổi avatar xuống `size-5` vẫn lệch). `h-5` giữ hàng đúng một dòng chữ, avatar `size-6` tràn 2px trên dưới vào khoảng cách giữa hai hàng.
 - **`[overflow-wrap:anywhere]` cho giá trị**: email, URL, mã dài không có dấu cách nên không tự xuống dòng, sẽ đẩy tràn card ở màn hẹp.
 - **Email chèn `<wbr>` ngay sau `@`**, để email dài xuống dòng ở ranh giới tên / tên miền. `overflow-wrap:anywhere` chỉ là lưới đỡ: một mình nó thì bẻ ở bất kỳ ký tự nào vừa hết chỗ. Ví dụ: thêm nút sao chép cạnh email, cột giá trị hẹp đi 28px, "…@hoanggiap" / "hat-import-export.com.vn" vỡ giữa chữ.
-  - **Email nằm giữa câu chữ** (hộp xác nhận, toast, dòng "Đang chờ xác nhận…") thì `<wbr>` chưa đủ: tên miền có gạch nối thì trình duyệt còn bẻ ở gạch nối, ra "…khang@agentsea-" / "studio.com" (ở 375px còn vỡ "…@age" / "ntsea-studio.com"). Tách email làm hai khúc `inline-block max-w-full`, mỗi khúc chỉ bẻ bên trong khi tự nó dài hơn cả dòng:
+  - **Email nằm giữa câu chữ** (hộp xác nhận, toast, dòng "Đang chờ xác nhận…") thì `<wbr>` chưa đủ: tên miền có gạch nối thì trình duyệt còn bẻ ở gạch nối, ra "…khang@agentsea-" / "studio.com" (ở 375px còn vỡ "…@evo" / "ndev-studio.com"). Tách email làm hai khúc `inline-block max-w-full`, mỗi khúc chỉ bẻ bên trong khi tự nó dài hơn cả dòng:
 
     ```tsx
     interface EmailTextProps {
@@ -99,18 +99,18 @@ Nằm trong card (`card.md`), mỗi hàng một cặp nhãn và giá trị, theo
     Dùng chung một component này cho mọi chỗ in email, kể cả hàng giá trị ở trên.
   - **Dấu câu ngay sau email đi vào `suffix`, không viết sau thẻ.** Sau một khối `inline-block`
     trình duyệt được phép xuống dòng, nên `<EmailText />.` ở câu dài ra dòng mở đầu bằng dấu
-    chấm: "…agentsea.vn" / ". Đổi tài khoản".
+    chấm: "…agentsea.com.vn" / ". Đổi tài khoản".
     Viết `<EmailText email={email} suffix="." />`. Bọc cả email và dấu bằng `whitespace-nowrap`
     thì không được: mất luôn chỗ xuống dòng sau `@`. Probe báo lỗi này ở mục "Dấu câu rơi xuống
     đầu dòng".
   - **Khối bọc ngoài cũng `inline-block max-w-full`.** Để khối ngoài là inline thường thì trình
     duyệt chọn ngắt ngay sau `@` dù cả email vừa một dòng: "Bạn đang đăng nhập bằng
-    alex.nguyen.minh.khang@" / "agentsea-studio.com. Đổi tài khoản", đọc như hai mẩu, câu căn
+    tran.nguyen.anh.tuan.khang@" / "agentsea-studio.com. Đổi tài khoản", đọc như hai mẩu, câu căn
     giữa thì hai dòng lệch hẳn nhau. Khối ngoài `inline-block` thì
     email vừa dòng sẽ xuống nguyên cụm; chỉ khi dài hơn cả dòng mới ngắt sau `@` như trên (thử ở
     320, 375, 1280px).
   - **Phần trước `@` dài hơn cả dòng thì xuống dòng trước dấu chấm** (`<wbr>` trước mỗi `.`, như trên). Không có nó thì `wrap-anywhere` bẻ ở ký tự vừa hết chỗ, và hay rơi đúng trước `@`: một dòng chỉ có mỗi "@" ("…toan.tong.hop" / "@" / "congty-…"). Có `<wbr>` thì ra "…toan.tong" / ".hop@" / "congty-…". Không dính `@` vào ký tự cuối bằng `nowrap`: ra "…tong.ho" / "p@", vẫn vỡ giữa chữ.
 - **Giá trị trống là `—` `text-muted`**, một ký hiệu cho mọi ô trống, giống ô trống trong bảng (`layouts/app.md`, `T18`). Không viết "Chưa có", "Chưa gắn nhãn", mỗi dòng một câu.
 - **Giá trị có khuôn riêng thì dùng đúng component của nó**, không viết chữ trơn: trạng thái là badge màu (`M7`), nhãn phân loại là pill (`M8`, `list-row.md`), tiền dùng `đ` không `₫` (`charts.md`), số `tabular-nums`, mã và ID `font-mono` (`T17`).
-- **Email là link `mailto:`, số điện thoại là link `tel:`**, chữ vẫn `text-foreground`, rê vào gạch chân. Kèm icon button `copy` `size-7` hiện khi rê vào hàng, luôn hiện trên màn chạm (`I11`); bấm thì icon đổi `check` 1,5 giây, không toast. **Vùng bấm nới ra 40px mà hình giữ 28px**: `relative before:absolute before:-inset-1.5` (số âm buộc phải giữ theo `N11`, cùng cách tay cầm ở `range-slider.md`: nút to lên `size-10` thì cột giá trị hẹp thêm 12px và mỗi hàng trên điện thoại cao thêm 12px). Nút 28px trơn trên màn chạm là dưới mức 32px. Hai hàng có nút sao chép cách nhau 56px nên vùng 40px không chồng nhau. Mặc định ở trang chi tiết và panel xem bản ghi; ở form xác nhận, màn chỉ đọc lại thông tin vừa nhập thì để chữ trơn. **Không lặp các việc này vào menu ⋯** ("Gọi điện", "Sao chép email"): việc gắn với một giá trị thì nằm cạnh giá trị đó (`layouts/app.md`, "Trang chi tiết bản ghi").
+- **Email là link `mailto:`, số điện thoại là link `tel:`**, chữ vẫn `text-foreground`, rê vào gạch chân. Kèm icon button `copy` `size-7` hiện khi rê vào hàng, luôn hiện trên màn chạm (`I11`); bấm thì icon đổi `check` 1,5 giây, không toast. **Vùng bấm nới ra 40px mà hình giữ 28px**: `relative before:absolute before:-inset-1.5` (số âm buộc phải giữ theo `N11`, cùng cách tay cầm ở `range-slider.md`: nút to lên `size-10` thì cột giá trị hẹp thêm 12px và mỗi hàng trên điện thoại cao thêm 12px). Nút 28px trơn trên màn chạm là dưới mức 32px. Hai hàng có nút sao chép cách nhau 56px nên vùng 40px không chồng nhau. Mặc định ở trang chi tiết và panel xem bản ghi; ở form xác nhận, màn chỉ đọc lại thông tin vừa nhập thì để chữ trơn. **Không lặp các việc này vào menu ⋯** ("Gọi điện", "Sao chép email"): việc gắn với một giá trị thì nằm cạnh giá trị đó (`layouts/app/record-detail.md`, "Trang chi tiết bản ghi").
 - Không kẻ đường chia giữa các hàng khi dưới 8 hàng: khoảng trắng đủ tách. Nhiều hơn thì chia nhóm có tiêu đề nhỏ, không kẻ từng hàng.

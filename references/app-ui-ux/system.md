@@ -168,7 +168,7 @@ bảy dòng chữ trong lượt trả lời, mà thành code thật và một tr
    chỉ sáng hay có tối (`M20`), ngôn ngữ của copy (`T24`). Đề không nói thì lấy mặc định
    của `brand-tokens.md` (gần đen, Inter, flat, chỉ sáng) và ghi vào brief. Dự án chưa có
    màu brand thì trang design system có nhóm ba màu gợi ý theo ngành (`brand-tokens.md`), như
-   nhóm Nhấn trên thanh wireframe (`design-process.md`, `U3`).
+   nhóm Nhấn trên thanh wireframe (`wireframe.md`, `U3`).
 3. **Token**: chép `tokens.css` vào file token của dự án theo `brand-tokens.md`, chỉ sửa
    khối font và màu nhấn. Thang cỡ chữ, nhịp, chiều cao control lấy từ `budgets.md`; bo
    góc theo `F1`, `M19`. **Không đẻ thang hay token mới** (`M14`, `M16`): bộ của skill đã
@@ -222,8 +222,8 @@ vào `U1` cho màn.
 
 Mỗi phiên mới, model không nhớ phiên trước đã chọn gì. Bộ mặt, màu nhấn, phong cách, bố cục
 đã duyệt chỉ nằm rải trong code (một dòng comment trong file token, class trên vài component),
-nên phiên sau audit ra khác, khuyên lại từ đầu, và màn thứ năm lệch màn đầu (chủ dự án,
-03/11/2026: ba màn hai mặt). `DESIGN.md` ở gốc dự án là trí nhớ đó.
+nên phiên sau audit ra khác, khuyên lại từ đầu, và màn thứ năm lệch màn đầu (chủ dự án:
+ba màn hai mặt). `DESIGN.md` ở gốc dự án là trí nhớ đó.
 
 **Đọc** ở audit câu 2 của `SKILL.md`, mọi lối, kể cả việc nhỏ hơn một màn. Có file thì những gì
 nó ghi **thắng** mặc định và lời khuyên của skill (bộ mặt `P13`, màu nhấn theo ngành, bố cục mặc
@@ -239,6 +239,9 @@ lúc còn ở wireframe, `U3`):
 - Người dùng dặn một điều cho cả app ("nút bo tròn hết", "đừng dùng màu tím", "bảng luôn dày"):
   ghi vào mục Người dùng dặn, kể cả khi điều đó đè luật skill.
 - Màn mới dựng xong: thêm một dòng vào mục Màn đã dựng.
+- Luồng nhiều màn dựng xong: ghi sơ đồ luồng màn (`flows.md`, `O7`) vào mục Luồng, gồm dòng
+  đường chính và bảng. Mục này không tính vào giới hạn ~40 dòng: người phát triển đọc nó khi
+  nối logic.
 
 Sửa tại chỗ, không chép thêm lịch sử: file là trạng thái hiện tại, lịch sử đã có git. Lúc giao
 nói một dòng *"Đã ghi vào `DESIGN.md`: …"*.
@@ -248,7 +251,7 @@ nói một dòng *"Đã ghi vào `DESIGN.md`: …"*.
 ```markdown
 # Thiết kế giao diện
 
-Skill vibe-design-harness đọc file này trước khi dựng. Sửa tay được; file trái với code thì code thắng.
+Skill vibe:ui-ux đọc file này trước khi dựng. Sửa tay được; file trái với code thì code thắng.
 
 ## Sản phẩm
 - Sản phẩm: app học tiếng Anh cho người đi làm
@@ -259,6 +262,7 @@ Skill vibe-design-harness đọc file này trước khi dựng. Sửa tay đư�
 
 ## Giao diện
 - Bộ mặt: Soft (P13): điều hướng sidebar, vùng chứa classic, header content, bề mặt nổi (P7), font Be Vietnam Pro
+- Sắc: Tinted (P17): Bài học cat-1, Ôn từ cat-2, Kiểm tra cat-3 (một loại một sắc trên mọi màn)
 - Màu nhấn: Tím `#7c3aed`, token `--primary` ở `app/globals.css`
 - Phong cách: nổi (P7), không glass, không gradient
 - Nền tối: có, theo `class="dark"`
@@ -269,9 +273,16 @@ Skill vibe-design-harness đọc file này trước khi dựng. Sửa tay đư�
 ## Màn đã dựng
 - `/` Trang đầu người học: phương án B, card Học tiếp đứng đầu
 - `/courses` Danh sách khoá: phương án A, lọc dính đầu trang
+
+## Luồng
+Onboarding: Đăng ký → Chọn ngành → Bài đầu tiên → Kết quả bài. 3 màn, 2 ô.
+| # | Từ màn | Người dùng làm gì | Tới | Loại |
+| --- | --- | --- | --- | --- |
+| 1 | Đăng ký `/signup` | Bấm "Tạo tài khoản" | Chọn ngành `/onboarding` | Chính |
+| 2 | Chọn ngành `/onboarding` | Bấm "Bỏ qua" | Bài đầu tiên, ngành chung | Bỏ qua |
 ```
 
 **Không ghi:** tên sản phẩm đã tra để tham khảo, số liệu giả, lý do dài, luật skill đã có
 sẵn (file không phải bản sao của skill). Dự án đã có `DESIGN.md` không do skill viết (không có
-dòng "Skill vibe-design-harness đọc file này") thì đọc như tài liệu của người dùng, không viết đè: thêm
-các mục trên vào cuối, dưới tiêu đề `## vibe-design-harness`.
+dòng "Skill vibe:ui-ux đọc file này") thì đọc như tài liệu của người dùng, không viết đè: thêm
+các mục trên vào cuối, dưới tiêu đề `## vibe:ui-ux`.

@@ -1,13 +1,14 @@
 /**
- * VibeDesign-Harness — Cleanroom App & Dashboard Architecture Engine (v2.1.0)
+ * VibeDesign-Harness — Cleanroom App, Dashboard & Mobile Prototype Architecture Engine (v3.2.0)
  *
- * Encodes the complete App/Dashboard UI/UX System:
+ * Encodes the complete App/Dashboard & Mobile Prototype UI/UX System:
  *  - 10 Named Dashboard Faces across 5 orthogonal axes (Nav, Container, Header, Surface, Font)
- *  - 10 Screen Content Layouts mapped by Primary User Job (U2)
+ *  - 9 Named Mobile App Faces (Clean, Mono, Photo, Playful, Immersive, Editorial, Glow, Tinted, Brand) + 6 Tab Bar Styles (J1-J19)
+ *  - 12 Screen Content Layouts mapped by Primary User Job (U2)
  *  - 12 Empirical Industry Accent Palettes (WCAG >= 5.0:1 verified)
  *  - 19 Locked Architectural Rules & Hard Budgets
  *  - Full Tailwind v4 Semantic Token Generator (`tokens.css` with `:root`, `.dark`, `@theme inline`, scrollbar autohide)
- *  - Reference Docs Resolver (49 cleanroom Markdown & CSS specs + live Playwright DOM probe runner)
+ *  - Reference Docs Resolver (97 cleanroom Markdown, HTML & CSS specs + live Playwright DOM & Mobile probe runner)
  */
 
 import fs from 'fs';
@@ -172,7 +173,7 @@ export const DASHBOARD_FACES = {
 };
 
 /**
- * 10 Screen Content Layouts by Primary User Job (U2 / layouts/app.md)
+ * 12 Screen Content Layouts by Primary User Job (U2 / layouts/app.md)
  */
 export const SCREEN_CONTENT_LAYOUTS = {
     overview_blocks: {
@@ -283,6 +284,28 @@ export const SCREEN_CONTENT_LAYOUTS = {
             '1. Paired Control Height: Every input, select, and form button shares `h-11 md:h-10` (44px mobile, 40px desktop; standalone auth forms may use `h-12`).',
             '2. Always-Visible Top Labels (`I26`): Required fields marked with red `*` (`locked-rule #15`).',
             '3. Inline Field Errors Only: On submit error, scroll & focus first invalid field (`--error` border + `--error-ring` + `--error-text` message below); no red summary banner at top of normal forms.'
+        ]
+    },
+    entity_grid: {
+        id: 'entity_grid',
+        name: 'Lưới thực thể (Entity Card Grid)',
+        primary_job: 'Recognize each item visually by photo/avatar and scan 2–4 key stats before opening detail.',
+        examples: ['Game characters', 'Staff directory cards', 'Vehicle fleet cards', 'Product/Room catalog'],
+        structure: [
+            '1. Visual Header: Fixed `aspect-4/3 object-cover` top photo for items/rooms/vehicles, or left `size-12` avatar for people (`layouts/app/entity-grid.md`).',
+            '2. Card Body (`p-4`): `text-sm font-semibold truncate` title + right short rank/code (`text-xs text-muted tabular-nums`) + status dot badge (`M7`) + 2–4 metrics.',
+            '3. Shared Progress Scale: Metric bars (`h-1.5 rounded-full bg-primary` on `bg-foreground/5`) share a single grid-wide scale; toolbar includes `layout-grid` / `list` segmented switch.'
+        ]
+    },
+    live_monitor: {
+        id: 'live_monitor',
+        name: 'Giám sát trực tiếp (Live Operations & Incident Monitor)',
+        primary_job: 'Spot active incidents and threshold breaches immediately during a live operational shift.',
+        examples: ['NOC / System status', 'Dispatch shift monitor', 'Payment gateway live telemetry'],
+        structure: [
+            '1. Top Status Banner: Single-sentence overall health ("Mọi hệ thống bình thường" or "2 sự cố đang mở · ...") colored by highest severity (`layouts/app/live-monitor.md`).',
+            '2. Current Metric Strip & Threshold Chart: Metric numbers stay `text-foreground tabular-nums` while sub-label flags breach (`▲ Vượt ngưỡng 800 ms`); chart includes dashed threshold line (`stroke-red-500/60`).',
+            '3. 90-Day Uptime Bars & Incident Feed: `h-8 gap-px` daily uptime bars + chronological incident log grouped by day.'
         ]
     }
 };
@@ -495,6 +518,10 @@ export function recommendDashboardSystem(query = {}) {
         layoutKey = 'activity_stream';
     } else if (/form|cài đặt|settings|hồ sơ|profile|tạo mới/i.test(jobText)) {
         layoutKey = 'form_first';
+    } else if (/lưới thực thể|entity grid|nhân vật|ảnh sản phẩm|thẻ nhân sự|fleet card/i.test(jobText)) {
+        layoutKey = 'entity_grid';
+    } else if (/giám sát trực tiếp|live monitor|vượt ngưỡng|sự cố|ca trực|noc|uptime/i.test(jobText)) {
+        layoutKey = 'live_monitor';
     }
 
     const contentLayout = SCREEN_CONTENT_LAYOUTS[layoutKey];
@@ -605,6 +632,7 @@ export function getAppUIReference(topic = '') {
             categories: {
                 core_playbooks: allFiles.filter(f => !f.file.includes('/')).map(f => f.file),
                 layouts: allFiles.filter(f => f.file.startsWith('layouts/')).map(f => f.file),
+                mobile: allFiles.filter(f => f.file.startsWith('mobile/')).map(f => f.file),
                 components: allFiles.filter(f => f.file.startsWith('components/')).map(f => f.file)
             },
             files: allFiles
@@ -649,6 +677,7 @@ export function runLiveUIProbe(options = {}) {
     if (options.out) args.push('--out', options.out);
     if (options.dark) args.push('--dark');
     if (options.quick) args.push('--quick');
+    if (options.mobile) args.push('--mobile');
     if (options.stress) args.push('--stress');
     if (options.sweep) args.push('--sweep', typeof options.sweep === 'string' ? options.sweep : '1440,375,20');
     if (options.wireframe) args.push('--wireframe', options.wireframe);
@@ -662,6 +691,7 @@ export function runLiveUIProbe(options = {}) {
             cli_command: cliCommand,
             supported_flags: [
                 '--widths 375,768,1024,1280,1440,1920',
+                '--mobile (inspect mobile app prototype screens [data-screen] & sheets at 390x844 touch + 1280 flow board)',
                 '--quick (static layout/contrast/overflow only, 4x faster)',
                 '--stress (injects 60-char Vietnamese names & 10-digit numbers to test truncation/wrapping)',
                 '--sweep 1440,375,20 (continuous responsive sweep every 20px)',
@@ -1044,17 +1074,300 @@ export default function DashboardScreen() {
     };
 }
 
+/**
+ * 9 Named Mobile App Faces (J15 / references/app-ui-ux/mobile/faces.md)
+ * Derived from 300+ screens across 10 mobile app categories.
+ */
+export const MOBILE_APP_FACES = {
+    clean: {
+        id: 'clean',
+        name: 'Clean',
+        verified: true,
+        font: 'Inter',
+        surface_mode: 'light',
+        radius: '12px-16px',
+        template_file: 'layouts/mobile-app.html',
+        target_users: 'Daily tracking, expense logging, task management, inventory, clinic/salon booking, merchant tools (J14).',
+        summary: 'White screen background (`--surface`), grouped settings on `--background` gray with white cards (`J1`), dark neutral hero metric card (`#1c1c1e`, `J5`), accent on primary CTA & active tab.'
+    },
+    photo: {
+        id: 'photo',
+        name: 'Photo',
+        verified: true,
+        font: 'Inter',
+        surface_mode: 'light',
+        radius: '12px-16px',
+        template_file: 'layouts/mobile-photo.html',
+        target_users: 'Visual browsing & discovery: homestay/hotel booking, travel, real estate, food/cafe ordering, fashion, interior.',
+        summary: 'Real photography as primary subject (`aspect-4/3` or `1:1`, `rounded-xl`), text sits directly below photo without card box; brand accent strictly on commitment CTAs (Đặt, Mua, Thanh toán).'
+    },
+    playful: {
+        id: 'playful',
+        name: 'Playful',
+        verified: true,
+        font: 'Nunito',
+        surface_mode: 'light',
+        radius: '16px',
+        template_file: 'layouts/mobile-playful.html',
+        target_users: 'Daily habit & learning apps needing motivation: language learning, streak tracking, fitness, consumer edtech.',
+        summary: 'Nunito 700-800 typography, tactile selectable cards with `border-2` + `border-b-4` 3D lip, `h-3` to `h-4` rounded progress bars, 3D badge/mascot cues (`J16`), full-bleed bottom feedback sheet.'
+    },
+    immersive: {
+        id: 'immersive',
+        name: 'Immersive',
+        verified: true,
+        font: 'Inter',
+        surface_mode: 'dark',
+        radius: '12px-16px',
+        template_file: 'layouts/mobile-immersive.html',
+        target_users: 'Evening relaxation, listening & watching: meditation, sleep, audiobooks, music, podcasts, video streaming.',
+        summary: 'Full-app `.force-dark` tinted deep canvas (`color-mix(in oklab, var(--primary) 30%, #0b0d18)`), 10% translucent white cards, white primary CTA with dark text, mini-player docked above tab bar.'
+    },
+    brand: {
+        id: 'brand',
+        name: 'Brand',
+        verified: true,
+        flagged: true,
+        font: 'Plus Jakarta Sans',
+        surface_mode: 'light',
+        radius: '16px-24px',
+        template_file: 'layouts/mobile-order.html',
+        target_users: 'On-demand consumer service apps: ride-hailing, food/parcel delivery, ticket booking, super-apps.',
+        summary: 'Home screen opens with solid `--primary` brand header block (white search bar + promo strip + curved bottom edge), `--primary-soft` secondary buttons/active states, 3D service icons (`J16`).'
+    },
+    tinted: {
+        id: 'tinted',
+        name: 'Tinted',
+        verified: true,
+        font: 'Inter',
+        surface_mode: 'tinted',
+        radius: '20px-28px',
+        template_file: 'layouts/mobile-charts.html',
+        target_users: 'Personal wellness & self-care without heavy gamification: calorie/nutrition log, water/sleep tracker, personal budget, lifestyle.',
+        summary: 'Whole app canvas tinted with 10% `--primary` mixed into warm cream (`#f6f3ee`), borderless white cards with soft elevation, `dark` or `pill` tab bar (`J2`).'
+    },
+    glow: {
+        id: 'glow',
+        name: 'Glow',
+        verified: true,
+        font: 'Plus Jakarta Sans',
+        surface_mode: 'dark',
+        radius: '20px-24px',
+        template_file: 'layouts/mobile-showcase.html',
+        target_users: 'AI companions, creative studios, music/audio tools, next-gen consumer fintech.',
+        summary: 'Near-black `#0b0b0f` canvas with 2-3 blurred radial colorauras at top/hero (`45-60%` opacity), 8% white cards with 10% white border (no backdrop-blur on scrolling cards), `glass` tab bar.'
+    },
+    mono: {
+        id: 'mono',
+        name: 'Mono',
+        verified: false,
+        experimental: true,
+        font: 'Inter',
+        surface_mode: 'light',
+        radius: '9999px',
+        template_file: 'layouts/mobile-app.html',
+        target_users: 'Social feeds, community threads, microblogging, group messaging where user-posted media owns all color.',
+        summary: 'Pure white canvas separated by hairline dividers, zero card boxes, solid black pill primary buttons (`#111111`), user avatars and photos are the only color.'
+    },
+    editorial: {
+        id: 'editorial',
+        name: 'Editorial',
+        verified: false,
+        experimental: true,
+        font: 'Lora',
+        surface_mode: 'warm',
+        radius: '8px-12px',
+        template_file: 'layouts/mobile-app.html',
+        target_users: 'Long-form mobile reading: news digests, magazines, serialized books, text-first courses, recipe stories.',
+        summary: 'Warm cream canvas (`#fbf8f3`), Lora Vietnamese serif for article titles and 18px/1.6 body copy, Inter for app chrome, borderless 20px-margin reading layout.'
+    }
+};
+
+/**
+ * 6 Mobile Tab Bar Styles (J2 / references/app-ui-ux/layouts/mobile-tabbars.html)
+ */
+export const MOBILE_TABBAR_STYLES = {
+    float: {
+        id: 'float',
+        name: 'Float (Viên nổi sáng mặc định)',
+        verified: true,
+        max_items: 5,
+        min_items: 3,
+        requires_labels: true,
+        summary: '64px floating pill (`rounded-full bg-surface/90 backdrop-blur-xl`), 11px `font-medium` label under every 24px icon; primary "+" action stands as a separate circular button beside the bar.'
+    },
+    center: {
+        id: 'center',
+        name: 'Center (Nút hành động giữa thanh)',
+        verified: false,
+        experimental: true,
+        max_items: 4,
+        min_items: 4,
+        requires_labels: true,
+        summary: '56px raised primary action button centered inside the bar for apps with a single daily core action (log expense, scan QR, post); strictly 4 tabs (2 left, 2 right).'
+    },
+    pill: {
+        id: 'pill',
+        name: 'Pill (Icon gọn, mục chọn mở chữ)',
+        verified: false,
+        experimental: true,
+        max_items: 5,
+        min_items: 3,
+        requires_labels: false,
+        summary: 'Compact icon bar where only the active destination expands into a colored pill with text label.'
+    },
+    dark: {
+        id: 'dark',
+        name: 'Dark (Thanh đen viên tròn trắng đồng tâm)',
+        verified: true,
+        max_items: 4,
+        min_items: 3,
+        requires_labels: false,
+        summary: '64px near-black `#18181b` bar on light/tinted screens; active item is a 48px white circle concentric with the rounded ends (`justify-between px-2`).'
+    },
+    bubbles: {
+        id: 'bubbles',
+        name: 'Bubbles (Nút tròn rời)',
+        verified: false,
+        experimental: true,
+        max_items: 4,
+        min_items: 3,
+        requires_labels: false,
+        summary: 'Each destination is an independent 52px circular bubble; active bubble fills with primary accent.'
+    },
+    glass: {
+        id: 'glass',
+        name: 'Glass (Thanh kính mờ trên nền tối/ảnh)',
+        verified: true,
+        max_items: 5,
+        min_items: 3,
+        requires_labels: true,
+        summary: 'Translucent `bg-white/12 backdrop-blur-2xl` bar with `bg-white/18` active pill for dark `Immersive` and `Glow` faces.'
+    }
+};
+
+/**
+ * Recommend the optimal Mobile App Face (9 Faces), Tab Bar Style (6 Styles), Industry Accent & Prototype Template (J1-J19)
+ * @param {Object} query { userRole, primaryJob, industry, showcaseMode, platform }
+ */
+export function recommendMobileSystem(query = {}) {
+    const roleText = String(query.userRole || '').toLowerCase();
+    const jobText = String(query.primaryJob || '').toLowerCase();
+    const indText = String(query.industry || '').toLowerCase();
+    const combined = `${roleText} ${jobText} ${indText}`;
+    const showcaseMode = Boolean(query.showcaseMode);
+    const platform = /android/i.test(String(query.platform || combined)) ? 'android' : 'ios';
+
+    // 1. Select Mobile Face (J15 priority order)
+    let faceKey = 'clean';
+    if (/immersive|thiền|ngủ|nhạc|podcast|sách nói|audiobook|meditation|sleep|music|video|buổi tối/i.test(combined)) {
+        faceKey = 'immersive';
+    } else if (/playful|học|luyện|thói quen|streak|thể dục|fitness|quiz|duolingo|flashcard|gamification/i.test(combined)) {
+        faceKey = 'playful';
+    } else if (/brand|gọi xe|giao hàng|giao đồ ăn|đặt xe|vé xem phim|siêu app|ride|delivery|super app/i.test(combined)) {
+        faceKey = 'brand';
+    } else if (/photo|đặt phòng|dat phong|homestay|khách sạn|khach san|du lịch|du lich|bất động sản|bat dong san|món ăn|mon an|đặt món|dat mon|cà phê|ca phe|coffee|cafe|đồ uống|do uong|thời trang|thoi trang|nội thất|noi that|lướt ảnh|hotel|airbnb/i.test(combined)) {
+        faceKey = 'photo';
+    } else if (/glow|ai|sáng tạo|âm nhạc|studio|tạo ảnh|voice ai|chatbot/i.test(combined) || (showcaseMode && /ai|tech|crypto/i.test(combined))) {
+        faceKey = 'glow';
+    } else if (/tinted|sức khoẻ|ăn uống|kcal|calo|uống nước|tự chăm|wellness|nutrition|lifestyle/i.test(combined) || showcaseMode) {
+        faceKey = 'tinted';
+    } else if (/mono|mạng xã hội|cộng đồng|bình luận|nhắn tin|threads|social feed/i.test(combined)) {
+        faceKey = 'mono';
+    } else if (/editorial|bản tin|đọc báo|đọc sách|công thức nấu ăn|newsletter|reader/i.test(combined)) {
+        faceKey = 'editorial';
+    }
+
+    const face = MOBILE_APP_FACES[faceKey] || MOBILE_APP_FACES.clean;
+
+    // 2. Select Tab Bar Style (J2)
+    let tabbarKey = 'float';
+    if (face.id === 'immersive' || face.id === 'glow') {
+        tabbarKey = 'glass';
+    } else if (face.id === 'tinted') {
+        tabbarKey = 'dark';
+    } else if (/nút giữa|center|quét qr|ghi nhanh/i.test(combined)) {
+        tabbarKey = 'center';
+    } else if (/pill|viên gọn/i.test(combined)) {
+        tabbarKey = 'pill';
+    }
+    const tabbar = MOBILE_TABBAR_STYLES[tabbarKey] || MOBILE_TABBAR_STYLES.float;
+
+    // 3. Reuse Industry Accent Palette
+    const dashRec = recommendDashboardSystem({ userRole: query.userRole, primaryJob: query.primaryJob, industry: query.industry });
+
+    return {
+        platform,
+        viewport: platform === 'android' ? { width: 412, height: 915, insetTop: 24, insetBottom: 24 } : { width: 390, height: 844, insetTop: 47, insetBottom: 34 },
+        recommended_face: face,
+        recommended_tabbar: tabbar,
+        industry_palette: dashRec.industry_palette,
+        template_reference: face.template_file,
+        probe_command: 'node scripts/probe.mjs <prototype.html> --mobile --widths 390,1280',
+        delivery_note_template: `Bộ mặt app điện thoại: **${face.name}** (font: \`${face.font}\`, nền: \`${face.surface_mode}\`, mẫu gốc: \`${face.template_file}\`) · Thanh tab: **${tabbar.name}** · Màu nhấn: **${dashRec.industry_palette.primary_token_spec.name}** (\`${dashRec.industry_palette.primary_token_spec.primary}\`).`
+    };
+}
+
+/**
+ * Scaffold a Multi-Screen Interactive Mobile App HTML Prototype inside a Phone Frame (390x844) + Desktop Flow Board (>=900px)
+ * Loads the battle-tested cleanroom HTML prototype for the chosen Mobile Face (`mobile-app.html`, `mobile-order.html`, `mobile-photo.html`, `mobile-playful.html`, `mobile-immersive.html`, `mobile-charts.html`, `mobile-showcase.html`) and customizes brand title & primary accent.
+ * @param {Object} options { face: 'clean'|'photo'|'playful'|'immersive'|'brand'|'tinted'|'glow', title: string, accent: string }
+ */
+export function scaffoldMobileApp(options = {}) {
+    const faceKey = String(options.face || 'clean').toLowerCase().replace(/[\s-]+/g, '_');
+    const face = MOBILE_APP_FACES[faceKey] || MOBILE_APP_FACES.clean;
+    const templateRel = options.template || face.template_file || 'layouts/mobile-app.html';
+    const templatePath = path.join(APP_REFS_DIR, templateRel);
+
+    const accentKey = String(options.accent || '').toLowerCase();
+    const accentObj = APPROVED_BRAND_ACCENTS[accentKey] || (options.accent && options.accent.startsWith('#')
+        ? { name: 'Custom', primary: options.accent, primary_hover: options.accent }
+        : null);
+
+    let html = '';
+    if (fs.existsSync(templatePath)) {
+        html = fs.readFileSync(templatePath, 'utf-8');
+        if (options.title) {
+            html = html.replace(/<title>[^<]*<\/title>/, `<title>${options.title}</title>`);
+        }
+        if (accentObj) {
+            html = html.replace(/--primary:\s*#[0-9a-fA-F]{3,8};/, `--primary: ${accentObj.primary};`);
+            if (accentObj.primary_hover) {
+                html = html.replace(/--primary-hover:\s*#[0-9a-fA-F]{3,8};/, `--primary-hover: ${accentObj.primary_hover};`);
+            }
+        }
+    } else {
+        throw new Error(`Mobile prototype template not found at ${templatePath}`);
+    }
+
+    const screens = [...html.matchAll(/data-screen="([^"]+)"/g)].map(m => m[1]);
+    const flows = [...html.matchAll(/data-flow="([^"]+)"/g)].map(m => m[1]);
+
+    return {
+        face: face.name,
+        face_id: face.id,
+        template: templateRel,
+        screens: [...new Set(screens)],
+        flows: [...new Set(flows)],
+        code: html
+    };
+}
+
 export default {
     DASHBOARD_FACE_AXES,
     DASHBOARD_FACES,
+    MOBILE_APP_FACES,
+    MOBILE_TABBAR_STYLES,
     SCREEN_CONTENT_LAYOUTS,
     APPROVED_BRAND_ACCENTS,
     INDUSTRY_ACCENT_PALETTES,
     APP_UI_BUDGETS,
     LOCKED_ARCHITECTURAL_RULES,
     recommendDashboardSystem,
+    recommendMobileSystem,
     generateAppTokensCSS,
     getAppUIReference,
     runLiveUIProbe,
-    scaffoldDashboardApp
+    scaffoldDashboardApp,
+    scaffoldMobileApp
 };

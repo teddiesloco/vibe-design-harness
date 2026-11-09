@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * VibeDesign-Harness — Unified UI/UX Design System, App Architecture & Scroll Choreography MCP Server (v3.0.0)
+ * VibeDesign-Harness — Unified UI/UX Design System, App/Mobile Architecture & Scroll Choreography MCP Server (v3.2.0)
  */
 import { Server } from '@modelcontextprotocol/sdk/server/index.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
@@ -16,10 +16,12 @@ import {
     scaffoldLandingPage,
     fetchRemoteRules,
     recommendDashboardSystem,
+    recommendMobileSystem,
     generateAppTokensCSS,
     getAppUIReference,
     runLiveUIProbe,
     scaffoldDashboardApp,
+    scaffoldMobileApp,
     recommendScrollChoreography,
     verifyScrollFingerprint,
     getScrollChoreographyReference,
@@ -34,7 +36,7 @@ import {
 const server = new Server(
     {
         name: 'vibe-design-harness-mcp',
-        version: '3.1.0',
+        version: '3.2.0',
     },
     {
         capabilities: {
@@ -113,7 +115,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             },
             {
                 name: 'recommend_dashboard_system',
-                description: 'Recommends the optimal App Dashboard Face (from 10 Named Faces across 5 Axes: Clean, Dark Sidebar, Soft, Midnight, Inset, Paper, Float, Rail, Topbar, Editorial), Screen Content Layout (10 job-driven layouts), and WCAG-verified Industry Accent Palette.',
+                description: 'Recommends the optimal App Dashboard Face (from 10 Named Faces across 5 Axes: Clean, Dark Sidebar, Soft, Midnight, Inset, Paper, Float, Rail, Topbar, Editorial), Screen Content Layout (12 job-driven layouts), and WCAG-verified Industry Accent Palette.',
                 inputSchema: {
                     type: 'object',
                     properties: {
@@ -140,6 +142,32 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                 },
             },
             {
+                name: 'recommend_mobile_system',
+                description: 'Recommends the optimal Mobile App Face (9 Named Faces: Clean, Photo, Playful, Immersive, Brand, Tinted, Glow, Mono, Editorial), Mobile Tab Bar Style (6 styles: float, center, pill, dark, bubbles, glass), Industry Accent Palette, and HTML Prototype Template (J1-J19).',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        userRole: { type: 'string', description: 'Target mobile user (e.g. consumer ordering coffee, language learner, meditation listener, ride-hailing user).' },
+                        primaryJob: { type: 'string', description: 'Main job in the mobile app (e.g. log expense, order food, book homestay, daily quiz).' },
+                        industry: { type: 'string', description: 'Industry vertical (e.g. finance, food, travel, education, wellness, logistics).' },
+                        platform: { type: 'string', description: 'Target platform viewport: ios (390x844) or android (412x915).', default: 'ios' },
+                        showcaseMode: { type: 'boolean', description: 'Whether to enable showcase presentation mode (J18).', default: false },
+                    },
+                },
+            },
+            {
+                name: 'scaffold_mobile_app',
+                description: 'Scaffolds a multi-screen interactive Mobile App HTML Prototype inside a 390x844 phone frame + Desktop Flow Board (>=900px) using the 8 cleanroom mobile prototype templates.',
+                inputSchema: {
+                    type: 'object',
+                    properties: {
+                        face: { type: 'string', description: 'Mobile face: clean, photo, playful, immersive, brand, tinted, glow, mono, editorial.', default: 'clean' },
+                        title: { type: 'string', description: 'Optional HTML document title override.' },
+                        accent: { type: 'string', description: 'Optional brand accent key (blue, indigo, violet, fuchsia, teal, green, orange) or hex.' },
+                    },
+                },
+            },
+            {
                 name: 'generate_app_tokens_css',
                 description: 'Generates the complete Tailwind v4 `tokens.css` stylesheet (:root, .dark, .force-light/.force-dark, @theme inline, semantic danger/error/warning/success tokens, and 4px autohide scrollbar).',
                 inputSchema: {
@@ -152,11 +180,11 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
             },
             {
                 name: 'get_app_ui_reference',
-                description: 'Reads or lists the 49 Cleanroom App UI/UX reference specifications (e.g. list, PLAYBOOK, styles, budgets, locked-rules, review, checklist, layouts/app, layouts/overlay, layouts/form, components/charts, components/button, components/choice-controls).',
+                description: 'Reads or lists the 97 Cleanroom App, Dashboard & Mobile UI/UX reference specifications (e.g. list, PLAYBOOK, mobile, wireframe, styles, budgets, locked-rules, review, checklist, layouts/app, layouts/app/data-table, layouts/app/entity-grid, layouts/app/live-monitor, layouts/mobile-app, mobile/faces, mobile/native-code, components/charts, components/button).',
                 inputSchema: {
                     type: 'object',
                     properties: {
-                        topic: { type: 'string', description: 'Reference key or "list" to browse all 49 cleanroom reference files.', default: 'list' },
+                        topic: { type: 'string', description: 'Reference key or "list" to browse all 97 cleanroom reference files.', default: 'list' },
                     },
                 },
             },
@@ -218,6 +246,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
                     properties: {
                         url: { type: 'string', description: 'Live URL to inspect (leave empty or set dryRun=true to get CLI command & flags).' },
                         quick: { type: 'boolean', description: 'Static layout/contrast/overflow check only (4x faster).', default: true },
+                        mobile: { type: 'boolean', description: 'Enable mobile app prototype mode (--mobile: inspects every [data-screen] and sheet at 390x844 touch + 1280 flow board).', default: false },
                         stress: { type: 'boolean', description: 'Inject 60-char Vietnamese strings and 10-digit numbers to test layout resilience.', default: false },
                         dark: { type: 'boolean', description: 'Inspect in dark mode.', default: false },
                         dryRun: { type: 'boolean', description: 'Return command without launching browser.', default: false },
@@ -329,6 +358,16 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const res = scaffoldDashboardApp(args);
         return { content: [{ type: 'text', text: JSON.stringify(res, null, 2) }] };
     }
+    if (name === 'recommend_mobile_system') {
+        const res = recommendMobileSystem(args);
+        return { content: [{ type: 'text', text: JSON.stringify(res, null, 2) }] };
+    }
+
+    if (name === 'scaffold_mobile_app') {
+        const res = scaffoldMobileApp(args);
+        return { content: [{ type: 'text', text: JSON.stringify(res, null, 2) }] };
+    }
+
 
     if (name === 'generate_app_tokens_css') {
         const res = generateAppTokensCSS(args);

@@ -45,11 +45,12 @@ Cách nạp thì tuỳ bối cảnh:
 
 ## Màu nhấn gợi ý theo ngành, khi dự án chưa có brand ⚑
 
-Nhóm Nhấn của wireframe (`design-process.md`, `U3`) và trang design system (`system.md`) gợi ý
+Nhóm Nhấn của wireframe (`wireframe.md`, `U3`) và trang design system (`system.md`) gợi ý
 ba màu. Trước đây ba màu cố định cho mọi dự án, nên ba dự án khác ngành ra cùng một bảng màu.
 Giờ ba màu chọn theo ngành ở `U1`: **màu đầu là quy ước của ngành**, hai màu sau khác hướng để
 người dùng có lựa chọn không sáo. Không chọn thì dựng màu đầu, báo một dòng. Dự án có brand
-thì brand thắng, không gợi ý.
+thì brand thắng, không gợi ý. **Dự án đã có UI là đã có brand**, kể cả màu nhấn gần đen: giữ màu
+của dự án (chủ dự án chốt, `wireframe.md`).
 
 **Bảng màu, chỉ lấy từ đây** (đều đạt từ 5 : 1 với chữ trắng trên nút chính, `P3`):
 
@@ -65,23 +66,26 @@ thì brand thắng, không gợi ý.
 
 `--primary-hover`, `--primary-light` và bản nền tối suy từ `--primary` như các mục bên dưới.
 
-**Ngành → ba màu gợi ý.** Cột giữa là số đo thật: màu chính trên trang chủ của khoảng 60
-sản phẩm, 12 ngành, đo 03/11/2026, chỉ đếm những trang đọc ra màu. Đừng sửa bảng theo trí nhớ
+**Ngành → ba màu gợi ý.** Cột giữa là số đo thật: màu chính trên trang chủ (trang chặn đọc thì icon app) của
+khoảng 95 sản phẩm, 14 ngành, đo 03/11/2026 (hai ngành cuối 07/11/2026), chỉ đếm những trang đọc ra màu. Đừng sửa bảng theo trí nhớ
 hay theo sáo ("spa thì hồng"); muốn sửa thì đo lại.
 
 | Ngành ở `U1` | Đo được | Ba màu, màu đầu mặc định |
 | --- | --- | --- |
 | Tài chính, kế toán, ngân hàng | xanh dương, chàm 5/8; cam, xanh lá lẻ | Xanh dương · Xanh lá · Cam |
 | Y tế, phòng khám, nha khoa | xanh dương 2, xanh ngọc 1, vàng 1 trên 4 | Xanh ngọc · Xanh dương · Tím |
-| Đồ ăn, nhà hàng, giao đồ ăn | đỏ, đỏ cam 3/3 | Cam · Xanh lá · Chàm |
+| Đồ ăn, nhà hàng, giao đồ ăn; đồ uống, cà phê, trà sữa (gộp vào đây, chưa đo riêng) | đỏ, đỏ cam 3/3 | Cam · Xanh lá · Chàm |
 | Spa, làm đẹp, đặt lịch | tím 1, cam 2, vàng 1 trên 4: **không có quy ước rõ** | Tím · Cam · Xanh ngọc |
 | Bán lẻ, cửa hàng, bán hàng tại quầy | xanh dương 4, xanh lá 2 trên 6 | Xanh dương · Xanh lá · Cam |
 | Giáo dục, khoá học | xanh dương 3, tím vàng 1 trên 4 | Xanh dương · Tím · Cam |
 | Bất động sản, cho thuê | xanh dương, xanh than 3, xanh ngọc 1 trên 4 | Xanh dương · Xanh ngọc · Cam |
-| Vận tải, kho, giao hàng | xanh dương 3, hổ phách 1, xanh lá 1 trên 5 | Xanh dương · Cam · Xanh ngọc |
+| Vận tải, kho, giao hàng (phần mềm cho công ty: điều phối, kho) | xanh dương 3, hổ phách 1, xanh lá 1 trên 5 | Xanh dương · Cam · Xanh ngọc |
+| Gọi xe, giao hàng, giao đồ ăn cho người dùng cuối ⚑ | xanh lá 3, vàng, xanh ngọc, đen, hồng, cam, xanh chanh mỗi màu 1 trên 9 (đếm theo màu nhận diện của app, 08/11/2026, chưa đo trang) | Xanh lá · Cam · Xanh ngọc |
 | Nhân sự, chấm công | tím 2, xanh dương 1 trên 3 | Tím · Xanh dương · Xanh ngọc |
 | CRM, bán hàng B2B | cam, xanh dương, xanh lá, tím rải đều: **không có quy ước** | Chàm · Cam · Xanh ngọc |
 | Du lịch, khách sạn, homestay | hồng đỏ, cam, đỏ tím, xanh dương trên 4 | Cam · Hồng tím · Xanh dương |
+| Sức khoẻ cá nhân, thói quen, thể dục, ăn uống lành mạnh | cam 4, xanh dương 3, xanh ngọc 2, xanh lá 2, hồng đỏ 2, đen 2, tím 1, chàm 1 trên 17: **không có quy ước rõ** | Tím · Cam · Xanh lá |
+| Thiền, ngủ, sách nói, podcast | cam 3, xanh ngọc 3, xanh dương 2, xanh lá 2, hổ phách 2, đen 2, đỏ, chàm, tím mỗi màu 1 trên 17: **không có quy ước**; nhánh thiền nghiêng lạnh, nhánh sách nói nghiêng ấm | Hồng tím · Xanh ngọc · Cam |
 | Ngành khác, không rõ | | Chàm · Xanh ngọc · Cam |
 
 Xanh dương là màu chung của gần hết các ngành, nên chỉ để nó đứng đầu ở ngành mà số đo nghiêng
@@ -103,6 +107,35 @@ một quy ước.
 - **Không thêm màu ngoài bảng màu** cho "hợp ngành hơn". Màu mới phải đo lại chữ trắng từ 4.5 : 1
   (`P3`). Hai màu cũ của nhóm Nhấn là ngọc `#0d9488` (3.74) và cam `#ea580c` (3.56) đã trượt
   chuẩn này.
+
+---
+
+## Gradient nhấn cho Sắc Vivid ⚑
+
+Chỉ khi dự án chọn Sắc **Vivid** (`styles.md`, `P17`). Điểm đầu là `--primary`, điểm cuối là
+`--accent-to` trong khối Sắc của `tokens.css`. **Chỉ lấy từ bảng này**: hai đầu đều đạt từ 5 : 1
+với chữ trắng (`P3`, đo ở đầu nhạt nhất), cách nhau 26–41° trên vòng màu để gradient thấy được mà
+không thành hai màu nhấn.
+
+| `--primary` | `--accent-to` | Lệch | Chữ trắng trên `--accent-to` | Bản tối: `--primary` → `--accent-to` |
+| --- | --- | --- | --- | --- |
+| Xanh dương `#2563eb` | Tím `#7c3aed` | 41° | 5.70 | `#60a5fa` → `#a78bfa` |
+| Chàm `#4f46e5` | `#9333ea` | 28° | 5.38 | `#818cf8` → `#c084fc` |
+| Tím `#7c3aed` | Hồng tím `#a21caf` | 33° | 6.32 | `#a78bfa` → `#e879f9` |
+| Hồng tím `#a21caf` | Tím `#7c3aed` | 33° | 5.70 | `#e879f9` → `#a78bfa` |
+| Xanh ngọc `#0f766e` | `#0369a1` | 26° | 5.93 | `#2dd4bf` → `#38bdf8` |
+| Xanh lá `#15803d` | Xanh ngọc `#0f766e` | 33° | 5.47 | `#4ade80` → `#2dd4bf` |
+| Cam `#c2410c` | `#9a3412` | cùng sắc, đậm dần | 7.31 | `#fb923c` → `#fdba74` |
+
+Bản tối chữ trên nút là `--primary-foreground` tối (`#05060f`), đạt từ 6.7 : 1 trên mọi ô cột tối.
+
+**Bẫy**
+
+- **Cam không đổi sắc**: một bên là hổ phách (`--warning`), bên kia là đỏ (`--danger`). Gradient
+  cam sang hồng đi qua vùng đỏ, nút chính trông như nút xoá (`I4`). Nên Cam đậm dần trong cùng sắc.
+- **Không đi về phía đỏ, xanh lá của trạng thái** dù hợp mắt: Hồng tím quay về Tím, không sang hồng.
+- Màu nhấn của dự án ngoài bảng (brand riêng): lấy điểm cuối lệch 25–40° về phía **xa** đỏ, hổ phách,
+  xanh lá, đo lại chữ trắng từ 4.5 : 1. Không đo được thì Vivid bỏ gradient, chỉ còn phần Tinted.
 
 ---
 
